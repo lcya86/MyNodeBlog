@@ -3,6 +3,9 @@
  * GET home page.
  */
 
+var app = require('../app');
+
+
 exports.index = function(req, res){
   res.render('index', { title: 'Index' });
 };
@@ -35,5 +38,8 @@ exports.home = function(req,res){
 		username:'admin',
 		password:'admin'
 	}
+	app.io.sockets.on('connection',function(socket){
+		socket.emit('user',{ip:req.ip,cookies:req.cookies,body:req.body});
+	});
 	res.render('home',{title:'home'});
 }

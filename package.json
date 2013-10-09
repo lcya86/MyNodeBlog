@@ -11,6 +11,7 @@
     "eventproxy":"*",
     "mongoose":"*",
     "validator":"*",
-    "nodemailer":"*"
+    "nodemailer":"*",
+    "socket.io":"*"
   }
 }

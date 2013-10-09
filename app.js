@@ -79,6 +79,9 @@ app.get('/logout', routes.logout);
 app.get('/home',authentication);
 app.get('/home', routes.home);
 
-http.createServer(app).listen(app.get('port'), function() {
+var server = http.createServer(app).listen(app.get('port'), function() {
 	console.log('Express server listening on port ' + app.get('port'));
 });
+
+exports.io = require('socket.io').listen(server);
+
