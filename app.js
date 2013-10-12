@@ -11,6 +11,12 @@ var ejs = require('ejs');
 var SessionStore = require("session-mongoose")(express);
 var app = express();
 
+
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/nodeblog');
+exports.db = mongoose.connection;
+
+
 //session store
 var store = new SessionStore({
 	url: "mongodb://localhost/session",
@@ -71,6 +77,7 @@ function notAuthentication(req,res,next){
 }
 
 app.get('/', routes.index);
+app.get('/blog', routes.index);
 app.all('/login',notAuthentication);
 app.get('/login', routes.login);
 app.post('/login', routes.doLogin);
@@ -78,6 +85,9 @@ app.get('/logout',authentication);
 app.get('/logout', routes.logout);
 app.get('/home',authentication);
 app.get('/home', routes.home);
+app.get('/post',authentication);
+app.get('/post', routes.post);
+app.post('/post', routes.doPost);
 
 var server = http.createServer(app).listen(app.get('port'), function() {
 	console.log('Express server listening on port ' + app.get('port'));

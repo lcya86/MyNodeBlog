@@ -1,0 +1,42 @@
+<%include header.html%>
+	<%include navbar.html%>
+	<div class="container">
+		<form class="form-horizontal col-xs-12 col-sm-12 col-md-12" role="form">
+
+			<div class="form-group">
+	      <ul id="myTab" class="nav nav-tabs">
+	        <li class="active"><a href="#write" data-toggle="tab">输入</a></li>
+	        <li class=""><a href="#preview" id="a_preview" data-toggle="tab">预览</a></li>
+	      </ul>
+	      <div id="myTabContent" class="tab-content">
+          <textarea style="margin-top:10px" class="form-control col-xs-12 tab-pane fade active in" name="write" id="write" placeholder="写点啥？"></textarea>
+	        <div style="margin-top:10px" class="tab-pane fade" id="preview">
+	          
+	        </div>
+	      </div>
+			</div>
+		  <div class="form-group">
+		    <div class="col-sx-12">
+		      <button type="submit" id="submit" class="btn btn-default btn-lg btn-block">完 成</button>
+		    </div>
+		  </div>
+		</form>
+  </div>
+	<script src="/javascripts/showdown-master/showdown-master/compressed/showdown.js"></script>
+	<script src="/javascripts/showdown-master/showdown-master/compressed/extensions/github.js"></script>
+	<script src="/javascripts/showdown-master/showdown-master/compressed/extensions/prettify.js"></script>
+	<script src="/javascripts/showdown-master/showdown-master/compressed/extensions/table.js"></script>
+	<script src="/google-code-prettify/prettify.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+  	$("#write").height($(window).height()-$("#write").offset().top-90);
+
+  	var converter = new Showdown.converter({ extensions: ['github','prettify','table'] });
+	  $("#a_preview").click(function(){
+
+	  	$("#preview").html(converter.makeHtml($("#write").val()));
+			prettyPrint();
+	  });
+  });
+  </script>
+<%include footer.html%>

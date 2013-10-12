@@ -1,13 +1,9 @@
 <%include header.html%>
-<h1>Welcome <%=user.username%>,欢迎登陆！</h1>
-<textarea id="request">
-
-</textarea>
-<a class="btn" href="/logout">退出</a>
-<script type="text/javascript">
-var socket = io.connect('http://localhost');
-socket.on('user', function (data) {
-	document.getElementById('request').value = data.ip + "\n" + JSON.stringify(data.cookies) +"\n"+ data.body;
-});
-</script>
+<%include navbar.html%>
+	<div class="container">
+    <h1><%= title %></h1>
+    <br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <p>Welcome to <a href="/login"><%= title %></a></p>
+  </div>
 <%include footer.html%>

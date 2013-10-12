@@ -1,8 +1,142 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
 a {
   color: #00B7FF;
+}
+
+@keyframes mybody
+{
+0% {background: rgb(255,242,255);}
+17% {background: rgb(242,242,255);}
+34% {background: rgb(242,255,255);}
+51% {background: rgb(242,255,242);}
+68% {background: rgb(255,255,242);}
+85% {background: rgb(255,242,242);}
+100% {background: rgb(255,242,255);}
+}
+
+@-moz-keyframes mybody /* Firefox */
+{
+0% {background: rgb(255,242,255);}
+17% {background: rgb(242,242,255);}
+34% {background: rgb(242,255,255);}
+51% {background: rgb(242,255,242);}
+68% {background: rgb(255,255,242);}
+85% {background: rgb(255,242,242);}
+100% {background: rgb(255,242,255);}
+}
+
+@-webkit-keyframes mybody /* Safari 和 Chrome */
+{
+0% {background: rgb(255,242,255);}
+17% {background: rgb(242,242,255);}
+34% {background: rgb(242,255,255);}
+51% {background: rgb(242,255,242);}
+68% {background: rgb(255,255,242);}
+85% {background: rgb(255,242,242);}
+100% {background: rgb(255,242,255);}
+}
+
+@-o-keyframes mybody /* Opera */
+{
+0% {background: rgb(255,242,255);}
+17% {background: rgb(242,242,255);}
+34% {background: rgb(242,255,255);}
+51% {background: rgb(242,255,242);}
+68% {background: rgb(255,255,242);}
+85% {background: rgb(255,242,242);}
+100% {background: rgb(255,242,255);}
+}
+
+@keyframes mynavbar
+{
+0% {background: rgba(255,242,255,0.9);}
+17% {background: rgba(242,242,255,0.9);}
+34% {background: rgba(242,255,255,0.9);}
+51% {background: rgba(242,255,242,0.9);}
+68% {background: rgba(255,255,242,0.9);}
+85% {background: rgba(255,242,242,0.9);}
+100% {background: rgba(255,242,255,0.9);}
+}
+
+@-moz-keyframes mynavbar /* Firefox */
+{
+0% {background: rgba(255,242,255,0.9);}
+17% {background: rgba(242,242,255,0.9);}
+34% {background: rgba(242,255,255,0.9);}
+51% {background: rgba(242,255,242,0.9);}
+68% {background: rgba(255,255,242,0.9);}
+85% {background: rgba(255,242,242,0.9);}
+100% {background: rgba(255,242,255,0.9);}
+}
+
+@-webkit-keyframes mynavbar /* Safari 和 Chrome */
+{
+0% {background: rgba(255,242,255,0.9);}
+17% {background: rgba(242,242,255,0.9);}
+34% {background: rgba(242,255,255,0.9);}
+51% {background: rgba(242,255,242,0.9);}
+68% {background: rgba(255,255,242,0.9);}
+85% {background: rgba(255,242,242,0.9);}
+100% {background: rgba(255,242,255,0.9);}
+}
+
+@-o-keyframes mynavbar /* Opera */
+{
+0% {background: rgba(255,242,255,0.9);}
+17% {background: rgba(242,242,255,0.9);}
+34% {background: rgba(242,255,255,0.9);}
+51% {background: rgba(242,255,242,0.9);}
+68% {background: rgba(255,255,242,0.9);}
+85% {background: rgba(255,242,242,0.9);}
+100% {background: rgba(255,242,255,0.9);}
+}
+
+
+body {
+	font-family: "Helvetica Neue", "Helvetica", Arial,"Hiragino Sans GB","WenQuanYi Micro Hei",SimSun, sans-serif;
+	-webkit-font-smoothing: antialiased;
+  padding-top:80px;
+  /*background-color: rgb(255,242,242);*/
+  animation: mybody 3600s infinite;
+  -moz-animation: mybody 3600s infinite; /* Firefox */
+  -webkit-animation: mybody 3600s infinite;  /* Safari 和 Chrome */
+  -o-animation: mybody 3600s infinite;
+}
+
+.navbar {
+  animation: mynavbar 3600s infinite;
+  -moz-animation: mynavbar 3600s infinite; /* Firefox */
+  -webkit-animation: mynavbar 3600s infinite;  /* Safari 和 Chrome */
+  -o-animation: mynavbar 3600s infinite;
+	border-bottom:1px solid rgba(180, 180, 180, 0.5);
+}
+
+h2 {
+  background: url('/images/hr.png') bottom center no-repeat;
+  padding-bottom: 15px;
+}
+
+.post {
+  background: url('/images/hr.png') bottom center no-repeat;
+  padding-bottom: 10px;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+  color: rgb(85, 85, 85);
+  background-color: rgba(231, 231, 231, 0.5);
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+	animation: mybody 3600s infinite;
+	-moz-animation: mybody 3600s infinite; /* Firefox */
+	-webkit-animation: mybody 3600s infinite;  /* Safari 和 Chrome */
+	-o-animation: mybody 3600s infinite;
+}
+
+::selection {
+  background: rgba(0,55,177,0.7);
+  color:#fff;
+}
+::-moz-selection {
+  background: rgba(0,55,177,0.7);
+  color:#fff;
 }

@@ -4,6 +4,7 @@
  */
 
 var app = require('../app');
+var model = require('../models');
 
 
 exports.index = function(req, res){
@@ -42,4 +43,13 @@ exports.home = function(req,res){
 		socket.emit('user',{ip:req.ip,cookies:req.cookies,body:req.body});
 	});
 	res.render('home',{title:'home'});
+}
+
+exports.post = function(req,res){
+	res.render('post',{title:'写文章'});
+}
+
+exports.doPost = function(req,res){
+	var tags = req.body.write.match(/^/);
+	post = new model.Post({body:req.body.write,tags:})
 }
