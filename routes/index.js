@@ -4,7 +4,7 @@
  */
 
 var app = require('../app');
-var model = require('../models');
+var model = require('../models/models');
 
 
 exports.index = function(req, res){
@@ -51,5 +51,5 @@ exports.post = function(req,res){
 
 exports.doPost = function(req,res){
 	var tags = req.body.write.match(/^/);
-	post = new model.Post({body:req.body.write,tags:})
+	post = new model.Post({body:req.body.write});
 }
