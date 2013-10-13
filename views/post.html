@@ -1,7 +1,7 @@
 <%include header.html%>
 	<%include navbar.html%>
 	<div class="container">
-		<form class="form-horizontal col-xs-12 col-sm-12 col-md-12" role="form">
+		<form class="form-horizontal col-xs-12 col-sm-12 col-md-12" role="form" method="post">
 
 			<div class="form-group">
 	      <ul id="myTab" class="nav nav-tabs">
@@ -22,11 +22,7 @@
 		  </div>
 		</form>
   </div>
-	<script src="/javascripts/showdown-master/showdown-master/compressed/showdown.js"></script>
-	<script src="/javascripts/showdown-master/showdown-master/compressed/extensions/github.js"></script>
-	<script src="/javascripts/showdown-master/showdown-master/compressed/extensions/prettify.js"></script>
-	<script src="/javascripts/showdown-master/showdown-master/compressed/extensions/table.js"></script>
-	<script src="/google-code-prettify/prettify.js"></script>
+	<%include otherscript.html%>
   <script type="text/javascript">
   $(document).ready(function(){
   	$("#write").height($(window).height()-$("#write").offset().top-90);

@@ -12,9 +12,7 @@ var SessionStore = require("session-mongoose")(express);
 var app = express();
 
 
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/nodeblog');
-exports.db = mongoose.connection;
+
 
 
 //session store

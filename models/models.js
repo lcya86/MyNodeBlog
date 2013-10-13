@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+mongoose.connect("mongodb://localhost/session");
 
+
+var Schema = mongoose.Schema;
 var tagSchema = new Schema({
 	name:String,
 	size:Number

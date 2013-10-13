@@ -8,7 +8,18 @@ var model = require('../models/models');
 
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Index' });
+	model.Post.find(function(err,posts){
+/*		var converter = new Showdown.converter({ extensions: ['github','prettify','table'] });
+		var htposts = [];
+		for(i=0;i<posts.length;i++){
+			htposts[i] = converter.makeHtml(posts[i].body);
+		}
+		console.log(htposts);
+*/
+		console.log(posts);
+	  res.render('index', {title: 'blog',posts:posts});
+
+	})
 };
 
 exports.login = function(req,res){
@@ -50,6 +61,13 @@ exports.post = function(req,res){
 }
 
 exports.doPost = function(req,res){
-	var tags = req.body.write.match(/^/);
-	post = new model.Post({body:req.body.write});
+	console.log('doPost')
+	model.Post.create({body:req.body.write,tags:[]},function(err){
+		if(err) console.error(err);
+		console.log('createOk');
+	});
+	model.Post.find(function(err,posts){
+		console.log(posts);
+	})
+	return res.redirect('/blog');
 }

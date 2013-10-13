@@ -2,12 +2,18 @@
 	<%include navbar.html%>
 	<div class="container">
 		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-9" >
-
-				<div class="row">
-					<div class="col-xs-12 post" >
-					</div>
-				</div>
+			<div class="col-xs-12 col-sm-12 col-md-9" id="posts">
+				<%if(!posts){%>
+					<h2>主人很懒，什么都没有留下。。。</h2>
+				<%}else{%>
+					<%posts.forEach(function(post){%>
+						<div class="row">
+							<div class="col-xs-12 post" >
+								<%=post.body%>							
+							</div>
+						</div>
+					<%})%>
+				<%}%>
 				
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-3" >
@@ -28,4 +34,15 @@
 			</div>
 		</div>
 	</div>
+	
+	<%include otherscript.html%>
+	<script type="text/javascript">
+	  $(document).ready(function(){
+	  	var converter = new Showdown.converter({ extensions: ['github','prettify','table'] });
+			$(".post").html(function(i){
+				return converter.makeHtml($(".post:eq("+i+")").text());
+			});	
+			prettyPrint();
+	  });
+	</script>
 <%include footer.html%>
