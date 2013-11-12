@@ -12,6 +12,7 @@ exports.Tag = mongoose.model('Tag', tagSchema);
 
 var postSchema = new Schema({
 	body: String,
+	title: String,
 	tags: [tagSchema],
 	update: { type: Date, default: Date.now }
 })

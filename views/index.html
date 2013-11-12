@@ -2,36 +2,34 @@
 	<%include navbar.html%>
 	<div class="container">
 		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-3 col-md-offset-9">
+				<div class="bs-sidebar affix">
+					<ul class="nav">
+						<%if(posts){%>
+							<%posts.forEach(function(post){%>
+								<li><a href="#<%=post.id%>"><%=post.title%></a></li>
+							<%})%>
+						<%}%>
+					</ul>
+				</div>
+			</div>
 			<div class="col-xs-12 col-sm-12 col-md-9" id="posts">
 				<%if(!posts){%>
 					<h2>主人很懒，什么都没有留下。。。</h2>
 				<%}else{%>
 					<%posts.forEach(function(post){%>
-						<div class="row">
-							<div class="col-xs-12 post" >
+						<div class="row" id="<%=post.id%>">
+							<br>
+							<br>
+							<br>
+							<div class="col-xs-12 post">
 								<%=post.body%>							
 							</div>
 						</div>
 					<%})%>
 				<%}%>
-				
 			</div>
-			<div class="col-xs-12 col-sm-12 col-md-3" >
-				<div class="row">
-					<div class="col-xs-12" >
-						<h2>sdfsdf</h2>
-					</div>
-					<div class="col-xs-12" >
-						<h2>sdfsdf</h2>
-					</div>
-					<div class="col-xs-12" >
-						<h2>sdfsdf</h2>
-					</div>
-					<div class="col-xs-12" >
-						<h2>sdfsdf</h2>
-					</div>
-				</div>
-			</div>
+			
 		</div>
 	</div>
 	

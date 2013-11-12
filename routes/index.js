@@ -16,6 +16,17 @@ exports.index = function(req, res){
 		}
 		console.log(htposts);
 */
+
+		posts.forEach(function(post){
+			if(!post.title||post.title===''){
+				console.log(post.body);
+				var title = post.body.match(/^.+$/m);
+				console.log("title:"+title);
+				model.Post.update({_id:post.id},{title:title[0]},function(err){
+					console.error(err);
+				});
+			}
+		})
 		console.log(posts);
 	  res.render('index', {title: 'blog',posts:posts});
 
@@ -61,13 +72,17 @@ exports.post = function(req,res){
 }
 
 exports.doPost = function(req,res){
-	console.log('doPost')
-	model.Post.create({body:req.body.write,tags:[]},function(err){
+	console.log('doPost');
+	var title = req.body.write.match(/^.+$/m);
+	model.Post.create({body:req.body.write,title:title[0],tags:[]},function(err){
 		if(err) console.error(err);
 		console.log('createOk');
 	});
+
+	/*
 	model.Post.find(function(err,posts){
 		console.log(posts);
 	})
+*/
 	return res.redirect('/blog');
 }
