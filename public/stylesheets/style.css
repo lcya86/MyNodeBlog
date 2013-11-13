@@ -141,6 +141,10 @@ h2 {
   color:#fff;
 }
 
+
+
+
+
 /*
  * Side navigation
  *
@@ -170,6 +174,20 @@ h2 {
   color: #716b7a;
   padding: 5px 20px;
 }
+
+.sidebar_a:hover {
+  font-size:120%;
+}
+
+.sidebar_a {
+  transition-property:font-size;
+  transition-duration:200ms;
+  -webkit-transition-property:font-size;
+  -webkit-transition-duration:200ms;
+  -moz-transition-property:font-size;
+  -moz-transition-duration:200ms;
+}
+
 .bs-sidebar .nav > li > a:hover,
 .bs-sidebar .nav > li > a:focus {
   text-decoration: none;
