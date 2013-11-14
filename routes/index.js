@@ -27,7 +27,6 @@ exports.index = function(req, res){
 				});
 			}
 		})
-		console.log(posts);
 	  res.render('index', {title: 'blog',posts:posts});
 
 	})

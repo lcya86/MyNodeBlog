@@ -2,111 +2,17 @@ a {
   color: #00B7FF;
 }
 
-@keyframes mybody
-{
-0% {background: rgb(255,248,255);}
-17% {background: rgb(248,248,255);}
-34% {background: rgb(248,255,255);}
-51% {background: rgb(248,255,248);}
-68% {background: rgb(255,255,248);}
-85% {background: rgb(255,248,248);}
-100% {background: rgb(255,248,255);}
-}
-
-@-moz-keyframes mybody /* Firefox */
-{
-0% {background: rgb(255,248,255);}
-17% {background: rgb(248,248,255);}
-34% {background: rgb(248,255,255);}
-51% {background: rgb(248,255,248);}
-68% {background: rgb(255,255,248);}
-85% {background: rgb(255,248,248);}
-100% {background: rgb(255,248,255);}
-}
-
-@-webkit-keyframes mybody /* Safari 和 Chrome */
-{
-0% {background: rgb(255,248,255);}
-17% {background: rgb(248,248,255);}
-34% {background: rgb(248,255,255);}
-51% {background: rgb(248,255,248);}
-68% {background: rgb(255,255,248);}
-85% {background: rgb(255,248,248);}
-100% {background: rgb(255,248,255);}
-}
-
-@-o-keyframes mybody /* Opera */
-{
-0% {background: rgb(255,248,255);}
-17% {background: rgb(248,248,255);}
-34% {background: rgb(248,255,255);}
-51% {background: rgb(248,255,248);}
-68% {background: rgb(255,255,248);}
-85% {background: rgb(255,248,248);}
-100% {background: rgb(255,248,255);}
-}
-
-@keyframes mynavbar
-{
-0% {background: rgba(255,248,255,0.9);}
-17% {background: rgba(248,248,255,0.9);}
-34% {background: rgba(248,255,255,0.9);}
-51% {background: rgba(248,255,248,0.9);}
-68% {background: rgba(255,255,248,0.9);}
-85% {background: rgba(255,248,248,0.9);}
-100% {background: rgba(255,248,255,0.9);}
-}
-
-@-moz-keyframes mynavbar /* Firefox */
-{
-0% {background: rgba(255,248,255,0.9);}
-17% {background: rgba(248,248,255,0.9);}
-34% {background: rgba(248,255,255,0.9);}
-51% {background: rgba(248,255,248,0.9);}
-68% {background: rgba(255,255,248,0.9);}
-85% {background: rgba(255,248,248,0.9);}
-100% {background: rgba(255,248,255,0.9);}
-}
-
-@-webkit-keyframes mynavbar /* Safari 和 Chrome */
-{
-0% {background: rgba(255,248,255,0.9);}
-17% {background: rgba(248,248,255,0.9);}
-34% {background: rgba(248,255,255,0.9);}
-51% {background: rgba(248,255,248,0.9);}
-68% {background: rgba(255,255,248,0.9);}
-85% {background: rgba(255,248,248,0.9);}
-100% {background: rgba(255,248,255,0.9);}
-}
-
-@-o-keyframes mynavbar /* Opera */
-{
-0% {background: rgba(255,248,255,0.9);}
-17% {background: rgba(248,248,255,0.9);}
-34% {background: rgba(248,255,255,0.9);}
-51% {background: rgba(248,255,248,0.9);}
-68% {background: rgba(255,255,248,0.9);}
-85% {background: rgba(255,248,248,0.9);}
-100% {background: rgba(255,248,255,0.9);}
-}
-
 
 body {
 	font-family: "Helvetica Neue", "Helvetica", Arial,"Hiragino Sans GB","WenQuanYi Micro Hei",SimSun, sans-serif;
 	-webkit-font-smoothing: antialiased;
   position: relative;
   display: block;
-  animation: mybody 3600s infinite;
-  -moz-animation: mybody 3600s infinite; /* Firefox */
-  -webkit-animation: mybody 3600s infinite;  /* Safari 和 Chrome */
-  -o-animation: mybody 3600s infinite;
+  background: rgb(255,255,255);
 }
 
 .navbar {
-  animation: mynavbar 3600s infinite;
-  -moz-animation: mynavbar 3600s infinite; /* Firefox */
-  -webkit-animation: mynavbar 3600s infinite;  /* Safari 和 Chrome */
-  -o-animation: mynavbar 3600s infinite;
+  background: rgba(255,255,255,0.9);
 	border-bottom:1px solid rgba(180, 180, 180, 0.5);
 }
 
@@ -126,10 +32,7 @@ h2 {
 }
 
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
-	animation: mybody 3600s infinite;
-	-moz-animation: mybody 3600s infinite; /* Firefox */
-	-webkit-animation: mybody 3600s infinite;  /* Safari 和 Chrome */
-	-o-animation: mybody 3600s infinite;
+	background: rgb(255,248,255);
 }
 
 ::selection {
@@ -176,16 +79,17 @@ h2 {
 }
 
 .sidebar_a:hover {
-  font-size:120%;
+  left: 5px;
+  top: 5px;
 }
 
 .sidebar_a {
-  transition-property:font-size;
-  transition-duration:200ms;
-  -webkit-transition-property:font-size;
-  -webkit-transition-duration:200ms;
-  -moz-transition-property:font-size;
-  -moz-transition-duration:200ms;
+  transition-property:left,top;
+  transition-duration:200ms,200ms;
+  -webkit-transition-property:left,top;
+  -webkit-transition-duration:200ms,200ms;
+  -moz-transition-property:left,top;
+  -moz-transition-duration:200ms,200ms;
 }
 
 .bs-sidebar .nav > li > a:hover,
