@@ -18,13 +18,8 @@
 					<h2>主人很懒，什么都没有留下。。。</h2>
 				<%}else{%>
 					<%posts.forEach(function(post){%>
-						<div class="row" id="<%=post.title%>">
-							<br>
-							<br>
-							<br>
-							<div class="col-xs-12 post">
-								<%=post.body%>							
-							</div>
+						<div class="col-xs-12 post" id="<%=post.title%>">
+							<%=post.body%>
 						</div>
 					<%})%>
 				<%}%>

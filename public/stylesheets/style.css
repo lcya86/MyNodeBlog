@@ -33,6 +33,7 @@ h2 {
   padding: 15px;
   box-shadow: 0 2px 6px rgba(100, 100, 100, 0.3);
   background: #fcfcfa;
+  margin-top: 20px;
 }
 
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
@@ -66,6 +67,10 @@ h2 {
 
 /* By default it's not affixed in mobile views, so undo that */
 .bs-sidebar.affix {
+  padding: 15px;
+  box-shadow: 0 2px 6px rgba(100, 100, 100, 0.3);
+  background: #fcfcfa;
+  margin-top: 20px;
   position: static;
 }
 
@@ -128,11 +133,6 @@ h2 {
   font-size: 90%;
 }
 
-@media (max-width: 991px){
-  .bs-sidebar.affix {
-    padding-top: 80px;
-  }
-}
 
 /* Show and affix the side nav when space allows it */
 @media (min-width: 992px) {
@@ -146,7 +146,6 @@ h2 {
   }
   .bs-sidebar.affix {
     position: fixed; /* Undo the static from mobile first approach */
-    top: 80px;
   }
   .bs-sidebar.affix-bottom {
     position: absolute; /* Undo the static from mobile first approach */
