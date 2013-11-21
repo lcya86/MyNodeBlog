@@ -37,11 +37,6 @@ footer > div{
   text-align: center;
 }
 
-h2 {
-  background: url('/images/hr.png') bottom center no-repeat;
-  padding-bottom: 15px;
-}
-
 .post {
   padding: 15px;
   box-shadow: 0 2px 6px rgba(100, 100, 100, 0.3);
