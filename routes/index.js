@@ -27,7 +27,7 @@ exports.index = function(req, res){
 				});
 			}
 		})
-	  res.render('index', {title: '\'s blog',posts:posts});
+	  return res.render('index', {title: '\'s blog',posts:posts});
 
 	})
 };
@@ -52,7 +52,7 @@ exports.doLogin = function(req,res){
 
 exports.logout = function(req,res){
 	req.session.user=null;
-	res.redirect('/');
+	return res.redirect('/');
 }
 
 exports.home = function(req,res){
@@ -63,11 +63,11 @@ exports.home = function(req,res){
 	app.io.sockets.on('connection',function(socket){
 		socket.emit('user',{ip:req.ip,cookies:req.cookies,body:req.body});
 	});
-	res.render('home',{title:'home'});
+	return res.render('home',{title:'home'});
 }
 
 exports.post = function(req,res){
-	res.render('post',{title:'写文章'});
+	return res.render('post',{title:'写文章'});
 }
 
 exports.doPost = function(req,res){
@@ -84,4 +84,19 @@ exports.doPost = function(req,res){
 	})
 */
 	return res.redirect('/blog');
+}
+
+exports.getPost = function(req,res){
+	var title = req.params.title;
+	if(title){
+		var post = model.Post.find({title:title},function(err,post){
+			if(err){
+				console.error(err);
+				return res.render('404',{title:'404'});
+			}
+			return res.render('getpost',{title:title,post:post});
+		});
+	}else{
+		return res.render('404',{title:'404'});
+	}
 }

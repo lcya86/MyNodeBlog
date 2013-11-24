@@ -75,7 +75,7 @@ function notAuthentication(req,res,next){
 }
 
 app.get('/', routes.index);
-app.get('/blog', routes.index);
+app.get('/getpost/:title', routes.getPost);
 app.all('/login',notAuthentication);
 app.get('/login', routes.login);
 app.post('/login', routes.doLogin);
