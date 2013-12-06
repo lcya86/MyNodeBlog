@@ -98,6 +98,8 @@ footer > div{
   display: block;
   color: #716b7a;
   padding: 5px 20px;
+  cursor: pointer;
+  
 }
 
 .sidebar_a:hover {
