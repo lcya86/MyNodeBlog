@@ -83,7 +83,7 @@ exports.doPost = function(req,res){
 		console.log(posts);
 	})
 */
-	return res.redirect('/blog');
+	return res.redirect('/');
 }
 
 exports.getPost = function(req,res){

@@ -18,9 +18,9 @@
 					<h2>主人很懒，什么都没有留下。。。</h2>
 				<%}else{%>
 					<%posts.forEach(function(post){%>
-						<div class="col-xs-12 post" id="<%=post.title%>">
+						<article class="col-xs-12 post" id="<%=post.title%>">
 							<%=post.body%>
-						</div>
+						</article>
 					<%})%>
 				<%}%>
 			</div>
@@ -51,6 +51,6 @@
 
 		function scroll(id){
 			var top = getElementTop(document.getElementById(id))-90;
-			$("body").scrollTop(top);
+			$("body").animate({scrollTop:top},120);
 		}
 	</script>
