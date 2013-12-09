@@ -22,7 +22,7 @@ var store = new SessionStore({
 })
 
 // all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 80);
 app.engine('.html', ejs.__express);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'html');
