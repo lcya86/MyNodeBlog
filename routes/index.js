@@ -100,3 +100,18 @@ exports.edit = function(req,res){
 		return res.render('404',{title:'404'});
 	}
 }
+
+exports.doEdit = function(req,res){
+	var title = req.params.title;
+	if(title){
+		model.Post.findOneAndUpdate({title:title},{body:req.body.write},function(err){
+			if(err){
+				console.error(err);
+				return res.render('404',{title:'404'});
+			}
+			return res.redirect('/');
+		});
+	}else{
+		return res.render('404',{title:'404'});
+	}
+}

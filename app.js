@@ -89,6 +89,8 @@ app.post('/post',authentication);
 app.post('/post', routes.doPost);
 app.get('/edit/:title',authentication);
 app.get('/edit/:title',routes.edit);
+app.post('/edit/:title',authentication);
+app.post('/edit/:title',routes.doEdit);
 
 var server = http.createServer(app).listen(app.get('port'), function() {
 	console.log('Express server listening on port ' + app.get('port'));
