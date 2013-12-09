@@ -28,19 +28,10 @@
 								</small>
 								<%if(user){%>
 								<div class="pull-right">
-									<a style="color:#555" href=""><span class="glyphicon glyphicon-pencil"></span></a>
+									<a style="color:#555" href="/edit/<%=post.title%>"><span class="glyphicon glyphicon-pencil"></span></a>
 									&nbsp;&nbsp;&nbsp;&nbsp;
-									<a style="color:#555" onclick="remove('<%=post.title%>')"><span class="glyphicon glyphicon-remove"></span></a>
+									<a style="color:#555"><span class="glyphicon glyphicon-remove"></span></a>
 								</div>
-								<script type="text/javascript">
-									function removePost(id){
-
-									}
-
-									function editPost(id){
-
-									}
-								</script>
 								<%}%>
 							</div>
 						</div>
@@ -78,4 +69,6 @@
 			$("html").animate({scrollTop:top},120);
 			$("body").animate({scrollTop:top},120);
 		}
+
+
 	</script>

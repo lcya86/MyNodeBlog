@@ -10,7 +10,7 @@
 	        <li class=""><a href="#preview" id="a_preview" data-toggle="tab">预览</a></li>
 	      </ul>
 	      <div id="myTabContent" class="tab-content">
-          <textarea style="margin-top:10px" class="form-control col-xs-12 tab-pane fade active in" name="write" id="write" placeholder="写点啥？"></textarea>
+          <textarea style="margin-top:10px" class="form-control col-xs-12 tab-pane fade active in" name="write" id="write" placeholder="写点啥？"><%if(post){%><%=post.body%><%}%></textarea>
 	        <div style="margin-top:10px;background-color:#fff;" class="tab-pane fade post" id="preview">
 	          
 	        </div>

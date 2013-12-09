@@ -58,7 +58,7 @@ exports.home = function(req,res){
 }
 
 exports.post = function(req,res){
-	return res.render('post',{title:'写文章'});
+	return res.render('post',{title:'写文章',post:null});
 }
 
 exports.doPost = function(req,res){
@@ -74,12 +74,27 @@ exports.doPost = function(req,res){
 exports.getPost = function(req,res){
 	var title = req.params.title;
 	if(title){
-		var post = model.Post.find({title:title},function(err,post){
+		model.Post.find({title:title},function(err,post){
 			if(err){
 				console.error(err);
 				return res.render('404',{title:'404'});
 			}
 			return res.render('getpost',{title:title,post:post});
+		});
+	}else{
+		return res.render('404',{title:'404'});
+	}
+}
+
+exports.edit = function(req,res){
+	var title = req.params.title;
+	if(title){
+		model.Post.findOne({title:title},function(err,post){
+			if(err){
+				console.error(err);
+				return res.render('404',{title:'404'});
+			}
+			return res.render('post',{title:title,post:post});
 		});
 	}else{
 		return res.render('404',{title:'404'});
