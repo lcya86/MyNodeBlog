@@ -18,9 +18,32 @@
 					<h2>主人很懒，什么都没有留下。。。</h2>
 				<%}else{%>
 					<%posts.forEach(function(post){%>
-						<article class="col-xs-12 post" id="<%=post.title%>">
-							<%=post.body%>
-						</article>
+						<div class="col-xs-12 post">
+							<article class="col-xs-12 article" id="<%=post.title%>">
+								<%=post.body%>
+							</article>
+							<hr>
+							<div class="col-xs-12">
+								<small><em>post at <%=post.update.getFullYear()%>-<%=post.update.getMonth()%>-<%=post.update.getDate()%></em>
+								</small>
+								<%if(user){%>
+								<div class="pull-right">
+									<a style="color:#555" href=""><span class="glyphicon glyphicon-pencil"></span></a>
+									&nbsp;&nbsp;&nbsp;&nbsp;
+									<a style="color:#555" onclick="remove('<%=post.title%>')"><span class="glyphicon glyphicon-remove"></span></a>
+								</div>
+								<script type="text/javascript">
+									function removePost(id){
+
+									}
+
+									function editPost(id){
+
+									}
+								</script>
+								<%}%>
+							</div>
+						</div>
 					<%})%>
 				<%}%>
 			</div>
@@ -32,8 +55,8 @@
 	<script type="text/javascript">
 	  $(document).ready(function(){
 	  	var converter = new Showdown.converter({ extensions: ['github','prettify','table'] });
-			$(".post").html(function(i){
-				return converter.makeHtml($(".post:eq("+i+")").text());
+			$(".article").html(function(i){
+				return converter.makeHtml($(".article:eq("+i+")").text());
 			});	
 			prettyPrint();
 	  });
@@ -50,7 +73,9 @@
 　　}
 
 		function scroll(id){
-			var top = getElementTop(document.getElementById(id))-90;
+			var top = getElementTop(document.getElementById(id))-128;
+			console.log(top);
+			$("html").animate({scrollTop:top},120);
 			$("body").animate({scrollTop:top},120);
 		}
 	</script>

@@ -9,25 +9,16 @@ var model = require('../models/models');
 
 exports.index = function(req, res){
 	model.Post.find(function(err,posts){
-/*		var converter = new Showdown.converter({ extensions: ['github','prettify','table'] });
-		var htposts = [];
-		for(i=0;i<posts.length;i++){
-			htposts[i] = converter.makeHtml(posts[i].body);
-		}
-		console.log(htposts);
-*/
-
 		posts.forEach(function(post){
 			if(!post.title||post.title===''){
 				console.log(post.body);
 				var title = post.body.match(/^.+$/m);
-				console.log("title:"+title);
 				model.Post.update({_id:post.id},{title:title[0]},function(err){
 					console.error(err);
 				});
 			}
 		})
-	  return res.render('index', {title: '\'s blog',posts:posts});
+	  return res.render('index', {title: '\'s blog',posts:posts,user:req.session.user});
 
 	})
 };
@@ -77,12 +68,6 @@ exports.doPost = function(req,res){
 		if(err) console.error(err);
 		console.log('createOk');
 	});
-
-	/*
-	model.Post.find(function(err,posts){
-		console.log(posts);
-	})
-*/
 	return res.redirect('/');
 }
 
