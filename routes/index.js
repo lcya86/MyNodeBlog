@@ -115,3 +115,17 @@ exports.doEdit = function(req,res){
 		return res.render('404',{title:'404'});
 	}
 }
+
+exports.doRemove = function(req,res){
+	var title = req.params.title;
+	if(title){
+		model.Post.findOneAndRemove({title:title},function(err){
+			if(err){
+				console.error(err);
+			}
+			return res.redirect('/');
+		});
+	}else{
+		return res.redirect('/');
+	}
+}

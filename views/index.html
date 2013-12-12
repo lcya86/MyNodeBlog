@@ -24,13 +24,13 @@
 							</article>
 							<hr>
 							<div class="col-xs-12">
-								<small><em>post at <%=post.update.getFullYear()%>-<%=post.update.getMonth()%>-<%=post.update.getDate()%></em>
+								<small><em>posted at <%=post.update.toLocaleTimeString()%>&nbsp;<%=post.update.toLocaleDateString()%></em>
 								</small>
 								<%if(user){%>
 								<div class="pull-right">
 									<a style="color:#555" href="/edit/<%=post.title%>"><span class="glyphicon glyphicon-pencil"></span></a>
 									&nbsp;&nbsp;&nbsp;&nbsp;
-									<a style="color:#555"><span class="glyphicon glyphicon-remove"></span></a>
+									<a style="color:#555" href="/remove/<%=post.title%>"><span class="glyphicon glyphicon-remove"></span></a>
 								</div>
 								<%}%>
 							</div>
@@ -65,7 +65,6 @@
 
 		function scroll(id){
 			var top = getElementTop(document.getElementById(id))-128;
-			console.log(top);
 			$("html").animate({scrollTop:top},120);
 			$("body").animate({scrollTop:top},120);
 		}
