@@ -1,9 +1,29 @@
 <%include header.html%>
 <%include navbar.html%>
 	<div class="container">
-    <h1><%= title %></h1>
-    <br>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <p>Welcome to <a href="/login"><%= title %></a></p>
-  </div>
+		<div class="col-md-10 col-md-offset-1">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>ip</th>	
+						<th>host name</th>
+						<th>frequency</th>
+						<th>last visited time</th>	
+					</tr>
+				</thead>
+				<tbody>
+					<%if(visitors){%>
+						<%visitors.forEach(function(visitor){%>
+						<tr>
+							<td><%=visitor.ip%></td>
+							<td><%=visitor.hostName%></td>
+							<td><%=visitor.frequency%></td>
+							<td><%=visitor.lastVisitTime%></td>
+						</tr>
+						<%})%>
+					<%}%>
+				</tbody>
+			</table>	
+		</div>
+	</div>
 <%include footer.html%>

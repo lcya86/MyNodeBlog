@@ -17,3 +17,11 @@ var postSchema = new Schema({
 	update: { type: Date, default: Date.now }
 })
 exports.Post = mongoose.model('Post', postSchema);
+
+var visitorSchema = new Schema({
+	ip:String,
+	hostName:String,
+	frequency:{type:Number,default:0},
+	lastVisitTime:Date
+})
+exports.Visitor = mongoose.model('Visitor',visitorSchema);

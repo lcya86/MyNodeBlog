@@ -6,10 +6,26 @@
 var app = require('../app');
 var model = require('../models/models');
 
-
+// enter index page
 exports.index = function(req, res){
+	model.Visitor.findOne({ip:req.ip},function(err,visitor){
+		console.log(visitor);
+		if(err){
+			console.error(err);
+		}
+		if(visitor){
+			visitor.frequency++;
+			visitor.lastVisitTime=Date.now();
+			visitor.save();
+		}else{
+			model.Visitor.create({ip:req.ip,hostName:req.host,frequency:1,lastVisitTime:Date.now()},function(err){
+				if(err) console.error(err);
+				console.log('create visitor Ok');
+			});
+		}
+	});
 	model.Post.find(function(err,posts){
-	  return res.render('index', {title: '\'s blog',posts:posts,user:req.session.user});
+	  return res.render('index', {title: 'L\'s blog',posts:posts,user:req.session.user});
 	})
 };
 
@@ -44,7 +60,12 @@ exports.home = function(req,res){
 	app.io.sockets.on('connection',function(socket){
 		socket.emit('user',{ip:req.ip,cookies:req.cookies,body:req.body});
 	});
-	return res.render('home',{title:'home'});
+	model.Visitor.find(function(err,visitors){
+		if(err){
+			console.error(err);
+		}
+		return res.render('home',{title:'home',visitors:visitors});
+	});
 }
 
 exports.post = function(req,res){
