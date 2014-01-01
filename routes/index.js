@@ -9,7 +9,6 @@ var model = require('../models/models');
 // enter index page
 exports.index = function(req, res){
 	model.Visitor.findOne({ip:req.ip},function(err,visitor){
-		console.log(visitor);
 		if(err){
 			console.error(err);
 		}
@@ -133,6 +132,24 @@ exports.doRemove = function(req,res){
 		model.Post.findOneAndRemove({title:title},function(err){
 			if(err){
 				console.error(err);
+			}
+			return res.redirect('/');
+		});
+	}else{
+		return res.redirect('/');
+	}
+}
+
+exports.doLike = function(req,res){
+	var title = req.params.title;
+	if(title){
+		model.Post.findOne({title:title},function(err,post){
+			if(err){
+				console.error(err);
+			}
+			if(post){
+				post.like++;
+				post.save();
 			}
 			return res.redirect('/');
 		});

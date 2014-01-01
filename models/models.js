@@ -13,6 +13,7 @@ exports.Tag = mongoose.model('Tag', tagSchema);
 var postSchema = new Schema({
 	body: String,
 	title: String,
+	like:{type:Number,default:0},
 	tags: [tagSchema],
 	update: { type: Date, default: Date.now }
 })
