@@ -18,7 +18,7 @@ exports.index = function(req, res){
 			visitor.lastVisitTime=Date.now();
 			visitor.save();
 		}else{
-			model.Visitor.create({ip:req.ip,hostName:req.host,frequency:1,lastVisitTime:Date.now()},function(err){
+			model.Visitor.create({ip:req.ip,frequency:1,lastVisitTime:Date.now()},function(err){
 				if(err) console.error(err);
 				console.log('create visitor Ok');
 			});

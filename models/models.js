@@ -20,7 +20,6 @@ exports.Post = mongoose.model('Post', postSchema);
 
 var visitorSchema = new Schema({
 	ip:String,
-	hostName:String,
 	frequency:{type:Number,default:0},
 	lastVisitTime:Date
 })
