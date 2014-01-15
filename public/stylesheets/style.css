@@ -9,7 +9,8 @@ body {
   position: relative;
   display: block;
   background: #e6e6e6;
-  color:rgb(80,80,80);
+  color:#444;
+  font-size: 15px;
 }
 
 .navbar {
@@ -38,7 +39,10 @@ footer > div{
 }
 
 .post {
-  padding: 15px;
+  padding-top:10px;
+  padding-bottom: 10px;
+  padding-left: 1%;
+  padding-right: 1%;
   box-shadow: 0 2px 6px rgba(100, 100, 100, 0.3);
   background: #fcfcfa;
   margin-top: 20px;
@@ -166,10 +170,20 @@ footer > div{
     margin-bottom: 0;
   }
 }
+
+@media (max-width: 992px){
+  .article{
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+
+
 @media (min-width: 1200px) {
   /* Widen the fixed sidebar again */
   .bs-sidebar.affix-bottom,
   .bs-sidebar.affix {
     width: 263px;
   }
+
 }
