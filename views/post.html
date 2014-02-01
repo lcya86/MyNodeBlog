@@ -42,7 +42,9 @@
 	  			var title = $("#write").val().match(/^.+$/m);
 	  			W.parseCMD("/statuses/update.json",function(sResult,bStatus){
 	  				if(bStatus==false){
-	  					alert(sResult);
+	  					alert('false!');
+	  				}else{
+	  					alert('发送成功')
 	  				}
 	  			},{
 	  				status:"我刚刚发表了一篇文章《"+title[0]+"》，快来看看吧！http://lcy-blog.com"	
