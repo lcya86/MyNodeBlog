@@ -40,9 +40,9 @@
 	  		WB2.anyWhere(function(W){
 	  			var title = $("#write").val().match(/^.+$/m);
 	  			W.parseCMD("https://api.weibo.com/2/statuses/update.json",function(sResult,bStatus){
-	  				if(bStatus==true){
+	  				//if(bStatus==true){
 	  					alert(sResult);
-	  				}
+	  				//}
 	  			},{
 	  				source:'2744650942'
 	  			},{
