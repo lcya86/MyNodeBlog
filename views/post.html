@@ -40,7 +40,7 @@
 	  	if(WB2.checkLogin()){
 	  		WB2.anyWhere(function(W){
 	  			var title = $("#write").val().match(/^.+$/m);
-	  			W.parseCMD("2/statuses/update.json",function(sResult,bStatus){
+	  			W.parseCMD("statuses/update",function(sResult,bStatus){
 	  				if(bStatus==true){
 	  					alert(sResult);
 	  				}
