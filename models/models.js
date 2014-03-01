@@ -22,6 +22,10 @@ exports.Post = mongoose.model('Post', postSchema);
 var visitorSchema = new Schema({
 	ip:String,
 	frequency:{type:Number,default:0},
+	agent:String,
+	country:String,
+	province:String,
+	city:String,
 	lastVisitTime:Date
 })
 exports.Visitor = mongoose.model('Visitor',visitorSchema);

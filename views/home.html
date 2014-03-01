@@ -1,11 +1,15 @@
 <%include header.html%>
 <%include navbar.html%>
 	<div class="container">
-		<div class="col-md-8 col-md-offset-3">
+		<div class="col-md-12">
 			<table class="table">
 				<thead>
 					<tr>
 						<th>ip</th>	
+						<th>country</th>
+						<th>province</th>
+						<th>city</th>
+						<th>agent</th>
 						<th>frequency</th>
 						<th>last visited time</th>	
 					</tr>
@@ -15,6 +19,10 @@
 						<%visitors.forEach(function(visitor){%>
 						<tr>
 							<td><%=visitor.ip%></td>
+							<td><%=visitor.country%></td>
+							<td><%=visitor.province%></td>
+							<td><%=visitor.city%></td>
+							<td><%=visitor.agent%></td>
 							<td><%=visitor.frequency%></td>
 							<td><%=visitor.lastVisitTime.toLocaleDateString()%>&nbsp;<%=visitor.lastVisitTime.toLocaleTimeString()%></td>
 						</tr>

@@ -4,7 +4,6 @@
 
 var app = require('../app');
 var model = require('../models/models');
-
 // enter index page
 exports.index = function(req, res) {
 	model.Visitor.findOne({
@@ -18,13 +17,25 @@ exports.index = function(req, res) {
 			visitor.lastVisitTime = Date.now();
 			visitor.save();
 		} else {
-			model.Visitor.create({
-				ip: req.ip,
-				frequency: 1,
-				lastVisitTime: Date.now()
-			}, function(err) {
-				if (err) console.error(err);
-				console.log('create visitor Ok');
+			require('http').get('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip='+req.ip,function(response){
+				response.setEncoding('utf-8');
+				response.on('data',function(chunk){
+					var ip_info = JSON.parse(chunk);
+					model.Visitor.create({
+						ip: req.ip,
+						frequency: 1,
+						agent:req.headers['user-agent'],
+						country:ip_info.country,
+						province:ip_info.province,
+						city:ip_info.city,
+						lastVisitTime: Date.now()
+					}, function(err) {
+						if (err) console.error(err);
+						console.log('create visitor Ok');
+					});
+				});
+			}).on('error',function(err){
+				console.log("Got error:"+err.message);
 			});
 		}
 	});
