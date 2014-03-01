@@ -6,9 +6,7 @@
 				<thead>
 					<tr>
 						<th>ip</th>	
-						<th>country</th>
-						<th>province</th>
-						<th>city</th>
+						<th>country-province-city</th>
 						<th>agent</th>
 						<th>frequency</th>
 						<th>last visited time</th>	
@@ -19,9 +17,7 @@
 						<%visitors.forEach(function(visitor){%>
 						<tr>
 							<td><%=visitor.ip%></td>
-							<td><%=visitor.country%></td>
-							<td><%=visitor.province%></td>
-							<td><%=visitor.city%></td>
+							<td><%=visitor.country%>-<%=visitor.province%>-<%=visitor.city%></td>
 							<td><%=visitor.agent%></td>
 							<td><%=visitor.frequency%></td>
 							<td><%=visitor.lastVisitTime.toLocaleDateString()%>&nbsp;<%=visitor.lastVisitTime.toLocaleTimeString()%></td>
