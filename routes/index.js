@@ -8,6 +8,7 @@ var model = require('../models/models');
 exports.index = function(req, res) {
 	var ip = req.ip;
 	var agent = req.headers['user-agent'];
+	console.log(ip+" : "+agent);
 	model.Visitor.findOne({
 		ip: ip
 	}, function(err, visitor) {
