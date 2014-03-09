@@ -7,7 +7,7 @@
 					<ul class="nav">
 						<%if(posts){%>
 							<%posts.forEach(function(post){%>
-								<li><a class="sidebar_a" onclick="scroll('<%=post.title%>')"><%=post.title%></a></li>
+								<li><a class="sidebar_a" onclick="scroll('<%=post.id%>')"><%=post.title%></a></li>
 							<%})%>
 						<%}%>
 					</ul>
@@ -19,7 +19,7 @@
 				<%}else{%>
 					<%posts.forEach(function(post){%>
 						<div class="col-xs-12 post">
-							<article class="col-xs-12 article" id="<%=post.title%>">
+							<article class="col-xs-12 article" id="<%=post.id%>">
 								<%=post.body%>
 							</article>
 							<hr>
@@ -28,16 +28,13 @@
 								</small>
 								<%if(user){%>
 								<div class="pull-right">
-									<a style="color:#555" href="/edit/<%=post.title%>"><span class="glyphicon glyphicon-pencil"></span></a>
+									<a style="color:#555" href="/edit/<%=post.id%>"><span class="glyphicon glyphicon-pencil"></span></a>
 									&nbsp;&nbsp;&nbsp;&nbsp;
-									<a style="color:#555" href="/remove/<%=post.title%>"><span class="glyphicon glyphicon-remove"></span></a>
+									<a style="color:#555" href="/remove/<%=post.id%>"><span class="glyphicon glyphicon-remove"></span></a>
 								</div>
 								<%}%>
 								<div class="pull-right">
-<wb:share-button appkey="4qjvVc" addition="simple" type="button" ralateUid="1915235825" default_text="《<%=post.title%>》"></wb:share-button>
-									<%if(false){%>
-									<a style="color:#555" href="/like/<%=post.title%>"><span class="glyphicon glyphicon-thumbs-up">(<%=post.like%>)</span></a>
-									<%}%>	
+									<a id="like_<%=post.id%>" style="color:#555;cursor: pointer;" onclick="like('<%=post.id%>')"><span class="glyphicon glyphicon-thumbs-up">(<%=post.like%>)</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
 								</div>	
 							</div>
 						</div>
@@ -56,6 +53,10 @@
 				return converter.makeHtml($(".article:eq("+i+")").text());
 			});	
 			prettyPrint();
+
+			var url = document.URL;
+			scroll(decodeURI(url.match(/.+#(.+)/)[1]));
+
 	  });
 	</script>
 	<script type="text/javascript">
@@ -73,6 +74,12 @@
 			var top = getElementTop(document.getElementById(id))-128;
 			$("html").animate({scrollTop:top},120);
 			$("body").animate({scrollTop:top},120);
+		}
+
+		function like(id){
+			$.get('/like/'+id,function(){
+				$('#like_'+id).load(location.href+' #like_'+id+'>*');
+			});
 		}
 
 

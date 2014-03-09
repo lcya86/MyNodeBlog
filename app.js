@@ -75,8 +75,8 @@ function notAuthentication(req,res,next){
 }
 
 app.get('/', routes.index);
-app.get('/getpost/:title', routes.getPost);
-app.get('/like/:title',routes.doLike);
+app.get('/getpost/:id', routes.getPost);
+app.get('/like/:id',routes.doLike);
 app.all('/login',notAuthentication);
 app.get('/login', routes.login);
 app.post('/login', routes.doLogin);
@@ -88,16 +88,15 @@ app.get('/post',authentication);
 app.get('/post', routes.post);
 app.post('/post',authentication);
 app.post('/post', routes.doPost);
-app.get('/edit/:title',authentication);
-app.get('/edit/:title',routes.edit);
-app.post('/edit/:title',authentication);
-app.post('/edit/:title',routes.doEdit);
-app.get('/remove/:title',authentication);
-app.get('/remove/:title',routes.doRemove);
+app.get('/edit/:id',authentication);
+app.get('/edit/:id',routes.edit);
+app.post('/edit/:id',authentication);
+app.post('/edit/:id',routes.doEdit);
+app.get('/remove/:id',authentication);
+app.get('/remove/:id',routes.doRemove);
 
 var server = http.createServer(app).listen(app.get('port'), function() {
 	console.log('Express server listening on port ' + app.get('port'));
 });
 
-exports.io = require('socket.io').listen(server);
 

@@ -44,7 +44,7 @@ exports.index = function(req, res) {
 	});
 	model.Post.find().sort('-update -like').exec(function(err, posts) {
 		return res.render('index', {
-			title: 'lcy.blog',
+			title: '大L的博客',
 			posts: posts,
 			user: req.session.user
 		});
@@ -121,10 +121,10 @@ exports.doPost = function(req, res) {
 }
 
 exports.getPost = function(req, res) {
-	var title = req.params.title;
-	if (title) {
+	var id = req.params.id;
+	if (id) {
 		model.Post.find({
-			title: title
+			_id: id
 		}, function(err, post) {
 			if (err) {
 				console.error(err);
@@ -133,7 +133,7 @@ exports.getPost = function(req, res) {
 				});
 			}
 			return res.render('getpost', {
-				title: title,
+				title: post.title,
 				post: post
 			});
 		});
@@ -145,10 +145,10 @@ exports.getPost = function(req, res) {
 }
 
 exports.edit = function(req, res) {
-	var title = req.params.title;
-	if (title) {
+	var id = req.params.id;
+	if (id) {
 		model.Post.findOne({
-			title: title
+			_id: id
 		}, function(err, post) {
 			if (err) {
 				console.error(err);
@@ -157,7 +157,7 @@ exports.edit = function(req, res) {
 				});
 			}
 			return res.render('post', {
-				title: title,
+				title: post.title,
 				post: post
 			});
 		});
@@ -169,10 +169,10 @@ exports.edit = function(req, res) {
 }
 
 exports.doEdit = function(req, res) {
-	var title = req.params.title;
-	if (title) {
+	var id = req.params.id;
+	if (id) {
 		model.Post.findOneAndUpdate({
-			title: title
+			_id: id
 		}, {
 			body: req.body.write,
 			update: Date.now()
@@ -193,10 +193,10 @@ exports.doEdit = function(req, res) {
 }
 
 exports.doRemove = function(req, res) {
-	var title = req.params.title;
-	if (title) {
+	var id = req.params.id;
+	if (id) {
 		model.Post.findOneAndRemove({
-			title: title
+			_id: id
 		}, function(err) {
 			if (err) {
 				console.error(err);
@@ -209,10 +209,10 @@ exports.doRemove = function(req, res) {
 }
 
 exports.doLike = function(req, res) {
-	var title = req.params.title;
-	if (title) {
+	var id = req.params.id;
+	if (id) {
 		model.Post.findOne({
-			title: title
+			_id: id
 		}, function(err, post) {
 			if (err) {
 				console.error(err);
@@ -220,6 +220,7 @@ exports.doLike = function(req, res) {
 			if (post) {
 				post.like++;
 				post.save();
+				return res.send(200);
 			}
 			return res.redirect('/');
 		});
