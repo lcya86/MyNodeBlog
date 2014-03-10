@@ -4,7 +4,7 @@ a {
 
 
 body {
-	font-family: "Helvetica Neue", "Helvetica", Arial,"Hiragino Sans GB","WenQuanYi Micro Hei",SimSun, sans-serif;
+	font-family: "Open Sans", "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,sans-serif;
 	-webkit-font-smoothing: antialiased;
   position: relative;
   display: block;
@@ -46,6 +46,10 @@ footer > div{
   box-shadow: 0 2px 6px rgba(100, 100, 100, 0.3);
   background: #fcfcfa;
   margin-top: 20px;
+  color: #666;
+  font-weight: 100;
+  font-size: 16px;
+  line-height: 180%;
 }
 
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
