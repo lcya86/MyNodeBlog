@@ -81,13 +81,6 @@ exports.home = function(req, res) {
 		username: 'admin',
 		password: 'admin'
 	}
-	app.io.sockets.on('connection', function(socket) {
-		socket.emit('user', {
-			ip: req.ip,
-			cookies: req.cookies,
-			body: req.body
-		});
-	});
 	model.Visitor.find(function(err, visitors) {
 		if (err) {
 			console.error(err);
