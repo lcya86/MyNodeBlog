@@ -4,7 +4,7 @@ a {
 
 
 body {
-	font-family: "Open Sans", "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-family: "Microsoft YaHei","Open Sans", "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,sans-serif;
 	-webkit-font-smoothing: antialiased;
   position: relative;
   display: block;
@@ -19,6 +19,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: "Microsoft YaHei","Open Sans", "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,sans-serif;
   color:#333;
 }
 
@@ -48,8 +49,7 @@ footer > div{
   margin-top: 20px;
   color: #666;
   font-weight: 100;
-  font-size: 16px;
-  line-height: 180%;
+  line-height: 160%;
 }
 
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
