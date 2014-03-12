@@ -24,8 +24,51 @@
 		</form>
   </div>
 	<%include otherscript.html%>
+	<script type="text/javascript">
+	$(function(){
+		var inputMode = false;
+		var key;
+		var keyMap;
+		var inputMap = {
+			'9':'tab',
+			'27':'esc'
+		};
+		var controlMap = {
+			'9':'tab',
+			'27':'esc',
+			'73':'i',
+			'86':'v',
+			'72':'h',
+			'74':'j',
+			'75':'k',
+			'76':'l'
+		}
+  	$('#write').keydown(function(event){
+  		key = event.which;
+  		if(inputMode){
+  			keyMap = inputMap;
+  		}else{
+  			keyMap = controlMap;
+  			event.preventDefault();
+  		}	
+  		if(key in keyMap){
+  			event.preventDefault();
+  			switch(keyMap[key]){
+  				case 'esc':inputMode = false;break;
+  				case 'i':inputMode = true;break;
+  			}
+  		}
+  	});
+	});
+	</script>
+
+
+
+
   <script type="text/javascript">
   $(document).ready(function(){
+
+
   	$("#write").height($(window).height()-$("#write").offset().top-90);
 
   	var converter = new Showdown.converter({ extensions: ['github','prettify','table'] });
@@ -33,6 +76,8 @@
   		$("#preview").html(converter.makeHtml($("#write").val()));
 			prettyPrint();
 	  });
+
+	  $('#write')
 
 	  $('#submit').click(function(event){
 	  	if(WB2.checkLogin()){
