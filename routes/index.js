@@ -44,7 +44,7 @@ exports.index = function(req, res) {
 	});
 	model.Post.find().sort('-update -like').exec(function(err, posts) {
 		return res.render('index', {
-			title: '大L的博客',
+			title: 'lcy.blog',
 			posts: posts,
 			user: req.session.user
 		});
