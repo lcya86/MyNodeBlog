@@ -10,7 +10,7 @@
 	        <li class=""><a href="#preview" id="a_preview" data-toggle="tab">预览</a></li>
 	      </ul>
 	      <div id="myTabContent" class="tab-content">
-          <textarea style="margin-top:10px" class="form-control col-xs-12 tab-pane fade active in" name="write" id="write" placeholder="写点啥？"><%if(post){%><%=post.body%><%}%></textarea>
+          <textarea style="margin-top:10px" class="write form-control col-xs-12 tab-pane fade active in" name="write" id="write" placeholder="写点啥？"><%if(post){%><%=post.body%><%}%></textarea>
 	        <div style="margin-top:10px;background-color:#fff;" class="tab-pane fade post" id="preview">
 	          
 	        </div>
@@ -34,17 +34,24 @@
 			'27':'esc'
 		};
 		var controlMap = {
+			'8':'backspace',
 			'9':'tab',
+			'18':'alt',
 			'27':'esc',
-			'73':'i',
-			'86':'v',
+			'65':'a',
+			'68':'d',
 			'72':'h',
+			'73':'i',
 			'74':'j',
 			'75':'k',
-			'76':'l'
+			'76':'l',
+			'79':'o',
+			'85':'u',
+			'86':'v'
 		}
   	$('#write').keydown(function(event){
   		key = event.which;
+  		alert(key);
   		if(inputMode){
   			keyMap = inputMap;
   		}else{

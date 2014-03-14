@@ -35,6 +35,13 @@ footer {
   background:url('/images/footersub.png') repeat-x center top #dcdcdc;
 }
 
+.write {
+  font-family: Menlo, Monaco, "Courier New", monospace;
+  font-size: 14px;
+  color: #333333;
+  line-height: 20px;
+}
+
 footer > div{
   text-align: center;
 }
