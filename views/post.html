@@ -45,7 +45,6 @@
 		}
   	$('#write').keydown(function(event){
   		var _this = $(this);
-  		var tab = '  ';
   		key = event.which;
   		if(inputMode){
   			keyMap = inputMap;
@@ -56,9 +55,21 @@
   		if(key in keyMap){
   			event.preventDefault();
   			switch(keyMap[key]){
-  				case 'esc':inputMode = false;break;
-  				case 'i':inputMode = true;break;
-  				case 'tab':_this.val(_this.val()+tab);this.selectionStart+=tab.length;break;
+  				case 'esc':
+  					inputMode = false;
+  					break;
+  				case 'i':
+  					inputMode = true;
+  					break;
+  				case 'tab':
+			  		var tab = '  ';
+			  		var start = this.selectionStart;
+			  		var end = this.selectionEnd;
+			  		var text = _this.val();
+  					_this.val(text.substr(0,start)+tab+text.substr(start));
+  					this.selectionStart=start+tab.length;
+  					this.selectionEnd = end + tab.length;
+  					break;
   			}
   		}
   		localStorage['article'] = _this.val();
