@@ -45,6 +45,7 @@
 		}
   	$('#write').keydown(function(event){
   		key = event.which;
+  		localStorage['article'] = $('#write').val();
   		if(inputMode){
   			keyMap = inputMap;
   		}else{
@@ -71,29 +72,19 @@
 
   	$("#write").height($(window).height()-$("#write").offset().top-90);
 
+  	var storage = localStorage['article'];
+  	if(storage!=null&&storage!=''){
+  		$('#write').val(storage);
+  	}
+
   	var converter = new Showdown.converter({ extensions: ['github','prettify','table'] });
 	  $("#a_preview").click(function(){
   		$("#preview").html(converter.makeHtml($("#write").val()));
 			prettyPrint();
 	  });
 
-	  $('#write')
-
-	  $('#submit').click(function(event){
-	  	if(WB2.checkLogin()){
-	  		WB2.anyWhere(function(W){
-	  			var title = $("#write").val().match(/^.+$/m);
-	  			W.parseCMD("/statuses/update.json",function(sResult,bStatus){
-	  				alert(sResult);
-	  				alert(bStatus);
-  					if(bStatus){
-  						$('form').submit();
-  					}
-	  			},{
-	  				status:"我刚刚发表了一篇文章《"+title[0]+"》，快来看看吧！http://lcy-blog.com/"	
-	  			});
-	  		});
-	  	}
+	  $('form').on('submit',function(event){
+	  	localStorage.removeItem('article');
 	  })
   });
   </script>
