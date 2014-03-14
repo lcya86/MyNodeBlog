@@ -50,6 +50,7 @@
 			'86':'v'
 		}
   	$('#write').keydown(function(event){
+  		var _this = $(this);
   		key = event.which;
   		alert(key);
   		if(inputMode){
@@ -61,10 +62,24 @@
   		if(key in keyMap){
   			event.preventDefault();
   			switch(keyMap[key]){
-  				case 'esc':inputMode = false;break;
-  				case 'i':inputMode = true;break;
+  				case 'esc':
+  					inputMode = false;
+  					break;
+  				case 'i':
+  					inputMode = true;
+  					break;
+  				case 'tab':
+			  		var tab = '  ';
+			  		var start = this.selectionStart;
+			  		var end = this.selectionEnd;
+			  		var text = _this.val();
+  					_this.val(text.substr(0,start)+tab+text.substr(start));
+  					this.selectionStart=start+tab.length;
+  					this.selectionEnd = end + tab.length;
+  					break;
   			}
   		}
+  		localStorage['article'] = _this.val();
   	});
 	});
 	</script>
@@ -78,29 +93,19 @@
 
   	$("#write").height($(window).height()-$("#write").offset().top-90);
 
+  	var storage = localStorage['article'];
+  	if(storage!=null&&storage!=''){
+  		$('#write').val(storage);
+  	}
+
   	var converter = new Showdown.converter({ extensions: ['github','prettify','table'] });
 	  $("#a_preview").click(function(){
   		$("#preview").html(converter.makeHtml($("#write").val()));
 			prettyPrint();
 	  });
 
-	  $('#write')
-
-	  $('#submit').click(function(event){
-	  	if(WB2.checkLogin()){
-	  		WB2.anyWhere(function(W){
-	  			var title = $("#write").val().match(/^.+$/m);
-	  			W.parseCMD("/statuses/update.json",function(sResult,bStatus){
-	  				alert(sResult);
-	  				alert(bStatus);
-  					if(bStatus){
-  						$('form').submit();
-  					}
-	  			},{
-	  				status:"我刚刚发表了一篇文章《"+title[0]+"》，快来看看吧！http://lcy-blog.com/"	
-	  			});
-	  		});
-	  	}
+	  $('form').on('submit',function(event){
+	  	localStorage.removeItem('article');
 	  })
   });
   </script>
