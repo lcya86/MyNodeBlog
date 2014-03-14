@@ -44,8 +44,9 @@
 			'76':'l'
 		}
   	$('#write').keydown(function(event){
+  		var _this = $(this);
+  		var tab = '  ';
   		key = event.which;
-  		localStorage['article'] = $('#write').val();
   		if(inputMode){
   			keyMap = inputMap;
   		}else{
@@ -57,8 +58,10 @@
   			switch(keyMap[key]){
   				case 'esc':inputMode = false;break;
   				case 'i':inputMode = true;break;
+  				case 'tab':_this.val(_this.val()+tab);this.selectionStart+=tab.length;break;
   			}
   		}
+  		localStorage['article'] = _this.val();
   	});
 	});
 	</script>
