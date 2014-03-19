@@ -44,18 +44,33 @@
 			
 		</div>
 	</div>
+	<div class="spinner">
+	  <div class="rect1"></div>
+	  <div class="rect2"></div>
+	  <div class="rect3"></div>
+	  <div class="rect4"></div>
+	  <div class="rect5"></div>
+	</div>
 	<%include footer.html%>
+	<script type="text/javascript">
+		(function($){
+			$('header,div.container').hide();
+		})(jQuery);
+	</script>	
 	<%include otherscript.html%>
 	<script type="text/javascript">
 	  $(document).ready(function(){
+	  	$('div.spinner').remove();
 	  	var converter = new Showdown.converter({ extensions: ['github','prettify','table'] });
 			$(".article").html(function(i){
 				return converter.makeHtml($(".article:eq("+i+")").text());
 			});	
 			prettyPrint();
+			$('header,div.container').slideDown('slow');
 	  });
 	</script>
 	<script type="text/javascript">
+	(function($){
 		function getElementTop(element){
 　　　　var actualTop = element.offsetTop;
 　　　　var current = element.offsetParent;
@@ -77,6 +92,5 @@
 				$('#like_'+id).load(location.href+' #like_'+id+'>*');
 			});
 		}
-
-
+	})(jQuery);
 	</script>
