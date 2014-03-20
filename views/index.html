@@ -59,27 +59,15 @@
 	</script>	
 	<%include otherscript.html%>
 	<script type="text/javascript">
-	  $(document).ready(function(){
-	  	$('div.spinner').remove();
-	  	var converter = new Showdown.converter({ extensions: ['github','prettify','table'] });
-			$(".article").html(function(i){
-				return converter.makeHtml($(".article:eq("+i+")").text());
-			});	
-			prettyPrint();
-			$('header,div.container').slideDown('slow');
-	  });
-	</script>
-	<script type="text/javascript">
-	(function($){
 		function getElementTop(element){
-　　　　var actualTop = element.offsetTop;
-　　　　var current = element.offsetParent;
-　　　　while (current !== null){
-　　　　　　actualTop += current.offsetTop;
-　　　　　　current = current.offsetParent;
-　　　　}
-　　　　return actualTop;
-　　}
+			var actualTop = element.offsetTop;
+			var current = element.offsetParent;
+			while (current !== null){
+				actualTop += current.offsetTop;
+				current = current.offsetParent;
+			}
+			return actualTop;
+		}
 
 		function scroll(id){
 			var top = getElementTop(document.getElementById(id))-128;
@@ -92,5 +80,17 @@
 				$('#like_'+id).load(location.href+' #like_'+id+'>*');
 			});
 		}
-	})(jQuery);
+	</script>
+	<script type="text/javascript">
+	  $(document).ready(function(){
+	  	$('div.spinner').remove();
+	  	var converter = new Showdown.converter({ extensions: ['github','prettify','table'] });
+			$(".article").html(function(i){
+				return converter.makeHtml($(".article:eq("+i+")").text());
+			});	
+			prettyPrint();
+			$('header,div.container').slideDown();
+
+			
+	  });
 	</script>
