@@ -237,6 +237,8 @@ footer > div{
   animation-delay: -0.8s;
 }
 
+
+
 @-webkit-keyframes stretchdelay {
   0%, 40%, 100% { -webkit-transform: scaleY(0.4) }  
   20% { -webkit-transform: scaleY(1.0) }

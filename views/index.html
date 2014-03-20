@@ -54,7 +54,7 @@
 	<%include footer.html%>
 	<script type="text/javascript">
 		(function($){
-			$('header,div.container').hide();
+			$('header,div.container,footer').hide();
 		})(jQuery);
 	</script>	
 	<%include otherscript.html%>
@@ -89,7 +89,7 @@
 				return converter.makeHtml($(".article:eq("+i+")").text());
 			});	
 			prettyPrint();
-			$('header,div.container').slideDown();
+			$('header,div.container,footer').fadeOut();
 
 			
 	  });
