@@ -200,7 +200,8 @@ footer > div{
 }
 
 .spinner {
-  margin-top: 100px;
+  position: fixed;
+  top:45%;
   width: 100%;
   height: 10px;
   font-size: 5px;
