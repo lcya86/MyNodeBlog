@@ -200,43 +200,109 @@ footer > div{
 }
 
 .spinner {
-  margin: 100px auto;
-  width: 50px;
-  height: 30px;
+  margin: 200px auto;
+  width: 100%;
+  height: 10px;
+  font-size: 5px;
   text-align: center;
-  font-size: 10px;
 }
 
 .spinner > div {
-  background-color: #333;
+  background-color: #2E69C0;
   height: 100%;
-  width: 6px;
+  width: 5%;
   display: inline-block;
   
-  -webkit-animation: stretchdelay 1.2s infinite ease-in-out;
-  animation: stretchdelay 1.2s infinite ease-in-out;
+  -webkit-animation: stretchdelay 2.2s infinite linear;
+  animation: stretchdelay 2.2s infinite cubic-bezier(0,.8,1,.2);
 }
 
 .spinner .rect2 {
+  -webkit-animation-delay: -2.1s;
+  animation-delay: -2.1s;
+}
+
+.spinner .rect3 {
+  -webkit-animation-delay: -2.0s;
+  animation-delay: -2.0s;
+}
+
+.spinner .rect4 {
+  -webkit-animation-delay: -1.9s;
+  animation-delay: -1.9s;
+}
+
+.spinner .rect5 {
+  -webkit-animation-delay: -1.8s;
+  animation-delay: -1.8s;
+}
+
+
+.spinner .rect6 {
+  -webkit-animation-delay: -1.7s;
+  animation-delay: -1.7s;
+}
+
+.spinner .rect7 {
+  -webkit-animation-delay: -1.6s;
+  animation-delay: -1.6s;
+}
+
+.spinner .rect8 {
+  -webkit-animation-delay: -1.5s;
+  animation-delay: -1.5s;
+}
+
+.spinner .rect9 {
+  -webkit-animation-delay: -1.4s;
+  animation-delay: -1.4s;
+}
+
+.spinner .rect10 {
+  -webkit-animation-delay: -1.3s;
+  animation-delay: -1.3s;
+}
+
+.spinner .rect11 {
+  -webkit-animation-delay: -1.3s;
+  animation-delay: -1.3s;
+}
+
+.spinner .rect12 {
+  -webkit-animation-delay: -1.2s;
+  animation-delay: -1.2s;
+}
+
+.spinner .rect13 {
   -webkit-animation-delay: -1.1s;
   animation-delay: -1.1s;
 }
 
-.spinner .rect3 {
+.spinner .rect14 {
   -webkit-animation-delay: -1.0s;
   animation-delay: -1.0s;
 }
 
-.spinner .rect4 {
+.spinner .rect15 {
   -webkit-animation-delay: -0.9s;
   animation-delay: -0.9s;
 }
 
-.spinner .rect5 {
+
+.spinner .rect16 {
   -webkit-animation-delay: -0.8s;
   animation-delay: -0.8s;
 }
 
+.spinner .rect17 {
+  -webkit-animation-delay: -0.7s;
+  animation-delay: -0.7s;
+}
+
+.spinner .rect18 {
+  -webkit-animation-delay: -0.6s;
+  animation-delay: -0.6s;
+}
 
 
 @-webkit-keyframes stretchdelay {
