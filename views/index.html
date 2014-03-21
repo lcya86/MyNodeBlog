@@ -65,6 +65,11 @@
     <div class="rect18"></div>
 	</div>
 	<%include footer.html%>
+	<script type="text/javascript">
+    (function($){
+      $('header,div.container,footer').hide();
+    })(jQuery);
+  </script>
 	<%include otherscript.html%>
 	<script type="text/javascript">
 		function getElementTop(element){
@@ -98,7 +103,5 @@
 			prettyPrint();
 			$('div.spinner').remove();
 			$('header,div.container,footer').fadeIn();
-
-			
 	  });
 	</script>
