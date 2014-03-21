@@ -66,14 +66,14 @@
 	<%include otherscript.html%>
 	<script type="text/javascript">
 		function getElementTop(element){
-			var actualTop = element.offsetTop;
-			var current = element.offsetParent;
-			while (current !== null){
-				actualTop += current.offsetTop;
-				current = current.offsetParent;
-			}
-			return actualTop;
-		}
+　　　　var actualTop = element.offsetTop;
+　　　　var current = element.offsetParent;
+　　　　while (current !== null){
+　　　　　　actualTop += current.offsetTop;
+　　　　　　current = current.offsetParent;
+　　　　}
+　　　　return actualTop;
+　　}
 
 		function scroll(id){
 			var top = getElementTop(document.getElementById(id))-128;
