@@ -65,11 +65,6 @@
     <div class="rect18"></div>
 	</div>
 	<%include footer.html%>
-	<script type="text/javascript">
-		(function($){
-			$('header,div.container,footer').hide();
-		})(jQuery);
-	</script>	
 	<%include otherscript.html%>
 	<script type="text/javascript">
 		function getElementTop(element){
@@ -96,12 +91,12 @@
 	</script>
 	<script type="text/javascript">
 	  $(document).ready(function(){
-	  	$('div.spinner').remove();
 	  	var converter = new Showdown.converter({ extensions: ['github','prettify','table'] });
 			$(".article").html(function(i){
 				return converter.makeHtml($(".article:eq("+i+")").text());
 			});	
 			prettyPrint();
+			$('div.spinner').remove();
 			$('header,div.container,footer').fadeIn();
 
 			
