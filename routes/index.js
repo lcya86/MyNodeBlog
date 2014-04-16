@@ -8,8 +8,8 @@ var model = require('../models/models');
 exports.index = function(req, res) {
 	var ip = req.ip;
 	var agent = req.headers['user-agent'];
-	console.log(ip + " : " + agent);
-	if (agent && !/bingbot|Baiduspider|Googlebot|YYSpider/.test(agent)) {
+	console.log(ip + " : " + agent + " at " + Date());
+	if (agent && !/bingbot|Baiduspider|Googlebot|YYSpider|Bot|bot|python|Python|curl|Wget/.test(agent)) {
 		model.Visitor.findOne({
 			ip: ip
 		}, function(err, visitor) {
