@@ -4,6 +4,8 @@ exports.index = function(req, res) {
 	if(req.query.signature){
 		if(weixin.checkSignature(req.query.signature,req.query.timestamp,req.query.nonce)){
 			return res.send(req.query.echostr);
+		}else{
+			return res.send(404);
 		}
 	}else{
 		var ip = req.ip;
