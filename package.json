@@ -12,6 +12,7 @@
     "mongoose":"*",
     "validator":"*",
     "nodemailer":"*",
-    "socket.io":"*"
+    "socket.io":"*",
+    "xml2js":"*"
   }
 }
