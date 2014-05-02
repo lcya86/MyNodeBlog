@@ -4,7 +4,6 @@
 
 var express = require('express');
 var routes = require('./routes');
-var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 var ejs = require('ejs');
@@ -74,26 +73,26 @@ function notAuthentication(req,res,next){
 	next();
 }
 
-app.get('/', routes.index);
-app.get('/getpost/:id', routes.getPost);
-app.get('/like/:id',routes.doLike);
+app.get('/', routes.Home.index);
+app.get('/getpost/:id', routes.Post.getPost);
+app.get('/like/:id',routes.Post.doLike);
 app.all('/login',notAuthentication);
-app.get('/login', routes.login);
-app.post('/login', routes.doLogin);
+app.get('/login', routes.Login.login);
+app.post('/login', routes.Login.doLogin);
 app.get('/logout',authentication);
-app.get('/logout', routes.logout);
+app.get('/logout', routes.Login.logout);
 app.get('/home',authentication);
-app.get('/home', routes.home);
+app.get('/home', routes.Home.home);
 app.get('/post',authentication);
-app.get('/post', routes.post);
+app.get('/post', routes.Post.post);
 app.post('/post',authentication);
-app.post('/post', routes.doPost);
+app.post('/post', routes.Post.doPost);
 app.get('/edit/:id',authentication);
-app.get('/edit/:id',routes.edit);
+app.get('/edit/:id',routes.Post.edit);
 app.post('/edit/:id',authentication);
-app.post('/edit/:id',routes.doEdit);
+app.post('/edit/:id',routes.Post.doEdit);
 app.get('/remove/:id',authentication);
-app.get('/remove/:id',routes.doRemove);
+app.get('/remove/:id',routes.Post.doRemove);
 
 var server = http.createServer(app).listen(app.get('port'), function() {
 	console.log('Express server listening on port ' + app.get('port'));
