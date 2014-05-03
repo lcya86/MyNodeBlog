@@ -1,7 +1,6 @@
 var xml2js = require('xml2js');
 
 exports.xmlBodyParser = function(req, res, next) {
-    console.log(req._body);
     if (req._body) return next();
     req.body = req.body || {};
 
@@ -9,7 +8,6 @@ exports.xmlBodyParser = function(req, res, next) {
     if ('GET' == req.method || 'HEAD' == req.method) return next();
 
     // check Content-Type
-    console.log(req.get('content-type'));
     if ('text/xml' != req.get('content-type')) return next();
 
     // flag as parsed
@@ -29,7 +27,6 @@ exports.xmlBodyParser = function(req, res, next) {
                 next(err);
             } else {
                 req.body = json;
-                console(json);
                 next();
             }
         });
