@@ -29,7 +29,7 @@ app.set('view engine', 'html');
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
-app.use(xmlBodyParser);
+app.use(xmlBodyParser.xmlBodyParser);
 app.use(express.methodOverride());
 app.use(express.cookieParser());
 app.use(express.cookieSession({
