@@ -1,6 +1,7 @@
 var xml2js = require('xml2js');
 
 exports.xmlBodyParser = function(req, res, next) {
+    console.log(req._body);
     if (req._body) return next();
     req.body = req.body || {};
 
