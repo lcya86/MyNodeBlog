@@ -1,14 +1,11 @@
 var weixin = require('../tools/weixin');
 
-exports.index = function(req,res){
-	if(weixin.checkSignature(req.query.signature,req.query.timestamp,req.query.nonce)){
-	     var result = '';
-            req.on('data',function(chunk){
-                     result += chunk;
-            });
-            console.log(result);
-            return res.send('');
-	}else{
+exports.index = function(req, res) {
+	if (weixin.checkSignature(req.query.signature, req.query.timestamp, req.query.nonce)) {
+		var result = '';
+		console.log(req.body.write);
+		return res.send('');
+	} else {
 		return res.send(404);
 	}
 }
