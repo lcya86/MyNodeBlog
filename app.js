@@ -9,6 +9,7 @@ var path = require('path');
 var ejs = require('ejs');
 var SessionStore = require("session-mongoose")(express);
 var app = express();
+var xmlBodyParser = require('./middleware/xmlBodyParser');
 
 
 
@@ -28,6 +29,7 @@ app.set('view engine', 'html');
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
+app.use(xmlBodyParser);
 app.use(express.methodOverride());
 app.use(express.cookieParser());
 app.use(express.cookieSession({
