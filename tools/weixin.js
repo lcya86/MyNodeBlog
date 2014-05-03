@@ -5,10 +5,8 @@ exports.checkSignature = function(signature,timestamp,nonce){
 	var tmpArr = [TOKEN,timestamp,nonce];
 	tmpArr.sort();
 	tmpStr = tmpArr.join('');
-	console.log(tmpStr);
 	shasum.update(tmpStr);
 	tmpStr = shasum.digest('hex');
-	console.log(tmpStr);
 	if(tmpStr == signature){
 		return true;
 	}else{
