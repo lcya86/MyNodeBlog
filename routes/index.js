@@ -3,7 +3,7 @@
  */
 
 var app = require('../app');
-var model = require('../models/models');
+var model = require('../models');
 // enter index page
 exports.index = function(req, res) {
 	var ip = req.ip;
