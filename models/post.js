@@ -1,3 +1,5 @@
+var mongoose = require('mongoose');
+var tagSchema = require('./tag');
 var Schema = mongoose.Schema;
 
 var postSchema = new Schema({
