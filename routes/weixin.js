@@ -14,23 +14,21 @@ function route(req,res){
 		if(req.body.xml.Event[0]=='subscribe'){
 			var reply = new XMLWriter;
 			var date = new Date();
-			reply.startDocument();
 			reply.startElement('ToUserName');
-			reply.writeCData('ToUserName',req.body.xml.FromUserName[0]);
+			reply.writeCData('toUser',req.body.xml.FromUserName[0]);
 			reply.endElement();
 			reply.startElement('FromUserName');
-			reply.writeCData('FromUserName',req.body.xml.ToUserName[0]);
+			reply.writeCData('fromUser',req.body.xml.ToUserName[0]);
 			reply.endElement();
 			reply.startElement('CreateTime').text(date.getTime()+'').endElement();
 			reply.startElement('MsgType');
-			reply.writeCData('MsgType','text');
+			reply.writeCData('text','text');
 			reply.endElement();
 			reply.startElement('MsgType');
-			reply.writeCData('Content','欢迎关注我的小玩意儿，这是我的博客http://lcy-blog.com欢迎来踩^_^');
+			reply.writeCData('欢迎关注我的小玩意儿','欢迎关注我的小玩意儿，这是我的博客http://lcy-blog.com欢迎来踩^_^');
 			reply.endElement();
-			reply.endDocument();
-			console.log(reply.toString());
-			return res.send(reply.toString());
+			console.log('<xml>'+reply.toString()+'</xml>');
+			return res.send('<xml>'+reply.toString()+'</xml>');
 		}
 	}
 	return res.send('');
