@@ -17,7 +17,7 @@ function route(req,res){
 			reply.startElement('ToUserName').text(req.body.xml.FromUserName[0]);
 			reply.startElement('FromUserName').text(req.body.xml.ToUserName[0]);
 			var date = new Date();
-			reply.startElement('CreateTime').text(date.getTime());
+			reply.startElement('CreateTime').text(date.getTime()+'');
 			reply.startElement('MsgType').text('text');
 			reply.startElement('Content').text('欢迎关注我的小玩意儿，这是我的博客http://lcy-blog.com欢迎来踩^_^');
 			reply.endDocument();
