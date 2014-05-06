@@ -21,6 +21,7 @@ function route(req,res){
 			reply.startElement('MsgType').text('text');
 			reply.startElement('Content').text('欢迎关注我的小玩意儿，这是我的博客http://lcy-blog.com欢迎来踩^_^');
 			reply.endDocument();
+			console.log(reply.toString());
 			return res.send(reply.toString());
 		}
 	}
