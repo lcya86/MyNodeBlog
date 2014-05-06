@@ -13,6 +13,7 @@
     "validator":"*",
     "nodemailer":"*",
     "socket.io":"*",
-    "xml2js":"*"
+    "xml2js":"*",
+    "xml-writer":"*"
   }
 }
