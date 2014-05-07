@@ -15,7 +15,7 @@ function route(req,res){
 			return replyText(req,res,'hi～我是刘春洋，“小玩意儿”是我平时瞎折腾的地方，我会不定时地做一些好玩儿的小玩意儿与大家分享，回复“捣鼓啥呢”可以看到我正在捣鼓神马。ps：<a href="http://lcy-blog.com">这是我的部落格，欢迎来访～</a>');
 		}
 	}else if(req.body.xml.MsgType[0]=='text'){
-		if(req.body.xml.Content[0]=='test'){
+		if(req.body.xml.Content[0]=='捣鼓啥呢'){
 			return replyText(req,res,'<a href="http://lcy-blog.com/project/doing">好玩儿的，点我就告诉你</a>');
 		}
 	}
