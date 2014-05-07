@@ -77,6 +77,7 @@ function notAuthentication(req,res,next){
 
 app.get('/', routes.Home.index);
 app.post('/',routes.Weixin.index);
+app.get('/project/test',routes.Weixin.test);
 app.get('/getpost/:id', routes.Post.getPost);
 app.get('/like/:id',routes.Post.doLike);
 app.all('/login',notAuthentication);
