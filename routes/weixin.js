@@ -9,6 +9,10 @@ exports.index = function(req, res) {
 	}
 }
 
+exports.test = function(req,res){
+	
+}
+
 function route(req,res){
 	if(req.body.xml.MsgType[0]=='event'){
 		if(req.body.xml.Event[0]=='subscribe'){
