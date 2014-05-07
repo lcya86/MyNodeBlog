@@ -6,5 +6,11 @@
 	</head>
 	<body>
 		<h1>啥都没有。。。</h1>
+		<script type="text/javascript">
+			document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+				WeixinJSBridge.call('hideToolbar');
+				WeixinJSBridge.call('hideOptionMenu');
+			});
+		</script>
 	</body>
 </html>
