@@ -3,13 +3,27 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<style type="text/css">
+			* {
+				margin:0;
+				padding:0;
+			}
+			html,body{
+				height:100%;
+				width:100%;
+			}
+      canvas { 
+      	border: 1px solid black;
+      	display: block;
+      }
+    </style>
 		<script type="text/javascript">
 			document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
 				WeixinJSBridge.call('hideToolbar');
 				WeixinJSBridge.call('hideOptionMenu');
 			});
-			var Width = document.documentElement.clientWidth;
-			var Height = document.documentElement.clientHeight;
+			var Width = document.body.clientWidth;
+			var Height = document.body.clientHeight;
 			function init(){
 				document.getElementById('canvas').width = Width;
 				document.getElementById('canvas').height = Height;
@@ -111,20 +125,7 @@
 			  ctx.restore();
 			}
 		</script>
-		<style type="text/css">
-			* {
-				margin:0;
-				padding:0;
-			}
-			html,body{
-				height:100%;
-				width:100%;
-			}
-      canvas { 
-      	border: 1px solid black;
-      	display: block;
-      }
-    </style>
+		
 	</head>
 	<body onload="init();">
 		<canvas id="canvas" width="150" height="150">啥都没有。。。</canvas>
