@@ -8,8 +8,8 @@
 				WeixinJSBridge.call('hideToolbar');
 				WeixinJSBridge.call('hideOptionMenu');
 			});
-			var Width = window.innerWidth-1;
-			var Height = window.innerHeight-1;
+			var Width = document.body.clientWidth;
+			var Height = document.body.clientHeight;
 			function init(){
 				document.getElementById('canvas').width = Width;
 				document.getElementById('canvas').height = Height;
