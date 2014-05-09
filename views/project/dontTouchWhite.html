@@ -27,11 +27,48 @@
 				document.getElementById('canvas').width = Width;
 				document.getElementById('canvas').height = Height;
 			  clock();
-			  setInterval(clock,1000);
 			}
 			function clock(){
 			  var ctx = document.getElementById('canvas').getContext('2d');
-			  
+			  ctx.save();
+			  ctx.clearRect(0,0,Width,Height);
+			  ctx.strokeStyle = "black";
+			  ctx.fillStyle = "white";
+			  ctx.lineWidth = 1;
+
+			  // Hour marks
+			  ctx.save();
+			  for (var i=1;i<4;i++){
+			  	if((i*Width/4)%1==0){
+			  		ctx.beginPath();
+				    ctx.moveTo(i*Width/4+0.5,0);
+				    ctx.lineTo(i*Width/4+0.5,Height-1);
+				    ctx.stroke();
+			  	}else{
+			  		ctx.beginPath();
+				    ctx.moveTo(i*Width/4,0);
+				    ctx.lineTo(i*Width/4,Height-1);
+				    ctx.stroke();
+			  	}
+			  }
+			  ctx.restore();
+
+			  // Minute marks
+			  ctx.save();
+			  for (i=1;i<4;i++){
+			  	if((i*Height/4)%1==0){
+			      ctx.beginPath();
+			      ctx.moveTo(0,i*Height/4+0.5);
+			      ctx.lineTo(Width-1,i*Height/4+0.5);
+			      ctx.stroke();
+		      }else{
+						ctx.beginPath();
+			      ctx.moveTo(0,i*Height/4);
+			      ctx.lineTo(Width-1,i*Height/4);
+			      ctx.stroke();
+		      }
+			  }
+			  ctx.restore();
 			}
 		</script>
 		
