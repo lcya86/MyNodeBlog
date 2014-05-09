@@ -46,13 +46,14 @@
 				document.getElementById('canvas').width = Width;
 				document.getElementById('canvas').height = Height;
 				var canvas = document.getElementById('canvas');
+
 				canvas.addEventListener('touchstart',function(event){
 					drawRectByPosition(getPosition(event.changedTouches[0].clientX,event.changedTouches[0].clientY));
+					canvas.addEventListener('touchend',function(){
+						clearRectByPosition(getPosition(event.changedTouches[0].clientX,event.changedTouches[0].clientY));
+					});
 				});
 
-				canvas.addEventListener('touchend',function(event){
-					clearRectByPosition(getPosition(event.changedTouches[0].clientX,event.changedTouches[0].clientY));
-				});
 
 				function drawRectByPosition(position){
 					var ctx = canvas.getContext('2d');
