@@ -6,17 +6,19 @@
 	</head>
 	<body>
 		<canvas id="canvas" width="400" height="400">不支持此浏览器</canvas>
-		<input type="file" id="f" />
-		<input type="button" id="b" value="import" onclick="if(f.value==''){alert('请选择xls文件');}else{importXLS(f.value);cover();}" />
+		<input type="file" id="fileSelector" />
+		<input type="button" id="b" value="import" onclick="if(f.value==''){alert('请选择xls文件');}else{importXLS();cover();}" />
 		
 		<script language="javascript" type="text/javascript">
 		var articles = [];
 		var ctx = document.getElementById('canvas').getContext('2d');
 		var allPoints = [];
-		function importXLS(fileName){  
+		function importXLS(){
+			var file = document.getElementById('fileSelector');
+			console.log(file);
 			objCon = new ActiveXObject("ADODB.Connection");
 			objCon.Provider = "Microsoft.Ace.OleDb.12.0;";
-			objCon.ConnectionString = "Data Source=" + fileName + ";Extended Properties=Excel 12.0;";
+			objCon.ConnectionString = "Data Source=" + file.value + ";Extended Properties=Excel 12.0;";
 			objCon.CursorLocation = 1;
 			objCon.Open;
 			var strQuery;
