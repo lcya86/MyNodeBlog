@@ -7,7 +7,7 @@
 	<body>
 		<canvas id="canvas" width="400" height="400">不支持此浏览器</canvas>
 		<input type="file" id="fileSelector" />
-		<input type="button" id="b" value="import" onclick="if(f.value==''){alert('请选择xls文件');}else{importXLS();cover();}" />
+		<input type="button" id="b" value="import" onclick="if(fileSelector.value==''){alert('请选择xls文件');}else{importXLS();cover();}" />
 		
 		<script language="javascript" type="text/javascript">
 		var articles = [];
