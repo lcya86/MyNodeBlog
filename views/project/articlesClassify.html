@@ -18,7 +18,7 @@
 			console.log(window.URL.createObjectURL(file.files[0]));
 			objCon = new ActiveXObject("ADODB.Connection");
 			objCon.Provider = "Microsoft.Ace.OleDb.12.0;";
-			objCon.ConnectionString = "Data Source=" + file.value + ";Extended Properties=Excel 12.0;";
+			objCon.ConnectionString = "Data Source=" + window.URL.createObjectURL(file.files[0]) + ";Extended Properties=Excel 12.0;";
 			objCon.CursorLocation = 1;
 			objCon.Open;
 			var strQuery;
