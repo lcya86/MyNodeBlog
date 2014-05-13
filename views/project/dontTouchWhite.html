@@ -29,8 +29,8 @@
 				startPoints[i] = [];
 			}
 			for(var i = 0;i<16;i++){
-				startPoints[i][0] = ((i%4)*Width/4)%1==0?(i%4)*Width/4:(i%4)*Width/4-((i%4)*Width/4)%1;
-				startPoints[i][1] = (Math.floor(i/4)*Height/4)%1==0?Math.floor(i/4)*Height/4:Math.floor(i/4)*Height/4-(Math.floor(i/4)*Height/4)%1;
+				startPoints[i][0] = Math.ceil((i%4)*Width/4);
+				startPoints[i][1] = Math.ceil(Math.floor(i/4)*Height/4);
 			}
 
 			function init(){
@@ -50,16 +50,18 @@
 				function drawRectByPosition(position){
 					console.log(position);
 					var ctx = canvas.getContext('2d');
-					ctx.fillStyle = 'black';
+					ctx.fillStyle = '#555';
 					ctx.save();
 					//ctx.scale(0.7,0.7);
-					ctx.fillRect(startPoints[position][0],startPoints[position][1],(Width/4)%1==0?Width/4:Width/4-(Width/4)%1,(Height/4)%1==0?Height/4:Height/4-(Height/4)%1);
+					console.log(Math.floor(Math.abs(startPoints[position+1][0]-startPoints[position][0])));
+					console.log(Math.floor(Math.abs(startPoints[position+4][1]-startPoints[position][1])));
+					ctx.fillRect(startPoints[position][0],startPoints[position][1],Math.floor(Math.abs(startPoints[position+1][0]-startPoints[position][0])),Math.floor(Math.abs(startPoints[position+4][1]-startPoints[position][1])));
 					ctx.restore();
 				}
 
 				function clearRectByPosition(position){
 					var ctx = canvas.getContext('2d');
-					ctx.clearRect(startPoints[position][0],startPoints[position][1],(Width/4)%1==0?Width/4:Width/4-(Width/4)%1,(Height/4)%1==0?Height/4:Height/4-(Height/4)%1);
+					ctx.clearRect(startPoints[position][0],startPoints[position][1],Math.floor(startPoints[position+1][0]-startPoints[position][0]),Math.floor(startPoints[position+4][1]-startPoints[position][1]));
 				}
 
 				function getPosition(x,y){
@@ -113,7 +115,7 @@
 			  ctx.clearRect(0,0,Width,Height);
 			  ctx.strokeStyle = "black";
 			  ctx.fillStyle = "white";
-			  ctx.lineWidth = 0.1;
+			  ctx.lineWidth = 1;
 
 			  // Hour marks
 			  ctx.save();

@@ -17,6 +17,16 @@
 				position: relative;
 				float: left;
 			}
+
+			div.article{
+				width:100%;
+				margin:1px;
+				border:solid white 1px;
+			}
+
+			div.selected{
+				border:solid black 1px;
+			}
 		</style>
 	</head>
 	<body>
@@ -34,6 +44,7 @@
 		var list = document.getElementById('list');
 		var allPoints = [];
 		var coverPoints = [];
+		var id_list = [];
 		function importXLS(filename){
 			objCon = new ActiveXObject("ADODB.Connection");
 			objCon.Provider = "Microsoft.Ace.OleDb.12.0;";
@@ -198,18 +209,18 @@
 
 			drawBackGround();
 			//初始化覆盖物
-			var r,g,b;
+			var r,g,b,article;
 			for(var i = 0;i<id_list.length;i++){
-				var article = document.getElementById(id_list[i]);
-				coverPoints[0] = allPoints[articles[id_list[i]]['xuanti']][0];
-				coverPoints[1] = allPoints[articles[id_list[i]]['keguan']][1];
-				coverPoints[2] = allPoints[articles[id_list[i]]['shidai']][2];
-				coverPoints[3] = allPoints[articles[id_list[i]]['wenbi']][3];
-				coverPoints[4] = allPoints[articles[id_list[i]]['gushi']][4];
-				coverPoints[5] = allPoints[articles[id_list[i]]['sixiang']][5];
-				r = article.getAttribute('date-r');
-				g = article.getAttribute('date-g');
-				b = article.getAttribute('date-b');
+				article = document.getElementById(id_list[i]);
+				coverPoints[0] = allPoints[articles[id_list[i].substring(1)]['xuanti']][0];
+				coverPoints[1] = allPoints[articles[id_list[i].substring(1)]['keguan']][1];
+				coverPoints[2] = allPoints[articles[id_list[i].substring(1)]['shidai']][2];
+				coverPoints[3] = allPoints[articles[id_list[i].substring(1)]['wenbi']][3];
+				coverPoints[4] = allPoints[articles[id_list[i].substring(1)]['gushi']][4];
+				coverPoints[5] = allPoints[articles[id_list[i].substring(1)]['sixiang']][5];
+				r = article.getAttribute('data-r');
+				g = article.getAttribute('data-g');
+				b = article.getAttribute('data-b');
 				drawCover(r,g,b);
 			}
 		}
@@ -231,10 +242,22 @@
 				r = Math.floor(255*j/articles.length);
 				g = Math.floor(Math.random()*255+1);
 				b = Math.floor(Math.random()*255+1);
-				list.innerHTML += '<div id="'+j+'" data-r="'+r+'" data-g="'+g+'" data-b="'+b+'" style="width:100%;color:rgb('+r+','+g+','+b+')" onclick="select('+j+')">'+articles[j]['title']+'</div>';
+				list.innerHTML += '<div id="l'+j+'" class="article" data-r="'+r+'" data-g="'+g+'" data-b="'+b+'" style="color:rgb('+r+','+g+','+b+')">'+articles[j]['title']+'</div>';
 				drawCover(r,g,b);
 			}
 		}
+
+		list.addEventListener('click',function(event){
+			if(event.target.id!='list'){
+				if(id_list.indexOf(event.target.id)==-1){
+					id_list.push(event.target.id);
+					drawArticles(id_list);
+				}else{
+					id_list.splice(id_list.indexOf(event.target.id),1);
+					drawArticles(id_list);
+				}
+			}
+		});
 		</script>
 	</body>
 </html>
