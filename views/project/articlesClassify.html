@@ -19,9 +19,9 @@
 			}
 
 			div.article{
-				width:100%;
 				margin:1px;
 				border:solid white 1px;
+				cursor: pointer;
 			}
 
 			div.selected{
@@ -248,12 +248,19 @@
 		}
 
 		list.addEventListener('click',function(event){
+			var classname = [];
 			if(event.target.id!='list'){
 				if(id_list.indexOf(event.target.id)==-1){
 					id_list.push(event.target.id);
+					classname = event.target.className.split(' ');
+					classname.push('selected');
+					event.target.className = classname.join(' ');
 					drawArticles(id_list);
 				}else{
 					id_list.splice(id_list.indexOf(event.target.id),1);
+					classname = event.target.className.split(' ');
+					classname.splice(classname.indexOf('selected'));
+					event.target.className = classname.join(' ');
 					drawArticles(id_list);
 				}
 			}
