@@ -48,9 +48,8 @@
 
 		
 		function importXLS(file){
-			var fso = new ActiveXObject("Scripting.FileSystemObject");
-			var filename = fso.GetAbsolutePathName(file.value);
-
+			file.select();
+			var filename = document.selection.createRange().text;
 			objCon = new ActiveXObject("ADODB.Connection");
 			objCon.Provider = "Microsoft.Ace.OleDb.12.0;";
 			objCon.ConnectionString = "Data Source=" + filename + ";Extended Properties=Excel 12.0;";
