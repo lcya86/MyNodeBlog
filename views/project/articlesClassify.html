@@ -32,7 +32,7 @@
 	<body>
 		<div>
 			<input type="file" id="fileSelector" />
-			<input type="button" id="b" value="import" onclick="if(fileSelector.value==''){alert('请选择xls文件');}else{importXLS(document.getElementById('fileSelector'));drawAllArticles();}" />
+			<input type="button" id="b" value="import"/>
 		</div>
 		<div>
 			<canvas id="canvas" width="600" height="500">不支持此浏览器</canvas>
@@ -267,6 +267,15 @@
 					event.target.className = classname.join(' ');
 					drawArticles(id_list);
 				}
+			}
+		});
+
+		document.getElementById('b').addEventListener('click',function(){
+			if(fileSelector.value==''){
+				alert('请选择xls文件');
+			}else{
+				importXLS(document.getElementById('fileSelector'));
+				drawAllArticles();
 			}
 		});
 		</script>
