@@ -39,244 +39,249 @@
 			<div id="list"></div>
 		</div>
 		<script language="javascript" type="text/javascript">
-		var articles = [];
-		var ctx = document.getElementById('canvas').getContext('2d');
-		var list = document.getElementById('list');
-		var allPoints = [];
-		var coverPoints = [];
-		var id_list = [];
+		window.onload = function(){
+			var articles = [];
+			var ctx = document.getElementById('canvas').getContext('2d');
+			var list = document.getElementById('list');
+			var allPoints = [];
+			var coverPoints = [];
+			var id_list = [];
 
-		
-		function importXLS(file){
-			file.select();
-			var filename = document.selection.createRange().text;
-			objCon = new ActiveXObject("ADODB.Connection");
-			objCon.Provider = "Microsoft.Ace.OleDb.12.0;";
-			objCon.ConnectionString = "Data Source=" + filename + ";Extended Properties=Excel 12.0;";
-			objCon.CursorLocation = 1;
-			objCon.Open;
-			var strQuery;
-			//Get the SheetName
-			var strSheetName = "Sheet1$";
-			var rsTemp = new ActiveXObject("ADODB.Recordset");
-			rsTemp = objCon.OpenSchema(20);
-			if(!rsTemp.EOF)
-			strSheetName = rsTemp.Fields("Table_Name").Value;
-			rsTemp = null;
-			rsExcel =   new ActiveXObject("ADODB.Recordset");
-			strQuery = "SELECT * FROM [" + strSheetName + "]";
-			rsExcel.ActiveConnection = objCon;
-			rsExcel.Open(strQuery);
-			var index = 0;
-			while(!rsExcel.EOF){
-				articles[index] = {
-					name:rsExcel.Fields(0).value,
-					school:rsExcel.Fields(1).value,
-					cellphone:rsExcel.Fields(2).value,
-					title:rsExcel.Fields(3).value,
-					xuanti:rsExcel.Fields(4).value,
-					keguan:rsExcel.Fields(5).value,
-					shidai:rsExcel.Fields(6).value,
-					wenbi:rsExcel.Fields(7).value,
-					gushi:rsExcel.Fields(8).value,
-					sixiang:rsExcel.Fields(9).value
+			
+			function importXLS(file){
+				file.select();
+				var filename = document.selection.createRange().text;
+				objCon = new ActiveXObject("ADODB.Connection");
+				objCon.Provider = "Microsoft.Ace.OleDb.12.0;";
+				objCon.ConnectionString = "Data Source=" + filename + ";Extended Properties=Excel 12.0;";
+				objCon.CursorLocation = 1;
+				objCon.Open;
+				var strQuery;
+				//Get the SheetName
+				var strSheetName = "Sheet1$";
+				var rsTemp = new ActiveXObject("ADODB.Recordset");
+				rsTemp = objCon.OpenSchema(20);
+				if(!rsTemp.EOF)
+				strSheetName = rsTemp.Fields("Table_Name").Value;
+				rsTemp = null;
+				rsExcel =   new ActiveXObject("ADODB.Recordset");
+				strQuery = "SELECT * FROM [" + strSheetName + "]";
+				rsExcel.ActiveConnection = objCon;
+				rsExcel.Open(strQuery);
+				var index = 0;
+				while(!rsExcel.EOF){
+					articles[index] = {
+						name:rsExcel.Fields(0).value,
+						school:rsExcel.Fields(1).value,
+						cellphone:rsExcel.Fields(2).value,
+						title:rsExcel.Fields(3).value,
+						xuanti:rsExcel.Fields(4).value,
+						keguan:rsExcel.Fields(5).value,
+						shidai:rsExcel.Fields(6).value,
+						wenbi:rsExcel.Fields(7).value,
+						gushi:rsExcel.Fields(8).value,
+						sixiang:rsExcel.Fields(9).value
+					}
+					index++;
+					rsExcel.MoveNext; 
 				}
-				index++;
-				rsExcel.MoveNext; 
+				// Close the connection and dispose the file
+				objCon.Close;
+				objCon =null;
+				rsExcel = null;
 			}
-			// Close the connection and dispose the file
-			objCon.Close;
-			objCon =null;
-			rsExcel = null;
-		}
 
-		//传入canvas的宽度和高度还有六边形的边长，就可以确定一个六边形的六个点的坐标了,还可以设置偏移量
-		function getHexagonPoints(width, height, edgeLength,Xoffset,Yoffset){
-			Xoffset = Xoffset || 0;
-			Yoffset = Yoffset || 0;
-			var paramX = edgeLength * Math.sqrt(3) / 2;
-			var marginLeft = (width - 2 * paramX) / 2 + Xoffset;
-			var x5 = x6 = marginLeft;
-			var x2 = x3 = marginLeft + paramX * 2;
-			var x1 = x4 = marginLeft + paramX;
+			//传入canvas的宽度和高度还有六边形的边长，就可以确定一个六边形的六个点的坐标了,还可以设置偏移量
+			function getHexagonPoints(width, height, edgeLength,Xoffset,Yoffset){
+				Xoffset = Xoffset || 0;
+				Yoffset = Yoffset || 0;
+				var paramX = edgeLength * Math.sqrt(3) / 2;
+				var marginLeft = (width - 2 * paramX) / 2 + Xoffset;
+				var x5 = x6 = marginLeft;
+				var x2 = x3 = marginLeft + paramX * 2;
+				var x1 = x4 = marginLeft + paramX;
 
-			var paramY = edgeLength / 2;
-			var marginTop = (height - 4 * paramY) / 2 + Yoffset;
-			var y1 = marginTop;
-			var y2 = y6 = marginTop + paramY;
-			var y3 = y5 = marginTop + 3 * paramY;
-			var y4 = marginTop + 4 * paramY;
+				var paramY = edgeLength / 2;
+				var marginTop = (height - 4 * paramY) / 2 + Yoffset;
+				var y1 = marginTop;
+				var y2 = y6 = marginTop + paramY;
+				var y3 = y5 = marginTop + 3 * paramY;
+				var y4 = marginTop + 4 * paramY;
 
-			var points = new Array();
-			points[0] = [x1, y1];
-			points[1] = [x2, y2];
-			points[2] = [x3, y3];
-			points[3] = [x4, y4];
-			points[4] = [x5, y5];
-			points[5] = [x6, y6];
-			return points;
-		}
+				var points = new Array();
+				points[0] = [x1, y1];
+				points[1] = [x2, y2];
+				points[2] = [x3, y3];
+				points[3] = [x4, y4];
+				points[4] = [x5, y5];
+				points[5] = [x6, y6];
+				return points;
+			}
 
-		//画七个六边形
-		function drawHexagon(sixParam){
-			ctx.save();
-			ctx.strokeStyle = "black";
-			for (var i = 0; i < 7; i++) {
-				allPoints[i] = getHexagonPoints(400, 400, i * sixParam / 6,50,50);
+			//画七个六边形
+			function drawHexagon(sixParam){
+				ctx.save();
+				ctx.strokeStyle = "black";
+				for (var i = 0; i < 7; i++) {
+					allPoints[i] = getHexagonPoints(400, 400, i * sixParam / 6,50,50);
+					ctx.beginPath();
+					ctx.fillStyle = "rgba(0,0,0,0.1)";
+					ctx.moveTo(allPoints[i][5][0],allPoints[i][5][1]); //5
+					for (var j = 0; j < 6; j++) {
+				    ctx.lineTo(allPoints[i][j][0],allPoints[i][j][1]); //1
+					}
+					ctx.stroke();
+					ctx.closePath();
+					ctx.fill();
+				}
+				ctx.restore();
+			}
+
+			function drawNumbers(){
+				ctx.save();
+				ctx.fillStyle = 'black';
+				ctx.font = '20px sans-serif';
+				ctx.textBaseline = 'middle';
+				ctx.textAlign = 'end';
+				ctx.fillText('0',allPoints[0][0][0],allPoints[0][0][1]);
+				ctx.fillText('1',allPoints[1][0][0],allPoints[1][0][1]);
+				ctx.fillText('2',allPoints[2][0][0],allPoints[2][0][1]);
+				ctx.fillText('3',allPoints[3][0][0],allPoints[3][0][1]);
+				ctx.fillText('4',allPoints[4][0][0],allPoints[4][0][1]);
+				ctx.fillText('5',allPoints[5][0][0],allPoints[5][0][1]);
+				ctx.fillText('6',allPoints[6][0][0],allPoints[6][0][1]);
+				ctx.restore();
+			}
+			 
+			//画交叉的线
+			function drawLines(){
+				ctx.save();
+				ctx.strokeStyle = "black";
 				ctx.beginPath();
-				ctx.fillStyle = "rgba(0,0,0,0.1)";
-				ctx.moveTo(allPoints[i][5][0],allPoints[i][5][1]); //5
+				for (var i = 0; i < 3; i++) {
+					ctx.moveTo(allPoints[6][i][0],allPoints[6][i][1]); //1-4
+					ctx.lineTo(allPoints[6][i+3][0],allPoints[6][i+3][1]); //1-4
+					ctx.stroke();
+				}
+				ctx.closePath();
+				ctx.restore();
+			}
+
+			function drawText(){
+				ctx.save();
+				ctx.fillStyle = 'black';
+				ctx.font = '20px sans-serif';
+				ctx.fillText('选题',allPoints[6][0][0],allPoints[6][0][1]);
+				ctx.fillText('客观性',allPoints[6][1][0],allPoints[6][1][1]);
+				ctx.textBaseline = 'top';
+				ctx.fillText('时代性',allPoints[6][2][0],allPoints[6][2][1]);
+				ctx.textAlign = 'end';
+				ctx.fillText('文笔',allPoints[6][3][0],allPoints[6][3][1]);
+				ctx.fillText('故事性',allPoints[6][4][0],allPoints[6][4][1]);
+				ctx.textBaseline = 'bottom';
+				ctx.fillText('思想性',allPoints[6][5][0],allPoints[6][5][1]);
+				ctx.restore();
+			}
+			 
+			//画覆盖物
+			function drawCover(r,g,b){
+				r = r || 200;
+				g = g || 255;
+				b = b || 75;
+				ctx.save();
+				ctx.strokeStyle = "rgb("+r+","+g+","+b+")";
+				ctx.fillStyle = "rgba("+r+","+g+","+b+",0.2)";
+				ctx.beginPath();
+				ctx.moveTo(coverPoints[5][0],coverPoints[5][1]); //5
 				for (var j = 0; j < 6; j++) {
-			    ctx.lineTo(allPoints[i][j][0],allPoints[i][j][1]); //1
+					ctx.lineTo(coverPoints[j][0],coverPoints[j][1]);
 				}
 				ctx.stroke();
 				ctx.closePath();
 				ctx.fill();
+				ctx.restore();
 			}
-			ctx.restore();
-		}
 
-		function drawNumbers(){
-			ctx.save();
-			ctx.fillStyle = 'black';
-			ctx.font = '20px sans-serif';
-			ctx.textBaseline = 'middle';
-			ctx.textAlign = 'end';
-			ctx.fillText('0',allPoints[0][0][0],allPoints[0][0][1]);
-			ctx.fillText('1',allPoints[1][0][0],allPoints[1][0][1]);
-			ctx.fillText('2',allPoints[2][0][0],allPoints[2][0][1]);
-			ctx.fillText('3',allPoints[3][0][0],allPoints[3][0][1]);
-			ctx.fillText('4',allPoints[4][0][0],allPoints[4][0][1]);
-			ctx.fillText('5',allPoints[5][0][0],allPoints[5][0][1]);
-			ctx.fillText('6',allPoints[6][0][0],allPoints[6][0][1]);
-			ctx.restore();
-		}
-		 
-		//画交叉的线
-		function drawLines(){
-			ctx.save();
-			ctx.strokeStyle = "black";
-			ctx.beginPath();
-			for (var i = 0; i < 3; i++) {
-				ctx.moveTo(allPoints[6][i][0],allPoints[6][i][1]); //1-4
-				ctx.lineTo(allPoints[6][i+3][0],allPoints[6][i+3][1]); //1-4
-				ctx.stroke();
+			function drawBackGround(){
+				drawHexagon(200); 
+				drawLines();
+				drawText();
+				drawNumbers();
 			}
-			ctx.closePath();
-			ctx.restore();
-		}
 
-		function drawText(){
-			ctx.save();
-			ctx.fillStyle = 'black';
-			ctx.font = '20px sans-serif';
-			ctx.fillText('选题',allPoints[6][0][0],allPoints[6][0][1]);
-			ctx.fillText('客观性',allPoints[6][1][0],allPoints[6][1][1]);
-			ctx.textBaseline = 'top';
-			ctx.fillText('时代性',allPoints[6][2][0],allPoints[6][2][1]);
-			ctx.textAlign = 'end';
-			ctx.fillText('文笔',allPoints[6][3][0],allPoints[6][3][1]);
-			ctx.fillText('故事性',allPoints[6][4][0],allPoints[6][4][1]);
-			ctx.textBaseline = 'bottom';
-			ctx.fillText('思想性',allPoints[6][5][0],allPoints[6][5][1]);
-			ctx.restore();
-		}
-		 
-		//画覆盖物
-		function drawCover(r,g,b){
-			r = r || 200;
-			g = g || 255;
-			b = b || 75;
-			ctx.save();
-			ctx.strokeStyle = "rgb("+r+","+g+","+b+")";
-			ctx.fillStyle = "rgba("+r+","+g+","+b+",0.2)";
-			ctx.beginPath();
-			ctx.moveTo(coverPoints[5][0],coverPoints[5][1]); //5
-			for (var j = 0; j < 6; j++) {
-				ctx.lineTo(coverPoints[j][0],coverPoints[j][1]);
-			}
-			ctx.stroke();
-			ctx.closePath();
-			ctx.fill();
-			ctx.restore();
-		}
+			function drawArticles(id_list){
+				ctx.clearRect(0,0,600,500);
 
-		function drawBackGround(){
-			drawHexagon(200); 
-			drawLines();
-			drawText();
-			drawNumbers();
-		}
-
-		function drawArticles(id_list){
-			ctx.clearRect(0,0,600,500);
-
-			drawBackGround();
-			//初始化覆盖物
-			var r,g,b,article;
-			for(var i = 0;i<id_list.length;i++){
-				article = document.getElementById(id_list[i]);
-				coverPoints[0] = allPoints[articles[id_list[i].substring(1)]['xuanti']][0];
-				coverPoints[1] = allPoints[articles[id_list[i].substring(1)]['keguan']][1];
-				coverPoints[2] = allPoints[articles[id_list[i].substring(1)]['shidai']][2];
-				coverPoints[3] = allPoints[articles[id_list[i].substring(1)]['wenbi']][3];
-				coverPoints[4] = allPoints[articles[id_list[i].substring(1)]['gushi']][4];
-				coverPoints[5] = allPoints[articles[id_list[i].substring(1)]['sixiang']][5];
-				r = article.getAttribute('data-r');
-				g = article.getAttribute('data-g');
-				b = article.getAttribute('data-b');
-				drawCover(r,g,b);
-			}
-		}
-
-		function drawAllArticles(){
-			ctx.clearRect(0,0,600,500);
-			list.innerHTML = '';
-
-			drawBackGround();
-			//初始化覆盖物
-			var r,g,b;
-			for(var j = 0;j<articles.length;j++){
-				coverPoints[0] = allPoints[articles[j]['xuanti']][0];
-				coverPoints[1] = allPoints[articles[j]['keguan']][1];
-				coverPoints[2] = allPoints[articles[j]['shidai']][2];
-				coverPoints[3] = allPoints[articles[j]['wenbi']][3];
-				coverPoints[4] = allPoints[articles[j]['gushi']][4];
-				coverPoints[5] = allPoints[articles[j]['sixiang']][5];
-				r = Math.floor(255*j/articles.length);
-				g = Math.floor(Math.random()*255+1);
-				b = Math.floor(Math.random()*255+1);
-				list.innerHTML += '<div id="l'+j+'" class="article" data-r="'+r+'" data-g="'+g+'" data-b="'+b+'" style="color:rgb('+r+','+g+','+b+')">'+articles[j]['title']+'</div>';
-				drawCover(r,g,b);
-			}
-		}
-
-		list.addEventListener('click',function(event){
-			var classname = [];
-			if(event.target.id!='list'){
-				if(id_list.indexOf(event.target.id)==-1){
-					id_list.push(event.target.id);
-					classname = event.target.className.split(' ');
-					classname.push('selected');
-					event.target.className = classname.join(' ');
-					drawArticles(id_list);
-				}else{
-					id_list.splice(id_list.indexOf(event.target.id),1);
-					classname = event.target.className.split(' ');
-					classname.splice(classname.indexOf('selected'));
-					event.target.className = classname.join(' ');
-					drawArticles(id_list);
+				drawBackGround();
+				//初始化覆盖物
+				var r,g,b,article;
+				for(var i = 0;i<id_list.length;i++){
+					article = document.getElementById(id_list[i]);
+					coverPoints[0] = allPoints[articles[id_list[i].substring(1)]['xuanti']][0];
+					coverPoints[1] = allPoints[articles[id_list[i].substring(1)]['keguan']][1];
+					coverPoints[2] = allPoints[articles[id_list[i].substring(1)]['shidai']][2];
+					coverPoints[3] = allPoints[articles[id_list[i].substring(1)]['wenbi']][3];
+					coverPoints[4] = allPoints[articles[id_list[i].substring(1)]['gushi']][4];
+					coverPoints[5] = allPoints[articles[id_list[i].substring(1)]['sixiang']][5];
+					r = article.getAttribute('data-r');
+					g = article.getAttribute('data-g');
+					b = article.getAttribute('data-b');
+					drawCover(r,g,b);
 				}
 			}
-		});
-		document.getElementById('b').addEventListener('click',function(){
-			if(fileSelector.value==''){
-				alert('请选择xls文件');
-			}else{
-				importXLS(document.getElementById('fileSelector'));
-				drawAllArticles();
+
+			function drawAllArticles(){
+				ctx.clearRect(0,0,600,500);
+				list.innerHTML = '';
+
+				drawBackGround();
+				//初始化覆盖物
+				var r,g,b;
+				for(var j = 0;j<articles.length;j++){
+					coverPoints[0] = allPoints[articles[j]['xuanti']][0];
+					coverPoints[1] = allPoints[articles[j]['keguan']][1];
+					coverPoints[2] = allPoints[articles[j]['shidai']][2];
+					coverPoints[3] = allPoints[articles[j]['wenbi']][3];
+					coverPoints[4] = allPoints[articles[j]['gushi']][4];
+					coverPoints[5] = allPoints[articles[j]['sixiang']][5];
+					r = Math.floor(255*j/articles.length);
+					g = Math.floor(Math.random()*255+1);
+					b = Math.floor(Math.random()*255+1);
+					list.innerHTML += '<div id="l'+j+'" class="article" data-r="'+r+'" data-g="'+g+'" data-b="'+b+'" style="color:rgb('+r+','+g+','+b+')">'+articles[j]['title']+'</div>';
+					drawCover(r,g,b);
+				}
 			}
-		});
+
+			list.addEventListener('click',function(event){
+				var classname = [];
+				if(event.target.id!='list'){
+					if(id_list.indexOf(event.target.id)==-1){
+						id_list.push(event.target.id);
+						classname = event.target.className.split(' ');
+						classname.push('selected');
+						event.target.className = classname.join(' ');
+						drawArticles(id_list);
+					}else{
+						id_list.splice(id_list.indexOf(event.target.id),1);
+						classname = event.target.className.split(' ');
+						classname.splice(classname.indexOf('selected'));
+						event.target.className = classname.join(' ');
+						drawArticles(id_list);
+					}
+				}
+			});
+
+			document.getElementById('b').addEventListener('click',function(){
+				if(fileSelector.value==''){
+					alert('请选择xls文件');
+				}else{
+					importXLS(document.getElementById('fileSelector'));
+					drawAllArticles();
+				}
+			});
+
+		}
+		
 		</script>
 	</body>
 </html>
