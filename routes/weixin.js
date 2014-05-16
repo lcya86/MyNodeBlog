@@ -22,7 +22,7 @@ function route(req,res){
 			var firstarticle = {
 				title:'Yesterday When I Was Young',
 				description:"<p>Seems the love I've ever known</p>",
-				picurl:"http://upload.ahwang.cn/2014/0516/1400223312243.jpg",
+				picurl:"",
 				url:'http://lcy-blog.com'
 			}
 			articles.push(firstarticle);
