@@ -63,7 +63,7 @@ function replyNews(req,res,articles){
 	reply.startElement('MsgType');
 	reply.writeCData('news');
 	reply.endElement();
-	reply.startElement('ArticleCount').text(2).endElement();
+	reply.startElement('ArticleCount').text('2').endElement();
 	reply.startElement('Articles');
 	for(var i = 0;i<articles.length;i++){
 		reply.startElement('item');
