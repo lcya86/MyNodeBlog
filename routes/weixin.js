@@ -17,8 +17,8 @@ function route(req,res){
 	}else if(req.body.xml.MsgType[0]=='text'){
 		if(req.body.xml.Content[0]=='捣鼓啥呢'){
 			var str = '';
-			for(var i = 0;i<1500;i++){
-				str += '一';
+			for(var i = 0;i<1024;i++){
+				str += '啦';
 			}
 			//'<a href="http://lcy-blog.com/project/doing">好玩儿的，点我就告诉你</a>'
 			return replyText(req,res,str);
