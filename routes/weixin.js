@@ -21,10 +21,10 @@ function route(req,res){
 			var articles = [];
 			var firstarticle = {
 				title:'Yesterday When I Was Young',
-				description:"<p>Seems the love I've ever known</p>",
-				picurl:"",
+				description:"<p>Seems the love I've ever known</p><p>看来，过去我所知道的爱情</p><p>Has always been the most destructive kind</p><p>似乎总是最具有毁灭性的那种</p><p>Guess that's why now</p><p>或许，那就是为什么</p><p>I feel so old before my time</p><p>如今我感觉如此的未老先衰</p><p>Yesterday, when I was young,</p><p>昨日，当我轻狂年少</p><p>The taste of life was sweet as rain upon my tongue,</p><p>For yesterday, when I was young.</p>",
+				picurl:"http://upload.ahwang.cn/2014/0516/1400223312243.jpg",
 				url:'http://lcy-blog.com'
-			}
+			};
 			articles.push(firstarticle);
 			return replyNews(req,res,articles);
 		}
