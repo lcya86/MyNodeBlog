@@ -12,7 +12,12 @@ exports.index = function(req, res) {
 function route(req,res){
 	if(req.body.xml.MsgType[0]=='event'){
 		if(req.body.xml.Event[0]=='subscribe'){
-			return replyText(req,res,'hi～我是刘春洋，“小玩意儿”是我平时瞎折腾的地方，我会不定时地做一些好玩儿的小玩意儿与大家分享，回复“捣鼓啥呢”可以看到我正在捣鼓神马。ps：<a href="http://lcy-blog.com">这是我的部落格，欢迎来访～</a>');
+			var str = '';
+			for(var i = 0;i<2048;i++){
+				str += '一';
+			}
+			//hi～我是刘春洋，“小玩意儿”是我平时瞎折腾的地方，我会不定时地做一些好玩儿的小玩意儿与大家分享，回复“捣鼓啥呢”可以看到我正在捣鼓神马。ps：<a href="http://lcy-blog.com">这是我的部落格，欢迎来访～</a>
+			return replyText(req,res,str);
 		}
 	}else if(req.body.xml.MsgType[0]=='text'){
 		if(req.body.xml.Content[0]=='捣鼓啥呢'){
