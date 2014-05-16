@@ -17,7 +17,8 @@ function route(req,res){
 	}else if(req.body.xml.MsgType[0]=='text'){
 		if(req.body.xml.Content[0]=='捣鼓啥呢'){
 			return replyText(req,res,'<a href="http://lcy-blog.com/project/doing">好玩儿的，点我就告诉你</a>');
-		}else if(req.body.xml.MsgType[0]=='图文'){
+		}else if(req.body.xml.MsgType[0]=='123'){
+			console.log('123');
 			var articles = [];
 			var firstarticle = {
 				title:'Yesterday When I Was Young',
