@@ -4,11 +4,10 @@
 		<meta charset="utf-8">
 		<title>文章分类</title>
 		<style type="text/css">
-			div#list {
+			div#list{
 				position: relative;
 				float: left;
 				height: 500px;
-				width: 300px;
 				overflow-y: auto;
 			}
 
@@ -18,15 +17,22 @@
 				float: left;
 			}
 
-			div.article{
-				margin:1px;
+			div#list tr.selected{
+				border:solid black 1px;
+			}
+
+			div#list tr{
+				margin-top:5px;
 				border:solid white 1px;
 				cursor: pointer;
 			}
 
-			div.selected{
-				border:solid black 1px;
+			
+
+			table{
+				border-collapse: collapse !important
 			}
+
 		</style>
 	</head>
 	<body>
@@ -35,8 +41,10 @@
 			<input type="button" id="b" value="import"/>
 		</div>
 		<div>
-			<canvas id="canvas" width="600" height="500">不支持此浏览器</canvas>
-			<div id="list"></div>
+			<canvas id="canvas" width="500" height="500">不支持此浏览器</canvas>
+			<div id="list">
+				
+			</div>
 		</div>
 		<script language="javascript" type="text/javascript">
 		window.onload = function(){
@@ -211,12 +219,11 @@
 
 			function drawArticles(id_list){
 				ctx.clearRect(0,0,600,500);
-
 				drawBackGround();
 				//初始化覆盖物
 				var r,g,b,article;
 				for(var i = 0;i<id_list.length;i++){
-					article = document.getElementById(id_list[i]);
+					article = document.querySelector('td#'+id_list[i]);
 					coverPoints[0] = allPoints[articles[id_list[i].substring(1)]['xuanti']][0];
 					coverPoints[1] = allPoints[articles[id_list[i].substring(1)]['keguan']][1];
 					coverPoints[2] = allPoints[articles[id_list[i].substring(1)]['shidai']][2];
@@ -232,12 +239,13 @@
 
 			function drawAllArticles(){
 				ctx.clearRect(0,0,600,500);
-				list.innerHTML = '';
-
+				var inner = '';
 				drawBackGround();
 				//初始化覆盖物
 				var r,g,b;
+				
 				for(var j = 0;j<articles.length;j++){
+					inner += '<tr id="l'+j+'">';
 					coverPoints[0] = allPoints[articles[j]['xuanti']][0];
 					coverPoints[1] = allPoints[articles[j]['keguan']][1];
 					coverPoints[2] = allPoints[articles[j]['shidai']][2];
@@ -247,9 +255,13 @@
 					r = Math.floor(255*j/articles.length);
 					g = Math.floor(Math.random()*255+1);
 					b = Math.floor(Math.random()*255+1);
-					list.innerHTML += '<div id="l'+j+'" class="article" data-r="'+r+'" data-g="'+g+'" data-b="'+b+'" style="color:rgb('+r+','+g+','+b+')">'+articles[j]['title']+'</div>';
+					for(var prop in articles[j]){
+						inner += '<td id="l'+j+'" data-r="'+r+'" data-g="'+g+'" data-b="'+b+'" style="color:rgb('+r+','+g+','+b+')">'+articles[j][prop]+'</td>';
+					}
 					drawCover(r,g,b);
+					inner += '</tr>';
 				}
+				list.innerHTML = '<table class="table"><thead><tr><th>姓名</th><th>学校</th><th>电话</th><th>题目</th><th>选题</th><th>客观性</th><th>时代性</th><th>文本</th><th>故事性</th><th>思想性</th></tr></thead><tbody>'+inner+'</tbody></table>';
 			}
 
 			list.addEventListener('click',function(event){
@@ -259,13 +271,13 @@
 						id_list.push(event.target.id);
 						classname = event.target.className.split(' ');
 						classname.push('selected');
-						event.target.className = classname.join(' ');
+						document.querySelector('tr#'+event.target.id).className = classname.join(' ');
 						drawArticles(id_list);
 					}else{
 						id_list.splice(id_list.indexOf(event.target.id),1);
 						classname = event.target.className.split(' ');
 						classname.splice(classname.indexOf('selected'));
-						event.target.className = classname.join(' ');
+						document.querySelector('tr#'+event.target.id).className = classname.join(' ');
 						drawArticles(id_list);
 					}
 				}
