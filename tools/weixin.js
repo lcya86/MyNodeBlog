@@ -24,13 +24,13 @@ exports.login = function(fn){
 	request
 		.post('http://mp.weixin.qq.com/cgi-bin/login?lang=zh_CN')
 		.type('form')
-		.send(
-			username: wx_user
-			pwd: wx_pwd_md5;
-			imgcode : ''
-			f : 'json'
+		.send({
+			username: wx_user,
+			pwd: wx_pwd_md5,
+			imgcode : '',
+			f : 'json',
 			register : 0
-		)
+		})
 		.end(function(res){
 			var cookie = '';
 			for(rs in res.header['set-cookie']){
