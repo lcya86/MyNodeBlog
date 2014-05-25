@@ -36,7 +36,7 @@ exports.login = function(fn){
 			for(rs in res.header['set-cookie']){
 				cookie += rs.replace(/Path=\//g, '');
 			}
-			console.log('res:'+objToString(res.header));
+			console.log('res:'+objToString(res));
 			console.log('base_resp:'+JSON.stringify(res.base_resp));
 			console.log('redirect_url:'+res.redirect_url);
 			fn(null,cookie);
