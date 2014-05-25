@@ -36,9 +36,7 @@ exports.login = function(fn){
 			for(rs in res.header['set-cookie']){
 				cookie += rs.replace(/Path=\//g, '');
 			}
-			console.log('cookie:'+cookie);
-			console.log('res:'+res.toString());
-			console.log('pwd:'+wx_pwd_md5);
+			console.log('redirect_url:'+res.redirect_url);
 			fn(null,cookie);
 		});
 }
