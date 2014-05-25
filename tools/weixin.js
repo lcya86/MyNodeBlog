@@ -34,22 +34,31 @@ exports.login = function(fn){
 		})
 		.end(function(res){
 			var cookie = '';
+			var token = res.text.redirect_url;
 			for(rs in res.header['set-cookie']){
 				cookie += rs.replace(/Path=\//g, '');
 			}
-			console.log('res:'+objToString(res));
-			console.log('base_resp:'+JSON.stringify(res.base_resp));
-			console.log('redirect_url:'+res.redirect_url);
-			fn(null,cookie);
+			fn(cookie);
 		});
 }
 
-function objToString (obj) {
-    var str = '';
-    for (var p in obj) {
-        if (obj.hasOwnProperty(p)) {
-            str += p + '::' + obj[p] + '\n';
-        }
-    }
-    return str;
+exports.sender = function(options,fn){
+	var msg = options.msg,
+			fakeid = options.fakeid;
+	var psotParams = {
+		type: 1,
+		content: msg,
+		error: false,
+		tofakeid : fakeid,
+		ajax : 1
+	}
+	request
+		.post('http://mp.weixin.qq.com/cgi-bin/singlesend?t=ajax-response&lang=zh_CN')
+		.set('referer','https://mp.weixin.qq.com/')
+		.type('form')
+		.send(psotParams)
+		.set('Cookie', options.cookie)
+		.end(function(res){
+			fn(JSON.parse(res.text));
+		});
 }

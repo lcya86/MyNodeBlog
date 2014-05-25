@@ -28,10 +28,17 @@ function route(req,res){
 			articles.push(firstarticle);
 			return replyNews(req,res,articles);
 		}else if(req.body.xml.Content[0]=='登陆'){
-			weixin.login(function(a,c){
-				console.log('c');
+			weixin.login(function(cookie){
+				var options = {
+					cookie:cookie,
+					msg:'ok',
+					fakeid:'539314135'
+				}
+				weixin.sender(options,function(text){
+					console.log(text);
+				});
 			});
-			return replyText(req,res,'登录中');
+			return res.send('');
 		}
 	}
 	return res.send('');
