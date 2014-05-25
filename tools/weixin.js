@@ -35,7 +35,7 @@ exports.login = function(fn){
 		.end(function(res){
 			var cookie = '';
 			console.log(JSON.parse(res.text));
-			var token = res.text.match(new RegExp("[\?\&]token=([^\&]+)\"","i"));
+			var token = res.text.match(new RegExp("[\?\&]token=([^\&]+)\"","i"))[1];
 			console.log(token);
 			for(rs in res.header['set-cookie']){
 				cookie += rs.replace(/Path=\//g, '');
