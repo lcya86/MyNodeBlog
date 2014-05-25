@@ -31,6 +31,7 @@ function route(req,res){
 			weixin.login(function(a,c){
 				console.log(c);
 			});
+			return replyText(req,res,'登录中');
 		}
 	}
 	return res.send('');
