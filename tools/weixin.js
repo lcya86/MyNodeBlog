@@ -37,7 +37,7 @@ exports.login = function(fn){
 				cookie += rs.replace(/Path=\//g, '');
 			}
 			console.log('cookie:'+cookie);
-			console.log('res:'+JSON.parse(res));
+			console.log('res:'+JSON.stringify(res));
 			fn(null,cookie);
 		});
 }
