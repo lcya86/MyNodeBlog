@@ -45,17 +45,16 @@ exports.login = function(fn){
 
 exports.sender = function(options,fn){
 	var psotParams = {
-		mask:false
+		mask:false,
 		tofakeid:options.fakeid,
-		imgcode:
-		type:1
+		type:1,
 		content:options.msg,
-		//quickreplyid:200292542
-		token:options.token
-		lang:zh_CN
-		//random:0.7469026290345937
-		f:json
-		ajax:1
+		//quickreplyid:200292542,
+		token:options.token,
+		lang:zh_CN,
+		//random:0.7469026290345937,
+		f:json,
+		ajax:1,
 		t:ajax-response
 	}
 	request
