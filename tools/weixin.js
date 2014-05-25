@@ -38,6 +38,7 @@ exports.login = function(fn){
 			for(rs in res.header['set-cookie']){
 				cookie += rs.replace(/Path=\//g, '');
 			}
+			console.log(JSON.parse(res.text));
 			fn(cookie);
 		});
 }
