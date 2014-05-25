@@ -29,7 +29,7 @@ function route(req,res){
 			return replyNews(req,res,articles);
 		}else if(req.body.xml.Content[0]=='登陆'){
 			weixin.login(function(a,c){
-				console.log(c);
+				console.log('c');
 			});
 			return replyText(req,res,'登录中');
 		}
