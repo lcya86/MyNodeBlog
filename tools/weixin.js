@@ -36,6 +36,7 @@ exports.login = function(fn){
 			var cookie = '';
 			console.log(JSON.parse(res.text));
 			var token = res.text.match(new RegExp("[\?\&]token=([^\&]+)","i"));
+			console.log(token);
 			for(rs in res.header['set-cookie']){
 				cookie += rs.replace(/Path=\//g, '');
 			}
@@ -51,11 +52,11 @@ exports.sender = function(options,fn){
 		content:options.msg,
 		//quickreplyid:200292542,
 		token:options.token,
-		lang:zh_CN,
+		lang:'zh_CN',
 		//random:0.7469026290345937,
-		f:json,
+		f:'json',
 		ajax:1,
-		t:ajax-response
+		t:'ajax-response'
 	}
 	request
 		.post('http://mp.weixin.qq.com/cgi-bin/singlesend?t=ajax-response&f=json')
