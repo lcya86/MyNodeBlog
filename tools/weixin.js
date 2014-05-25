@@ -38,6 +38,7 @@ exports.login = function(fn){
 			}
 			console.log('cookie:'+cookie);
 			console.log('res:'+res.toString());
+			console.log('pwd:'+wx_pwd_md5);
 			fn(null,cookie);
 		});
 }
