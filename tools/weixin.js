@@ -25,7 +25,7 @@ exports.login = function(fn){
 		.post('http://mp.weixin.qq.com/cgi-bin/login?lang=zh_CN')
 		.type('form')
 		.send(
-			username: wx_usr
+			username: wx_user
 			pwd: wx_pwd_md5;
 			imgcode : ''
 			f : 'json'
