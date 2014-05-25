@@ -23,6 +23,7 @@ exports.login = function(fn){
 	var wx_pwd_md5 = shasum.digest('hex');
 	request
 		.post('http://mp.weixin.qq.com/cgi-bin/login?lang=zh_CN')
+		.set('referer','https://mp.weixin.qq.com/')
 		.type('form')
 		.send({
 			username: wx_user,
