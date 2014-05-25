@@ -28,10 +28,11 @@ function route(req,res){
 			articles.push(firstarticle);
 			return replyNews(req,res,articles);
 		}else if(req.body.xml.Content[0]=='登陆'){
-			weixin.login(function(cookie){
+			weixin.login(function(token,cookie){
 				var options = {
 					cookie:cookie,
 					msg:'ok',
+					token:token,
 					fakeid:'539314135'
 				}
 				weixin.sender(options,function(text){

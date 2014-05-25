@@ -34,27 +34,32 @@ exports.login = function(fn){
 		})
 		.end(function(res){
 			var cookie = '';
-			var token = res.text.redirect_url;
+			var token = res.text.redirect_url.match(new RegExp("[\?\&]token=([^\&]+)","i"));
 			for(rs in res.header['set-cookie']){
 				cookie += rs.replace(/Path=\//g, '');
 			}
 			console.log(JSON.parse(res.text));
-			fn(cookie);
+			fn(token,cookie);
 		});
 }
 
 exports.sender = function(options,fn){
-	var msg = options.msg,
-			fakeid = options.fakeid;
 	var psotParams = {
-		type: 1,
-		content: msg,
-		error: false,
-		tofakeid : fakeid,
-		ajax : 1
+		mask:false
+		tofakeid:options.fakeid,
+		imgcode:
+		type:1
+		content:options.msg,
+		//quickreplyid:200292542
+		token:options.token
+		lang:zh_CN
+		//random:0.7469026290345937
+		f:json
+		ajax:1
+		t:ajax-response
 	}
 	request
-		.post('http://mp.weixin.qq.com/cgi-bin/singlesend?t=ajax-response&lang=zh_CN')
+		.post('http://mp.weixin.qq.com/cgi-bin/singlesend?t=ajax-response&f=json')
 		.set('referer','https://mp.weixin.qq.com/')
 		.type('form')
 		.send(psotParams)
