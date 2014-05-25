@@ -36,9 +36,19 @@ exports.login = function(fn){
 			for(rs in res.header['set-cookie']){
 				cookie += rs.replace(/Path=\//g, '');
 			}
-			console.log('redirect:'+JSON.stringify(res.redirect));
+			console.log('res:'+objToString(res));
 			console.log('base_resp:'+JSON.stringify(res.base_resp));
 			console.log('redirect_url:'+res.redirect_url);
 			fn(null,cookie);
 		});
+}
+
+function objToString (obj) {
+    var str = '';
+    for (var p in obj) {
+        if (obj.hasOwnProperty(p)) {
+            str += p + '::' + obj[p] + '\n';
+        }
+    }
+    return str;
 }
