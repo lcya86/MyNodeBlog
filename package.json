@@ -14,6 +14,7 @@
     "nodemailer":"*",
     "socket.io":"*",
     "xml2js":"*",
-    "xml-writer":"*"
+    "xml-writer":"*",
+    "superagent":"*"
   }
 }

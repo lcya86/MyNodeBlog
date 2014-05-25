@@ -27,6 +27,10 @@ function route(req,res){
 			};
 			articles.push(firstarticle);
 			return replyNews(req,res,articles);
+		}else if(req.body.xml.Content[0]=='登陆'){
+			weixin.login(function(a,c){
+				console.log(c);
+			});
 		}
 	}
 	return res.send('');
