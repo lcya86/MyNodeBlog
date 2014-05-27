@@ -77,7 +77,7 @@ exports.getFirstMsg = function(options,fn){
 	}
 
 	request
-		.get('https://mp.weixin.qq.com/cgi-bin/message')
+		.get('http://mp.weixin.qq.com/cgi-bin/message')
 		.query(queryString)
 		.set('Cookie', options.cookie)
 		.end(function(err,res){
