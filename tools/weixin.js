@@ -80,7 +80,10 @@ exports.getFirstMsg = function(options,fn){
 		.get('https://mp.weixin.qq.com/cgi-bin/message')
 		.query(queryString)
 		.set('Cookie', options.cookie)
-		.end(function(res){
+		.end(function(err,res){
+			if(err){
+				console.log(err);
+			}
 			console.log('ok');
 			fn(JSON.parse(res.text));
 		});
