@@ -46,7 +46,7 @@ exports.login = function(fn){
 }
 
 exports.sender = function(options,fn){
-	var psotParams = {
+	var postParams = {
 		mask:false,
 		tofakeid:options.fakeid,
 		type:1,
@@ -63,7 +63,24 @@ exports.sender = function(options,fn){
 		.post('http://mp.weixin.qq.com/cgi-bin/singlesend?t=ajax-response&f=json')
 		.set('referer','https://mp.weixin.qq.com/')
 		.type('form')
-		.send(psotParams)
+		.send(postParams)
+		.set('Cookie', options.cookie)
+		.end(function(res){
+			fn(JSON.parse(res.text));
+		});
+}
+
+exports.getFirstMsg = function(options,fn){
+	var queryString = {
+		t:'message/list',
+		count:1,
+		day:7,
+		token:options.token,
+		lang:'zh_CN'
+	}
+	request
+		.get('https://mp.weixin.qq.com/cgi-bin/message')
+		.query(queryString)
 		.set('Cookie', options.cookie)
 		.end(function(res){
 			fn(JSON.parse(res.text));
