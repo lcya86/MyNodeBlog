@@ -78,6 +78,7 @@ exports.getFirstMsg = function(options,fn){
 
 	request
 		.get('http://mp.weixin.qq.com/cgi-bin/message')
+		.accept('gzip')
 		.query(queryString)
 		.set('Cookie', options.cookie)
 		.end(function(err,res){
