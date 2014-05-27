@@ -38,7 +38,7 @@ exports.login = function(fn){
 			var token = res.text.match(new RegExp("[\?\&]token=([^\&]+)\"","i"))[1];
 			console.log(token);
 			for(rs in res.header['set-cookie']){
-				cookie += res.header['set-cookie'][rs];
+				cookie += res.header['set-cookie'][rs].replace(/Path=\/;\sSecure;\sHttpOnly/g, '');
 			}
 			console.log(cookie);
 			fn(token,cookie);
