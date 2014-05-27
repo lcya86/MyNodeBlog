@@ -75,12 +75,13 @@ exports.getFirstMsg = function(options,fn){
 		token:options.token,
 		lang:'zh_CN'
 	}
-	console.log(JSON.stringify(queryString));
+
 	request
 		.get('https://mp.weixin.qq.com/cgi-bin/message')
 		.query(queryString)
 		.set('Cookie', options.cookie)
 		.end(function(res){
+			console.log('ok');
 			fn(JSON.parse(res.text));
 		});
 }
