@@ -34,13 +34,10 @@ exports.login = function(fn){
 		})
 		.end(function(res){
 			var cookie = '';
-			console.log(JSON.parse(res.text));
 			var token = res.text.match(new RegExp("[\?\&]token=([^\&]+)\"","i"))[1];
-			console.log(token);
 			for(rs in res.header['set-cookie']){
 				cookie += res.header['set-cookie'][rs].replace(/Path=\/;\sSecure;\sHttpOnly/g, '');
 			}
-			console.log(cookie);
 			fn(token,cookie);
 		});
 }
@@ -78,6 +75,7 @@ exports.getFirstMsg = function(options,fn){
 		token:options.token,
 		lang:'zh_CN'
 	}
+	console.log(JSON.parse(queryString));
 	request
 		.get('https://mp.weixin.qq.com/cgi-bin/message')
 		.query(queryString)
