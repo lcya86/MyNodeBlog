@@ -75,7 +75,7 @@ exports.getFirstMsg = function(options,fn){
 		token:options.token,
 		lang:'zh_CN'
 	}
-	console.log(JSON.parse(queryString));
+	console.log(JSON.stringify(queryString));
 	request
 		.get('https://mp.weixin.qq.com/cgi-bin/message')
 		.query(queryString)
