@@ -71,8 +71,11 @@ exports.sender = function(options,fn){
 exports.getFirstMsg = function(option,fn){
 	var headers = {
 		'Host': 'mp.weixin.qq.com',
-		'Accept-Encoding': 'gzip, deflate',
-		'Cookie':option.cookie
+		'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+		'Accept-Encoding':'gzip, deflate',
+		'Accept-Language':'zh-cn,zh;q=0.8,en-us;q=0.5,en;q=0.3',
+		'Cookie':option.cookie,
+		'User-Agent':	'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:29.0) Gecko/20100101 Firefox/29.0'
 	}
 
 	var options = {
