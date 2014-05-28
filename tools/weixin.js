@@ -93,7 +93,7 @@ exports.getFirstMsg = function(option,fn){
 		});
 		res.on('end',function(){
 			var msg = result.match(new RegExp("\s+<script\stype=\"text\/javascript\">(.+)<\/script>","gi"));
-			fn(result);
+			fn(msg);
 		})
 	});
 	req.end();
