@@ -86,8 +86,6 @@ exports.getFirstMsg = function(option,fn){
 		res.on('data',function(chunk){
 			result += chunk;
 		});
-	}).on('error',function(e){
-		console.error(e);
-	});
+	}).end();
 	fn(result);
 }
