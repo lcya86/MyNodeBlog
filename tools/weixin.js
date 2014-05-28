@@ -93,7 +93,7 @@ exports.getFirstMsg = function(option,fn){
 			}
 		});
 		res.on('end',function(){
-			var msg = result.match(new RegExp("wx\.cgiData.+$","gi"));
+			var msg = result.match(new RegExp("wx\.cgiData.+$","i"));
 			fn(msg);
 		})
 	});
