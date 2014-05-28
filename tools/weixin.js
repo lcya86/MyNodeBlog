@@ -87,7 +87,8 @@ exports.getFirstMsg = function(option,fn){
 	var result = '';
 	var req = https.request(options,function(res){
 		console.log('loading...');
-		res.setEncoding('utf8').on('data',function(chunk){
+		res.setEncoding('utf8');
+		res.on('data',function(chunk){
 			console.log('chunk:'+chunk);
 		});
 	});
