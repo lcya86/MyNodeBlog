@@ -88,8 +88,8 @@ exports.getFirstMsg = function(option,fn){
 	var req = https.request(options,function(res){
 		res.setEncoding('utf8');
 		res.on('data',function(chunk){
-			if(chunk.search(/wx\.cgiData/)!=-1){
-				result = chunk;
+			if(chunk.search(/wx\.cgiData/)!=-1||chunk.search(/fakeid/)!=-1){
+				result += chunk;
 			}
 		});
 		res.on('end',function(){
