@@ -86,7 +86,6 @@ exports.getFirstMsg = function(option,fn){
 	}
 	var result = '';
 	var req = https.request(options,function(res){
-		console.log('loading...');
 		res.setEncoding('utf8');
 		res.on('data',function(chunk){
 			if(chunk.search(/wx\.cgiData/)){
@@ -95,7 +94,7 @@ exports.getFirstMsg = function(option,fn){
 		});
 		res.on('end',function(){
 			var msg = result.match(new RegExp("<script\stype=\"text\/javascript\">(.+)<\/script>","gi"));
-			fn(result);
+			fn(result.search(/wx\.cgiData/));
 		})
 	});
 	req.end();
