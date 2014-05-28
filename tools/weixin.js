@@ -94,7 +94,7 @@ exports.getFirstMsg = function(option,fn){
 		});
 		res.on('end',function(){
 			var msg = result.match(/wx\.cgiData[.\n]+\}\r\n/);
-			fn(msg);
+			fn(result);
 		})
 	});
 	req.end();
