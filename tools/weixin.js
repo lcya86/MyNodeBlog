@@ -1,4 +1,5 @@
 var crypto = require('crypto');
+var https = require('https');
 var TOKEN = 'lcya86';
 var request = require('superagent');
 exports.checkSignature = function(signature,timestamp,nonce){
@@ -76,16 +77,14 @@ exports.getFirstMsg = function(options,fn){
 		lang:'zh_CN'
 	}
 
-	request
-		.get('http://mp.weixin.qq.com/cgi-bin/message')
-		.accept('gzip')
-		.query(queryString)
-		.set('Cookie', options.cookie)
-		.end(function(err,res){
-			if(err){
-				console.log(err);
-			}
-			console.log('ok');
-			fn(JSON.parse(res.text));
+	var req = https
+		.get('http://mp.weixin.qq.com/cgi-bin/message?t=message/list&count=1&day=7&token='+options.token+'&lang=zh_CN',
+		function(res){
+			fn(res.text);
+			res.setEncoding('utf8');
+			res.on('data',function(chunk){
+				console.log('chunk:'+chunk);
+			});
 		});
+	req.end();
 }
