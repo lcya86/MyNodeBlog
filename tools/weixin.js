@@ -89,7 +89,9 @@ exports.getFirstMsg = function(option,fn){
 		console.log('loading...');
 		res.setEncoding('utf8');
 		res.on('data',function(chunk){
-			result += chunk;
+			if(chunk.search(/wx\.cgiData/)){
+				result = chunk;
+			}
 		});
 		res.on('end',function(){
 			var msg = result.match(new RegExp("<script\stype=\"text\/javascript\">(.+)<\/script>","gi"));
