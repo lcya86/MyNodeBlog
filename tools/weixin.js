@@ -80,12 +80,5 @@ exports.getFirstMsg = function(options,fn){
 		.get('http://mp.weixin.qq.com/cgi-bin/message?t=message/list&count=1&day=7&token='+options.token+'&lang=zh_CN')
 		.set('Cookie', options.cookie)
 		.buffer(false)
-		.pipe(stream)
-		.end(function(err,res){
-			if(err){
-				console.log(err);
-			}
-			console.log('ok');
-			fn(stream);
-		});
+		.pipe(stream);
 }
