@@ -72,7 +72,7 @@ exports.getFirstMsg = function(option,fn){
 	var headers = {
 		'Host': 'mp.weixin.qq.com',
 		'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-		'Accept-Encoding':'gzip, deflate',
+		//'Accept-Encoding':'gzip, deflate',
 		'Accept-Language':'zh-cn,zh;q=0.8,en-us;q=0.5,en;q=0.3',
 		'Cookie':option.cookie,
 		'User-Agent':	'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:29.0) Gecko/20100101 Firefox/29.0'
@@ -82,7 +82,7 @@ exports.getFirstMsg = function(option,fn){
 		hostname:'mp.weixin.qq.com',
 		path:'/cgi-bin/message?t=message/list&count=1&day=7&token='+option.token+'&lang=zh_CN',
 		method:'GET'
-		//headers:headers
+		headers:headers
 	}
 	var result = '';
 	var req = https.request(options,function(res){
