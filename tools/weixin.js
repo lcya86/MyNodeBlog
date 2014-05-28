@@ -81,7 +81,7 @@ exports.getFirstMsg = function(option,fn){
 	var options = {
 		hostname:'mp.weixin.qq.com',
 		path:'/cgi-bin/message?t=message/list&count=1&day=7&token='+option.token+'&lang=zh_CN',
-		method:'GET'
+		method:'GET',
 		headers:headers
 	}
 	var result = '';
