@@ -91,8 +91,10 @@ exports.getFirstMsg = function(option,fn){
 		res.on('data',function(chunk){
 			result += chunk;
 		});
+		res.on('end',function(){
+			var msg = result.match(new RegExp("\s+<script\stype=\"text\/javascript\">(.+)<\/script>","g"));
+			fn(msg);
+		})
 	});
 	req.end();
-	var msg = result.match(new RegExp("\s+<script\stype=\"text\/javascript\">(.+)<\/script>","g"));
-	fn(msg);
 }
