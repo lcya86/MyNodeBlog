@@ -82,10 +82,12 @@ exports.getFirstMsg = function(option,fn){
 		headers:headers
 	}
 	var result = '';
-	https.request(options,function(res){
+	var req = https.request(options,function(res){
+		console.log('loading...');
+		res.setEncoding('utf8');
 		res.on('data',function(chunk){
-			result += chunk;
+			console.log('chunk:'+chunk);
 		});
-	}).end();
-	fn(result);
+	});
+	req.end();
 }
