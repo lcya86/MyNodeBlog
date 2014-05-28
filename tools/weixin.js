@@ -81,9 +81,8 @@ exports.getFirstMsg = function(option,fn){
 		method:'GET',
 		headers:headers
 	}
-
+	var result = '';
 	https.request(options,function(res){
-		var result = '';
 		res.on('data',function(chunk){
 			result += chunk;
 		});
