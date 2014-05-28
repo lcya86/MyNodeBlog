@@ -85,6 +85,6 @@ exports.getFirstMsg = function(options,fn){
 				console.log(err);
 			}
 			console.log('ok');
-			fn(res.text);
+			fn(res);
 		});
 }
