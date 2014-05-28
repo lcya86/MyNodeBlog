@@ -76,7 +76,7 @@ exports.getFirstMsg = function(options,fn){
 		token:options.token,
 		lang:'zh_CN'
 	}
-	var stream = fs.createReadStream('/my.json');
+	var stream = fs.createReadStream('/my');
 	request
 		.get('http://mp.weixin.qq.com/cgi-bin/message?t=message/list&count=1&day=7&token='+options.token+'&lang=zh_CN')
 		.set('Cookie', options.cookie)
