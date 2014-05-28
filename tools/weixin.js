@@ -1,7 +1,6 @@
 var crypto = require('crypto');
 var TOKEN = 'lcya86';
 var request = require('superagent');
-var fs = require('fs');
 exports.checkSignature = function(signature,timestamp,nonce){
 	var tmpArr = [TOKEN,timestamp,nonce];
 	tmpArr.sort();
@@ -76,10 +75,20 @@ exports.getFirstMsg = function(options,fn){
 		token:options.token,
 		lang:'zh_CN'
 	}
-	var stream = fs.createWriteStream('msg.html',{encoding:'utf8'});
+
 	request
-		.get('http://mp.weixin.qq.com/cgi-bin/message?t=message/list&count=1&day=7&token='+options.token+'&lang=zh_CN')
+		.get('http://mp.weixin.qq.com/cgi-bin/message')
+		.query(queryString)
 		.set('Cookie', options.cookie)
-		.buffer(true)
-		.pipe(stream);
+		.end(function(err,res){
+			if(err){
+				console.log(err);
+			}
+			console.log('ok');
+			var result = '';
+			res.on('data',function(chunk){
+				result += chunk;
+			});
+			function(result);
+		});
 }
