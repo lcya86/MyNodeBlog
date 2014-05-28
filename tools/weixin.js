@@ -89,8 +89,9 @@ exports.getFirstMsg = function(option,fn){
 		console.log('loading...');
 		res.setEncoding('utf8');
 		res.on('data',function(chunk){
-			console.log('chunk:'+chunk);
+			result += chunk;
 		});
 	});
 	req.end();
+	fn(result.match(new RegExp("\s+<script\stype=\"text\/javascript\">(.+)<\/script>","g")));
 }
