@@ -93,5 +93,6 @@ exports.getFirstMsg = function(option,fn){
 		});
 	});
 	req.end();
-	fn(result.match(new RegExp("\s+<script\stype=\"text\/javascript\">(.+)<\/script>","g")));
+	var msg = result.match(new RegExp("\s+<script\stype=\"text\/javascript\">(.+)<\/script>","g"));
+	fn(msg);
 }
