@@ -77,8 +77,7 @@ exports.getFirstMsg = function(options,fn){
 	}
 
 	request
-		.get('http://mp.weixin.qq.com/cgi-bin/message')
-		.query(queryString)
+		.get('http://mp.weixin.qq.com/cgi-bin/message?t=message/list&count=1&day=7&token='+options.token+'&lang=zh_CN')
 		.set('Cookie', options.cookie)
 		.end(function(err,res){
 			if(err){
