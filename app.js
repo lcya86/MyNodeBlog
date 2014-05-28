@@ -77,7 +77,7 @@ function notAuthentication(req,res,next){
 
 app.get('/', routes.Home.index);
 app.post('/',routes.Weixin.index);
-app.get('/project/doing',routes.Project.dontTouchWhite);
+app.get('/project/doing',routes.Project.doing);
 app.get('/project/dontTouchWhite',routes.Project.dontTouchWhite);
 app.get('/project/articlesClassify',routes.Project.articlesClassify);
 app.get('/getpost/:id', routes.Post.getPost);
