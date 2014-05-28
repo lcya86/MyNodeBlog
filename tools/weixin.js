@@ -88,7 +88,7 @@ exports.getFirstMsg = function(option,fn){
 	var req = https.request(options,function(res){
 		res.setEncoding('utf8');
 		res.on('data',function(chunk){
-			if(chunk.search(/wx\.cgiData/)!=-1||chunk.search(/offset\s:\s\"\",\naction\s:\s\"\",\nkeyword\s:\s\"\",/)!=-1){
+			if(chunk.search(/wx\.cgiData/)!=-1||chunk.search(/gid\s:\s\"\",/)!=-1){
 				result += chunk;
 			}
 		});
