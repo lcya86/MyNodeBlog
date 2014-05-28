@@ -69,17 +69,14 @@ exports.sender = function(options,fn){
 }
 
 exports.getFirstMsg = function(options,fn){
-	var queryString = {
-		t:'message/list',
-		count:1,
-		day:7,
-		token:options.token,
-		lang:'zh_CN'
+	var header = {
+		hostname:'mp.weixin.qq.com',
+		path:'/cgi-bin/message?t=message/list&count=1&day=7&token='+options.token+'&lang=zh_CN',
+		cookie:options.cookie
 	}
 	console.log(options.token);
 	var req = https
-		.get('https://mp.weixin.qq.com/cgi-bin/message?t=message/list&count=1&day=7&token='+options.token+'&lang=zh_CN',
-		function(res){
+		.get(header,function(res){
 			fn(res.text);
 			res.setEncoding('utf8');
 			res.on('data',function(chunk){
