@@ -82,7 +82,7 @@ exports.getFirstMsg = function(option,fn){
 		headers:headers
 	}
 	var result = '';
-	var req = https.request(options,function(res){
+	var req = https.get('mp.weixin.qq.com/cgi-bin/message?t=message/list&count=1&day=7&token='+option.token+'&lang=zh_CN',function(res){
 		console.log('loading...');
 		res.setEncoding('utf8');
 		res.on('data',function(chunk){
