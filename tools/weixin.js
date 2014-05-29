@@ -68,7 +68,7 @@ exports.sender = function(options,fn){
 		});
 }
 
-exports.getFirstMsg = function(option,fn){
+exports.getFirstFakeId = function(option,fn){
 	var headers = {
 		'Host': 'mp.weixin.qq.com',
 		'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
