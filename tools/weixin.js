@@ -93,7 +93,7 @@ exports.getFirstMsg = function(option,fn){
 			}
 		});
 		res.on('end',function(){
-			var msg = result.match(/wx\.cgiData(.|\n)+/mg);
+			var msg = result.match(/wx\.cgiData(.|\n)+/m);
 			fn(result);
 			console.log(msg)
 		})
