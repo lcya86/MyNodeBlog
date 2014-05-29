@@ -1,5 +1,7 @@
 var weixin = require('../tools/weixin');
 var XMLWriter = require('xml-writer');
+var chatList = [];
+var waitList = {};
 exports.index = function(req, res) {
 	if (weixin.checkSignature(req.query.signature, req.query.timestamp, req.query.nonce)) {
 		console.log(req.body);
@@ -11,34 +13,73 @@ exports.index = function(req, res) {
 
 function route(req,res){
 	var xml = req.body.xml;
+	var inChatList = false;
+	var toFakeId;
 	if(xml.MsgType[0]=='event'){
 		if(xml.Event[0]=='subscribe'){
 			return replyText(req,res,'hi～我是刘春洋，“小玩意儿”是我平时瞎折腾的地方，我会不定时地做一些好玩儿的小玩意儿与大家分享，回复“捣鼓啥呢”可以看到我正在捣鼓神马。ps：<a href="http://lcy-blog.com">这是我的部落格，欢迎来访～</a>');
 		}
 	}else if(xml.MsgType[0]=='text'){
-		if(xml.Content[0]=='捣鼓啥呢'){
-			return replyText(req,res,'<a href="http://lcy-blog.com/project/doing">好玩儿的，点我就告诉你</a>');
-		}else if(xml.Content[0]=='我们聊天吧'){
+		for(var i = 0;i<chatList.length;i++){
+			if(chatList[i].hasOwnProperty(xml.FromUserName[0])){
+				inChatList = true;
+				for(prop in chatList[i]){
+					if(prop != xml.FromUserName[0]){
+						toFakeId = chatList[i][prop];
+					}
+				}
+				break;
+			}
+		}
+		if(inChatList){
 			weixin.login(function(token,cookie){
 				var options = {
+					cookie:cookie,
+					msg:xml.MsgType[0],
 					token:token,
-					cookie:cookie
+					fakeid:toFakeId
 				}
-
-				weixin.getFirstFakeId(options,function(fakeid){
-					var options = {
-						cookie:cookie,
-						msg:'ok',
-						token:token,
-						fakeid:fakeid
-					}
-					weixin.sender(options,function(text){
-						console.log(text);
-					});
+				weixin.sender(options,function(text){
+					console.log(text);
 				});
 			});
-			return res.send('');
+		}else{
+			if(xml.Content[0]=='捣鼓啥呢'){
+				return replyText(req,res,'<a href="http://lcy-blog.com/project/doing">好玩儿的，点我就告诉你</a>');
+			}else if(xml.Content[0]=='我们聊天吧'){
+				weixin.login(function(token,cookie){
+					var options = {
+						token:token,
+						cookie:cookie
+					}
+
+					weixin.getFirstFakeId(options,function(fakeid){
+						waitList[xml.FromUserName[0]] = fakeid;
+						var count = 0;
+						for(prop in waitList){
+							count++;
+						}
+						if(count===2){
+							chatList.push(waitList);
+						}
+
+
+
+						var options = {
+							cookie:cookie,
+							msg:'ok',
+							token:token,
+							fakeid:fakeid
+						}
+						weixin.sender(options,function(text){
+							console.log(text);
+						});
+					});
+				});
+				return res.send('');
+			}
 		}
+		
 	}
 	return res.send('');
 }
