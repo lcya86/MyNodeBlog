@@ -63,18 +63,28 @@ function route(req,res){
 							}
 							if(count===2){
 								chatList.push(waitList);
+								waitList = {};
+								var options = {
+									cookie:cookie,
+									msg:'打个招呼吧~',
+									token:token,
+									fakeid:fakeid
+								}
+								weixin.sender(options,function(text){
+									console.log(text);
+								});
 								console.log('chatList:'+JSON.stringify(chatList));
+							}else{
+								var options = {
+									cookie:cookie,
+									msg:'正在找人聊天...',
+									token:token,
+									fakeid:fakeid
+								}
+								weixin.sender(options,function(text){
+									console.log(text);
+								});
 							}
-
-							var options = {
-								cookie:cookie,
-								msg:'ok',
-								token:token,
-								fakeid:fakeid
-							}
-							weixin.sender(options,function(text){
-								console.log(text);
-							});
 						}
 					});
 				});
