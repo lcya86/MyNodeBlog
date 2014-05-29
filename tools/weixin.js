@@ -91,7 +91,7 @@ exports.getFirstMsg = function(option,fn){
 				result += chunk;
 		});
 		res.on('end',function(){
-			var msg = result.match(/wx.cgiData(.+\n){3}/);
+			var msg = result.match(/wx.cgiData(.+\n)+.+?}\n/);
 			fn(msg);
 		})
 	});
