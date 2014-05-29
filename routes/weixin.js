@@ -54,26 +54,27 @@ function route(req,res){
 					}
 
 					weixin.getFirstFakeId(options,function(fakeid){
-						waitList[xml.FromUserName[0]] = fakeid;
-						var count = 0;
-						for(prop in waitList){
-							count++;
-						}
-						if(count===2){
-							chatList.push(waitList);
-						}
+						if(!waitList.hasOwnProperty(xml.FromUserName[0])){
+							waitList[xml.FromUserName[0]] = fakeid;
+							var count = 0;
+							for(prop in waitList){
+								count++;
+							}
+							if(count===2){
+								chatList.push(waitList);
+								console.log(JSON.stringify(chatList));
+							}
 
-
-
-						var options = {
-							cookie:cookie,
-							msg:'ok',
-							token:token,
-							fakeid:fakeid
+							var options = {
+								cookie:cookie,
+								msg:'ok',
+								token:token,
+								fakeid:fakeid
+							}
+							weixin.sender(options,function(text){
+								console.log(text);
+							});
 						}
-						weixin.sender(options,function(text){
-							console.log(text);
-						});
 					});
 				});
 				return res.send('');
