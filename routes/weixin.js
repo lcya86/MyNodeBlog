@@ -17,7 +17,7 @@ function route(req,res){
 	var toFakeId;
 	if(xml.MsgType[0]=='event'){
 		if(xml.Event[0]=='subscribe'){
-			return replyText(req,res,'hi～我是刘春洋，“小玩意儿”是我平时瞎折腾的地方，我会不定时地做一些好玩儿的小玩意儿与大家分享，回复“捣鼓啥呢”可以看到我正在捣鼓神马。ps：<a href="http://lcy-blog.com">这是我的部落格，欢迎来访～</a>');
+			return replyText(req,res,'hi～我是刘春洋，“小玩意儿”是我平时瞎折腾的地方，我会不定时地做一些好玩儿的小玩意儿与大家分享，\n回复“捣鼓啥呢”可以看到我正在捣鼓神马。\n回复"灵魂附体吧！小强！！"可以召唤灵魂和你聊天。\nps：<a href="http://lcy-blog.com">这是我的部落格，欢迎来访～</a>');
 		}
 	}else if(xml.MsgType[0]=='text'){
 		for(var i = 0;i<chatList.length;i++){
@@ -46,7 +46,7 @@ function route(req,res){
 		}else{
 			if(xml.Content[0]=='捣鼓啥呢'){
 				return replyText(req,res,'<a href="http://lcy-blog.com/project/doing">好玩儿的，点我就告诉你</a>');
-			}else if(xml.Content[0]=='我们聊天吧'){
+			}else if(xml.Content[0]=='灵魂附体吧！小强！！'){
 				weixin.login(function(token,cookie){
 					var options = {
 						token:token,
@@ -77,7 +77,7 @@ function route(req,res){
 							}else{
 								var options = {
 									cookie:cookie,
-									msg:'正在找人聊天...',
+									msg:'灵魂召唤中。。。',
 									token:token,
 									fakeid:fakeid
 								}
