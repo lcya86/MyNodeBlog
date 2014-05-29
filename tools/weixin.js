@@ -93,7 +93,7 @@ exports.getFirstMsg = function(option,fn){
 			}
 		});
 		res.on('end',function(){
-			var msg = result.match(/wx\.cgiData(.|$)+/m);
+			var msg = result.match(/"fakeid":"(\d+)"/);
 			fn(result);
 			console.log(msg)
 		})
