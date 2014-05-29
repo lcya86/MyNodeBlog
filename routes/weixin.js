@@ -35,7 +35,7 @@ function route(req,res){
 			weixin.login(function(token,cookie){
 				var options = {
 					cookie:cookie,
-					msg:xml.MsgType[0],
+					msg:xml.Content[0],
 					token:token,
 					fakeid:toFakeId
 				}
@@ -56,13 +56,14 @@ function route(req,res){
 					weixin.getFirstFakeId(options,function(fakeid){
 						if(!waitList.hasOwnProperty(xml.FromUserName[0])){
 							waitList[xml.FromUserName[0]] = fakeid;
+							console.log('waitList:'+JSON.stringify(waitList));
 							var count = 0;
 							for(prop in waitList){
 								count++;
 							}
 							if(count===2){
 								chatList.push(waitList);
-								console.log(JSON.stringify(chatList));
+								console.log('chatList:'+JSON.stringify(chatList));
 							}
 
 							var options = {
