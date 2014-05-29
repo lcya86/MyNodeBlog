@@ -17,7 +17,7 @@ function route(req,res){
 	var toFakeId;
 	if(xml.MsgType[0]=='event'){
 		if(xml.Event[0]=='subscribe'){
-			return replyText(req,res,'hi～我是刘春洋，“小玩意儿”是我平时瞎折腾的地方，我会不定时地做一些好玩儿的小玩意儿与大家分享，\n回复“捣鼓啥呢”可以看到我正在捣鼓神马。\n回复"灵魂附体吧！小强！！"可以召唤灵魂和你聊天。\nps：<a href="http://lcy-blog.com">这是我的部落格，欢迎来访～</a>');
+			return replyText(req,res,'hi～我是刘春洋，“小玩意儿”是我平时瞎折腾的地方，我会不定时地做一些好玩儿的小玩意儿与大家分享\n回复“捣鼓啥呢”可以看到我正在捣鼓神马。\n回复"灵魂附体吧！小强！！"可以召唤灵魂和你聊天。\nps：<a href="http://lcy-blog.com">这是我的部落格，欢迎来访～</a>');
 		}
 	}else if(xml.MsgType[0]=='text'){
 		for(var i = 0;i<chatList.length;i++){
@@ -66,7 +66,7 @@ function route(req,res){
 								waitList = {};
 								var options = {
 									cookie:cookie,
-									msg:'打个招呼吧~',
+									msg:'hi~',
 									token:token,
 									fakeid:fakeid
 								}
