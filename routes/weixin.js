@@ -25,20 +25,17 @@ function route(req,res){
 					cookie:cookie
 				}
 
-				weixin.getFirstMsg(options,function(text){
-					console.log(text);
+				weixin.getFirstFakeId(options,function(fakeid){
+					var options = {
+						cookie:cookie,
+						msg:'ok',
+						token:token,
+						fakeid:fakeid
+					}
+					weixin.sender(options,function(text){
+						console.log(text);
+					});
 				});
-				/*
-				var options = {
-					cookie:cookie,
-					msg:'ok',
-					token:token,
-					fakeid:'539314135'
-				}
-				weixin.sender(options,function(text){
-					console.log(text);
-				});
-				*/
 			});
 			return res.send('');
 		}
