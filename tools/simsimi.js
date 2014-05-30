@@ -34,9 +34,11 @@ exports.getReply = function(msg,fn){
 		}).on('error',function(e){
 			console.log('error1:'+e.message);
 		}).setTimeout(3000,function(){
-			this.end();
+			this.destroy();
 		});
 	}).on('error',function(e){
 		console.log('error2:'+e.message);
+	}).setTimeout(3000,function(){
+		this.destroy();
 	});
 }
