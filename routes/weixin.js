@@ -15,6 +15,7 @@ exports.index = function(req, res) {
 function route(req,res){
 	var xml = req.body.xml;
 	var inChatList = false;
+	var inWaitList = false;
 	var toFakeId;
 	if(xml.MsgType[0]=='event'){
 		if(xml.Event[0]=='subscribe'){
@@ -66,7 +67,11 @@ function route(req,res){
 				});
 			});
 		}else{
-			if(xml.Content[0]=='捣鼓啥呢'){
+			if(waitList.hasOwnProperty(xml.FromUserName[0])){
+				simsimi.getReply(xml.Content[0],function(reply){
+					replyText(req,res,reply);
+				});
+			}else if(xml.Content[0]=='捣鼓啥呢'){
 				return replyText(req,res,'<a href="http://lcy-blog.com/project/doing">好玩儿的，点我就告诉你</a>');
 			}else if(xml.Content[0]=='灵魂附体吧！小强！！'){
 				weixin.login(function(token,cookie){
@@ -107,27 +112,15 @@ function route(req,res){
 									console.log(text);
 								});
 							}
-						}else{
-							simsimi.getReply(xml.Content[0],function(msg){
-								var options = {
-									cookie:cookie,
-									msg:msg,
-									token:token,
-									fakeid:fakeid
-								}
-								weixin.sender(options,function(text){
-									console.log(text);
-								});
-							});
 						}
 					});
 				});
 				return res.send('');
 			}
 		}
-		
+	}else{
+		return res.send('');
 	}
-	return res.send('');
 }
 
 function replyText(req,res,content){
