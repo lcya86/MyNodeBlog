@@ -1,4 +1,5 @@
 var weixin = require('../tools/weixin');
+var simsimi = require('../tools/simsimi');
 var XMLWriter = require('xml-writer');
 var chatList = [];
 var waitList = {};
@@ -36,7 +37,7 @@ function route(req,res){
 								console.log(text);
 							});
 						});
-					})();	
+					}());	
 				}
 			}
 			chatList = [];
@@ -98,7 +99,7 @@ function route(req,res){
 							}else{
 								var options = {
 									cookie:cookie,
-									msg:'灵魂召唤中。。。',
+									msg:'hi~',
 									token:token,
 									fakeid:fakeid
 								}
@@ -106,6 +107,18 @@ function route(req,res){
 									console.log(text);
 								});
 							}
+						}else{
+							simsimi.getReply(xml.Content[0],function(msg){
+								var options = {
+									cookie:cookie,
+									msg:msg,
+									token:token,
+									fakeid:fakeid
+								}
+								weixin.sender(options,function(text){
+									console.log(text);
+								});
+							});
 						}
 					});
 				});
