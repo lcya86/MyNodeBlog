@@ -5,7 +5,6 @@ exports.getReply = function(msg,fn){
 		for(rs in res.headers['set-cookie']){
 			cookie += res.headers['set-cookie'][rs].replace(/\sPath=\/;\sHttpOnly/,'');
 		}
-		console.log(cookie);
 		var headers = {
 			'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
 			'Accept-Language':'zh-CN,zh;q=0.8,en;q=0.6,ja;q=0.4,zh-TW;q=0.2',
@@ -29,6 +28,7 @@ exports.getReply = function(msg,fn){
 				console.log(e.message);
 			});
 			res.on('end',function(){
+				console.log(result);
 				fn(JSON.parse(result).sentence_resp);
 			});
 		}).on('error',function(e){
