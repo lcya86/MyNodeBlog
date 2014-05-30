@@ -24,17 +24,19 @@ function route(req,res){
 			for(var j = 0;j<chatList.length;j++){
 				for(prop in chatList[j]){
 					toFakeId = chatList[j][prop];
-					weixin.login(function(token,cookie){
-						var options = {
-							cookie:cookie,
-							msg:'灵魂已飘远，附体结束～',
-							token:token,
-							fakeid:toFakeId
-						}
-						weixin.sender(options,function(text){
-							console.log(text);
+					(function(toFakeId){
+						weixin.login(function(token,cookie){
+							var options = {
+								cookie:cookie,
+								msg:'灵魂已飘远，附体结束～',
+								token:token,
+								fakeid:toFakeId
+							}
+							weixin.sender(options,function(text){
+								console.log(text);
+							});
 						});
-					});
+					})();	
 				}
 			}
 			chatList = [];
