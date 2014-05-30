@@ -1,5 +1,5 @@
 var http = require('http');
-http.globalAgent = 20;
+http.globalAgent.maxSockets = 20;
 var cookie = '';
 (function getCookie(){
 	http.get('http://www.simsimi.com/talk.htm',function(res){
