@@ -39,7 +39,7 @@ function route(req,res){
 								console.log(text);
 							});
 						});
-					}());	
+					}(toFakeId));	
 				}
 			}
 			chatList = [];
