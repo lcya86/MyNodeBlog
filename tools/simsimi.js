@@ -1,5 +1,5 @@
 var http = require('http');
-http.globalAgent.maxSockets = 20;
+
 var cookie = '';
 (function getCookie(){
 	http.get('http://www.simsimi.com/talk.htm',function(res){
@@ -42,7 +42,7 @@ var cookie = '';
 		console.log('error2:'+e.message);
 	});
 }());
-var getReply = function(msg,fn){
+exports.getReply = function(msg,fn){
 	
 	var headers = {
 		'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
