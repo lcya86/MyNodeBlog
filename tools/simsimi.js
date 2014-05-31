@@ -51,8 +51,7 @@ exports.getReply = function(msg,fn){
 		.get('http://www.simsimi.com/func/reqN?req='+msg+'&lc=ch')
 		.set('Cookie',cookie)
 		.end(function(res){
-			console.log(res.text);
-			fn(JSON.parse(res.text));
+			fn(JSON.parse(res.text).sentence_resp);
 		});
 }
 
