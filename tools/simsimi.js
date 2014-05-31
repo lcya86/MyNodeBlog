@@ -50,7 +50,11 @@ exports.getReply = function(msg,fn){
 	superrequest
 		.get('http://www.simsimi.com/func/reqN?req='+msg+'&lc=ch')
 		.set('Cookie',cookie)
-		.end(function(res){
+		.end(function(err,res){
+			if(err){
+				return console.error(err);
+			}
+			console.log(res.text);
 			fn(JSON.parse(res.text).sentence_resp);
 		});
 }
