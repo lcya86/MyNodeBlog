@@ -5,6 +5,7 @@
 var express = require('express');
 var routes = require('./routes');
 var http = require('http');
+http.globalAgent.maxSockets = 50;
 var path = require('path');
 var ejs = require('ejs');
 var SessionStore = require("session-mongoose")(express);

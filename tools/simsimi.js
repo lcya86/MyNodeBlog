@@ -11,6 +11,7 @@ var cookie = '';
 			'Accept-Language':'zh-CN,zh;q=0.8,en;q=0.6,ja;q=0.4,zh-TW;q=0.2',
 			'Cookie':cookie,
 			'Host':'www.simsimi.com',
+			'Connection':'keep-alive',
 			'User-Agent':	'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:29.0) Gecko/20100101 Firefox/29.0'
 		}
 		var options = {
@@ -41,13 +42,14 @@ var cookie = '';
 		console.log('error2:'+e.message);
 	});
 }());
-exports.getReply = function(msg,fn){
+var getReply = function(msg,fn){
 	
 	var headers = {
 		'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
 		'Accept-Language':'zh-CN,zh;q=0.8,en;q=0.6,ja;q=0.4,zh-TW;q=0.2',
 		'Cookie':cookie,
 		'Host':'www.simsimi.com',
+		'Connection':'keep-alive',
 		'Referer': 'http://www.simsimi.com/talk.htm',
 		'User-Agent':	'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:29.0) Gecko/20100101 Firefox/29.0'
 	}
