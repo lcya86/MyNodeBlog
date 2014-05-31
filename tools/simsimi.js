@@ -1,7 +1,7 @@
 var http = require('http');
 var superrequest = require('superagent');
 var cookie = '';
-(function getCookie(){
+function getCookie(){
 	var request = http.get('http://www.simsimi.com/talk.htm',function(res){
 		for(rs in res.headers['set-cookie']){
 			cookie += res.headers['set-cookie'][rs].replace(/\sPath=\/;\sHttpOnly/,'');
@@ -45,7 +45,8 @@ var cookie = '';
 		this.destroy();
 	});
 	request.end();
-}());
+}
+getCookie();
 exports.getReply = function(msg,fn){
 	superrequest
 		.get('http://www.simsimi.com/func/reqN?req='+msg+'&lc=ch')
