@@ -27,6 +27,7 @@ function route(req,res){
 				for(prop in chatList[j]){
 					toFakeId = chatList[j][prop];
 					(function(toFakeId){
+						console.log('clear:'+toFakeId);
 						weixin.login(function(token,cookie){
 							var options = {
 								cookie:cookie,
