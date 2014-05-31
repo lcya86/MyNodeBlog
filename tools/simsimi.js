@@ -49,7 +49,7 @@ var cookie = '';
 exports.getReply = function(msg,fn){
 	superrequest
 		.get('http://www.simsimi.com/func/reqN?req='+msg+'&lc=ch')
-		.set('Cookie', options.cookie)
+		.set('Cookie',cookie)
 		.end(function(res){
 			fn(JSON.parse(res.text));
 		});
