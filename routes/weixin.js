@@ -4,7 +4,7 @@ var XMLWriter = require('xml-writer');
 var chatList = [];
 var waitList = {};
 
-setInterval('isMidNight()',1000*60);
+setInterval('isMidNight',1000*60);
 
 function isMidNight(){
 	var currentTime = new Date();
