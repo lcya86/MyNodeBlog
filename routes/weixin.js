@@ -11,7 +11,6 @@ function isMidNight(){
 	if(currentTime.getHours() == 0){
 		clearSouls();
 	}
-	console.log(currentTime);
 }
 
 exports.index = function(req, res) {
@@ -35,6 +34,9 @@ function route(req,res){
 	}else if(xml.MsgType[0]=='text'){
 		if(xml.Content[0]=='清空灵魂'){
 			clearSouls();
+		}
+		if(xml.Content[0]=='转身离开'){
+			leave();
 		}
 		for(var i = 0;i<chatList.length;i++){
 			if(chatList[i].hasOwnProperty(xml.FromUserName[0])){
@@ -67,7 +69,7 @@ function route(req,res){
 				});
 			}else if(xml.Content[0]=='捣鼓啥呢'){
 				return replyText(req,res,'<a href="http://lcy-blog.com/project/doing">好玩儿的，点我就告诉你</a>');
-			}else if(xml.Content[0]=='灵魂附体吧！小强！！'){
+			}else if(xml.Content[0].search(/灵魂附体/)!=-1){
 				weixin.login(function(token,cookie){
 					var options = {
 						token:token,
@@ -195,5 +197,33 @@ function clearSouls(){
 		}
 	}
 	chatList = [];
+	return res.send('');
+}
+
+function leave(){
+	var toFakeId;
+	for(var j = 0;j<chatList.length;j++){
+		if(chatList[j].hasOwnProperty(xml.FromUserName[0])){
+			for(prop in chatList[j]){
+				if(prop != xml.FromUserName[0]){
+					toFakeId = chatList[i][prop];
+				}
+			}
+			weixin.login(function(token,cookie){
+				var options = {
+					cookie:cookie,
+					msg:'灵魂已飘远，附体结束～',
+					token:token,
+					fakeid:toFakeId
+				}
+				weixin.sender(options,function(text){
+					console.log(text);
+				});
+			});
+			chatList.splice(j,1);
+			return res.send('');
+		}
+	}
+	waitList = {};
 	return res.send('');
 }
