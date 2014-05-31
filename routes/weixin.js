@@ -3,6 +3,16 @@ var simsimi = require('../tools/simsimi');
 var XMLWriter = require('xml-writer');
 var chatList = [];
 var waitList = {};
+
+setInterval('isMidNight();',1000*60);
+
+function isMidNight(){
+	var currentTime = new Date();
+	if(currentTime.getHours() == 0){
+		clearSouls();
+	}
+}
+
 exports.index = function(req, res) {
 	if (weixin.checkSignature(req.query.signature, req.query.timestamp, req.query.nonce)) {
 		console.log(req.body);
@@ -23,27 +33,7 @@ function route(req,res){
 		}
 	}else if(xml.MsgType[0]=='text'){
 		if(xml.Content[0]=='清空灵魂'){
-			for(var j = 0;j<chatList.length;j++){
-				for(prop in chatList[j]){
-					toFakeId = chatList[j][prop];
-					(function(toFakeId){
-						console.log('clear:'+toFakeId);
-						weixin.login(function(token,cookie){
-							var options = {
-								cookie:cookie,
-								msg:'灵魂已飘远，附体结束～',
-								token:token,
-								fakeid:toFakeId
-							}
-							weixin.sender(options,function(text){
-								console.log(text);
-							});
-						});
-					}(toFakeId));	
-				}
-			}
-			chatList = [];
-			return res.send('');
+			clearSouls();
 		}
 		for(var i = 0;i<chatList.length;i++){
 			if(chatList[i].hasOwnProperty(xml.FromUserName[0])){
@@ -181,3 +171,28 @@ function replyNews(req,res,articles){
 }
 
 function letsChat(){}
+
+function clearSouls(){
+	var toFakeId;
+	for(var j = 0;j<chatList.length;j++){
+		for(prop in chatList[j]){
+			toFakeId = chatList[j][prop];
+			(function(toFakeId){
+				console.log('clear:'+toFakeId);
+				weixin.login(function(token,cookie){
+					var options = {
+						cookie:cookie,
+						msg:'灵魂已飘远，附体结束～',
+						token:token,
+						fakeid:toFakeId
+					}
+					weixin.sender(options,function(text){
+						console.log(text);
+					});
+				});
+			}(toFakeId));	
+		}
+	}
+	chatList = [];
+	return res.send('');
+}
