@@ -2,7 +2,7 @@ var http = require('http');
 
 var cookie = '';
 (function getCookie(){
-	http.get('http://www.simsimi.com/talk.htm',function(res){
+	var request = http.get('http://www.simsimi.com/talk.htm',function(res){
 		for(rs in res.headers['set-cookie']){
 			cookie += res.headers['set-cookie'][rs].replace(/\sPath=\/;\sHttpOnly/,'');
 		}
@@ -20,7 +20,7 @@ var cookie = '';
 			method:'GET',
 			headers:headers
 		}
-		http.request(options,function(res){
+		var req = http.request(options,function(res){
 			var result = '';
 			res.setEncoding('utf8');
 			res.on('data',function(chunk){
@@ -37,12 +37,14 @@ var cookie = '';
 		}).on('error',function(e){
 			console.error('error1:'+e.message);
 			this.destroy();
-		}).end();
+		});
+		req.end();
 		console.log(cookie);
 	}).on('error',function(e){
 		console.error('error2:'+e.message);
 		this.destroy();
 	});
+	request.end();
 }());
 exports.getReply = function(msg,fn){
 	
