@@ -52,6 +52,7 @@ exports.getReply = function(msg,fn){
 		.set('Cookie',cookie)
 		.end(function(err,res){
 			if(err){
+				getCookie();
 				return console.error(err);
 			}
 			console.log(res.text);

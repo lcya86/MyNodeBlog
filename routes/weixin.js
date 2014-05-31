@@ -42,6 +42,7 @@ function route(req,res){
 				}
 			}
 			chatList = [];
+			return res.send('');
 		}
 		for(var i = 0;i<chatList.length;i++){
 			if(chatList[i].hasOwnProperty(xml.FromUserName[0])){
@@ -66,6 +67,7 @@ function route(req,res){
 					console.log(text);
 				});
 			});
+			return res.send('');
 		}else{
 			if(waitList.hasOwnProperty(xml.FromUserName[0])){
 				simsimi.getReply(xml.Content[0],function(reply){
