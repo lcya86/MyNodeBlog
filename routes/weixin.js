@@ -11,6 +11,7 @@ function isMidNight(){
 	if(currentTime.getHours() == 0){
 		clearSouls();
 	}
+	console.log(currentTime);
 }
 
 exports.index = function(req, res) {
