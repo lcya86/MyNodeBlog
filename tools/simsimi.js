@@ -35,11 +35,13 @@ var cookie = '';
 				console.log(cookie);
 			});
 		}).on('error',function(e){
-			console.log('error1:'+e.message);
+			console.error('error1:'+e.message);
+			this.destroy();
 		}).end();
 		console.log(cookie);
 	}).on('error',function(e){
-		console.log('error2:'+e.message);
+		console.error('error2:'+e.message);
+		this.destroy();
 	});
 }());
 exports.getReply = function(msg,fn){
@@ -72,8 +74,7 @@ exports.getReply = function(msg,fn){
 			fn(JSON.parse(result).sentence_resp);
 		});
 	}).on('error',function(e){
-		console.log('error3:'+e.message);
-	}).setTimeout(2000,function(){
+		console.error('error3:'+e.message);
 		this.destroy();
 	});
 	
