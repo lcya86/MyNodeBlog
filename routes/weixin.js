@@ -118,9 +118,8 @@ function route(req,res){
 				return res.send('');
 			}
 		}
-	}else{
-		return res.send('');
 	}
+	return res.send('');
 }
 
 function replyText(req,res,content){
