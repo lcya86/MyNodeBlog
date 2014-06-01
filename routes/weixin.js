@@ -174,8 +174,6 @@ function replyNews(req,res,articles){
 	return res.send('<xml>'+reply.toString()+'</xml>');
 }
 
-function letsChat(){}
-
 function clearSouls(){
 	var toFakeId;
 	for(var j = 0;j<chatList.length;j++){
