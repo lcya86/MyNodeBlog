@@ -33,10 +33,10 @@ function route(req,res){
 		}
 	}else if(xml.MsgType[0]=='text'){
 		if(xml.Content[0]=='清空灵魂'){
-			clearSouls(res);
+			clearSouls(res,xml);
 		}
 		if(xml.Content[0]=='转身离开'){
-			leave(res);
+			leave(res.xml);
 		}
 		for(var i = 0;i<chatList.length;i++){
 			if(chatList[i].hasOwnProperty(xml.FromUserName[0])){
@@ -175,7 +175,7 @@ function replyNews(req,res,articles){
 
 function letsChat(){}
 
-function clearSouls(res){
+function clearSouls(res,xml){
 	var toFakeId;
 	for(var j = 0;j<chatList.length;j++){
 		for(prop in chatList[j]){
@@ -200,7 +200,7 @@ function clearSouls(res){
 	return res.send('');
 }
 
-function leave(res){
+function leave(res,xml){
 	var toFakeId;
 	for(var j = 0;j<chatList.length;j++){
 		if(chatList[j].hasOwnProperty(xml.FromUserName[0])){
