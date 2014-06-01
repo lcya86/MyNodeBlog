@@ -37,7 +37,7 @@ function route(req,res){
 			return res.send('');
 		}
 		if(xml.Content[0]=='转身离开'){
-			leave(res.xml);
+			leave(res,xml);
 		}
 		for(var i = 0;i<chatList.length;i++){
 			if(chatList[i].hasOwnProperty(xml.FromUserName[0])){
