@@ -32,16 +32,15 @@ function getCookie(){
 			res.on('end',function(){
 				cookie += 'simsimi_uid='+JSON.parse(result).uid+';';
 				console.log(cookie);
-				return;
 			});
 		}).on('error',function(e){
 			console.error('error1:'+e.message);
-			return this.destroy();
+			this.destroy();
 		});
 		req.end();
 	}).on('error',function(e){
 		console.error('error2:'+e.message);
-		return this.destroy();
+		this.destroy();
 	});
 	request.end();
 }
