@@ -2,6 +2,7 @@ var http = require('http');
 var superrequest = require('superagent');
 var cookie = '';
 function getCookie(){
+	cookie = '';
 	var request = http.get('http://www.simsimi.com/talk.htm',function(res){
 		for(rs in res.headers['set-cookie']){
 			cookie += res.headers['set-cookie'][rs].replace(/\sPath=\/;\sHttpOnly/,'');
@@ -12,7 +13,6 @@ function getCookie(){
 			'Cookie':cookie,
 			'Host':'www.simsimi.com',
 			'Connection':'keep-alive'
-			//'User-Agent':	'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:29.0) Gecko/20100101 Firefox/29.0'
 		}
 		var options = {
 			hostname:'www.simsimi.com',
@@ -30,7 +30,6 @@ function getCookie(){
 				console.log(e.message);
 			});
 			res.on('end',function(){
-				console.log(result);
 				cookie += 'simsimi_uid='+JSON.parse(result).uid+';';
 				console.log(cookie);
 			});
