@@ -33,7 +33,10 @@ exports.login = function(fn){
 			f : 'json',
 			register : 0
 		})
-		.end(function(res){
+		.end(function(err,res){
+			if(err){
+				return console.error(err);
+			}
 			var cookie = '';
 			var token = res.text.match(new RegExp("[\?\&]token=([^\&]+)\"","i"))[1];
 			for(rs in res.header['set-cookie']){
@@ -63,7 +66,10 @@ exports.sender = function(options,fn){
 		.type('form')
 		.send(postParams)
 		.set('Cookie', options.cookie)
-		.end(function(res){
+		.end(function(err,res){
+			if(err){
+				return console.error(err);
+			}
 			fn(JSON.parse(res.text));
 		});
 }
@@ -96,6 +102,9 @@ exports.getFirstFakeId = function(option,fn){
 			var fakeid = result.match(/"fakeid":"(\d+)"/)[1];
 			fn(fakeid);
 		})
+	}).on('error',function(e){
+		console.error('weixin_error:'+e.message);
+		this.destroy();
 	});
 	req.end();
 }
