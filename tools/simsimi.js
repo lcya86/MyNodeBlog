@@ -38,7 +38,6 @@ function getCookie(){
 			this.destroy();
 		});
 		req.end();
-		console.log(cookie);
 	}).on('error',function(e){
 		console.error('error2:'+e.message);
 		this.destroy();
