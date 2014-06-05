@@ -55,7 +55,11 @@ exports.getReply = function(msg,fn){
 				return console.error(err);
 			}
 			console.log(res.text);
-			fn(JSON.parse(res.text).sentence_resp);
+			if(JSON.parse(res.text).sentence_resp){
+				fn(JSON.parse(res.text).sentence_resp);
+			}else{
+				fn('~~~');
+			}
 		});
 }
 
