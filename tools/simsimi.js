@@ -59,6 +59,7 @@ exports.getReply = function(msg,fn){
 				fn(JSON.parse(res.text).sentence_resp);
 			}else{
 				fn('~~~');
+				getCookie();
 			}
 		});
 }
