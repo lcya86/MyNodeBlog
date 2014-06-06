@@ -204,7 +204,7 @@ function leave(res,xml){
 		if(chatList[j].hasOwnProperty(xml.FromUserName[0])){
 			for(prop in chatList[j]){
 				if(prop != xml.FromUserName[0]){
-					toFakeId = chatList[i][prop];
+					toFakeId = chatList[j][prop];
 				}
 			}
 			weixin.login(function(token,cookie){
