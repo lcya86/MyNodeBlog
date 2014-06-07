@@ -58,7 +58,7 @@ exports.getReply = function(msg,fn){
 			if(JSON.parse(res.text).sentence_resp){
 				fn(JSON.parse(res.text).sentence_resp);
 			}else{
-				fn('~~~');
+				fn('咕~~(╯﹏╰)b小黄鸡被玩坏了额');
 				getCookie();
 			}
 		});
