@@ -65,9 +65,20 @@ function route(req,res){
 			return res.send('');
 		}else{
 			if(waitList.hasOwnProperty(xml.FromUserName[0])){
-				simsimi.getReply(xml.Content[0],function(reply){
-					replyText(req,res,reply);
+				weixin.login(function(token,cookie){
+					simsimi.getReply(xml.Content[0],function(reply){
+						var options = {
+							cookie:cookie,
+							msg:reply,
+							token:token,
+							fakeid:toFakeId
+						}
+						weixin.sender(options,function(text){
+							console.log(text);
+						});
+					});
 				});
+				return res.send('');
 			}else if(xml.Content[0]=='捣鼓啥呢'){
 				return replyText(req,res,'<a href="http://lcy-blog.com/project/doing">好玩儿的，点我就告诉你</a>');
 			}else if(xml.Content[0].search(/灵魂附体/)!=-1){
