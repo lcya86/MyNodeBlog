@@ -71,7 +71,7 @@ function route(req,res){
 							cookie:cookie,
 							msg:reply,
 							token:token,
-							fakeid:toFakeId
+							fakeid:waitList[xml.FromUserName[0]]
 						}
 						weixin.sender(options,function(text){
 							console.log(text);
