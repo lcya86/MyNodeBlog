@@ -133,7 +133,9 @@ function replyText(req,res,content){
 	reply.startElement('MsgType');
 	reply.writeCData('text');
 	reply.endElement();
-	reply.startElement('Content').text(content).endElement();
+	reply.startElement('Content');
+	reply.writeCData(content);
+	reply.endElement();
 	console.log('<xml>'+reply.toString()+'</xml>');
 	return res.send('<xml>'+reply.toString()+'</xml>');
 }
