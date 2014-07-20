@@ -7,6 +7,7 @@
   <style media="screen">
     body{
       margin:0px;
+      height: 100%;
       line-height:2;
       font-family: "Microsoft YaHei";
       color:black;
@@ -16,7 +17,7 @@
     }
     .left_navs{
       width: 11%;
-      height: 1000px;
+      height: 100%;
       float: left;
       box-shadow: 10px 0px 5px #333 inset, -10px 0px 5px #333 inset;
       background-color: #373737;
@@ -37,9 +38,11 @@
     }
     .main{
       width: 89%;
-      height: 1000px;
+      height: 100%;
       float: right;
       background-color: #FAF8E4;
+    }
+    .main_hd{
     }
     .main_hd h2{
       padding: 0 30px;
@@ -67,6 +70,13 @@
     .tab_nav.selected{
       border-bottom: solid 3px #F19F45;
     }
+    .main_bd{
+      padding: 30px;
+    }
+    .img_fd{
+      border: dashed 1px #F19F45;
+      height: 75%;
+    }
   </style>
 </head>
 <body>
@@ -83,6 +93,9 @@
           <div class="tab_nav selected">image</div>
           <div class="tab_nav">text</div>
         </div>
+      </div>
+      <div class="main_bd">
+        <div class="img_fd"></div>
       </div>
     </div>
   </div>
