@@ -136,14 +136,16 @@
         function create_upload_done(index){
           return function(event){
             console.log('pic'+index+' done!')
-            $this.find('#input_image'+index).hide();
+            $this.find('#input_image'+index).css({
+              width:'100%'
+            });
           }
         }
         $this = $(this);
         $this.removeClass('selected');
         var children_length = $this.children().length;
         var fileList = event.originalEvent.dataTransfer.files;
-        for(var i = children_length;i<(fileList.length+children_length);i++){
+        for(var i = 0;i<fileList.length;i++){
           var src = '';
           if(window.webkitURL){
             src = window.webkitURL.createObjectURL(fileList[i]);
@@ -151,11 +153,11 @@
             src = window.URL.createObjectURL(fileList[i]);
           }
           console.log(src);
-          $this.append('<div style="background-color:#eee;display:inline-block;padding:5px;margin:10px;text-align:center;"><img style="width:80px;" src="'+src+'"/><p style="display:relative;bottom:0px;margin:0px;">'+fileList[i].name+'</p><div id="input_image'+i+'" style="background-color:#F19F45;height:1px;width:0%;"></div></div>');
+          $this.append('<div style="background-color:#eee;display:inline-block;padding:5px;margin:10px;text-align:center;"><img style="width:80px;" src="'+src+'"/><p style="display:relative;bottom:0px;margin:0px;">'+fileList[i].name+'</p><div id="input_image'+(i+children_length)+'" style="background-color:#F19F45;height:1px;width:0%;"></div></div>');
           var xhr = new XMLHttpRequest();
           var upload = xhr.upload;
-          upload.onprogress = create_upload_progress(i);
-          upload.onload = create_upload_done(i);
+          upload.onprogress = create_upload_progress(i+children_length);
+          upload.onload = create_upload_done(i+children_length);
           xhr.open("POST","./upload_process.jsp?fileName=" + fileList[i].name); 
           xhr.overrideMimeType("application/octet-stream");
           xhr.send(fileList[i]);
