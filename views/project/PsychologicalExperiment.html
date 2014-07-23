@@ -140,8 +140,10 @@
           }
         }
         $this = $(this);
+        $this.removeClass('selected');
+        var children_length = $this.children().length;
         var fileList = event.originalEvent.dataTransfer.files;
-        for(var i = 0;i<fileList.length;i++){
+        for(var i = children_length;i<(fileList.length+children_length);i++){
           var src = '';
           if(window.webkitURL){
             src = window.webkitURL.createObjectURL(fileList[i]);
