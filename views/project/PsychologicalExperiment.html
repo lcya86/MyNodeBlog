@@ -161,11 +161,15 @@
       })
       .on('dragenter',function(event){
         event.preventDefault();
-        $(this).toggleClass('selected');
+        $(this).addClass('selected');
+      })
+      .on('dragover',function(event){
+        event.preventDefault();
+        $(this).addClass('selected');
       })
       .on('dragleave',function(event){
         event.preventDefault();
-        $(this).toggleClass('selected');
+        $(this).removeClass('selected');
       });
   });
   
