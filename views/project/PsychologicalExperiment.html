@@ -75,7 +75,10 @@
     }
     .img_fd{
       border: dashed 1px #F19F45;
-      height: 75%;
+      height: 70%;
+    }
+    .img_fd.selected{
+      border: dashed 3px #F19F45;
     }
   </style>
 </head>
@@ -95,6 +98,7 @@
         </div>
       </div>
       <div class="main_bd">
+        drop images to here
         <div class="img_fd"></div>
       </div>
     </div>
@@ -118,42 +122,51 @@
     })
 
 
-    $('div.img_fd').on('drop',function(event){
-      event.preventDefault();
-      function create_upload_progress(index){
-        return function(event){
-          $this.find('#input_image'+index).css({
-            width:Math.round(event.loaded*100/event.total)+'%'
-          });
+    $('div.img_fd')
+      .on('drop',function(event){
+        event.preventDefault();
+        function create_upload_progress(index){
+          return function(event){
+            $this.find('#input_image'+index).css({
+              width:Math.round(event.loaded*100/event.total)+'%'
+            });
+          }
         }
-      }
 
-      function create_upload_done(index){
-        return function(event){
-          console.log('pic'+index+' done!')
-          $this.find('#input_image'+index).hide();
+        function create_upload_done(index){
+          return function(event){
+            console.log('pic'+index+' done!')
+            $this.find('#input_image'+index).hide();
+          }
         }
-      }
-      $this = $(this);
-      var fileList = event.originalEvent.dataTransfer.files;
-      for(var i = 0;i<fileList.length;i++){
-        var src = '';
-        if(window.webkitURL){
-          src = window.webkitURL.createObjectURL(fileList[i]);
-        }else{
-          src = window.URL.createObjectURL(fileList[i]);
+        $this = $(this);
+        var fileList = event.originalEvent.dataTransfer.files;
+        for(var i = 0;i<fileList.length;i++){
+          var src = '';
+          if(window.webkitURL){
+            src = window.webkitURL.createObjectURL(fileList[i]);
+          }else{
+            src = window.URL.createObjectURL(fileList[i]);
+          }
+          console.log(src);
+          $this.append('<div style="background-color:#eee;display:inline-block;padding:5px;margin:10px;text-align:center;"><img style="width:80px;" src="'+src+'"/><p style="display:relative;bottom:0px;margin:0px;">'+fileList[i].name+'</p><div id="input_image'+i+'" style="background-color:#F19F45;height:1px;width:0%;"></div></div>');
+          var xhr = new XMLHttpRequest();
+          var upload = xhr.upload;
+          upload.onprogress = create_upload_progress(i);
+          upload.onload = create_upload_done(i);
+          xhr.open("POST","./upload_process.jsp?fileName=" + fileList[i].name); 
+          xhr.overrideMimeType("application/octet-stream");
+          xhr.send(fileList[i]);
         }
-        console.log(src);
-        $this.append('<div style="background-color:#eee;display:inline-block;padding:5px;margin:10px;text-align:center;"><img style="width:80px;" src="'+src+'"/><p style="display:relative;bottom:0px;margin:0px;">'+fileList[i].name+'</p><div id="input_image'+i+'" style="background-color:#F19F45;height:1px;width:0%;"></div></div>');
-        var xhr = new XMLHttpRequest();
-        var upload = xhr.upload;
-        upload.onprogress = create_upload_progress(i);
-        upload.onload = create_upload_done(i);
-        xhr.open("POST","./upload_process.jsp?fileName=" + fileList[i].name); 
-        xhr.overrideMimeType("application/octet-stream");
-        xhr.send(fileList[i]);
-      }
-    });
+      })
+      .on('dragenter',function(event){
+        event.preventDefault();
+        $(this).toggleClass('selected');
+      })
+      .on('dragleave',function(event){
+        event.preventDefault();
+        $(this).toggleClass('selected');
+      });
   });
   
   </script>
