@@ -99,43 +99,63 @@
       </div>
     </div>
   </div>
+  <script type="text/javascript" src="/public/javascripts/jquery-1.11.0.min.js"></script>
   <script type="text/javascript">
-  $('div.img_fd').on('drop',function(event){
-    event.preventDefault();
-    function create_upload_progress(index){
-      return function(event){
-        $this.find('#input_image'+index).css({
-          width:Math.round(event.loaded*100/event.total)+'%'
-        });
-      }
-    }
+  $(function(){
+    $(document).on({
+      dragleave:function(e){
+        e.preventDefault();
+      },
+      drop:function(e){
+        e.preventDefault();
+      },
+      dragenter:function(e){
+        e.preventDefault();
+      },
+      dragover:function(e){
+        e.preventDefault();
+      },
+    })
 
-    function create_upload_done(index){
-      return function(event){
-        console.log('pic'+index+' done!')
-        $this.find('#input_image'+index).hide();
+
+    $('div.img_fd').on('drop',function(event){
+      event.preventDefault();
+      function create_upload_progress(index){
+        return function(event){
+          $this.find('#input_image'+index).css({
+            width:Math.round(event.loaded*100/event.total)+'%'
+          });
+        }
       }
-    }
-    $this = $(this);
-    var fileList = event.originalEvent.dataTransfer.files;
-    for(var i = 0;i<fileList.length;i++){
-      var src = '';
-      if(window.webkitURL){
-        src = window.webkitURL.createObjectURL(fileList[i]);
-      }else{
-        src = window.URL.createObjectURL(fileList[i]);
+
+      function create_upload_done(index){
+        return function(event){
+          console.log('pic'+index+' done!')
+          $this.find('#input_image'+index).hide();
+        }
       }
-      console.log(src);
-      $this.append('<div style="background-color:#eee;display:inline-block;padding:5px;margin:10px;text-align:center;"><img style="width:80px;" src="'+src+'"/><p style="display:relative;bottom:0px;">'+fileList[i].name+'</p><div id="input_image'+i+'" style="background-color:#F19F45;height:1px;width:0%;"></div></div>');
-      var xhr = new XMLHttpRequest();
-      var upload = xhr.upload;
-      upload.onprogress = create_upload_progress(i);
-      upload.onload = create_upload_done(i);
-      xhr.open("POST","./upload_process.jsp?fileName=" + fileList[i].name); 
-      xhr.overrideMimeType("application/octet-stream");
-      xhr.send(fileList[i]);
-    }
+      $this = $(this);
+      var fileList = event.originalEvent.dataTransfer.files;
+      for(var i = 0;i<fileList.length;i++){
+        var src = '';
+        if(window.webkitURL){
+          src = window.webkitURL.createObjectURL(fileList[i]);
+        }else{
+          src = window.URL.createObjectURL(fileList[i]);
+        }
+        console.log(src);
+        $this.append('<div style="background-color:#eee;display:inline-block;padding:5px;margin:10px;text-align:center;"><img style="width:80px;" src="'+src+'"/><p style="display:relative;bottom:0px;">'+fileList[i].name+'</p><div id="input_image'+i+'" style="background-color:#F19F45;height:1px;width:0%;"></div></div>');
+        var xhr = new XMLHttpRequest();
+        var upload = xhr.upload;
+        upload.onprogress = create_upload_progress(i);
+        upload.onload = create_upload_done(i);
+        xhr.open("POST","./upload_process.jsp?fileName=" + fileList[i].name); 
+        xhr.overrideMimeType("application/octet-stream");
+        xhr.send(fileList[i]);
+      }
+    });
   });
+  
   </script>
 </body>
 </html>
