@@ -95,6 +95,8 @@ exports.press = function(code, times) {
 		var dataList = extremum.map(function(item, index, array) {
 			return item[0];
 		});
+		console.log(dataList);
+		console.log(labelList);
 		return {
 			labels: labelList,
 			data:dataList
