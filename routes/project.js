@@ -16,5 +16,7 @@ exports.PsychologicalExperiment = function(req, res) {
 
 exports.stock = function(req, res) {
 	var press = require('./superPress').press;
-	return res.render('project/stock',press(req.query.code,req.query.times));
+	var result = press(req.query.code,req.query.times);
+	console.log(result);
+	return res.render('project/stock');
 }
