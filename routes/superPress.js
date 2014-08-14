@@ -90,7 +90,7 @@ exports.press = function(code, times,fn) {
 
 		connection.end();
 		var labelList = extremum.map(function(item, index, array) {
-			return item[1].getDate()+' '+item[1].toTimeString().substring(0,8);
+			return '\''+item[1].getDate()+' '+item[1].toTimeString().substring(0,8)+'\'';
 		});
 		var dataList = extremum.map(function(item, index, array) {
 			return item[0];
