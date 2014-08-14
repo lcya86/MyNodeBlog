@@ -8,6 +8,8 @@
 	<body>
 		<div style="width:30%">
 			<div>
+				<%=labels%>
+				<%=data%>
 				<canvas id="canvas" height="450" width="600"></canvas>
 			</div>
 		</div>
@@ -15,7 +17,7 @@
 
 	<script>
 		var lineChartData = {
-			labels : <%=labels%>,
+			labels : ,
 			datasets : [
 				{
 					label: "My First dataset",
@@ -25,7 +27,7 @@
 					pointStrokeColor : "#fff",
 					pointHighlightFill : "#fff",
 					pointHighlightStroke : "rgba(220,220,220,1)",
-					data : <%=data%>
+					data : 
 				}
 			]
 
