@@ -82,6 +82,7 @@ app.get('/project/doing', routes.Project.doing);
 app.get('/project/dontTouchWhite', routes.Project.dontTouchWhite);
 app.get('/project/articlesClassify', routes.Project.articlesClassify);
 app.get('/project/PsychologicalExperiment', routes.Project.PsychologicalExperiment);
+app.get('/project/stock', routes.Project.stock);
 app.get('/getpost/:id', routes.Post.getPost);
 app.get('/like/:id', routes.Post.doLike);
 app.all('/login', notAuthentication);
