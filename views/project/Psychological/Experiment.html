@@ -126,8 +126,8 @@
         $downside.html('图');
         $upside.hide();
         $downside.hide();
-        up = (Math.random()*10)%2==0;
-        E = (Math.random()*10)%2==0;
+        up = Math.floor((Math.random()*10))%2==0;
+        E = Math.floor((Math.random()*10))%2==0;
         setTimeout(function(){
           $cross.hide();
           $upside.show();
