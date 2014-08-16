@@ -20,16 +20,20 @@ exports.doExperiment = function(req, res) {
 
 exports.uploadImg = function(req,res){
 	var model = require('../models');
-  console.log(req);
+  var data = '';
+  var name = req.query('name');
   req.on('data',function(chunk){
-    console.log('data');
+    data += chunk;
   });
-	var file = req.files.img;
-  var path = file.path;
-  var name = file.name;
+  req.on('end',function(){
+    fs.appendFile('./public/upload/img/'+name, data, function (err) {
+      if (err) throw err;
+      console.log('The "data to append" was appended to file!');
+    });
+  });
   model.Material.create({
     type: 'img',
-    content: path,
+    content: './public/upload/img/'+name,
   }, function(err) {
     if (err) console.error(err);
     console.log('insert img:'+path);
