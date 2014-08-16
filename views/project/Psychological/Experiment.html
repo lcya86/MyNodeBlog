@@ -61,7 +61,7 @@
     <div class="rect11"></div>
     <div class="rect12"></div>
   </div>
-  <div class="container">
+  <div class="container" style="display:none;">
     <div class="d_login">
       请输入姓名
       <input type="text"/>
@@ -77,13 +77,12 @@
       </div>
     </div>
   </div>
-  <div class="cross">
+  <div class="cross" style="display:none;">
     <span class="glyphicon glyphicon-plus">
   </div>
 </body>
 <script type="text/javascript" src="/javascripts/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
-  $('div.container').hide();
   $(function(){
     $('div.spinner').remove();
     $('div.container').show();
@@ -95,7 +94,6 @@
     var up = false;
     var E = false;
     var count = 0;
-    $cross.hide();
     $upside.hide();
     $downside.hide();
 
@@ -116,7 +114,7 @@
           $cross.hide();
           $upside.show();
           $downside.show();
-        },500);
+        },5000);
         setTimeout(function(){
           reactive = true;
           if(up){
@@ -132,12 +130,12 @@
               $downside.html('<span>F</span>');
             }
           }
-        },500);
+        },5000);
         setTimeout(function(){
           if(miss){
             start();
           }
-        },1000); 
+        },5000); 
       }else{
         alert('finish');
       }
