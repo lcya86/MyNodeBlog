@@ -151,7 +151,7 @@
           var upload = xhr.upload;
           upload.onprogress = create_upload_progress(i+children_length);
           upload.onload = create_upload_done(i+children_length);
-          xhr.open("POST","/psycological/uploadImg"); 
+          xhr.open("POST","/project/psycological/uploadImg"); 
           xhr.overrideMimeType("application/octet-stream");
           xhr.send(fileList[i]);
         }
