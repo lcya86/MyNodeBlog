@@ -173,17 +173,17 @@
     /*##########################页面切换#####################*/
 
     $('div.js_material.left_nav').click(function(event){
-      $('div.main').load('PageSegment/material_manage.html');
+      $('div.main').load('/PageSegment/material_manage.html');
       $(event.target).addClass('selected').siblings().removeClass('selected');
     });
 
     $('div.js_subjects.left_nav').click(function(event){
-      $('div.main').load('PageSegment/subjects_manage.html');
+      $('div.main').load('/PageSegment/subjects_manage.html');
       $(event.target).addClass('selected').siblings().removeClass('selected');
     });
 
     $('div.js_rasult.left_nav').click(function(event){
-      $('div.main').load('PageSegment/rasult_manage.html');
+      $('div.main').load('/PageSegment/rasult_manage.html');
       $(event.target).addClass('selected').siblings().removeClass('selected');
     });
   });

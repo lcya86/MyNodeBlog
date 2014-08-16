@@ -15,7 +15,11 @@ exports.psychologicalExperiment = function(req, res) {
 }
 
 exports.doExperiment = function(req, res) {
-	return res.render('project/Psychological/Experiment');
+  model.Material.find({type:'img'},function(err, materials) {
+    return res.render('project/Psychological/Experiment', {
+      material:materials
+    });
+  });
 }
 
 exports.uploadImg = function(req,res){
