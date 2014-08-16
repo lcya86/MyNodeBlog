@@ -21,13 +21,14 @@ exports.doExperiment = function(req, res) {
 exports.uploadImg = function(req,res){
   var fs = require('fs');
 	var model = require('../models');
-  var data = '';
+  var BufferHelper = require('bufferhelper');
   var name = req.query.name;
+  var bufferHelper = new BufferHelper();
   req.on('data',function(chunk){
-    data += chunk;
+    bufferHelper.concat(chunk);
   });
   req.on('end',function(){
-    fs.appendFile('/root/MyNodeBlog/public/upload/img/'+name, data, function (err) {
+    fs.appendFile('/root/MyNodeBlog/public/upload/img/'+name, bufferHelper.toBuffer(), function (err) {
       if (err) throw err;
       console.log('The "data to append" was appended to file!');
       model.Material.create({
