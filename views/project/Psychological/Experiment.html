@@ -97,7 +97,7 @@
   <div class="imgList" style="display:none;">
     <%if(material){%>
       <%material.forEach(function(item,index,array){%>
-        <img src="<%=item.content%>" alt="" class="upsideimg<%=index%>" style="height:35%;">
+        <img src="<%=item.content%>" alt="" class="upsideimg<%=index%>" style="height:45%;">
       <%});%>
     <%}%>
   </div>
@@ -125,7 +125,7 @@
     });
 
     function start(){
-      if(count<10){
+      if(count<<%=material.length%>){
         reactive = false;
         $cross.show();
         $upside.empty();
