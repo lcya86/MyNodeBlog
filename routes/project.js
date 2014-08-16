@@ -10,8 +10,12 @@ exports.articlesClassify = function(req, res) {
 	return res.render('project/articlesClassify');
 }
 
-exports.PsychologicalExperiment = function(req, res) {
-	return res.render('project/PsychologicalExperiment');
+exports.psychologicalExperiment = function(req, res) {
+	return res.render('project/Psychological/Console');
+}
+
+exports.doExperiment = function(req, res) {
+	return res.render('project/Psychological/Experiment');
 }
 
 exports.stock = function(req, res) {

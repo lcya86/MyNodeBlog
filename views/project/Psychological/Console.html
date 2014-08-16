@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Psychological Experiment</title>
+  <title>Console</title>
   <style media="screen">
     body{
       margin:0px;
@@ -85,27 +85,20 @@
 <body>
   <div class="container">
     <div class="left_navs">
-      <div class="left_nav selected">material manage</div>
-      <div class="left_nav">subjects manage</div>
-      <div class="left_nav">result manage</div>
+      <div class="js_material left_nav selected">material manage</div>
+      <div class="js_subjects left_nav">subjects manage</div>
+      <div class="js_rasult left_nav">result manage</div>
     </div>
     <div class="main">
-      <div class="main_hd">
-        <h2>material manage</h2>
-        <div class="tab_navs">
-          <div class="tab_nav selected">image</div>
-          <div class="tab_nav">text</div>
-        </div>
-      </div>
-      <div class="main_bd">
-        drag images to here
-        <div class="img_fd"></div>
-      </div>
+      
     </div>
   </div>
   <script type="text/javascript" src="/javascripts/jquery-1.11.0.min.js"></script>
   <script type="text/javascript">
   $(function(){
+    $('div.main').load('PageSegment/material_manage.html');
+
+    /*########################上传图片###########################*/
     $(document).on({
       dragleave:function(e){
         e.preventDefault();
@@ -122,8 +115,8 @@
     })
 
 
-    $('div.img_fd')
-      .on('drop',function(event){
+    $('div.main')
+      .on('drop','div.img_fd',function(event){
         event.preventDefault();
         function create_upload_progress(index){
           return function(event){
@@ -163,18 +156,36 @@
           xhr.send(fileList[i]);
         }
       })
-      .on('dragenter',function(event){
+      .on('dragenter','div.img_fd',function(event){
         event.preventDefault();
         $(this).addClass('selected');
       })
-      .on('dragover',function(event){
+      .on('dragover','div.img_fd',function(event){
         event.preventDefault();
         $(this).addClass('selected');
       })
-      .on('dragleave',function(event){
+      .on('dragleave','div.img_fd',function(event){
         event.preventDefault();
         $(this).removeClass('selected');
       });
+
+
+    /*##########################页面切换#####################*/
+
+    $('div.js_material.left_nav').click(function(event){
+      $('div.main').load('PageSegment/material_manage.html');
+      $(event.target).addClass('selected').siblings().removeClass('selected');
+    });
+
+    $('div.js_subjects.left_nav').click(function(event){
+      $('div.main').load('PageSegment/subjects_manage.html');
+      $(event.target).addClass('selected').siblings().removeClass('selected');
+    });
+
+    $('div.js_rasult.left_nav').click(function(event){
+      $('div.main').load('PageSegment/rasult_manage.html');
+      $(event.target).addClass('selected').siblings().removeClass('selected');
+    });
   });
   
   </script>
