@@ -158,12 +158,11 @@
           upload.onprogress = create_upload_progress(i+children_length);
           upload.onload = create_upload_done(i+children_length);
           body += '--' + boundary + CRLF;
-          body += 'Content-Disposition: form-data; filename="' + fileList[i].name + '"'+CRLF;     
+          body += 'Content-Disposition: form-data; name="img"; filename="' + fileList[i].name + '"'+CRLF;     
           body += "Content-Type: "+fileList[i].type+CRLF+CRLF;     
           body += fileList[i] + CRLF;     
           body += "--" + boundary + "--"+CRLF;
         }
-        xhr.overrideMimeType("multipart/form-data");
         xhr.send(body);
 
       })
