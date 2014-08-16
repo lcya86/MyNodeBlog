@@ -20,26 +20,17 @@ exports.doExperiment = function(req, res) {
 
 exports.uploadImg = function(req,res){
 	var model = require('../models');
-	var upfile = req.files.upfile;
-  var files = [];
-  if (upfile instanceof  Array) {
-      files = upfile;
-  } else {
-      files.push(upfile);
-  }
-  for (var i = 0; i < files.length; i++) {
-      var file = files[i];
-      var path = file.path;
-      var name = file.name;
-      model.Material.create({
-        type: 'img',
-        content: path,
-      }, function(err) {
-        if (err) console.error(err);
-        console.log('insert img:'+path);
-      });
-  }
-
+  console.log(req.files);
+	var file = req.files.img;
+  var path = file.path;
+  var name = file.name;
+  model.Material.create({
+    type: 'img',
+    content: path,
+  }, function(err) {
+    if (err) console.error(err);
+    console.log('insert img:'+path);
+  });
   res.render('index', {success:true});
 }
 
