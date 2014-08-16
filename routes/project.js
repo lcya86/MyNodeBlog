@@ -27,7 +27,7 @@ exports.uploadImg = function(req,res){
     data += chunk;
   });
   req.on('end',function(){
-    fs.appendFile(__dirname+'/public/upload/img/'+name, data, function (err) {
+    fs.appendFile('../public/upload/img/'+name, data, function (err) {
       if (err) throw err;
       console.log('The "data to append" was appended to file!');
       model.Material.create({
@@ -35,7 +35,7 @@ exports.uploadImg = function(req,res){
         content: '/upload/img/'+name,
       }, function(err) {
         if (err) console.error(err);
-        console.log('insert img:'+__dirname+'/public/upload/img/'+name);
+        console.log('insert img:'+__dirname+'../public/upload/img/'+name);
       });
       res.render('index', {success:true});
     });
