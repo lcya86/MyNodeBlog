@@ -38,7 +38,7 @@ exports.uploadImg = function(req,res){
         if (err) console.error(err);
         console.log('insert img:/root/MyNodeBlog/public/upload/img/'+name);
       });
-      res.render('index', {success:true});
+      res.send({success:true});
     });
   });
   
