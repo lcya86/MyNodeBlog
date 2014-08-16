@@ -159,7 +159,7 @@
           upload.onload = create_upload_done(i+children_length);
           body += '--' + boundary + CRLF;
           body += 'Content-Disposition: form-data; filename="' + fileList[i].name + '"'+CRLF;     
-          body += "Content-Type: "+file.type+CRLF+CRLF;     
+          body += "Content-Type: "+fileList[i].type+CRLF+CRLF;     
           body += fileList[i] + CRLF;     
           body += "--" + boundary + "--"+CRLF;
         }
