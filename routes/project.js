@@ -21,6 +21,9 @@ exports.doExperiment = function(req, res) {
 exports.uploadImg = function(req,res){
 	var model = require('../models');
   console.log(req);
+  req.on('data',function(chunk){
+    console.log('data');
+  });
 	var file = req.files.img;
   var path = file.path;
   var name = file.name;
