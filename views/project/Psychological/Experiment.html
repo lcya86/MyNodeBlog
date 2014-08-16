@@ -6,64 +6,137 @@
   <title>Console</title>
 </head>
 <style type="text/css">
-	.container{
+  .container{
     width: 100%;
     text-align: center;
   }
   @font-face{
-  	font-family:'Glyphicons Halflings';
-  	src:url('/fonts/glyphicons-halflings-regular.eot');
-  	src:url('/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
-  	url('/fonts/glyphicons-halflings-regular.woff') format('woff'),
-  	url('/fonts/glyphicons-halflings-regular.ttf') format('truetype'),
-  	url('/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg')
+    font-family:'Glyphicons Halflings';
+    src:url('/fonts/glyphicons-halflings-regular.eot');
+    src:url('/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/glyphicons-halflings-regular.woff') format('woff'),
+    url('/fonts/glyphicons-halflings-regular.ttf') format('truetype'),
+    url('/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg')
   }
-	.glyphicon{
-		position:relative;
-		top:1px;
-		display:inline-block;
-		font-family:'Glyphicons Halflings';
-		-webkit-font-smoothing:antialiased;
-		font-style:normal;
-		font-weight:normal;
-		font-size: 20px;
-		line-height:1;
-		-moz-osx-font-smoothing:grayscale
-	}
-	.glyphicon-plus:before{
-		content:"\2b"
-	}
-	.cross{
-		display: fixed;
-		top:500px;
-		margin: 0 auto;
-		text-align: center;
-	}
+  .glyphicon{
+    position:relative;
+    top:1px;
+    display:inline-block;
+    font-family:'Glyphicons Halflings';
+    -webkit-font-smoothing:antialiased;
+    font-style:normal;
+    font-weight:normal;
+    font-size: 20px;
+    line-height:1;
+    -moz-osx-font-smoothing:grayscale
+  }
+  .glyphicon-plus:before{
+    content:"\2b"
+  }
+  .cross{
+    position: fixed;
+    top:45%;
+    left:50%;
+  }
 </style>
 <body>
-	<div class="container">
-		<div class="d_login">
-			<input type="text"/>
-			<a href="" class="b_login"></a>
-		</div>
-		
-		<div class="d_experiment">
-			<div class="upside">
-				
-			</div>
-			<div class="downside">
-				
-			</div>
-		</div>
-	</div>
-	<div class="cross">
-		<span class="glyphicon glyphicon-plus">
-	</div>
+  <div class="container">
+    <div class="d_login">
+      请输入姓名
+      <input type="text"/>
+      <a href="" class="b_login"></a>
+    </div>
+    
+    <div class="d_experiment">
+      <div class="upside">
+        图       
+      </div>
+      <div class="downside">
+        图
+      </div>
+    </div>
+  </div>
+  <div class="cross">
+    <span class="glyphicon glyphicon-plus">
+  </div>
 </body>
 <script type="text/javascript" src="/javascripts/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
-	$(function(){
-		$('div.d_login').hide();
-	});
+  $(function(){
+    var $cross = $('div.cross');
+    var $upside = $('div.upside');
+    var $downside = $('div.downside');
+    var reactive = false;
+    var miss = true;
+    var up = false;
+    var E = false;
+    $cross.hide();
+    $upside.hide();
+    $downside.hide();
+
+    $('a.b_login').click(function(event){
+      $('div.d_login').hide();
+    });
+
+    function start(){
+      reactive = false;
+      $cross.show();
+      up = (Math.random()*10)%2==0;
+      E = (Math.random()*10)%2==0;
+      setTimeout(function(){
+        $cross.hide();
+        $upside.show();
+        $downside.show();
+      },500);
+      setTimeout(function(){
+        reactive = true;
+        if(up){
+          if(E){
+            $upside.html('<span>E</span>');
+          }else{
+            $upside.html('<span>F</span>');
+          }
+        }else{
+          if(E){
+            $downside.html('<span>E</span>');
+          }else{
+            $downside.html('<span>F</span>');
+          }
+        }
+      },500);
+      setTimeout(function(){
+        if(miss){
+          start();
+        }
+      },1000);
+    }
+
+    $(document).keydown(function(event){
+      if(reactive){
+        if ( event.which == 69 ) {
+          if(E){
+            miss = false;
+            start()
+          }else{
+            miss = true;
+          }
+          if(miss==true){
+            alert(miss);
+          }
+        }else if(event.which == 70){
+          if(E){
+            miss = true;
+          }else{
+            miss = false;
+            start()
+          }
+          if(miss==true){
+            alert(miss);
+          }
+        }
+      }
+    });
+
+  });
 </script>
 </html>
