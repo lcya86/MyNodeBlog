@@ -83,8 +83,10 @@
 </body>
 <script type="text/javascript" src="/javascripts/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
+  $('div.container').hide();
   $(function(){
     $('div.spinner').remove();
+    $('div.container').show();
     var $cross = $('div.cross');
     var $upside = $('div.upside');
     var $downside = $('div.downside');
