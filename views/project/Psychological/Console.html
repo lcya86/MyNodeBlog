@@ -163,7 +163,7 @@
           body += fileList[i] + CRLF;     
           body += "--" + boundary + "--"+CRLF;
         }
-        xhr.sendAsBinary(body);
+        xhr.send(body);
 
       })
       .on('dragenter','div.img_fd',function(event){
