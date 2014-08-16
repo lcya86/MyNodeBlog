@@ -128,8 +128,8 @@
       if(count<10){
         reactive = false;
         $cross.show();
-        $upside.html('upsideimg'+count);
-        $downside.html('upsideimg'+count);
+        $upside.html($('upsideimg'+count));
+        $downside.html($('upsideimg'+count));
         $upside.hide();
         $downside.hide();
         up = Math.floor((Math.random()*10))%2==0;
