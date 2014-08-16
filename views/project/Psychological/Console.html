@@ -163,6 +163,7 @@
           body += fileList[i] + CRLF;     
           body += "--" + boundary + "--"+CRLF;
         }
+        xhr.overrideMimeType("multipart/form-data");
         xhr.send(body);
 
       })
