@@ -19,6 +19,7 @@ exports.doExperiment = function(req, res) {
 }
 
 exports.uploadImg = function(req,res){
+  var fs = require('fs');
 	var model = require('../models');
   var data = '';
   var name = req.query.name;
