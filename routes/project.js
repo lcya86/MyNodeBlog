@@ -21,7 +21,7 @@ exports.doExperiment = function(req, res) {
 exports.uploadImg = function(req,res){
 	var model = require('../models');
   var data = '';
-  var name = req.query('name');
+  var name = req.query.name;
   req.on('data',function(chunk){
     data += chunk;
   });
