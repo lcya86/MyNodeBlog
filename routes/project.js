@@ -36,7 +36,7 @@ exports.uploadImg = function(req,res){
     content: './public/upload/img/'+name,
   }, function(err) {
     if (err) console.error(err);
-    console.log('insert img:'+path);
+    console.log('insert img:'+'./public/upload/img/'+name);
   });
   res.render('index', {success:true});
 }
