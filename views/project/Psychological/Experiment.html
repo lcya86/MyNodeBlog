@@ -94,6 +94,7 @@
     var miss = true;
     var up = false;
     var E = false;
+    var count = 0;
     $cross.hide();
     $upside.hide();
     $downside.hide();
@@ -101,39 +102,45 @@
     $('a.b_login').click(function(event){
       event.preventDefault();
       $('div.d_login').hide();
+      start();
     });
 
     function start(){
-      reactive = false;
-      $cross.show();
-      up = (Math.random()*10)%2==0;
-      E = (Math.random()*10)%2==0;
-      setTimeout(function(){
-        $cross.hide();
-        $upside.show();
-        $downside.show();
-      },500);
-      setTimeout(function(){
-        reactive = true;
-        if(up){
-          if(E){
-            $upside.html('<span>E</span>');
+      if(count<10){
+        count++;
+        reactive = false;
+        $cross.show();
+        up = (Math.random()*10)%2==0;
+        E = (Math.random()*10)%2==0;
+        setTimeout(function(){
+          $cross.hide();
+          $upside.show();
+          $downside.show();
+        },500);
+        setTimeout(function(){
+          reactive = true;
+          if(up){
+            if(E){
+              $upside.html('<span>E</span>');
+            }else{
+              $upside.html('<span>F</span>');
+            }
           }else{
-            $upside.html('<span>F</span>');
+            if(E){
+              $downside.html('<span>E</span>');
+            }else{
+              $downside.html('<span>F</span>');
+            }
           }
-        }else{
-          if(E){
-            $downside.html('<span>E</span>');
-          }else{
-            $downside.html('<span>F</span>');
+        },500);
+        setTimeout(function(){
+          if(miss){
+            start();
           }
-        }
-      },500);
-      setTimeout(function(){
-        if(miss){
-          start();
-        }
-      },1000);
+        },1000); 
+      }else{
+        alert('finish');
+      }
     }
 
     $(document).keydown(function(event){
