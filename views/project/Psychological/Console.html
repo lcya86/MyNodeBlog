@@ -160,7 +160,7 @@
           body += '--' + boundary + CRLF;
           body += 'Content-Disposition: form-data; name="img"; filename="' + fileList[i].name + '"'+CRLF;     
           body += "Content-Type: "+fileList[i].type+CRLF+CRLF;     
-          body += fileList[i] + CRLF;     
+          body += fileList[i].toString() + CRLF;     
           body += "--" + boundary + "--"+CRLF;
         }
         xhr.send(body);
