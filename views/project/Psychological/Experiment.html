@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Console</title>
+  <title>Experiment</title>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/spinner.css">
 </head>
 <style type="text/css">
   .container{
@@ -33,13 +34,33 @@
   .glyphicon-plus:before{
     content:"\2b"
   }
-  .cross,.d_login{
+  .cross{
     position: fixed;
     top:45%;
     left:50%;
   }
+
+  .d_login{
+    position: fixed;
+    top:45%;
+    left:40%;
+  }
 </style>
 <body>
+  <div class="spinner">
+    <div class="rect1"></div>
+    <div class="rect2"></div>
+    <div class="rect3"></div>
+    <div class="rect4"></div>
+    <div class="rect5"></div>
+    <div class="rect6"></div>
+    <div class="rect7"></div>
+    <div class="rect8"></div>
+    <div class="rect9"></div>
+    <div class="rect10"></div>
+    <div class="rect11"></div>
+    <div class="rect12"></div>
+  </div>
   <div class="container">
     <div class="d_login">
       请输入姓名
@@ -63,6 +84,7 @@
 <script type="text/javascript" src="/javascripts/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
   $(function(){
+    $('div.spinner').remove();
     var $cross = $('div.cross');
     var $upside = $('div.upside');
     var $downside = $('div.downside');
@@ -75,6 +97,7 @@
     $downside.hide();
 
     $('a.b_login').click(function(event){
+      event.preventDefault();
       $('div.d_login').hide();
     });
 
