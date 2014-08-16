@@ -27,19 +27,20 @@ exports.uploadImg = function(req,res){
     data += chunk;
   });
   req.on('end',function(){
-    fs.appendFile('./public/upload/img/'+name, data, function (err) {
+    fs.appendFile(__dirname+'/public/upload/img/'+name, data, function (err) {
       if (err) throw err;
       console.log('The "data to append" was appended to file!');
+      model.Material.create({
+        type: 'img',
+        content: '/upload/img/'+name,
+      }, function(err) {
+        if (err) console.error(err);
+        console.log('insert img:'+__dirname+'/public/upload/img/'+name);
+      });
+      res.render('index', {success:true});
     });
   });
-  model.Material.create({
-    type: 'img',
-    content: './public/upload/img/'+name,
-  }, function(err) {
-    if (err) console.error(err);
-    console.log('insert img:'+'./public/upload/img/'+name);
-  });
-  res.render('index', {success:true});
+  
 }
 
 exports.stock = function(req, res) {
