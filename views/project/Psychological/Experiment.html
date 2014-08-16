@@ -45,6 +45,20 @@
     top:45%;
     left:40%;
   }
+
+  .upside{
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    text-align: center;
+  }
+  .downside{
+    position: fixed;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+  }
+
 </style>
 <body>
   <div class="spinner">
@@ -108,6 +122,10 @@
         count++;
         reactive = false;
         $cross.show();
+        $upside.html('图');
+        $downside.html('图');
+        $upside.hide();
+        $downside.hide();
         up = (Math.random()*10)%2==0;
         E = (Math.random()*10)%2==0;
         setTimeout(function(){
@@ -123,12 +141,14 @@
             }else{
               $upside.html('<span>F</span>');
             }
+            $downside.html('');
           }else{
             if(E){
               $downside.html('<span>E</span>');
             }else{
               $downside.html('<span>F</span>');
             }
+            $upside.html('');
           }
         },1000);
         setTimeout(function(){
