@@ -11,7 +11,11 @@ exports.articlesClassify = function(req, res) {
 }
 
 exports.psychologicalExperiment = function(req, res) {
-	return res.render('project/Psychological/Console');
+  model.Material.find({type:'img'},function(err, materials) {
+    return res.render('project/Psychological/Console', {
+      material:materials
+    });
+  });
 }
 
 exports.doExperiment = function(req, res) {
