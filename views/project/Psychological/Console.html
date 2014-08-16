@@ -90,13 +90,30 @@
       <div class="js_rasult left_nav">result manage</div>
     </div>
     <div class="main">
-      
+      <div class="main_hd">
+        <h2>material manage</h2>
+        <div class="tab_navs">
+          <div class="tab_nav selected">image</div>
+          <div class="tab_nav">text</div>
+        </div>
+      </div>
+      <div class="main_bd">
+        drag images to here
+        <div class="img_fd">
+          <%if(material){%>
+            <%material.forEach(function(item,index,array){%>
+              <div style="background-color:#eee;display:inline-block;padding:5px;margin:10px;text-align:center;"><img style="width:80px;" src="<%=item.content%>"/><p style="display:relative;bottom:0px;margin:0px;"><%=item.content.split('/')[2]%></p><div id="" style="background-color:#F19F45;height:1px;width:0%;"></div></div>
+            <%});%>
+          <%}%>
+        </div>
+      </div>
     </div>
   </div>
   <script type="text/javascript" src="/javascripts/jquery-1.11.0.min.js"></script>
   <script type="text/javascript">
   $(function(){
-    $('div.main').load('/PageSegment/material_manage.html');
+
+
 
     /*########################上传图片###########################*/
     $(document).on({
