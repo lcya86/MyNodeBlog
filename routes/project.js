@@ -12,7 +12,7 @@ exports.articlesClassify = function(req, res) {
 }
 
 exports.psychologicalExperiment = function(req, res) {
-  model.Material.find({type:'img'},function(err, materials) {
+  model.MaterialImg.find(function(err, materials) {
     return res.render('project/Psychological/Console', {
       material:materials
     });
@@ -20,7 +20,7 @@ exports.psychologicalExperiment = function(req, res) {
 }
 
 exports.doExperiment = function(req, res) {
-  model.Material.find({type:'img'},function(err, materials) {
+  model.MaterialImg.find(function(err, materials) {
     return res.render('project/Psychological/Experiment', {
       material:materials
     });
@@ -41,7 +41,6 @@ exports.uploadImg = function(req,res){
       if (err) throw err;
       console.log('The "data to append" was appended to file!');
       model.Material.create({
-        type: 'img',
         content: '/upload/img/'+name,
       }, function(err) {
         if (err) console.error(err);
