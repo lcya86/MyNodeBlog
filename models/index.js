@@ -10,5 +10,6 @@ require('./psycological/subject');
 exports.Post = mongoose.model('Post');
 exports.Tag = mongoose.model('Tag');
 exports.Visitor = mongoose.model('Visitor');
-exports.Material = mongoose.model('Material');
+exports.MaterialImg = mongoose.model('MaterialImg');
+exports.MaterialText = mongoose.model('MaterialText');
 exports.Subject = mongoose.model('Subject');
