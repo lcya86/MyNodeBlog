@@ -73,13 +73,25 @@
     .main_bd{
       padding: 30px;
     }
-    .img_fd{
+    .pimg_fd{
       border: dashed 1px #F19F45;
       min-height: 70%;
     }
+    .nimg_fd{
+      border: dashed 1px #F19F45;
+      min-height: 70%;
+    }
+    .pfd{
+      width: 50%;
+    }
+    .nfd{
+      width: 50%;
+    }
+
     .img_fd.selected{
       border: dashed 3px #F19F45;
     }
+
   </style>
 </head>
 <body>
@@ -98,14 +110,26 @@
         </div>
       </div>
       <div class="main_bd">
-        drag images to here
-        <div class="img_fd">
-          <%if(material){%>
-            <%material.forEach(function(item,index,array){%>
-              <div style="background-color:#eee;display:inline-block;padding:5px;margin:10px;text-align:center;"><img style="width:80px;" src="<%=item.content%>"/><p style="display:relative;bottom:0px;margin:0px;"><%=item.content.split('/')[3]%></p><div id="" style="background-color:#F19F45;height:1px;width:0%;"></div></div>
-            <%});%>
-          <%}%>
-        </div>
+        <div class="pfd">
+          积极
+          <div class="pimg_fd">
+            <%if(material){%>
+              <%material.forEach(function(item,index,array){%>
+                <div style="background-color:#eee;display:inline-block;padding:5px;margin:10px;text-align:center;"><img style="width:80px;" src="<%=item.content%>"/><p style="display:relative;bottom:0px;margin:0px;"><%=item.content.split('/')[3]%></p><div id="" style="background-color:#F19F45;height:1px;width:0%;"></div></div>
+              <%});%>
+            <%}%>
+          </div>
+        </div> 
+        <div class="nfd">
+          消极 
+          <div class="nimg_fd">
+            <%if(material){%>
+              <%material.forEach(function(item,index,array){%>
+                <div style="background-color:#eee;display:inline-block;padding:5px;margin:10px;text-align:center;"><img style="width:80px;" src="<%=item.content%>"/><p style="display:relative;bottom:0px;margin:0px;"><%=item.content.split('/')[3]%></p><div id="" style="background-color:#F19F45;height:1px;width:0%;"></div></div>
+              <%});%>
+            <%}%>
+          </div>
+        </div> 
       </div>
     </div>
   </div>
