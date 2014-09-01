@@ -12,7 +12,7 @@ exports.articlesClassify = function(req, res) {
 }
 
 exports.psychologicalExperiment = function(req, res) {
-  model.MaterialImg.find(function(err, materials) {
+  model.MaterialImg.find().sort('+sequence').exec(function(err, materials) {
     return res.render('project/Psychological/Console', {
       material:materials
     });
@@ -42,7 +42,7 @@ exports.uploadImg = function(req,res){
     fs.appendFile('/root/MyNodeBlog/public/upload/img/'+name, bufferHelper.toBuffer(), function (err) {
       if (err) throw err;
       console.log('The "data to append" was appended to file!');
-      model.Material.create({
+      model.MaterialImg.create({
         content: '/upload/img/'+name,
         polarity:polarity,
         sequence:sequence
