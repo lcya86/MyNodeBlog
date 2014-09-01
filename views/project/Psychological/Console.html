@@ -169,6 +169,10 @@
 
     var pimgCounter = function(){//产生sequence
       var pimgSequence = 0;
+      var children = $('div.pimg_fd').children();
+      if(children.length>0){
+        pimgSequence = children.last().children('h3').text();
+      }
       return function(){
         pimgSequence++;
         return pimgSequence;
@@ -177,6 +181,10 @@
 
     var nimgCounter = function(){//产生sequence
       var nimgSequence = 0;
+      var children = $('div.nimg_fd').children();
+      if(children.length>0){
+        nimgSequence = children.last().children('h3').text();
+      }
       return function(){
         nimgSequence++;
         return nimgSequence;
