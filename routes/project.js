@@ -20,7 +20,7 @@ exports.psychologicalExperiment = function(req, res) {
 }
 
 exports.doExperiment = function(req, res) {
-  model.MaterialImg.find(function(err, materials) {
+  model.MaterialImg.find().sort('+sequence').exec(function(err, materials) {
     return res.render('project/Psychological/Experiment', {
       material:materials
     });
@@ -32,6 +32,8 @@ exports.uploadImg = function(req,res){
 	var model = require('../models');
   var BufferHelper = require('bufferhelper');
   var name = req.query.name;
+  var sequence = req.query.sequence;
+  var polarity = req.query.polarity;
   var bufferHelper = new BufferHelper();
   req.on('data',function(chunk){
     bufferHelper.concat(chunk);
@@ -42,6 +44,8 @@ exports.uploadImg = function(req,res){
       console.log('The "data to append" was appended to file!');
       model.Material.create({
         content: '/upload/img/'+name,
+        polarity:polarity,
+        sequence:sequence
       }, function(err) {
         if (err) console.error(err);
         console.log('insert img:/root/MyNodeBlog/public/upload/img/'+name);
