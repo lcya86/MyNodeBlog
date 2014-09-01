@@ -124,7 +124,7 @@
             <%if(material){%>
               <%material.forEach(function(item,index,array){%>
                 <%if(item.polarity==1){%>
-                <div style="padding:5px;margin:10px;text-align:center;"><h3 style="display:inline-block;margin-right:12px;float:left;"><%item.sequence%></h3><img style="width:80px;float:left;" src="<%=item.content%>"/><p style="display:relative;bottom:0px;margin:0px;"><%=item.content.split('/')[3]%></p><div id="" style="background-color:#F19F45;height:1px;width:0%;clear:left;"></div></div>
+                <div style="padding:5px;margin:10px;text-align:center;"><h3 style="display:inline-block;margin-right:12px;float:left;"><%=item.sequence%></h3><img style="width:80px;float:left;" src="<%=item.content%>"/><p style="display:relative;bottom:0px;margin:0px;"><%=item.content.split('/')[3]%></p><div id="" style="background-color:#F19F45;height:1px;width:100%;clear:left;"></div></div>
                 <%}%>
               <%});%>
             <%}%>
@@ -136,7 +136,7 @@
             <%if(material){%>
               <%material.forEach(function(item,index,array){%>
                 <%if(item.polarity==0){%>
-                <div style="padding:5px;margin:10px;text-align:center;"><h3 style="display:inline-block;margin-right:12px;float:left;"><%item.sequence%></h3><img style="width:80px;float:left;" src="<%=item.content%>"/><p style="display:relative;bottom:0px;margin:0px;"><%=item.content.split('/')[3]%></p><div id="" style="background-color:#F19F45;height:1px;width:0%;clear:left;"></div></div>
+                <div style="padding:5px;margin:10px;text-align:center;"><h3 style="display:inline-block;margin-right:12px;float:left;"><%=item.sequence%></h3><img style="width:80px;float:left;" src="<%=item.content%>"/><p style="display:relative;bottom:0px;margin:0px;"><%=item.content.split('/')[3]%></p><div id="" style="background-color:#F19F45;height:1px;width:100%;clear:left;"></div></div>
                 <%}%>
               <%});%>
             <%}%>
