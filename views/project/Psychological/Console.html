@@ -216,7 +216,7 @@
             src = window.URL.createObjectURL(fileList[i]);
           }
           console.log(src);
-          sequence = pimgSequence()();
+          sequence = pimgCounter()();
           $this.append('<div style="padding:5px;margin:10px;text-align:center;"><h3 style="display:inline-block;margin-right:12px;float:left;">'+sequence+'</h3><img style="width:80px;float:left;" src="'+src+'"/><p style="display:relative;bottom:0px;margin:0px;">'+fileList[i].name+'</p><div id="input_pimage'+(i+children_length)+'" style="background-color:#F19F45;height:1px;width:0%;clear:left;"></div></div>');
           var xhr = new XMLHttpRequest();
           var upload = xhr.upload;
@@ -270,7 +270,7 @@
             src = window.URL.createObjectURL(fileList[i]);
           }
           console.log(src);
-          sequence = nimgSequence()();
+          sequence = nimgCounter()();
           $this.append('<div style="padding:5px;margin:10px;text-align:center;"><h3 style="display:inline-block;margin-right:12px;float:left;">'+sequence+'</h3><img style="width:80px;float:left;" src="'+src+'"/><p style="display:relative;bottom:0px;margin:0px;">'+fileList[i].name+'</p><div id="input_nimage'+(i+children_length)+'" style="background-color:#F19F45;height:1px;width:0%;clear:left;"></div></div>');
           var xhr = new XMLHttpRequest();
           var upload = xhr.upload;
