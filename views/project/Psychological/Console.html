@@ -169,20 +169,20 @@
 
     function pimgCounter(){//产生sequence
       var pimgSequence = 0;
-      return function(pimgSequence){
+      return function(){
         pimgSequence++;
         return pimgSequence;
       }
     }
-
+    pimgCounter();
     function nimgCounter(){//产生sequence
       var nimgSequence = 0;
-      return function(nimgSequence){
+      return function(){
         nimgSequence++;
         return nimgSequence;
       }
     }
-
+    nimgCounter();
 
     $('div.main')
       .on('drop','div.pimg_fd',function(event){
