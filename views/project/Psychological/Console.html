@@ -360,6 +360,7 @@
         event.stopPropagation();
         $target = $(event.target);
         $.post('/project/psychological/console/delimg',{id:$target.data('id')},function(data){
+          console.log($target.data('id'));
           if(data.success){
             $target.nextAll().each(function(index,item){
               var number = item.children('h3').text-1;
