@@ -358,7 +358,7 @@
       })
       .on('click.delete','div.img_item',function(event){
         event.stopPropagation();
-        $target = $(event.delegateTarget);
+        $target = $(event.currentTarget);
         console.log($target);
         console.log($target.nextAll());
         /*
