@@ -64,7 +64,7 @@ exports.delImg = function(req,res){
     if(err){
       console.error(err);
     }
-    model.MaterialImg.update({polarity:img.polarity,sequence:{$gt:img.sequence}},{ $inc: { sequence: -1 }});
+    model.MaterialImg.update({polarity:img.polarity,sequence:{$gt:img.sequence}},{ $inc: { sequence: -1 }},{ multi: true });
   });
   model.MaterialImg.findByIdAndRemove(id,function(err){
     if(err){
