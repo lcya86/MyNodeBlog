@@ -1,9 +1,10 @@
-<DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Console</title>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/spinner.css">
   <style media="screen">
     body{
       margin:0px;
@@ -103,7 +104,21 @@
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="spinner">
+    <div class="rect1"></div>
+    <div class="rect2"></div>
+    <div class="rect3"></div>
+    <div class="rect4"></div>
+    <div class="rect5"></div>
+    <div class="rect6"></div>
+    <div class="rect7"></div>
+    <div class="rect8"></div>
+    <div class="rect9"></div>
+    <div class="rect10"></div>
+    <div class="rect11"></div>
+    <div class="rect12"></div>
+  </div>
+  <div class="container" style="display:none;">
     <div class="left_navs">
       <div class="js_material left_nav selected">material manage</div>
       <div class="js_subjects left_nav">subjects manage</div>
@@ -148,7 +163,8 @@
   <script type="text/javascript" src="/javascripts/jquery-1.11.0.min.js"></script>
   <script type="text/javascript">
   $(function(){
-
+    $('div.spinner').remove();
+    $('div.container').show();
 
 
     /*########################上传图片###########################*/
@@ -194,7 +210,7 @@
     $('div.main')
       .on('drop','div.pimg_fd',function(event){
         event.preventDefault();
-        function create_upload_progress(index){
+        function create_pupload_progress(index){
           return function(event){
             $this.find('#input_pimage'+index).css({
               width:Math.round(event.loaded*100/event.total)+'%'
@@ -202,7 +218,7 @@
           }
         }
 
-        function create_upload_done(index){
+        function create_pupload_done(index){
           return function(event){
             console.log('pic'+index+' done!')
             $this.find('#input_pimage'+index).css({
@@ -227,8 +243,8 @@
           $this.append('<div style="padding:5px;margin:10px;text-align:center;"><h3 style="display:inline-block;margin-right:12px;float:left;">'+sequence+'</h3><img style="width:80px;float:left;" src="'+src+'"/><p style="display:relative;bottom:0px;margin:0px;">'+fileList[i].name+'</p><div id="input_pimage'+(i+children_length)+'" style="background-color:#F19F45;height:1px;width:0%;clear:left;"></div></div>');
           var xhr = new XMLHttpRequest();
           var upload = xhr.upload;
-          upload.onprogress = create_upload_progress(i+children_length);
-          upload.onload = create_upload_done(i+children_length);
+          upload.onprogress = create_pupload_progress(i+children_length);
+          upload.onload = create_pupload_done(i+children_length);
           xhr.open("POST","/project/psychological/uploadImg?name="+fileList[i].name+"&sequence="+sequence+"&polarity=1"); 
           xhr.overrideMimeType("application/octet-stream");
           xhr.send(fileList[i]);
@@ -248,7 +264,7 @@
       })
       .on('drop','div.nimg_fd',function(event){
         event.preventDefault();
-        function create_upload_progress(index){
+        function create_nupload_progress(index){
           return function(event){
             $this.find('#input_nimage'+index).css({
               width:Math.round(event.loaded*100/event.total)+'%'
@@ -256,7 +272,7 @@
           }
         }
 
-        function create_upload_done(index){
+        function create_nupload_done(index){
           return function(event){
             console.log('pic'+index+' done!')
             $this.find('#input_nimage'+index).css({
@@ -281,8 +297,8 @@
           $this.append('<div style="padding:5px;margin:10px;text-align:center;"><h3 style="display:inline-block;margin-right:12px;float:left;">'+sequence+'</h3><img style="width:80px;float:left;" src="'+src+'"/><p style="display:relative;bottom:0px;margin:0px;">'+fileList[i].name+'</p><div id="input_nimage'+(i+children_length)+'" style="background-color:#F19F45;height:1px;width:0%;clear:left;"></div></div>');
           var xhr = new XMLHttpRequest();
           var upload = xhr.upload;
-          upload.onprogress = create_upload_progress(i+children_length);
-          upload.onload = create_upload_done(i+children_length);
+          upload.onprogress = create_nupload_progress(i+children_length);
+          upload.onload = create_nupload_done(i+children_length);
           xhr.open("POST","/project/psychological/uploadImg?name="+fileList[i].name+"&sequence="+sequence+"&polarity=0"); 
           xhr.overrideMimeType("application/octet-stream");
           xhr.send(fileList[i]);
