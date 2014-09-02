@@ -359,9 +359,6 @@
       .on('click.delete','div.img_item',function(event){
         event.stopPropagation();
         $target = $(event.currentTarget);
-        console.log($target);
-        console.log($target.nextAll());
-        /*
         $.post('/project/psychological/console/delimg',{id:$target.data('id')},function(data){
           console.log($target.data('id'));
           if(data.success){
@@ -372,7 +369,6 @@
             $target.remove();
           }
         });
-      */
       });
 
 
