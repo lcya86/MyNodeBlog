@@ -58,7 +58,7 @@ exports.uploadImg = function(req,res){
 
 exports.delImg = function(req,res){
   var model = require('../models');
-  var id = req.params.id;
+  var id = req.body.id;
   console.log(id);
   model.MaterialImg.findById(id,function(err,img){
     if(err){
