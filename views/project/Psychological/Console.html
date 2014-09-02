@@ -362,7 +362,7 @@
         $.post('/project/psychological/console/delimg',{id:$target.data('id')},function(data){
           if(data.success){
             $target.nextAll().each(function(index,item){
-              var number = item.children('h3').text()-1;
+              var number = item.children('h3').text-1;
               item.children('h3').text(number);
             });
             $target.remove();
