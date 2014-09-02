@@ -179,7 +179,7 @@
             <%if(material){%>
               <%material.forEach(function(item,index,array){%>
                 <%if(item.polarity==1){%>
-                <div class="img_item"><h3><%=item.sequence%></h3><img src="<%=item.content%>"/><p><%=item.content.split('/')[3]%></p><div id=""></div></div>
+                <div data-id="<%=item._id%>" class="img_item"><h3><%=item.sequence%></h3><img src="<%=item.content%>"/><p><%=item.content.split('/')[3]%></p><div id=""></div></div>
                 <%}%>
               <%});%>
             <%}%>
@@ -191,7 +191,7 @@
             <%if(material){%>
               <%material.forEach(function(item,index,array){%>
                 <%if(item.polarity==0){%>
-                <div class="img_item"><h3><%=item.sequence%></h3><img src="<%=item.content%>"/><p><%=item.content.split('/')[3]%></p><div id=""></div></div>
+                <div data-id="<%=item._id%>" class="img_item"><h3><%=item.sequence%></h3><img src="<%=item.content%>"/><p><%=item.content.split('/')[3]%></p><div id=""></div></div>
                 <%}%>
               <%});%>
             <%}%>
@@ -248,7 +248,7 @@
     }();
 
     $('div.main')
-      .on('drop','div.pimg_fd',function(event){
+      .on('drop.add','div.pimg_fd',function(event){
         event.preventDefault();
         function create_pupload_progress(index){
           return function(event){
@@ -290,19 +290,19 @@
           xhr.send(fileList[i]);
         }
       })
-      .on('dragenter','div.pimg_fd',function(event){
+      .on('dragenter.add','div.pimg_fd',function(event){
         event.preventDefault();
         $(this).addClass('selected');
       })
-      .on('dragover','div.pimg_fd',function(event){
+      .on('dragover.add','div.pimg_fd',function(event){
         event.preventDefault();
         $(this).addClass('selected');
       })
-      .on('dragleave','div.pimg_fd',function(event){
+      .on('dragleave.add','div.pimg_fd',function(event){
         event.preventDefault();
         $(this).removeClass('selected');
       })
-      .on('drop','div.nimg_fd',function(event){
+      .on('drop.add','div.nimg_fd',function(event){
         event.preventDefault();
         function create_nupload_progress(index){
           return function(event){
@@ -344,17 +344,30 @@
           xhr.send(fileList[i]);
         }
       })
-      .on('dragenter','div.nimg_fd',function(event){
+      .on('dragenter.add','div.nimg_fd',function(event){
         event.preventDefault();
         $(this).addClass('selected');
       })
-      .on('dragover','div.nimg_fd',function(event){
+      .on('dragover.add','div.nimg_fd',function(event){
         event.preventDefault();
         $(this).addClass('selected');
       })
-      .on('dragleave','div.nimg_fd',function(event){
+      .on('dragleave.add','div.nimg_fd',function(event){
         event.preventDefault();
         $(this).removeClass('selected');
+      })
+      .on('click.delete','div.img_item',function(event){
+        event.stopPropagation();
+        $target = $(event.target);
+        $.post('/project/psychological/console/delimg',{id:$target.data(id)},function(data){
+          if(data.success){
+            $target.nextAll().each(function(index,item){
+              var number = Number(item.children('h3').text())-1;
+              item.children('h3').text(number);
+            });
+            $target.remove();
+          }
+        });
       });
 
 

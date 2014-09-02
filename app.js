@@ -84,6 +84,7 @@ app.get('/project/articlesClassify', routes.Project.articlesClassify);
 app.get('/project/psychological/console', routes.Project.psychologicalExperiment);
 app.get('/project/psychological/experiment', routes.Project.doExperiment);
 app.post('/project/psychological/uploadImg', routes.Project.uploadImg);
+app.post('/project/psychological/delimg', routes.Project.delImg);
 app.get('/project/stock', routes.Project.stock);
 app.get('/getpost/:id', routes.Post.getPost);
 app.get('/like/:id', routes.Post.doLike);
