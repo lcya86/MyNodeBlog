@@ -59,13 +59,15 @@ exports.uploadImg = function(req,res){
 exports.delImg = function(req,res){
   var model = require('../models');
   var id = req.params.id;
-  var sequence = 0;
-  var polarity = 0;
   model.MaterialImg.findById(id,function(err,img){
+    if(err){
+      console.error(err);
+    }
     model.MaterialImg.find({polarity:img.polarity}).gt('sequence',img.sequence).update({ $inc: { sequence: -1 }});
   });
   model.MaterialImg.findByIdAndRemove(id,function(err){
     if(err){
+      console.error(err);
       return res.send({success:false});
     }
     return res.send({success:true});
