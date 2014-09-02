@@ -359,7 +359,7 @@
       .on('click.delete','div.img_item',function(event){
         event.stopPropagation();
         $target = $(event.target);
-        $.post('/project/psychological/console/delimg',{id:$target.data(id)},function(data){
+        $.post('/project/psychological/console/delimg',{id:$target.data('id')},function(data){
           if(data.success){
             $target.nextAll().each(function(index,item){
               var number = Number(item.children('h3').text())-1;
