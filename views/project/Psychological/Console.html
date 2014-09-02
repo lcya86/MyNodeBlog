@@ -363,6 +363,7 @@
           console.log($target.data('id'));
           if(data.success){
             $target.nextAll().each(function(index,item){
+              console.log(item);
               var number = Number(item.children('h3').text())-1;
               item.children('h3').text(number);
             });
