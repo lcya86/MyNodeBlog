@@ -179,7 +179,7 @@
             <%if(material){%>
               <%material.forEach(function(item,index,array){%>
                 <%if(item.polarity==1){%>
-                <div class="img_item"><h3><%=item.sequence%> <%=index%></h3><img src="<%=item.content%>"/><p><%=item.content.split('/')[3]%></p><div id=""></div></div>
+                <div class="img_item"><h3><%=item.sequence%></h3><img src="<%=item.content%>"/><p><%=item.content.split('/')[3]%></p><div id=""></div></div>
                 <%}%>
               <%});%>
             <%}%>
@@ -191,7 +191,7 @@
             <%if(material){%>
               <%material.forEach(function(item,index,array){%>
                 <%if(item.polarity==0){%>
-                <div class="img_item"><h3><%=item.sequence%> <%=index%></h3><img src="<%=item.content%>"/><p><%=item.content.split('/')[3]%></p><div id=""></div></div>
+                <div class="img_item"><h3><%=item.sequence%></h3><img src="<%=item.content%>"/><p><%=item.content.split('/')[3]%></p><div id=""></div></div>
                 <%}%>
               <%});%>
             <%}%>
