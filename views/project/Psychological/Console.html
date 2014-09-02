@@ -105,6 +105,35 @@
       border: dashed 3px #F19F45;
     }
 
+    .img_item{
+      padding:5px;
+      margin:10px;
+      text-align:center;
+    }
+
+    .img_item h3{
+      display:inline-block;
+      margin-right:12px;
+      float:left;
+    }
+
+    .img_item img{
+      width:80px;
+      float:left;
+    }
+
+    .img_item p{
+      display:relative;
+      bottom:0px;
+      margin:0px;
+    }
+
+    .img_item div{
+      background-color:#F19F45;
+      height:1px;
+      width:100%;
+      clear:left;
+    }
 
   </style>
 </head>
@@ -144,7 +173,7 @@
             <%if(material){%>
               <%material.forEach(function(item,index,array){%>
                 <%if(item.polarity==1){%>
-                <div style="padding:5px;margin:10px;text-align:center;"><h3 style="display:inline-block;margin-right:12px;float:left;"><%=item.sequence%></h3><img style="width:80px;float:left;" src="<%=item.content%>"/><p style="display:relative;bottom:0px;margin:0px;"><%=item.content.split('/')[3]%></p><div id="" style="background-color:#F19F45;height:1px;width:100%;clear:left;"></div></div>
+                <div class="img_item"><h3><%=item.sequence%></h3><img src="<%=item.content%>"/><p><%=item.content.split('/')[3]%></p><div id=""></div></div>
                 <%}%>
               <%});%>
             <%}%>
@@ -156,7 +185,7 @@
             <%if(material){%>
               <%material.forEach(function(item,index,array){%>
                 <%if(item.polarity==0){%>
-                <div style="padding:5px;margin:10px;text-align:center;"><h3 style="display:inline-block;margin-right:12px;float:left;"><%=item.sequence%></h3><img style="width:80px;float:left;" src="<%=item.content%>"/><p style="display:relative;bottom:0px;margin:0px;"><%=item.content.split('/')[3]%></p><div id="" style="background-color:#F19F45;height:1px;width:100%;clear:left;"></div></div>
+                <div class="img_item"><h3><%=item.sequence%></h3><img src="<%=item.content%>"/><p><%=item.content.split('/')[3]%></p><div id=""></div></div>
                 <%}%>
               <%});%>
             <%}%>
@@ -245,7 +274,7 @@
           }
           console.log(src);
           sequence = pimgCounter();
-          $this.append('<div style="padding:5px;margin:10px;text-align:center;"><h3 style="display:inline-block;margin-right:12px;float:left;">'+sequence+'</h3><img style="width:80px;float:left;" src="'+src+'"/><p style="display:relative;bottom:0px;margin:0px;">'+fileList[i].name+'</p><div id="input_pimage'+(i+children_length)+'" style="background-color:#F19F45;height:1px;width:0%;clear:left;"></div></div>');
+          $this.append('<div class="img_item"><h3>'+sequence+'</h3><img src="'+src+'"/><p>'+fileList[i].name+'</p><div id="input_pimage'+(i+children_length)+'" style="width:0%;"></div></div>');
           var xhr = new XMLHttpRequest();
           var upload = xhr.upload;
           upload.onprogress = create_pupload_progress(i+children_length);
@@ -299,7 +328,7 @@
           }
           console.log(src);
           sequence = nimgCounter();
-          $this.append('<div style="padding:5px;margin:10px;text-align:center;"><h3 style="display:inline-block;margin-right:12px;float:left;">'+sequence+'</h3><img style="width:80px;float:left;" src="'+src+'"/><p style="display:relative;bottom:0px;margin:0px;">'+fileList[i].name+'</p><div id="input_nimage'+(i+children_length)+'" style="background-color:#F19F45;height:1px;width:0%;clear:left;"></div></div>');
+          $this.append('<div class="img_item"><h3>'+sequence+'</h3><img src="'+src+'"/><p>'+fileList[i].name+'</p><div id="input_nimage'+(i+children_length)+'" style="width:0%;"></div></div>');
           var xhr = new XMLHttpRequest();
           var upload = xhr.upload;
           upload.onprogress = create_nupload_progress(i+children_length);
