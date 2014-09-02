@@ -12,7 +12,7 @@ exports.articlesClassify = function(req, res) {
 }
 
 exports.psychologicalExperiment = function(req, res) {
-  model.MaterialImg.find(function(err, materials) {
+  model.MaterialImg.find().sort('+sequence').exec(function(err, materials) {
     return res.render('project/Psychological/Console', {
       material:materials
     });
