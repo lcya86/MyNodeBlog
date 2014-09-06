@@ -24,14 +24,14 @@ exports.psychologicalExperiment = function(req, res) {
       }).exec(function(err, materials) {
         if (err) console.error(err);
         Materials = materials;
-        callback(null, '');
+        callback(err, 'one');
       });
     },
     function(callback) {
       model.Subject.find(function(err, subjects) {
         if (err) console.error(err);
         Subjects = subjects;
-        callback(null, '');
+        callback(null, 'two');
       });
     },
     function(callback) {
