@@ -70,6 +70,7 @@ exports.psychologicalExperiment = function(req, res) {
     }
   ],function(err,result){
     if(err) console.error(err);
+    console.log(result);
     return res.render('project/Psychological/Console', {
       material: Materials,
       subjects: Subjects,
