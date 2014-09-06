@@ -164,40 +164,14 @@
       <div class="js_subjects left_nav">subjects manage</div>
       <div class="js_rasult left_nav">result manage</div>
     </div>
-    <div class="main">
-      <div class="main_hd">
-        <h2>material manage</h2>
-        <div class="tab_navs">
-          <div class="tab_nav selected">image</div>
-          <div class="tab_nav">text</div>
-        </div>
-      </div>
-      <div class="main_bd">
-        <div class="pfd">
-          积极
-          <div class="pimg_fd">
-            <%if(material){%>
-              <%material.forEach(function(item,index,array){%>
-                <%if(item.polarity==1){%>
-                <div data-id="<%=item._id%>" class="img_item"><h3><%=item.sequence%></h3><img src="<%=item.content%>"/><p><%=item.content.split('/')[3]%></p><div id=""></div></div>
-                <%}%>
-              <%});%>
-            <%}%>
-          </div>
-        </div> 
-        <div class="nfd">
-          消极 
-          <div class="nimg_fd">
-            <%if(material){%>
-              <%material.forEach(function(item,index,array){%>
-                <%if(item.polarity==0){%>
-                <div data-id="<%=item._id%>" class="img_item"><h3><%=item.sequence%></h3><img src="<%=item.content%>"/><p><%=item.content.split('/')[3]%></p><div id=""></div></div>
-                <%}%>
-              <%});%>
-            <%}%>
-          </div>
-        </div> 
-      </div>
+    <div id="material" class="main">
+      <%include material_manage.html%>
+    </div>
+    <div id="subjects" class="main" style="display:none;">
+      <%include subjects_manage.html%>
+    </div>
+    <div id="result" class="main" style="display:none;">
+      <%include result_manage.html%>
     </div>
   </div>
   <script type="text/javascript" src="/javascripts/jquery-1.11.0.min.js"></script>
@@ -375,17 +349,23 @@
     /*##########################页面切换#####################*/
 
     $('div.js_material.left_nav').click(function(event){
-      $('div.main').load('/PageSegment/material_manage.html');
+      $('#material').show();
+      $('#result').hide();
+      $('subjects').hide();
       $(event.target).addClass('selected').siblings().removeClass('selected');
     });
 
     $('div.js_subjects.left_nav').click(function(event){
-      $('div.main').load('/PageSegment/subjects_manage.html');
+      $('#material').hide();
+      $('#result').hide();
+      $('subjects').show();
       $(event.target).addClass('selected').siblings().removeClass('selected');
     });
 
     $('div.js_rasult.left_nav').click(function(event){
-      $('div.main').load('/PageSegment/rasult_manage.html');
+      $('#material').hide();
+      $('#result').show();
+      $('subjects').hide();
       $(event.target).addClass('selected').siblings().removeClass('selected');
     });
   });

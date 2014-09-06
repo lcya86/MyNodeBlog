@@ -1,0 +1,33 @@
+<div class="main_hd">
+  <h2>material manage</h2>
+  <div class="tab_navs">
+    <div class="tab_nav selected">image</div>
+    <div class="tab_nav">text</div>
+  </div>
+</div>
+<div class="main_bd">
+  <div class="pfd">
+    积极
+    <div class="pimg_fd">
+      <%if(material){%>
+        <%material.forEach(function(item,index,array){%>
+          <%if(item.polarity==1){%>
+          <div data-id="<%=item._id%>" class="img_item"><h3><%=item.sequence%></h3><img src="<%=item.content%>"/><p><%=item.content.split('/')[3]%></p><div id=""></div></div>
+          <%}%>
+        <%});%>
+      <%}%>
+    </div>
+  </div> 
+  <div class="nfd">
+    消极 
+    <div class="nimg_fd">
+      <%if(material){%>
+        <%material.forEach(function(item,index,array){%>
+          <%if(item.polarity==0){%>
+          <div data-id="<%=item._id%>" class="img_item"><h3><%=item.sequence%></h3><img src="<%=item.content%>"/><p><%=item.content.split('/')[3]%></p><div id=""></div></div>
+          <%}%>
+        <%});%>
+      <%}%>
+    </div>
+  </div>
+</div>
