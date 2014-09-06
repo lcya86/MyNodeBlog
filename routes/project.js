@@ -23,8 +23,8 @@ exports.psychologicalExperiment = function(req, res) {
       model.Subject.find(function(err, subjects) {
         if (err) console.error(err);
         Subjects = subjects;
-        cb(null, 1);
       });
+      cb(null, 1);
     },
     two:function(cb) {
       model.MaterialImg.find().sort({
