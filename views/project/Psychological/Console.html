@@ -402,7 +402,8 @@
         var $this = $(this);
         $.post('/project/psychological/console/addsubject',{type:$this.data('type'),name:$this.prev().val()},function(data){
           if(data.success){
-            $this.parent().data('id',data.id).html(data.name);
+            $this.parent().data('id',data.id).html('&nbsp;&nbsp;&nbsp;'+data.name);
+            $('div.statistics_fd').load('/project/psychological/console div.statistics_fd >*');
           }else{
             alert('添加被试失败');
           }
