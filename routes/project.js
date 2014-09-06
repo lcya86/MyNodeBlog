@@ -12,52 +12,73 @@ exports.articlesClassify = function(req, res) {
 }
 
 exports.psychologicalExperiment = function(req, res) {
+  var async = require('async');
+
   var Materials, Subjects,sc_count,cs_count,ts_count,csc_count,tsc_count;
-  model.MaterialImg.find().sort({
-    'sequence': +1
-  }).exec(function(err, materials) {
-    if(err) console.error(err);
-    Materials = materials;
-  });
 
-  model.Subject.find(function(err,subjects){
+  async.parallel([
+    function(callback){
+      model.MaterialImg.find().sort({
+        'sequence': +1
+      }).exec(function(err, materials) {
+        if(err) console.error(err);
+        Materials = materials;
+        callback(null,'one');
+      });
+    },
+    function(callback){
+      model.Subject.find(function(err,subjects){
+        if(err) console.error(err);
+        Subjects = subjects;
+        callback(null,'two');
+      });
+    },
+    function(callback){
+      model.Subject.count({complete:true},function(err,data){//实验组人数
+        if(err) console.error(err);
+        sc_count = data;
+        callback(null,'three');
+      });
+    },
+    function(callback){
+      model.Subject.count({type:1},function(err,data){//实验组人数
+        if(err) console.error(err);
+        ts_count = data;
+        callback(null,'four');
+      });
+    },
+    function(callback){
+      model.Subject.count({type:0},function(err,data){//控制组人数
+        if(err) console.error(err);
+        cs_count = data;
+        callback(null,'five');
+      });
+    },
+    function(callback){
+      model.Subject.count({type:1,complete:true},function(err,data){//实验组完成人数
+        if(err) console.error(err);
+        tsc_count = data;
+        callback(null,'six');
+      });
+    },
+    function(callback){
+      model.Subject.count({type:0,complete:true},function(err,data){//控制组完成人数
+        if(err) console.error(err);
+        csc_count = data;
+        callback(null,'seven');
+      });
+    }
+  ],function(err,result){
     if(err) console.error(err);
-    Subjects = subjects;
-  });
-
-  model.Subject.count({complete:true},function(err,data){//实验组人数
-    if(err) console.error(err);
-    sc_count = data;
-  });
-
-  model.Subject.count({type:1},function(err,data){//实验组人数
-    if(err) console.error(err);
-    ts_count = data;
-  });
-
-  model.Subject.count({type:0},function(err,data){//控制组人数
-    if(err) console.error(err);
-    cs_count = data;
-  });
-
-  model.Subject.count({type:1,complete:true},function(err,data){//实验组完成人数
-    if(err) console.error(err);
-    tsc_count = data;
-  });
-
-  model.Subject.count({type:0,complete:true},function(err,data){//控制组完成人数
-    if(err) console.error(err);
-    csc_count = data;
-  });
-
-  return res.render('project/Psychological/Console', {
-    material: Materials,
-    subjects: Subjects,
-    cs_count: cs_count,
-    ts_count: ts_count,
-    sc_count: sc_count,
-    csc_count: csc_count,
-    tsc_count: tsc_count
+    return res.render('project/Psychological/Console', {
+      material: Materials,
+      subjects: Subjects,
+      cs_count: cs_count,
+      ts_count: ts_count,
+      sc_count: sc_count,
+      csc_count: csc_count,
+      tsc_count: tsc_count
+    });
   });
 }
 
