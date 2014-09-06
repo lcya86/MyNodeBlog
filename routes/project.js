@@ -18,67 +18,67 @@ exports.psychologicalExperiment = function(req, res) {
 
   async.parallel([
 
-    function(callback) {
+    function(cb) {
       model.MaterialImg.find().sort({
         'sequence': +1
       }).exec(function(err, materials) {
         if (err) console.error(err);
         Materials = materials;
-        callback(err, 'one');
+        cb(null, 'one');
       });
     },
-    function(callback) {
+    function(cb) {
       model.Subject.find(function(err, subjects) {
         if (err) console.error(err);
         Subjects = subjects;
-        callback(null, 'two');
+        cb(null, 'two');
       });
     },
-    function(callback) {
+    function(cb) {
       model.Subject.count({
         complete: true
       }, function(err, data) { //实验组人数
         if (err) console.error(err);
         sc_count = data;
-        callback(null, 'three');
+        cb(null, 'three');
       });
     },
-    function(callback) {
+    function(cb) {
       model.Subject.count({
         type: 1
       }, function(err, data) { //实验组人数
         if (err) console.error(err);
         ts_count = data;
-        callback(null, 'four');
+        cb(null, 'four');
       });
     },
-    function(callback) {
+    function(cb) {
       model.Subject.count({
         type: 0
       }, function(err, data) { //控制组人数
         if (err) console.error(err);
         cs_count = data;
-        callback(null, 'five');
+        cb(null, 'five');
       });
     },
-    function(callback) {
+    function(cb) {
       model.Subject.count({
         type: 1,
         complete: true
       }, function(err, data) { //实验组完成人数
         if (err) console.error(err);
         tsc_count = data;
-        callback(null, 'six');
+        cb(null, 'six');
       });
     },
-    function(callback) {
+    function(cb) {
       model.Subject.count({
         type: 0,
         complete: true
       }, function(err, data) { //控制组完成人数
         if (err) console.error(err);
         csc_count = data;
-        callback(null, 'seven');
+        cb(null, 'seven');
       });
     }
   ], function(err, result) {
