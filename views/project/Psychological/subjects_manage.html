@@ -23,7 +23,7 @@
       <%if(subjects){%>
       <%subjects.forEach(function(item,index,array){%>
         <%if(item.type==1){%>
-        <div data-id="<%=item._id%>" class="subject_item">&nbsp;&nbsp;&nbsp;<%=item.name%></div>
+        <div data-id="<%=item._id%>" class="subject_item">&nbsp;&nbsp;&nbsp;<%=item.name%><p style="display:inline;float:right;"><%=item.complete?'(已完成)':'(未完成)'%></p></div>
         <%}%>
       <%});%>
       <%}%>
@@ -36,7 +36,7 @@
       <%if(subjects){%>
       <%subjects.forEach(function(item,index,array){%>
         <%if(item.type==0){%>
-        <div data-id="<%=item._id%>" class="subject_item">&nbsp;&nbsp;&nbsp;<%=item.name%></div>
+        <div data-id="<%=item._id%>" class="subject_item">&nbsp;&nbsp;&nbsp;<%=item.name%><p style="display:inline;float:right;"><%=item.complete?'(已完成)':'(未完成)'%></p></div>
         <%}%>
       <%});%>
       <%}%>
