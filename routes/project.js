@@ -16,72 +16,72 @@ exports.psychologicalExperiment = function(req, res) {
 
   var Materials, Subjects, sc_count, cs_count, ts_count, csc_count, tsc_count;
 
-  async.parallel([
+  async.parallel({
 
-    function(cb) {
+    one:function(cb) {
       model.MaterialImg.find().sort({
         'sequence': +1
       }).exec(function(err, materials) {
         if (err) console.error(err);
         Materials = materials;
-        cb(null, 'one');
+        cb(null, 1);
       });
     },
-    function(cb) {
+    two:function(cb) {
       model.Subject.find(function(err, subjects) {
         if (err) console.error(err);
         Subjects = subjects;
-        cb(null, 'two');
+        cb(null, 2);
       });
     },
-    function(cb) {
+    three:function(cb) {
       model.Subject.count({
         complete: true
       }, function(err, data) { //实验组人数
         if (err) console.error(err);
         sc_count = data;
-        cb(null, 'three');
+        cb(null, 3);
       });
     },
-    function(cb) {
+    four:function(cb) {
       model.Subject.count({
         type: 1
       }, function(err, data) { //实验组人数
         if (err) console.error(err);
         ts_count = data;
-        cb(null, 'four');
+        cb(null, 4);
       });
     },
-    function(cb) {
+    five:function(cb) {
       model.Subject.count({
         type: 0
       }, function(err, data) { //控制组人数
         if (err) console.error(err);
         cs_count = data;
-        cb(null, 'five');
+        cb(null, 5);
       });
     },
-    function(cb) {
+    six:function(cb) {
       model.Subject.count({
         type: 1,
         complete: true
       }, function(err, data) { //实验组完成人数
         if (err) console.error(err);
         tsc_count = data;
-        cb(null, 'six');
+        cb(null, 6);
       });
     },
-    function(cb) {
+    seven:function(cb) {
       model.Subject.count({
         type: 0,
         complete: true
       }, function(err, data) { //控制组完成人数
         if (err) console.error(err);
         csc_count = data;
-        cb(null, 'seven');
+        cb(null, 7);
       });
     }
-  ], function(err, result) {
+  }, function(err, result) {
     if (err) console.error(err);
     console.log(result);
     return res.render('project/Psychological/Console', {
