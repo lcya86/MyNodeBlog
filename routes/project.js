@@ -23,8 +23,8 @@ exports.psychologicalExperiment = function(req, res) {
       model.Subject.find(function(err, subjects) {
         if (err) console.error(err);
         Subjects = subjects;
+        cb(null);
       });
-      cb(null, 1);
     },
     two:function(cb) {
       model.MaterialImg.find().sort({
@@ -32,7 +32,7 @@ exports.psychologicalExperiment = function(req, res) {
       }).exec(function(err, materials) {
         if (err) console.error(err);
         Materials = materials;
-        cb(null, 2);
+        cb(null);
       });
     },
     three:function(cb) {
@@ -41,7 +41,7 @@ exports.psychologicalExperiment = function(req, res) {
       }, function(err, data) { //实验组人数
         if (err) console.error(err);
         sc_count = data;
-        cb(null, 3);
+        cb(null);
       });
     },
     four:function(cb) {
@@ -50,7 +50,7 @@ exports.psychologicalExperiment = function(req, res) {
       }, function(err, data) { //实验组人数
         if (err) console.error(err);
         ts_count = data;
-        cb(null, 4);
+        cb(null);
       });
     },
     five:function(cb) {
@@ -59,7 +59,7 @@ exports.psychologicalExperiment = function(req, res) {
       }, function(err, data) { //控制组人数
         if (err) console.error(err);
         cs_count = data;
-        cb(null, 5);
+        cb(null);
       });
     },
     six:function(cb) {
@@ -69,7 +69,7 @@ exports.psychologicalExperiment = function(req, res) {
       }, function(err, data) { //实验组完成人数
         if (err) console.error(err);
         tsc_count = data;
-        cb(null, 6);
+        cb(null);
       });
     },
     seven:function(cb) {
@@ -79,7 +79,7 @@ exports.psychologicalExperiment = function(req, res) {
       }, function(err, data) { //控制组完成人数
         if (err) console.error(err);
         csc_count = data;
-        cb(null, 7);
+        cb(null);
       });
     }
   }, function(err, result) {
