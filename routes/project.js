@@ -39,7 +39,7 @@ exports.uploadImg = function(req,res){
     bufferHelper.concat(chunk);
   });
   req.on('end',function(){
-    fs.appendFile('/root/MyNodeBlog/public/upload/img/'+name, bufferHelper.toBuffer(), function (err) {
+    fs.writeFile('/root/MyNodeBlog/public/upload/img/'+name, bufferHelper.toBuffer(), function (err) {
       if (err) throw err;
       console.log('The "data to append" was appended to file!');
       model.MaterialImg.create({
