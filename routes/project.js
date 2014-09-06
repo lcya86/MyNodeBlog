@@ -14,62 +14,75 @@ exports.articlesClassify = function(req, res) {
 exports.psychologicalExperiment = function(req, res) {
   var async = require('async');
 
-  var Materials, Subjects,sc_count,cs_count,ts_count,csc_count,tsc_count;
+  var Materials, Subjects, sc_count, cs_count, ts_count, csc_count, tsc_count;
 
   async.parallel([
-    function(callback){
+
+    function(callback) {
       model.MaterialImg.find().sort({
         'sequence': +1
       }).exec(function(err, materials) {
-        if(err) console.error(err);
+        if (err) console.error(err);
         Materials = materials;
-        callback(null,'one');
+        callback(null, 'one');
       });
     },
-    function(callback){
-      model.Subject.find(function(err,subjects){
-        if(err) console.error(err);
+    function(callback) {
+      model.Subject.find(function(err, subjects) {
+        if (err) console.error(err);
         Subjects = subjects;
-        callback(null,'two');
+        callback(null, 'two');
       });
     },
-    function(callback){
-      model.Subject.count({complete:true},function(err,data){//实验组人数
-        if(err) console.error(err);
+    function(callback) {
+      model.Subject.count({
+        complete: true
+      }, function(err, data) { //实验组人数
+        if (err) console.error(err);
         sc_count = data;
-        callback(null,'three');
+        callback(null, 'three');
       });
     },
-    function(callback){
-      model.Subject.count({type:1},function(err,data){//实验组人数
-        if(err) console.error(err);
+    function(callback) {
+      model.Subject.count({
+        type: 1
+      }, function(err, data) { //实验组人数
+        if (err) console.error(err);
         ts_count = data;
-        callback(null,'four');
+        callback(null, 'four');
       });
     },
-    function(callback){
-      model.Subject.count({type:0},function(err,data){//控制组人数
-        if(err) console.error(err);
+    function(callback) {
+      model.Subject.count({
+        type: 0
+      }, function(err, data) { //控制组人数
+        if (err) console.error(err);
         cs_count = data;
-        callback(null,'five');
+        callback(null, 'five');
       });
     },
-    function(callback){
-      model.Subject.count({type:1,complete:true},function(err,data){//实验组完成人数
-        if(err) console.error(err);
+    function(callback) {
+      model.Subject.count({
+        type: 1,
+        complete: true
+      }, function(err, data) { //实验组完成人数
+        if (err) console.error(err);
         tsc_count = data;
-        callback(null,'six');
+        callback(null, 'six');
       });
     },
-    function(callback){
-      model.Subject.count({type:0,complete:true},function(err,data){//控制组完成人数
-        if(err) console.error(err);
+    function(callback) {
+      model.Subject.count({
+        type: 0,
+        complete: true
+      }, function(err, data) { //控制组完成人数
+        if (err) console.error(err);
         csc_count = data;
-        callback(null,'seven');
+        callback(null, 'seven');
       });
     }
-  ],function(err,result){
-    if(err) console.error(err);
+  ], function(err, result) {
+    if (err) console.error(err);
     console.log(result);
     return res.render('project/Psychological/Console', {
       material: Materials,
@@ -93,15 +106,24 @@ exports.doExperiment = function(req, res) {
   });
 }
 
-exports.addSubject = function(req,res){
+exports.addSubject = function(req, res) {
   var name = req.body.name;
   var type = req.body.type;
-  model.Subject.create({name:name,type:type},function(err,item){
-    if(err){
+  model.Subject.create({
+    name: name,
+    type: type
+  }, function(err, item) {
+    if (err) {
       console.error(err);
-      res.send({success:false});
+      res.send({
+        success: false
+      });
     }
-    res.send({success:true,name:item.name,id:item._id});
+    res.send({
+      success: true,
+      name: item.name,
+      id: item._id
+    });
   });
 }
 
