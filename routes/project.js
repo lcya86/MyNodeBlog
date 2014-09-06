@@ -18,19 +18,20 @@ exports.psychologicalExperiment = function(req, res) {
 
   async.parallel({
 
+    
     one:function(cb) {
+      model.Subject.find(function(err, subjects) {
+        if (err) console.error(err);
+        Subjects = subjects;
+        cb(null, 1);
+      });
+    },
+    two:function(cb) {
       model.MaterialImg.find().sort({
         'sequence': +1
       }).exec(function(err, materials) {
         if (err) console.error(err);
         Materials = materials;
-        cb(null, 1);
-      });
-    },
-    two:function(cb) {
-      model.Subject.find(function(err, subjects) {
-        if (err) console.error(err);
-        Subjects = subjects;
         cb(null, 2);
       });
     },
