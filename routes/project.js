@@ -25,22 +25,27 @@ exports.psychologicalExperiment = function(req, res) {
     Subjects = subjects;
   });
 
-  model.Subjects.count({type:1},function(err,data){//实验组人数
+  model.Subject.count({complete:true},function(err,data){//实验组人数
+    if(err) console.error(err);
+    sc_count = data;
+  });
+
+  model.Subject.count({type:1},function(err,data){//实验组人数
     if(err) console.error(err);
     ts_count = data;
   });
 
-  model.Subjects.count({type:0},function(err,data){//控制组人数
+  model.Subject.count({type:0},function(err,data){//控制组人数
     if(err) console.error(err);
     cs_count = data;
   });
 
-  model.Subjects.count({type:1,complete:true},function(err,data){//实验组完成人数
+  model.Subject.count({type:1,complete:true},function(err,data){//实验组完成人数
     if(err) console.error(err);
     tsc_count = data;
   });
 
-  model.Subjects.count({type:0,complete:true},function(err,data){//控制组完成人数
+  model.Subject.count({type:0,complete:true},function(err,data){//控制组完成人数
     if(err) console.error(err);
     csc_count = data;
   });
@@ -50,7 +55,7 @@ exports.psychologicalExperiment = function(req, res) {
     subjects: Subjects,
     cs_count: cs_count,
     ts_count: ts_count,
-    sc_count: Subjects.length,
+    sc_count: sc_count,
     csc_count: csc_count,
     tsc_count: tsc_count
   });
