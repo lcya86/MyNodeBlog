@@ -19,11 +19,11 @@
   <div class="tfd">
     实验组
     <div class="tsubject_fd">
-      <div class="add_subject">添加被试</div>
+      <div class="t add_subject">添加被试</div>
       <%if(subjects){%>
       <%subjects.forEach(function(item,index,array){%>
         <%if(type==1){%>
-        <div class="subject_item"><%=item.name%></div>
+        <div data-id="<%=item._id%>" class="subject_item"><%=item.name%></div>
         <%}%>
       <%});%>
       <%}%>
@@ -32,11 +32,11 @@
   <div class="cfd">
     控制组
     <div class="csubject_fd">
-      <div class="add_subject">添加被试</div>
+      <div class="c add_subject">添加被试</div>
       <%if(subjects){%>
       <%subjects.forEach(function(item,index,array){%>
         <%if(type==0){%>
-        <div class="subject_item"><%=item.name%></div>
+        <div data-id="<%=item._id%>" class="subject_item"><%=item.name%></div>
         <%}%>
       <%});%>
       <%}%>

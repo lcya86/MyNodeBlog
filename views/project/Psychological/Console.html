@@ -388,6 +388,24 @@
         });
       });
 
+    /*##########################被试管理#####################*/
+    $('#subjects')
+      .on('click','div.t.add_subject',function(event){
+        var $this = $(this);
+        $this.after('<div class="subject_item"><input style="margin-left:15px;" type="text" placehoder="被试姓名" /><a href="javascript:;">&nbsp;&nbsp;添加</a></div>');
+      })
+      .on('click','div.subject_item a',function(event){
+        var $this = $(this);
+        $.post('/project/psychological/console/addsubject',{name:$this.prev().val()},function(data){
+          if(data.success){
+            $this.parent().data('id',data.id).html(data.name);
+          }else{
+            alert('添加被试失败');
+          }
+        });
+      });
+
+
 
     /*##########################页面切换#####################*/
 

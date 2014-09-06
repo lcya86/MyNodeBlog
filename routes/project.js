@@ -71,6 +71,18 @@ exports.doExperiment = function(req, res) {
   });
 }
 
+exports.addSubject = function(req,res){
+  var name = req.body.name;
+  var type = req.body.type;
+  model.Subject.create({name:name,type:type},function(err,item){
+    if(err){
+      console.error(err);
+      res.send({success:false});
+    }
+    res.send({success:true,name:item.name,id:item._id});
+  });
+}
+
 exports.uploadImg = function(req, res) {
   var fs = require('fs');
   var model = require('../models');
