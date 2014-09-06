@@ -22,7 +22,7 @@
       <div class="t add_subject">添加被试</div>
       <%if(subjects){%>
       <%subjects.forEach(function(item,index,array){%>
-        <%if(type==1){%>
+        <%if(item.type==1){%>
         <div data-id="<%=item._id%>" class="subject_item">&nbsp;&nbsp;&nbsp;<%=item.name%></div>
         <%}%>
       <%});%>
@@ -35,7 +35,7 @@
       <div class="c add_subject">添加被试</div>
       <%if(subjects){%>
       <%subjects.forEach(function(item,index,array){%>
-        <%if(type==0){%>
+        <%if(item.type==0){%>
         <div data-id="<%=item._id%>" class="subject_item">&nbsp;&nbsp;&nbsp;<%=item.name%></div>
         <%}%>
       <%});%>
