@@ -412,7 +412,7 @@
         var $this = $(this);
         $.post('/project/psychological/console/addsubject',{type:$this.data('type'),name:$this.prev().val()},function(data){
           if(data.success){
-            $this.parent().data('id',data.id).html('&nbsp;&nbsp;&nbsp;'+data.name+'<span>(未完成)</span>');
+            $this.parent().data('id',data.id).html('&nbsp;&nbsp;&nbsp;'+data.name+'<span style="float:right;">(未完成)</span>');
             $('div.statistics_fd').load('/project/psychological/console div.statistics_fd >*');
           }else{
             alert('添加被试失败');
