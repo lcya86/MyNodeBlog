@@ -231,6 +231,8 @@
       var children = $('div.pimg_fd').children();
       if(children.length>0){
         pimgSequence = children.last().children('h3').text();
+      }else if(children.length==0){
+        pimgSequence = 0;
       }
       return function(){
         pimgSequence++;
@@ -243,6 +245,8 @@
       var children = $('div.nimg_fd').children();
       if(children.length>0){
         nimgSequence = children.last().children('h3').text();
+      }else if(children.length==0){
+        nimgSequence = 0;
       }
       return function(){
         nimgSequence++;
