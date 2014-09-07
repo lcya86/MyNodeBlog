@@ -161,7 +161,6 @@ exports.uploadImg = function(req, res) {
 exports.delImg = function(req, res) {
   var model = require('../models');
   var id = req.body.id;
-  console.log(id);
   model.MaterialImg.findById(id, function(err, img) {
     if (err) {
       console.error(err);
@@ -192,7 +191,21 @@ exports.delImg = function(req, res) {
       });
     });
   });
-  
+}
+
+exports.delSubject = function(req,res){
+  var id = req.body.subject_id;
+  model.Subject.findByIdAndRemove(id, function(err) {
+    if (err) {
+      console.error(err);
+      return res.send({
+        success: false
+      });
+    }
+    return res.send({
+      success: true
+    });
+  });
 }
 
 exports.stock = function(req, res) {

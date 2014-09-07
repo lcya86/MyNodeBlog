@@ -179,6 +179,7 @@
     .subject_item{
       border-bottom: dashed 1px #c5c5c5;
       padding:0px 15px;
+      cursor: pointer;
     }
 
   </style>
@@ -408,6 +409,7 @@
         }
       })
       .on('click.add_submit','div.subject_item a',function(event){
+        event.stopPropagation();
         var $this = $(this);
         $.post('/project/psychological/console/addsubject',{type:$this.data('type'),name:$this.prev().val()},function(data){
           if(data.success){
@@ -415,6 +417,17 @@
             $('div.statistics_fd').load('./console div.statistics_fd >*');
           }else{
             alert('添加被试失败');
+          }
+        });
+      })
+      .on('click.del','div.subject_item',function(event){
+        event.stopPropagation();
+        var $this = $(this);
+        $.post('./console/delsubject',{subject_id:$this.data('id')},function(data){
+          if(data.success){
+            $this.remove();
+          }else{
+            alert('删除被试失败');
           }
         });
       });
