@@ -423,7 +423,7 @@
       .on('click.del','div.subject_item',function(event){
         event.stopPropagation();
         var $this = $(this);
-        $.post('./console/delsubject',{subject_id:$this.data('id')},function(data){
+        $.post('/project/psychological/console/delsuject',{subject_id:$this.data('id')},function(data){
           if(data.success){
             $this.remove();
           }else{
