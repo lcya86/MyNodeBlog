@@ -12,7 +12,7 @@
       <%if(material){%>
         <%material.forEach(function(item,index,array){%>
           <%if(item.polarity==1){%>
-          <div data-id="<%=item._id%>" class="img_item"><h3><%=item.sequence%></h3><img src="<%=item.content%>"/><p><%=item.content.split('/')[3]%></p><div></div></div>
+          <div data-id="<%=item._id%>" class="img_item real"><h3><%=item.sequence%></h3><img src="<%=item.content%>"/><p><%=item.content.split('/')[3]%></p><div></div></div>
           <%}%>
         <%});%>
       <%}%>
@@ -24,7 +24,7 @@
       <%if(material){%>
         <%material.forEach(function(item,index,array){%>
           <%if(item.polarity==0){%>
-          <div data-id="<%=item._id%>" class="img_item"><h3><%=item.sequence%></h3><img src="<%=item.content%>"/><p><%=item.content.split('/')[3]%></p><div></div></div>
+          <div data-id="<%=item._id%>" class="img_item real"><h3><%=item.sequence%></h3><img src="<%=item.content%>"/><p><%=item.content.split('/')[3]%></p><div></div></div>
           <%}%>
         <%});%>
       <%}%>

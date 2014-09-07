@@ -372,7 +372,7 @@
         event.preventDefault();
         $(this).removeClass('selected');
       })
-      .on('click.delete','div.img_item',function(event){
+      .on('click.delete','div.img_item.real',function(event){
         event.stopPropagation();
         $target = $(event.currentTarget);
         $.post('/project/psychological/console/delimg',{id:$target.data('id')},function(data){
