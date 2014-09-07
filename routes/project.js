@@ -177,16 +177,18 @@ exports.delImg = function(req, res) {
       }
     }, {
       multi: true
-    });
-    model.MaterialImg.findByIdAndRemove(id, function(err) {
-      if (err) {
-        console.error(err);
+    },function(err){
+      if(err) console.error(err);
+      model.MaterialImg.findByIdAndRemove(id, function(err) {
+        if (err) {
+          console.error(err);
+          return res.send({
+            success: false
+          });
+        }
         return res.send({
-          success: false
+          success: true
         });
-      }
-      return res.send({
-        success: true
       });
     });
   });
