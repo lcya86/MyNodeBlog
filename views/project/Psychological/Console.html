@@ -278,10 +278,10 @@
 
         function create_pupload_done(index){
           return function(event){
-            console.log('pic'+index+' done!')
             $this.find('#input_pimage'+index).css({
               width:'100%'
             });
+            $('div.pimg_fd').load('./ div.pimg_fd >*');
           }
         }
         $this = $(this);
@@ -332,10 +332,10 @@
 
         function create_nupload_done(index){
           return function(event){
-            console.log('pic'+index+' done!')
             $this.find('#input_nimage'+index).css({
               width:'100%'
             });
+            $('div.nimg_fd').load('./ div.nimg_fd >*');
           }
         }
         $this = $(this);
@@ -414,7 +414,7 @@
         $.post('/project/psychological/console/addsubject',{type:$this.data('type'),name:$this.prev().val()},function(data){
           if(data.success){
             $this.parent().data('id',data.id).html(data.name+'<span style="float:right;">(未完成)</span>');
-            $('div.statistics_fd').load('/project/psychological/console div.statistics_fd >*');
+            $('div.statistics_fd').load('./ div.statistics_fd >*');
           }else{
             alert('添加被试失败');
           }
