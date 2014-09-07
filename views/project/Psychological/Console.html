@@ -381,8 +381,8 @@
           if(data.success){
             console.log($target);
             console.log($target.parent());
-            console.log($target[0].className);
-            //$target.parent().load('./console div.'+$target[0].className);
+            console.log($target.parent()[0].className);
+            //$target.parent().load('./console div.'+$target.parent()[0].className);
           }else{
             alert('删除图片失败');
           }
