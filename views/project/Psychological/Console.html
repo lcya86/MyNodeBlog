@@ -426,6 +426,7 @@
         $.post('/project/psychological/console/delsuject',{subject_id:$this.data('id')},function(data){
           if(data.success){
             $this.remove();
+            $('div.statistics_fd').load('./console div.statistics_fd >*');
           }else{
             alert('删除被试失败');
           }
