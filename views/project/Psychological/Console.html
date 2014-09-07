@@ -246,11 +246,9 @@
       }else if(children.length==0){
         pimgSequence = 0;
       }
-      return function(){
-        pimgSequence++;
-        return pimgSequence;
-      }
-    }();
+      pimgSequence++;
+      return pimgSequence;
+    };
 
     var nimgCounter = function(){//产生sequence
       var nimgSequence = 0;
@@ -260,11 +258,9 @@
       }else if(children.length==0){
         nimgSequence = 0;
       }
-      return function(){
-        nimgSequence++;
-        return nimgSequence;
-      }
-    }();
+      nimgSequence++;
+      return nimgSequence;
+    };
 
     $('div.main')
       .on('drop.add','div.pimg_fd',function(event){
