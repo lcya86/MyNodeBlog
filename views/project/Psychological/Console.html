@@ -241,7 +241,7 @@
       var pimgSequence = 0;
       var children = $('div.pimg_fd').children();
       if(children.length>0){
-        pimgSequence = Number(children.last().children('h3').text()) - 1;
+        pimgSequence = Number(children.last().children('h3').text());
       }else if(children.length==0){
         pimgSequence = 0;
       }
@@ -255,7 +255,7 @@
       var nimgSequence = 0;
       var children = $('div.nimg_fd').children();
       if(children.length>0){
-        nimgSequence = Number(children.last().children('h3').text()) - 1;
+        nimgSequence = Number(children.last().children('h3').text());
       }else if(children.length==0){
         nimgSequence = 0;
       }
@@ -281,7 +281,6 @@
             $this.find('#input_pimage'+index).css({
               width:'100%'
             });
-            $('div.pimg_fd').load('./console div.pimg_fd >*');
           }
         }
         $this = $(this);
@@ -335,7 +334,6 @@
             $this.find('#input_nimage'+index).css({
               width:'100%'
             });
-            $('div.nimg_fd').load('./console div.nimg_fd >*');
           }
         }
         $this = $(this);
