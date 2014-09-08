@@ -213,7 +213,7 @@ exports.subjectLogin = function(req,res){
   model.Subject.find({name:name},function(err,subject){
     if(err) console.error(err);
     console.log({success:true,type:subject.type,complete:subject.complete});
-    if(subject.length>0) return res.send({success:true,type:subject.type,complete:subject.complete});
+    if(subject.length>0) return res.send({success:true,type:subject[0].type,complete:subject[0].complete});
     return res.send({success:false});
   });
 }
