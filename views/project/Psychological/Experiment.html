@@ -123,7 +123,7 @@
     var reactive = false;
     var miss = true;
     var up = false;
-    var E = false;
+    var J = false;
     var count = 0;
     $upside.hide();
     $downside.hide();
@@ -139,13 +139,13 @@
         reactive = false;
         $cross.show();
         $upside.empty();
-        $upside.append($('img.upsideimg'+count));
+        $upside.append($('#n'+count));
         $downside.empty();
-        $downside.append($('img.upsideimg'+count));
+        $downside.append($('#p'+count));
         $upside.hide();
         $downside.hide();
         up = Math.floor((Math.random()*10))%2==0;
-        E = Math.floor((Math.random()*10))%2==0;
+        J = Math.floor((Math.random()*10))%2==0;
         setTimeout(function(){
           $cross.hide();
           $upside.show();
@@ -154,15 +154,15 @@
         setTimeout(function(){
           reactive = true;
           if(up){
-            if(E){
-              $upside.html('<span>E</span>');
+            if(J){
+              $upside.html('<span>J</span>');
             }else{
               $upside.html('<span>F</span>');
             }
             $downside.html('');
           }else{
-            if(E){
-              $downside.html('<span>E</span>');
+            if(J){
+              $downside.html('<span>J</span>');
             }else{
               $downside.html('<span>F</span>');
             }
@@ -182,8 +182,8 @@
 
     $(document).keydown(function(event){
       if(reactive){
-        if ( event.which == 69 ) {
-          if(E){
+        if ( event.which == 74 ) {
+          if(J){
             miss = false;
             start()
           }else{
@@ -193,7 +193,7 @@
             alert(miss);
           }
         }else if(event.which == 70){
-          if(E){
+          if(J){
             miss = true;
           }else{
             miss = false;
