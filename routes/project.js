@@ -235,6 +235,17 @@ exports.sendResult = function(req,res){
   });
 }
 
+exports.getResult = function(req,res){
+  var id = req.query.id;
+  model.Results.findById(id,function(err,results){
+    if(err){
+      console.error(err);
+      return res.send({success:false});
+    }
+    return res.send({success:true,results:results});
+  });
+}
+
 exports.stock = function(req, res) {
   var press = require('./superPress').press;
   press(req.query.code, req.query.times, function(labels, data) {

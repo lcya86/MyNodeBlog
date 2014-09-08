@@ -182,6 +182,24 @@
       padding:0px 15px;
       cursor: pointer;
     }
+    .subject_fd{
+      width: 24%;
+      float: left;
+      margin-right: 4%;
+    }
+    .subjectList{
+      border: solid 1px #F19F45;
+      min-height: 40%;
+    }
+    .result_fd{
+      width: 40%;
+      float: left;
+    }
+    .resultTable{
+      border:solid 1px #F19F45;
+      text-align: center;
+    }
+
 
   </style>
 </head>
@@ -428,6 +446,37 @@
         });
       });
 
+    /*##########################结果管理#####################*/
+    $('#result')
+      .on('click','div.subject_item',function(event){
+        event.stopPropagation();
+        var $this = $(this);
+        $.get('/project/psychological/console/getresult',{id:$this.data(id)},function(data){
+          if(data.success){
+            var table = '实验结果';
+            table += '<table class="resultTable" cellspacing="0px" cellpadding="5px" width="300px">';
+            table += '<thead>';
+            table += '<tr>';
+            table += '<th>是否积极图片</th>';
+            table += '<th>是否miss</th>';
+            table += '<th>反应时</th>';
+            table += '</tr>';
+            table += '</thead>';
+            table += '<tbody>';
+            if(data.results){
+              results.forEach(function(item,index,array){
+                table += '<tr>';
+                table += '<td>'+item.isUnderP+'</td>';
+                table += '<td>'+item.isMiss+'</td>';
+                table += '<td>'+item.reactTime+'</td>';
+                table += '</tr>';
+              });
+            }
+            table += '</tbody>';
+            table += '</table>';
+          }
+        });
+      });
 
 
     /*##########################页面切换#####################*/
