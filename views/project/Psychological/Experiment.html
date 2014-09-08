@@ -132,6 +132,7 @@
     var type = 0;
     var reactTime = 0;
     var timer;
+    var time1;
     var name = '';
     var result = [];
     $upside.hide();
@@ -207,6 +208,7 @@
             }
             $upside.html('');
           }
+          time1 = new Date().getTime();
           timer = setInterval(function(){
             reactTime++;
           },1);
@@ -216,6 +218,7 @@
           if(miss){
             result[count].isMiss = miss;
             result[count].reactTime = reactTime;
+            result[count].time = new Date().getTime() - time1;
             start();
           }
         },2000);
