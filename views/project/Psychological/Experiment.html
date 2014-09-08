@@ -234,27 +234,23 @@
     $(document).keydown(function(event){
       if(reactive){
         reactive = false;
+        miss = false;
         clearInterval(timer);
         result[count].reactTime = new Date().getTime() - startTime
         if (event.which == 74) {
           if(J){
-            miss = false;
-            result[count].isCorrect = !miss;
+            result[count].isCorrect = true;
           }else{
-            miss = true;
-            result[count].isCorrect = !miss;
+            result[count].isCorrect = false;
           }
         }else if(event.which == 70){
           if(J){
-            miss = true;
-            result[count].isCorrect = !miss;
+            result[count].isCorrect = false;
           }else{
-            miss = false;
-            result[count].isCorrect = !miss;
+            result[count].isCorrect = true;
           }
         }else{
-          miss = true;
-          result[count].isCorrect = !miss;
+          result[count].isCorrect = false;
         }
         start();
       }
