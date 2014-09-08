@@ -451,7 +451,7 @@
       .on('click','div.subject_item',function(event){
         event.stopPropagation();
         var $this = $(this);
-        $.get('/project/psychological/console/getresult',{id:$this.data(id)},function(data){
+        $.get('/project/psychological/console/getresult',{id:$this.data('id')},function(data){
           if(data.success){
             var table = '实验结果';
             table += '<table class="resultTable" cellspacing="0px" cellpadding="5px" width="300px">';
