@@ -130,12 +130,17 @@
     var J = false;
     var count = 0;
     var type = 0;
+    var reactTime = 0;
+    var timer;
+    var name = '';
+    var result = [];
     $upside.hide();
     $downside.hide();
 
     $('a.b_login').click(function(event){
       event.preventDefault();
-      $.get('/project/psychological/experiment/login',{name:$(this).prev().val()},function(data){
+      name = $(this).prev().val();
+      $.get('/project/psychological/experiment/login',{name:name},function(data){
         if(data.success){
           if(data.complete){
             alert("您已完成实验");
@@ -153,6 +158,7 @@
     function start(){
       if(count<<%=material.length/2%>){
         reactive = false;
+        reactTime = 0;
         $cross.show();
         $upside.empty();
         $downside.empty();
@@ -164,6 +170,7 @@
           }else{
             up = Math.floor((Math.random()*10))==9;
           }
+          result[count].isUnderP = !up;
         }else{
           $downside.append($('#n'+(count+1)));
           $upside.append($('#p'+(count+1)));
@@ -172,6 +179,7 @@
           }else{
             up = Math.floor((Math.random()*10))!=9;
           }
+          result[count].isUnderP = up;
         }
         $upside.hide();
         $downside.hide();
@@ -198,41 +206,57 @@
             }
             $upside.html('');
           }
+          timer = setInterval(function(){
+            reactTime++;
+          },1);
         },1000);
         setTimeout(function(){
+          clearInterval(timer);
           if(miss){
+            result[count].isMiss = miss;
+            result[count].reactTime = 1000;
             start();
           }
         },2000); 
         count++;
       }else{
-        alert('finish');
+        $.post('/project/psychological/experiment/sendresult',{result:result,name:name},function(data){
+          if(data.success){
+            $upside.hide();
+            $downside.hide();
+            $upside.html('<h1>实验结束，谢谢参与</h1>');
+          }else{
+            alert('记录结果出错');
+          }
+        });
       }
     }
 
     $(document).keydown(function(event){
       if(reactive){
-        if ( event.which == 74 ) {
+        clearInterval(timer);
+        result[count].reactTime = reactTime;
+        if (event.which == 74) {
           if(J){
             miss = false;
-            start()
+            result[count].isMiss = miss;
           }else{
             miss = true;
-          }
-          if(miss==true){
-            alert(miss);
+            result[count].isMiss = miss;
           }
         }else if(event.which == 70){
           if(J){
             miss = true;
+            result[count].isMiss = miss;
           }else{
             miss = false;
-            start()
+            result[count].isMiss = miss;
           }
-          if(miss==true){
-            alert(miss);
-          }
+        }else{
+          miss = true;
+          result[count].isMiss = miss;
         }
+        start();
       }
     });
 

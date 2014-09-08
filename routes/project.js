@@ -149,9 +149,9 @@ exports.uploadImg = function(req, res) {
       }, function(err) {
         if (err) console.error(err);
         console.log('insert img:/root/MyNodeBlog/public/upload/img/' + name);
-      });
-      res.send({
-        success: true
+        res.send({
+          success: true
+        });
       });
     });
   });
@@ -215,6 +215,21 @@ exports.subjectLogin = function(req,res){
     if(subject.length>0) return res.send({success:true,type:subject.type,complete:subject.complete});
     return res.send({success:false});
   });
+}
+
+exports.sendResult = function(req,res){
+  var name = req.body.name;
+  var result = req.body.result;
+  console.log(result);
+  /*
+  model.Results.create({name:name,},function(err){
+    if(err){
+      console.error(err); 
+      return res.rend({success:false});
+    }
+    return res.send({success:true});
+  });
+*/
 }
 
 exports.stock = function(req, res) {

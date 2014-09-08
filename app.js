@@ -87,6 +87,7 @@ app.post('/project/psychological/uploadImg', routes.Project.uploadImg);
 app.post('/project/psychological/console/delimg', routes.Project.delImg);
 app.post('/project/psychological/console/addsubject', routes.Project.addSubject);
 app.post('/project/psychological/console/delsuject', routes.Project.delSubject);
+app.post('/project/psychological/experiment/sendresult', routes.Project.sendResult);
 app.get('/project/psychological/experiment/login', routes.Project.subjectLogin);
 app.get('/project/stock', routes.Project.stock);
 app.get('/getpost/:id', routes.Post.getPost);
