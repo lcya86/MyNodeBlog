@@ -239,22 +239,22 @@
         if (event.which == 74) {
           if(J){
             miss = false;
-            result[count].isMiss = miss;
+            result[count].isCorrect = !miss;
           }else{
             miss = true;
-            result[count].isMiss = miss;
+            result[count].isCorrect = !miss;
           }
         }else if(event.which == 70){
           if(J){
             miss = true;
-            result[count].isMiss = miss;
+            result[count].isCorrect = !miss;
           }else{
             miss = false;
-            result[count].isMiss = miss;
+            result[count].isCorrect = !miss;
           }
         }else{
           miss = true;
-          result[count].isMiss = miss;
+          result[count].isCorrect = !miss;
         }
         start();
       }
