@@ -221,11 +221,12 @@ exports.sendResult = function(req,res){
   var name = req.body.name;
   var result = req.body.result;
   console.log(result);
+  return res.send({success:true});
   /*
-  model.Results.create({name:name,},function(err){
+  model.Results.create({name:name,results:result},function(err){
     if(err){
       console.error(err); 
-      return res.rend({success:false});
+      return res.send({success:false});
     }
     return res.send({success:true});
   });
