@@ -135,13 +135,18 @@
     });
 
     function start(){
-      if(count<<%=material.length/2+1%>){
+      if(count<<%=material.length/2%>){
         reactive = false;
         $cross.show();
         $upside.empty();
-        $upside.append($('#n'+count));
         $downside.empty();
-        $downside.append($('#p'+count));
+        if(Math.floor((Math.random()*10))%2==0){
+          $upside.append($('#n'+(count+1)));
+          $downside.append($('#p'+(count+1)));
+        }else{
+          $downside.append($('#n'+(count+1)));
+          $upside.append($('#p'+(count+1)));
+        }
         $upside.hide();
         $downside.hide();
         up = Math.floor((Math.random()*10))%2==0;
