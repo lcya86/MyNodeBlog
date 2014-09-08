@@ -88,7 +88,7 @@
   <div class="container" style="display:none;">
     <div class="d_login">
       请输入姓名
-      <input type="text"/>
+      <input type="text" placeholder="请输入姓名"/>
       <a href="" class="b_login">确定</a>
     </div>
     
@@ -125,13 +125,25 @@
     var up = false;
     var J = false;
     var count = 0;
+    var type = 0;
     $upside.hide();
     $downside.hide();
 
     $('a.b_login').click(function(event){
       event.preventDefault();
-      $('div.d_login').hide();
-      start();
+      $.get('/project/psychological/experiment/login',{name:$(this).prev().val()},function(data){
+        if(data.success){
+          if(data.complete){
+            alert("您已完成实验");
+          }else{
+            $('div.d_login').hide();
+            type = data.type;
+            start();
+          }
+        }else{
+          alert("此用户不存在");
+        }
+      });
     });
 
     function start(){
@@ -143,13 +155,22 @@
         if(Math.floor((Math.random()*10))%2==0){
           $upside.append($('#n'+(count+1)));
           $downside.append($('#p'+(count+1)));
+          if(type==0){
+            up = Math.floor((Math.random()*10))%2==0;
+          }else{
+            up = Math.floor((Math.random()*10))==9;
+          }
         }else{
           $downside.append($('#n'+(count+1)));
           $upside.append($('#p'+(count+1)));
+          if(type==0){
+            up = Math.floor((Math.random()*10))%2==0;
+          }else{
+            up = Math.floor((Math.random()*10))!=9;
+          }
         }
         $upside.hide();
         $downside.hide();
-        up = Math.floor((Math.random()*10))%2==0;
         J = Math.floor((Math.random()*10))%2==0;
         setTimeout(function(){
           $cross.hide();

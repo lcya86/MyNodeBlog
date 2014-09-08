@@ -208,6 +208,15 @@ exports.delSubject = function(req,res){
   });
 }
 
+exports.subjectLogin = function(req,res){
+  var name = req.body.name;
+  model.Subject.find({name:name},function(err,subject){
+    if(err) console.error(err);
+    if(subject) return res.send({success:true,type:subject.type,complete:subject.complete});
+    return res.send({success:false});
+  });
+}
+
 exports.stock = function(req, res) {
   var press = require('./superPress').press;
   press(req.query.code, req.query.times, function(labels, data) {
