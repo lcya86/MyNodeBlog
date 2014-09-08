@@ -130,7 +130,6 @@
     var J = false;
     var count = -1;
     var type = 0;
-    var reactTime = 0;
     var timer;
     var startTime;
     var name = '';
@@ -209,16 +208,12 @@
             $upside.html('');
           }
           startTime = new Date().getTime();
-          timer = setInterval(function(){
-            reactTime++;
-          },1);
         },1000);
         setTimeout(function(){
           clearInterval(timer);
           if(miss){
             result[count].isMiss = miss;
-            result[count].reactTime = reactTime;
-            result[count].time = new Date().getTime() - startTime;
+            result[count].reactTime = new Date().getTime() - startTime;
             start();
           }
         },2000);
@@ -240,8 +235,7 @@
       if(reactive){
         reactive = false;
         clearInterval(timer);
-        result[count].reactTime = reactTime;
-        result[count].time = new Date().getTime() - startTime
+        result[count].reactTime = new Date().getTime() - startTime
         if (event.which == 74) {
           if(J){
             miss = false;

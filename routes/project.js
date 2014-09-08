@@ -220,17 +220,19 @@ exports.subjectLogin = function(req,res){
 exports.sendResult = function(req,res){
   var name = req.body.name;
   var result = req.body.result;
-  console.log(result);
-  return res.send({success:true});
-  /*
   model.Results.create({name:name,results:result},function(err){
     if(err){
       console.error(err); 
       return res.send({success:false});
     }
-    return res.send({success:true});
+    model.Subject.update({name:name},{complete:true},function(err){
+      if(err){
+        console.error(err); 
+        return res.send({success:false});
+      }
+      return res.send({success:true});
+    });
   });
-*/
 }
 
 exports.stock = function(req, res) {
