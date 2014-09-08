@@ -242,7 +242,10 @@ exports.getResult = function(req,res){
       console.error(err);
       return res.send({success:false});
     }
-    return res.send({success:true,results:result.results});
+    if(result){
+      return res.send({success:true,results:result.results});
+    }
+    return res.send({success:false});
   });
 }
 
