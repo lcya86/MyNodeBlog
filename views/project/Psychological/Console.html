@@ -464,7 +464,7 @@
             table += '</thead>';
             table += '<tbody>';
             if(data.results){
-              results.forEach(function(item,index,array){
+              data.results.forEach(function(item,index,array){
                 table += '<tr>';
                 table += '<td>'+item.isUnderP+'</td>';
                 table += '<td>'+item.isMiss+'</td>';
