@@ -237,12 +237,12 @@ exports.sendResult = function(req,res){
 
 exports.getResult = function(req,res){
   var id = req.query.id;
-  model.Results.findById(id,function(err,results){
+  model.Results.findById(id,function(err,result){
     if(err){
       console.error(err);
       return res.send({success:false});
     }
-    return res.send({success:true,results:results});
+    return res.send({success:true,results:result.results});
   });
 }
 
