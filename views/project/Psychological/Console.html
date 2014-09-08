@@ -189,7 +189,7 @@
     }
     .subjectList{
       border: solid 1px #F19F45;
-      min-height: 40%;
+      min-height: 190px;
     }
     .result_fd{
       width: 40%;
@@ -440,6 +440,7 @@
           if(data.success){
             $this.remove();
             $('div.statistics_fd').load('./console div.statistics_fd >*');
+            $('#result div.subject_fd').load('./console #result div.subject_fd >*');
           }else{
             alert('删除被试失败');
           }
