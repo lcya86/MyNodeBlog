@@ -107,7 +107,7 @@
   <div class="imgList" style="display:none;">
     <%if(material){%>
       <%material.forEach(function(item,index,array){%>
-        <img id="<%=item.polarity==0?'n':'p'%><%=item.sequence%>" src="<%=item.content%>" alt="" class="upsideimg<%=index%>">
+        <img id="<%=item.polarity==0?'n':'p'%><%=item.sequence%>" src="<%=item.content%>" alt="" class="upsideimg<%=index%>" style="height:100%;">
       <%});%>
     <%}%>
   </div>
