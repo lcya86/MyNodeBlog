@@ -213,7 +213,7 @@
           clearInterval(timer);
           if(miss){
             result[count].isMiss = miss;
-            result[count].reactTime = new Date().getTime() - startTime;
+            result[count].reactTime = 1000;
             start();
           }
         },2000);
