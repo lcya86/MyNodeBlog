@@ -460,7 +460,6 @@
             table += '<tr>';
             table += '<th>是否积极图片</th>';
             table += '<th>是否击中</th>';
-            table += '<th>是否miss</th>';
             table += '<th>反应时</th>';
             table += '</tr>';
             table += '</thead>';
@@ -469,8 +468,7 @@
               data.results.forEach(function(item,index,array){
                 table += '<tr>';
                 table += '<td>'+item.isUnderP+'</td>';
-                table += '<td>'+item.isCorrect+'</td>';
-                table += '<td>'+item.isMiss+'</td>';
+                table += '<td>'+item.isCorrect?'shit':(item.isMiss?'miss':'incorrect')+'</td>';
                 table += '<td>'+item.reactTime+'</td>';
                 table += '</tr>';
               });
