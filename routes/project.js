@@ -236,9 +236,8 @@ exports.sendResult = function(req,res){
 }
 
 exports.getResult = function(req,res){
-  var id = req.query.id;
-  console.log(id);
-  model.Results.findById(id,function(err,result){
+  var name = req.query.name;
+  model.Results.findOne({name:name},function(err,result){
     if(err){
       console.error(err);
       return res.send({success:false});
