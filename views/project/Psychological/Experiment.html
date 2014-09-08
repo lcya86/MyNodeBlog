@@ -158,7 +158,6 @@
     function start(){
       count++;
       if(count<<%=material.length/2%>){
-        reactive = false;
         reactTime = 0;
         result[count] = {};
         $cross.show();
@@ -226,6 +225,7 @@
             $upside.hide();
             $downside.hide();
             $upside.html('<h1>实验结束，谢谢参与</h1>');
+            $upside.show();
           }else{
             alert('记录结果出错');
           }
@@ -235,6 +235,7 @@
 
     $(document).keydown(function(event){
       if(reactive){
+        reactive = false;
         clearInterval(timer);
         result[count].reactTime = reactTime;
         if (event.which == 74) {
