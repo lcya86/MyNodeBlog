@@ -225,7 +225,7 @@ exports.sendResult = function(req,res){
       console.error(err); 
       return res.send({success:false});
     }
-    model.Subject.update({name:name},{complete:true},function(err){
+    model.Subject.update({name:name},{complete:{$push:true}},function(err){
       if(err){
         console.error(err); 
         return res.send({success:false});
@@ -237,14 +237,14 @@ exports.sendResult = function(req,res){
 
 exports.getResult = function(req,res){
   var name = req.query.name;
-  model.Results.findOne({name:name},function(err,result){
+  model.Results.find({name:name}).sort('+timestamp').exec(function(err,results){
     if(err){
       console.error(err);
       return res.send({success:false});
     }
-    console.log(result);
-    if(result){
-      return res.send({success:true,results:result.results});
+    console.log(results);
+    if(results){
+      return res.send({success:true,results:results});
     }
     return res.send({success:false});
   });

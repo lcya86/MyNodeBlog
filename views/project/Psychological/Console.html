@@ -191,6 +191,20 @@
       border: solid 1px #F19F45;
       min-height: 190px;
     }
+    .results_fd{
+      width: 20%;
+      margin-right: 4%;
+      float: left;
+    }
+    .resultList{
+      border: solid 1px #F19F45;
+      min-height: 190px;
+    }
+    .result_item{
+      border-bottom: dashed 1px #c5c5c5;
+      padding:0px 15px;
+      cursor: pointer;
+    }
     .result_fd{
       width: 40%;
       float: left;
@@ -454,30 +468,44 @@
         var $this = $(this);
         $.get('/project/psychological/console/getresult',{name:$this.text()},function(data){
           if(data.success){
+            var list = '实验批次';
             var table = '实验结果';
-            table += '<table class="resultTable" cellspacing="0px" cellpadding="5px" width="500px">';
-            table += '<thead>';
-            table += '<tr>';
-            table += '<th>是否积极图片</th>';
-            table += '<th>是否击中</th>';
-            table += '<th>反应时(ms)</th>';
-            table += '</tr>';
-            table += '</thead>';
-            table += '<tbody>';
+            list += '<div class="resultList">';
             if(data.results){
               data.results.forEach(function(item,index,array){
+                list += '<div data-index="<%=index%>" class="result_item">第<%=index+1%>次实验</div>';
+                table += '<table class="resultTable js_table'+index+'" cellspacing="0px" cellpadding="5px" width="500px" style="display:none;">';
+                table += '<thead>';
                 table += '<tr>';
-                table += '<td>'+item.isUnderP+'</td>';
-                table += '<td>'+(item.isCorrect?'shit':(item.isMiss?'miss':'incorrect'))+'</td>';
-                table += '<td>'+item.reactTime+'</td>';
+                table += '<th>是否积极图片</th>';
+                table += '<th>是否击中</th>';
+                table += '<th>反应时(ms)</th>';
                 table += '</tr>';
+                table += '</thead>';
+                table += '<tbody>';
+                if(item.results){
+                  item.results.forEach(function(item,index,array){
+                    table += '<tr>';
+                    table += '<td>'+item.isUnderP+'</td>';
+                    table += '<td>'+(item.isCorrect?'shit':(item.isMiss?'miss':'incorrect'))+'</td>';
+                    table += '<td>'+item.reactTime+'</td>';
+                    table += '</tr>';
+                  });
+                }
+                table += '</tbody>';
+                table += '</table>';
               });
             }
-            table += '</tbody>';
-            table += '</table>';
+            list += '</div>';
             $('div.reuslt_fd').html(table);
+            $('div.reuslts_fd').html(list);
           }
-        });
+        })
+      })
+      .on('click','div.result_item',function(event){
+        event.stopPropagation();
+        var $this = $(this);
+        $('#result table.js_table'+$this.data('index')).show().siblings().hide();
       });
 
 

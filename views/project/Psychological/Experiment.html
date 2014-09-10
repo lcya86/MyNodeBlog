@@ -142,7 +142,8 @@
       name = $(this).prev().val();
       $.get('/project/psychological/experiment/login',{name:name},function(data){
         if(data.success){
-          if(data.complete){
+          console.log(data.complete[-1]);
+          if(data.complete[-1]){
             alert("您已完成实验");
           }else{
             $('div.d_login').hide();
