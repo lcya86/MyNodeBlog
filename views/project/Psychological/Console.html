@@ -473,7 +473,7 @@
             list += '<div class="resultList">';
             if(data.results){
               data.results.forEach(function(item,index,array){
-                list += '<div data-index="<%=index%>" class="result_item">第<%=index+1%>次实验</div>';
+                list += '<div data-index="'+index+'" class="result_item">第'+(index+1)+'次实验</div>';
                 table += '<table class="resultTable js_table'+index+'" cellspacing="0px" cellpadding="5px" width="500px" style="display:none;">';
                 table += '<thead>';
                 table += '<tr>';
