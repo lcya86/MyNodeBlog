@@ -149,6 +149,7 @@
   $(window).load(function(){
     $('div.spinner').remove();
     $('div.container').show();
+    var welcome = 0;
     var $cross = $('div.cross');
     var $upside = $('div.upside');
     var $downside = $('div.downside');
@@ -165,27 +166,6 @@
     $upside.hide();
     $downside.hide();
 
-    $(document)
-      .on('keydown','div.welcome_first',function(event){
-        console.log(event.which);
-        if(event.which==13){
-          $(this).hide().next().show();
-        }
-      })
-     .on('keydown','div.welcome_second',function(event){
-        console.log(event.which);
-        if(event.which==13){
-          $(this).hide().next().show();
-        }
-      })
-      .on('keydown','div.welcome_third',function(event){
-        console.log(event.which);
-        if(event.which==13){
-          start();
-        }
-      });
-
-
     $('a.b_login').click(function(event){
       event.preventDefault();
       name = $(this).prev().val();
@@ -197,6 +177,7 @@
           }else{
             $('div.d_login').hide();
             $('div.welcome').show();
+            welcome = 1;
             type = data.type;
           }
         }else{
@@ -304,7 +285,16 @@
         }
         start();
       }
-      console.log(event.which);
+      if(welcome==1&&event.which==13){
+        $('div.welcome_first').hide().next().show();
+        welcome++;
+      }else if(welcome==2&&event.which==13){
+        $('div.welcome_second').hide().next().show();
+        welcome++;
+      }else if(welcome==3&&event.which==13){
+        start();
+        welcome=0;
+      }
     });
 
   });
