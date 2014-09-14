@@ -167,20 +167,20 @@
 
     $('div.welcome')
       .on('keydown','div.welcome_first',function(event){
+        console.log(event.which);
         if(event.which==13){
-          console.log(event.which);
           $(this).hide().next().show();
         }
       })
      .on('keydown','div.welcome_second',function(event){
+        console.log(event.which);
         if(event.which==13){
-          console.log(event.which);
           $(this).hide().next().show();
         }
       })
       .on('keydown','div.welcome_third',function(event){
+        console.log(event.which);
         if(event.which==13){
-          console.log(event.which);
           start();
         }
       });
