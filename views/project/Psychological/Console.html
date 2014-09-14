@@ -573,19 +573,19 @@
           }
         })
       })
-      .on('click','div.result_item.practice',function(event){
+      .on('click','div.resultList.practice div.result_item',function(event){
         event.stopPropagation();
         var $this = $(this);
         $('#result').children().hide();
         $('#result table.js_practice_table'+$this.data('index')).show();
       })
-      .on('click','div.result_item.test',function(event){
+      .on('click','div.resultList.test div.result_item',function(event){
         event.stopPropagation();
         var $this = $(this);
         $('#result').children().hide();
         $('#result table.js_test_table'+$this.data('index')).show();
       })
-      .on('click','div.result_item.train',function(event){
+      .on('click','div.resultList.train div.result_item',function(event){
         event.stopPropagation();
         var $this = $(this);
         $('#result').children().hide();
