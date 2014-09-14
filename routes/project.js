@@ -277,7 +277,7 @@ exports.getResult = function(req,res){
           console.error(err);
           return res.send({success:false});
         }
-        console.log(practice);
+        console.log(data);
         if(data){
           return practice = data;
         }
@@ -290,7 +290,7 @@ exports.getResult = function(req,res){
           console.error(err);
           return res.send({success:false});
         }
-        console.log(test);
+        console.log(data);
         if(data){
           return test = data;
         }
@@ -303,7 +303,7 @@ exports.getResult = function(req,res){
           console.error(err);
           return res.send({success:false});
         }
-        console.log(train);
+        console.log(data);
         if(data){
           return train = data;
         }
@@ -317,7 +317,7 @@ exports.getResult = function(req,res){
     }
     
     
-    
+
     return res.send({success:true,practice:practice,test:test,train:train});
   });
 }
