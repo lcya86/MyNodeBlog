@@ -310,11 +310,12 @@ exports.getResult = function(req,res){
         cb(null);
       });
     }
-  },function(err){
+  },function(err,result){
     if(err){
       console.error(err);
       return res.send({success:false});
     }
+    console.log('1');
     console.log(test);
     return res.send({success:true,practice:practice,test:test,train:train});
   });
