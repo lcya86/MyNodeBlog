@@ -315,6 +315,9 @@ exports.getResult = function(req,res){
       console.error(err);
       return res.send({success:false});
     }
+    console.log(practice);
+    console.log(test);
+    console.log(train);
     return res.send({success:true,practice:practice,test:test,train:train});
   });
 }
