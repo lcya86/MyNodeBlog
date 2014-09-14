@@ -162,7 +162,6 @@
     var J = false;
     var count = -1;
     var type = 0;
-    var timer;
     var startTime;
     var name = '';
     var result = [];
@@ -244,7 +243,6 @@
           startTime = new Date().getTime();
         },1000);
         setTimeout(function(){
-          clearInterval(timer);
           if(miss){
             result[count].isMiss = miss;
             result[count].reactTime = 1000;
@@ -269,7 +267,6 @@
       if(reactive){
         reactive = false;
         miss = false;
-        clearInterval(timer);
         result[count].reactTime = new Date().getTime() - startTime
         if (event.which == 74) {
           if(J){
