@@ -287,17 +287,18 @@
           result[count].isCorrect = false;
         }
         start();
-      }
-      if(welcome==1&&event.which==13){
-        $('div.welcome_first').hide().next().show();
-        welcome++;
-      }else if(welcome==2&&event.which==13){
-        $('div.welcome_second').hide().next().show();
-        welcome++;
-      }else if(welcome==3&&event.which==13){
-        $('div.welcome').hide();
-        welcome=0;
-        start();
+      }else{
+        if(welcome==1&&event.which==13){
+          $('div.welcome_first').hide().next().show();
+          welcome++;
+        }else if(welcome==2&&event.which==13){
+          $('div.welcome_second').hide().next().show();
+          welcome++;
+        }else if(welcome==3&&event.which==13){
+          $('div.welcome').hide();
+          welcome=0;
+          start();
+        }
       }
     });
 
