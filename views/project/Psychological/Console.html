@@ -486,11 +486,11 @@
           if(data.success){
             var list = '实验批次';
             var table = '实验结果';
-            list += '<div class="resultList">';
-            if(data.results){
-              data.results.forEach(function(item,index,array){
-                list += '<div data-index="'+index+'" class="result_item">第'+(index+1)+'次实验</div>';
-                table += '<table class="resultTable js_table'+index+'" cellspacing="0px" cellpadding="5px" width="500px" style="display:none;">';
+            list += '<div class="resultList practice">';
+            if(data.practice){
+              data.practice.forEach(function(item,index,array){
+                list += '<div data-index="'+index+'" class="result_item">第'+(index+1)+'次练习</div>';
+                table += '<table class="resultTable js_practice_table'+index+'" cellspacing="0px" cellpadding="5px" width="500px" style="display:none;">';
                 table += '<thead>';
                 table += '<tr>';
                 table += '<th>是否积极图片</th>';
@@ -513,16 +513,85 @@
               });
             }
             list += '</div>';
+            list += '<div class="resultList test">';
+            if(data.test){
+              data.test.forEach(function(item,index,array){
+                list += '<div data-index="'+index+'" class="result_item">第'+(index+1)+'次测试</div>';
+                table += '<table class="resultTable js_test_table'+index+'" cellspacing="0px" cellpadding="5px" width="500px" style="display:none;">';
+                table += '<thead>';
+                table += '<tr>';
+                table += '<th>是否积极图片</th>';
+                table += '<th>是否击中</th>';
+                table += '<th>反应时(ms)</th>';
+                table += '</tr>';
+                table += '</thead>';
+                table += '<tbody>';
+                if(item.results){
+                  item.results.forEach(function(item,index,array){
+                    table += '<tr>';
+                    table += '<td>'+item.isUnderP+'</td>';
+                    table += '<td>'+(item.isCorrect?'shit':(item.isMiss?'miss':'incorrect'))+'</td>';
+                    table += '<td>'+item.reactTime+'</td>';
+                    table += '</tr>';
+                  });
+                }
+                table += '</tbody>';
+                table += '</table>';
+              });
+            }
+            list += '</div>';
+            list += '<div class="resultList train">';
+            if(data.train){
+              data.train.forEach(function(item,index,array){
+                list += '<div data-index="'+index+'" class="result_item">第'+(index+1)+'次训练</div>';
+                table += '<table class="resultTable js_train_table'+index+'" cellspacing="0px" cellpadding="5px" width="500px" style="display:none;">';
+                table += '<thead>';
+                table += '<tr>';
+                table += '<th>是否积极图片</th>';
+                table += '<th>是否击中</th>';
+                table += '<th>反应时(ms)</th>';
+                table += '</tr>';
+                table += '</thead>';
+                table += '<tbody>';
+                if(item.results){
+                  item.results.forEach(function(item,index,array){
+                    table += '<tr>';
+                    table += '<td>'+item.isUnderP+'</td>';
+                    table += '<td>'+(item.isCorrect?'shit':(item.isMiss?'miss':'incorrect'))+'</td>';
+                    table += '<td>'+item.reactTime+'</td>';
+                    table += '</tr>';
+                  });
+                }
+                table += '</tbody>';
+                table += '</table>';
+              });
+            }
+            list += '</div>';
+
             $('div.result_fd').html(table);
             $('div.results_fd').html(list);
           }
         })
       })
-      .on('click','div.result_item',function(event){
+      .on('click','div.result_item.practice',function(event){
         event.stopPropagation();
         var $this = $(this);
-        $('#result table.js_table'+$this.data('index')).show().siblings().hide();
+        $('#result').children().hide();
+        $('#result table.js_practice_table'+$this.data('index')).show();
+      })
+      .on('click','div.result_item.test',function(event){
+        event.stopPropagation();
+        var $this = $(this);
+        $('#result').children().hide();
+        $('#result table.js_test_table'+$this.data('index')).show();
+      })
+      .on('click','div.result_item.train',function(event){
+        event.stopPropagation();
+        var $this = $(this);
+        $('#result').children().hide();
+        $('#result table.js_train_table'+$this.data('index')).show();
       });
+
 
 
     /*##########################页面切换#####################*/

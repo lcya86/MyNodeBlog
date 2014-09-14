@@ -268,16 +268,53 @@ exports.sendResult = function(req,res){
 
 exports.getResult = function(req,res){
   var name = req.query.name;
-  model.Results.find({name:name}).sort('+timestamp').exec(function(err,results){
+  var practice,test,train;
+  async.parallel({
+    one:function(cb){
+      model.Results.find({name:name,stage:1}).sort('+timestamp').exec(function(err,data){
+        if(err){
+          console.error(err);
+          return res.send({success:false});
+        }
+
+        if(data){
+          return practice = data;
+        }
+        cb(null);
+      });
+    },
+    two:function(cb){
+      model.Results.find({name:name,stage:2}).sort('+timestamp').exec(function(err,data){
+        if(err){
+          console.error(err);
+          return res.send({success:false});
+        }
+
+        if(data){
+          return test = data;
+        }
+        cb(null);
+      });
+    },
+    three:function(cb){
+      model.Results.find({name:name,stage:3}).sort('+timestamp').exec(function(err,data){
+        if(err){
+          console.error(err);
+          return res.send({success:false});
+        }
+
+        if(data){
+          return train = data;
+        }
+        cb(null);
+      });
+    }
+  },function(err){
     if(err){
       console.error(err);
       return res.send({success:false});
     }
-    console.log(results);
-    if(results){
-      return res.send({success:true,results:results});
-    }
-    return res.send({success:false});
+    return res.send({success:true,practice:practice,test:test,train:train});
   });
 }
 
