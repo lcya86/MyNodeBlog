@@ -279,7 +279,7 @@ exports.getResult = function(req,res){
         }
         console.log(data);
         if(data){
-          return practice = data;
+          practice = data;
         }
         cb(null);
       });
@@ -292,7 +292,7 @@ exports.getResult = function(req,res){
         }
         console.log(data);
         if(data){
-          return test = data;
+          test = data;
         }
         cb(null);
       });
@@ -305,7 +305,7 @@ exports.getResult = function(req,res){
         }
         console.log(data);
         if(data){
-          return train = data;
+          train = data;
         }
         cb(null);
       });
