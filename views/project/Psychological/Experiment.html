@@ -125,14 +125,17 @@
     <div class="welcome_first">
       <h4>欢迎你来参加我们的实验！</h4>
       <p>在本实验中，你需要对出现的字母进行按键反应。</p>
-      <p>你将会看到<strong>F</strong>或<strong>J</strong>，分别对应键盘上的<strong>F</strong>或<strong>J</strong>键。<small>输入回车进入下一页</small></p>
+      <p>你将会看到<strong>F</strong>或<strong>J</strong>，分别对应键盘上的<strong>F</strong>或<strong>J</strong>键。</p>
+      <small>输入回车进入下一页</small>
     </div>
     <div class="welcome_second" style="display:none;">
       <p>我们先进行一组练习。</p>
-      <p>练习结束后，我们会提醒您进入正式的试验阶段。<small>输入回车进入下一页</small></p>
+      <p>练习结束后，我们会提醒您进入正式的试验阶段。</p>
+      <small>输入回车开始练习</small>
     </div>
     <div class="welcome_third" style="display:none;">
-      <p>下面是正式的试验阶段，无需考虑正确率，希望您能尽量快速进行反应。<small>输入回车开始试验</small></p>
+      <p>下面是正式的试验阶段，无需考虑正确率，希望您能尽量快速进行反应。</p>
+      <small>输入回车开始试验</small>
     </div>
   </div>
 
@@ -292,8 +295,9 @@
         $('div.welcome_second').hide().next().show();
         welcome++;
       }else if(welcome==3&&event.which==13){
-        start();
+        $('div.welcome').hide();
         welcome=0;
+        start();
       }
     });
 
