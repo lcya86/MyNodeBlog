@@ -510,6 +510,17 @@
 
 
     /*##########################页面切换#####################*/
+    $('div.js_image.tab_nav').on('click',function(event){
+      $('#image_bd').show();
+      $('#text_bd').hide();
+      $(event.target).addClass('selected').siblings().removeClass('selected');
+    });
+
+    $('div.js_text.tab_nav').on('click',function(event){
+      $('#image_bd').hide();
+      $('#text_bd').show();
+      $(event.target).addClass('selected').siblings().removeClass('selected');
+    });
 
     $('div.js_material.left_nav').click(function(event){
       $('#material').show();

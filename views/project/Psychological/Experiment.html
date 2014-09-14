@@ -73,6 +73,20 @@
     margin-top: 10%;
   }
 
+  .welcome_text{
+    position: absolute;
+    top:15%;
+    left:35%;
+    width:40%;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .welcome_first strong{
+    font-size: 25px;
+    color:#5E307E;
+  }
+
 </style>
 <body>
   <div class="spinner">
@@ -89,13 +103,12 @@
     <div class="rect11"></div>
     <div class="rect12"></div>
   </div>
+  <div class="d_login">
+    请输入姓名
+    <input type="text" placeholder="请输入姓名"/>
+    <a href="" class="b_login">确定</a>
+  </div>
   <div class="container" style="display:none;">
-    <div class="d_login">
-      请输入姓名
-      <input type="text" placeholder="请输入姓名"/>
-      <a href="" class="b_login">确定</a>
-    </div>
-    
     <div class="d_experiment">
       <div class="upside">
         图       
@@ -108,6 +121,21 @@
   <div class="cross" style="display:none;">
     <span class="glyphicon glyphicon-plus"></span>
   </div>
+  <div class="welcome" style="display:none;">
+    <div class="welcome_first">
+      <h4>欢迎你来参加我们的实验！</h4>
+      <p>在本实验中，你需要对出现的字母进行按键反应。</p>
+      <p>你将会看到<strong>F</strong>或<strong>J</strong>，分别对应键盘上的<strong>F</strong>或<strong>J</strong>键。<small>输入回车进入下一页</small></p>
+    </div>
+    <div class="welcome_second" style="display:none;">
+      <p>我们先进行一组练习。</p>
+      <p>练习结束后，我们会提醒您进入正式的试验阶段。<small>输入回车进入下一页</small></p>
+    </div>
+    <div class="welcome_third" style="display:none;">
+      <p>下面是正式的试验阶段，无需考虑正确率，希望您能尽量快速进行反应。<small>输入回车开始试验</small></p>
+    </div>
+  </div>
+
   <div class="imgList" style="display:none;">
     <%if(material){%>
       <%material.forEach(function(item,index,array){%>
@@ -137,6 +165,24 @@
     $upside.hide();
     $downside.hide();
 
+    $('div.welcome')
+      .on('keydown','div.welcome_first',function(event){
+        if(event.which==13){
+          $(this).hide().next().show();
+        }
+      })
+     .on('keydown','div.welcome_second',function(event){
+        if(event.which==13){
+          $(this).hide().next().show();
+        }
+      })
+      .on('keydown','div.welcome_third',function(event){
+        if(event.which==13){
+          start();
+        }
+      });
+
+
     $('a.b_login').click(function(event){
       event.preventDefault();
       name = $(this).prev().val();
@@ -147,8 +193,8 @@
             alert("您已完成实验");
           }else{
             $('div.d_login').hide();
+            $('div.welcome').show();
             type = data.type;
-            start();
           }
         }else{
           alert("此用户不存在");
