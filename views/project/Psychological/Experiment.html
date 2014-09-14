@@ -192,6 +192,7 @@
       count++;
       if(count<<%=material.length/2%>){
         reactTime = 0;
+        miss = true;
         result[count] = {};
         $cross.show();
         $upside.empty();
@@ -243,7 +244,6 @@
           startTime = new Date().getTime();
         },1000);
         setTimeout(function(){
-          console.log('miss:'+miss);
           if(miss){
             result[count].isMiss = miss;
             result[count].reactTime = 1000;
