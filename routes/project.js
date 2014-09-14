@@ -96,15 +96,42 @@ exports.psychologicalExperiment = function(req, res) {
   });
 }
 
-exports.doExperiment = function(req, res) {
-  model.MaterialImg.find().sort({
+exports.doPractice = function(req, res) {
+  model.MaterialImg.find({stage:1}).sort({
     'sequence': +1
   }).exec(function(err, materials) {
     return res.render('project/Psychological/Experiment', {
-      material: materials
+      material: materials,
+      stage:1,
+      stage_text:'练习'
     });
   });
 }
+
+exports.doTest = function(req,res){
+  model.MaterialImg.find({stage:2}).sort({
+    'sequence': +1
+  }).exec(function(err, materials) {
+    return res.render('project/Psychological/Experiment', {
+      material: materials,
+      stage:2,
+      stage_text:'测试'
+    });
+  });
+}
+
+exports.doTrain = function(req,res){
+  model.MaterialImg.find({stage:3}).sort({
+    'sequence': +1
+  }).exec(function(err, materials) {
+    return res.render('project/Psychological/Experiment', {
+      material: materials,
+      stage:3,
+      stage_text:'训练'
+    });
+  });
+}
+
 
 exports.addSubject = function(req, res) {
   var name = req.body.name;
@@ -134,6 +161,7 @@ exports.uploadImg = function(req, res) {
   var name = req.query.name;
   var sequence = req.query.sequence;
   var polarity = req.query.polarity;
+  var stage = req.query.stage;
   var bufferHelper = new BufferHelper();
   req.on('data', function(chunk) {
     bufferHelper.concat(chunk);
@@ -145,6 +173,7 @@ exports.uploadImg = function(req, res) {
       model.MaterialImg.create({
         content: '/upload/img/' + name,
         polarity: polarity,
+        stage:stage,
         sequence: sequence
       }, function(err) {
         if (err) console.error(err);
@@ -167,6 +196,7 @@ exports.delImg = function(req, res) {
     }
     model.MaterialImg.update({
       polarity: img.polarity,
+      stage:img.stage,
       sequence: {
         $gt: img.sequence
       }
@@ -220,7 +250,8 @@ exports.subjectLogin = function(req,res){
 exports.sendResult = function(req,res){
   var name = req.body.name;
   var result = req.body.result;
-  model.Results.create({name:name,results:result},function(err){
+  var stage = req.body.stage;
+  model.Results.create({name:name,results:result,stage:stage},function(err){
     if(err){
       console.error(err); 
       return res.send({success:false});

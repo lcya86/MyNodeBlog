@@ -126,16 +126,11 @@
       <h4>欢迎你来参加我们的实验！</h4>
       <p>在本实验中，你需要对出现的字母进行按键反应。</p>
       <p>你将会看到<strong>F</strong>或<strong>J</strong>，分别对应键盘上的<strong>F</strong>或<strong>J</strong>键。</p>
-      <small>输入回车进入下一页</small>
+      <small>准备好后请按回车</small>
     </div>
     <div class="welcome_second" style="display:none;">
-      <p>我们先进行一组练习。</p>
-      <p>练习结束后，我们会提醒您进入正式的试验阶段。</p>
-      <small>输入回车开始练习</small>
-    </div>
-    <div class="welcome_third" style="display:none;">
-      <p>下面是正式的试验阶段，无需考虑正确率，希望您能尽量快速进行反应。</p>
-      <small>输入回车开始试验</small>
+      <p>接下来是一组<%=stage_text%>。</p>
+      <small>准备好后请按回车</small>
     </div>
   </div>
 
@@ -146,6 +141,7 @@
       <%});%>
     <%}%>
   </div>
+
 </body>
 <script type="text/javascript" src="/javascripts/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
@@ -153,6 +149,7 @@
     $('div.spinner').remove();
     $('div.container').show();
     var welcome = 0;
+    var stage = <%=stage%>;
     var $cross = $('div.cross');
     var $upside = $('div.upside');
     var $downside = $('div.downside');
@@ -251,7 +248,7 @@
           }
         },2000);
       }else{
-        $.post('/project/psychological/experiment/sendresult',{result:result,name:name},function(data){
+        $.post('/project/psychological/experiment/sendresult',{result:result,name:name,stage:stage},function(data){
           if(data.success){
             $upside.hide();
             $downside.hide();
@@ -290,11 +287,8 @@
           $('div.welcome_first').hide().next().show();
           welcome++;
         }else if(welcome==2&&event.which==13){
-          $('div.welcome_second').hide().next().show();
-          welcome++;
-        }else if(welcome==3&&event.which==13){
           $('div.welcome').hide();
-          welcome=0;
+          welcome = 0;
           start();
         }
       }

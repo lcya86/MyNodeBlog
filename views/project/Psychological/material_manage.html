@@ -1,17 +1,19 @@
 <div class="main_hd">
   <h2>material manage</h2>
   <div class="tab_navs">
-    <div class="js_image tab_nav selected">image</div>
+    <div class="js_practice_image tab_nav selected">Practice Image</div>
+    <div class="js_test_image tab_nav">Test Image</div>
+    <div class="js_train_image tab_nav">Train Image</div>
     <div class="js_text tab_nav">text</div>
   </div>
 </div>
-<div id="image_bd" class="main_bd">
+<div id="practice_image_bd" class="main_bd">
   <div class="pfd">
     积极
-    <div class="pimg_fd">
+    <div class="pimg_fd" data-stage="1">
       <%if(material){%>
         <%material.forEach(function(item,index,array){%>
-          <%if(item.polarity==1){%>
+          <%if(item.polarity==1&&item.stage==1){%>
           <div data-id="<%=item._id%>" class="img_item real"><h3><%=item.sequence%></h3><img src="<%=item.content%>"/><p><%=item.content.split('/')[3]%></p><div></div></div>
           <%}%>
         <%});%>
@@ -20,10 +22,10 @@
   </div> 
   <div class="nfd">
     消极 
-    <div class="nimg_fd">
+    <div class="nimg_fd" data-stage="1">
       <%if(material){%>
         <%material.forEach(function(item,index,array){%>
-          <%if(item.polarity==0){%>
+          <%if(item.polarity==0&&item.stage==1){%>
           <div data-id="<%=item._id%>" class="img_item real"><h3><%=item.sequence%></h3><img src="<%=item.content%>"/><p><%=item.content.split('/')[3]%></p><div></div></div>
           <%}%>
         <%});%>
@@ -31,6 +33,59 @@
     </div>
   </div>
 </div>
+<div id="test_image_bd" class="main_bd">
+  <div class="pfd">
+    积极
+    <div class="pimg_fd" data-stage="2">
+      <%if(material){%>
+        <%material.forEach(function(item,index,array){%>
+          <%if(item.polarity==1&&item.stage==2){%>
+          <div data-id="<%=item._id%>" class="img_item real"><h3><%=item.sequence%></h3><img src="<%=item.content%>"/><p><%=item.content.split('/')[3]%></p><div></div></div>
+          <%}%>
+        <%});%>
+      <%}%>
+    </div>
+  </div> 
+  <div class="nfd">
+    消极 
+    <div class="nimg_fd"  data-stage="2">
+      <%if(material){%>
+        <%material.forEach(function(item,index,array){%>
+          <%if(item.polarity==0&&item.stage==2){%>
+          <div data-id="<%=item._id%>" class="img_item real"><h3><%=item.sequence%></h3><img src="<%=item.content%>"/><p><%=item.content.split('/')[3]%></p><div></div></div>
+          <%}%>
+        <%});%>
+      <%}%>
+    </div>
+  </div>
+</div>
+<div id="train_image_bd" class="main_bd">
+  <div class="pfd">
+    积极
+    <div class="pimg_fd" data-stage="3">
+      <%if(material){%>
+        <%material.forEach(function(item,index,array){%>
+          <%if(item.polarity==1&&item.stage==3){%>
+          <div data-id="<%=item._id%>" class="img_item real"><h3><%=item.sequence%></h3><img src="<%=item.content%>"/><p><%=item.content.split('/')[3]%></p><div></div></div>
+          <%}%>
+        <%});%>
+      <%}%>
+    </div>
+  </div> 
+  <div class="nfd">
+    消极 
+    <div class="nimg_fd" data-stage="3">
+      <%if(material){%>
+        <%material.forEach(function(item,index,array){%>
+          <%if(item.polarity==0&&item.stage==3){%>
+          <div data-id="<%=item._id%>" class="img_item real"><h3><%=item.sequence%></h3><img src="<%=item.content%>"/><p><%=item.content.split('/')[3]%></p><div></div></div>
+          <%}%>
+        <%});%>
+      <%}%>
+    </div>
+  </div>
+</div>
+
 <div id="text_bd" class="main_bd">
   
 </div>

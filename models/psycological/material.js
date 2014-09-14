@@ -3,6 +3,7 @@ var Schema = mongoose.Schema;
 
 var materialImgSchema = new Schema({
 	content: String,
+	stage: Number,
 	sequence: Number,//序号相同为一对
 	polarity: Number//0为消极，1为积极
 });

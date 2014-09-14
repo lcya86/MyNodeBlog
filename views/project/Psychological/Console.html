@@ -332,7 +332,7 @@
           var upload = xhr.upload;
           upload.onprogress = create_pupload_progress(i+children_length);
           upload.onload = create_pupload_done(i+children_length);
-          xhr.open("POST","/project/psychological/uploadImg?name="+fileList[i].name+"&sequence="+sequence+"&polarity=1"); 
+          xhr.open("POST","/project/psychological/uploadImg?name="+fileList[i].name+"&sequence="+sequence+"&polarity=1&stage="+$this.data('stage')); 
           xhr.overrideMimeType("application/octet-stream");
           xhr.send(fileList[i]);
         }
@@ -385,7 +385,7 @@
           var upload = xhr.upload;
           upload.onprogress = create_nupload_progress(i+children_length);
           upload.onload = create_nupload_done(i+children_length);
-          xhr.open("POST","/project/psychological/uploadImg?name="+fileList[i].name+"&sequence="+sequence+"&polarity=0"); 
+          xhr.open("POST","/project/psychological/uploadImg?name="+fileList[i].name+"&sequence="+sequence+"&polarity=0&stage="+$this.data('stage')); 
           xhr.overrideMimeType("application/octet-stream");
           xhr.send(fileList[i]);
         }
@@ -510,14 +510,35 @@
 
 
     /*##########################页面切换#####################*/
-    $('div.js_image.tab_nav').on('click',function(event){
-      $('#image_bd').show();
+    $('div.js_practice_image.tab_nav').on('click',function(event){
+      $('#practice_image_bd').show();
+      $('#test_image_bd').hide();
+      $('#train_image_bd').hide();
       $('#text_bd').hide();
       $(event.target).addClass('selected').siblings().removeClass('selected');
     });
 
+    $('div.js_test_image.tab_nav').on('click',function(event){
+      $('#practice_image_bd').hide();
+      $('#test_image_bd').show();
+      $('#train_image_bd').hide();
+      $('#text_bd').hide();
+      $(event.target).addClass('selected').siblings().removeClass('selected');
+    });
+
+    $('div.js_train_image.tab_nav').on('click',function(event){
+      $('#practice_image_bd').hide();
+      $('#test_image_bd').hide();
+      $('#train_image_bd').show();
+      $('#text_bd').hide();
+      $(event.target).addClass('selected').siblings().removeClass('selected');
+    });
+
+
     $('div.js_text.tab_nav').on('click',function(event){
-      $('#image_bd').hide();
+      $('#practice_image_bd').hide();
+      $('#test_image_bd').hide();
+      $('#train_image_bd').hide();
       $('#text_bd').show();
       $(event.target).addClass('selected').siblings().removeClass('selected');
     });
