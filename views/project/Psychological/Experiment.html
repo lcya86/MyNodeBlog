@@ -192,7 +192,6 @@
       count++;
       if(count<<%=material.length/2%>){
         reactTime = 0;
-        miss = true;
         result[count] = {};
         $cross.show();
         $upside.empty();
@@ -226,6 +225,7 @@
         },500);
         setTimeout(function(){
           reactive = true;
+          miss = true; 
           if(up){
             if(J){
               $upside.html('<h1>J</h1>');
