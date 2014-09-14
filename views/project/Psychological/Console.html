@@ -271,9 +271,17 @@
       },
     })
 
-    var pimgCounter = function(){//产生sequence
+    var pimgCounter = function(stage){//产生sequence
+      var listName = '';
       var pimgSequence = 0;
-      var children = $('div.pimg_fd').children();
+      if(stage==1){
+        listName = '#practice_image_bd';
+      }else if(stage==2){
+        listName = '#test_image_bd';
+      }else if(stage==3){
+        listName = '#train_image_bd';
+      }
+      var children = $(listName+' div.pimg_fd').children();
       if(children.length>0){
         pimgSequence = Number(children.last().children('h3').text());
       }else if(children.length==0){
@@ -283,9 +291,17 @@
       return pimgSequence;
     };
 
-    var nimgCounter = function(){//产生sequence
+    var nimgCounter = function(stage){//产生sequence
+      var listName = '';
       var nimgSequence = 0;
-      var children = $('div.nimg_fd').children();
+      if(stage==1){
+        listName = '#practice_image_bd';
+      }else if(stage==2){
+        listName = '#test_image_bd';
+      }else if(stage==3){
+        listName = '#train_image_bd';
+      }
+      var children = $(listName+' div.nimg_fd').children();
       if(children.length>0){
         nimgSequence = Number(children.last().children('h3').text());
       }else if(children.length==0){
@@ -326,7 +342,7 @@
             src = window.URL.createObjectURL(fileList[i]);
           }
           console.log(src);
-          sequence = pimgCounter();
+          sequence = pimgCounter($this.data('stage'));
           $this.append('<div class="img_item"><h3>'+sequence+'</h3><img src="'+src+'"/><p>'+fileList[i].name+'</p><div id="input_pimage'+(i+children_length)+'" style="width:0%;"></div></div>');
           var xhr = new XMLHttpRequest();
           var upload = xhr.upload;
@@ -379,7 +395,7 @@
             src = window.URL.createObjectURL(fileList[i]);
           }
           console.log(src);
-          sequence = nimgCounter();
+          sequence = nimgCounter($this.data('stage'));
           $this.append('<div class="img_item"><h3>'+sequence+'</h3><img src="'+src+'"/><p>'+fileList[i].name+'</p><div id="input_nimage'+(i+children_length)+'" style="width:0%;"></div></div>');
           var xhr = new XMLHttpRequest();
           var upload = xhr.upload;
