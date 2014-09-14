@@ -168,16 +168,19 @@
     $('div.welcome')
       .on('keydown','div.welcome_first',function(event){
         if(event.which==13){
+          console.log(event.which);
           $(this).hide().next().show();
         }
       })
      .on('keydown','div.welcome_second',function(event){
         if(event.which==13){
+          console.log(event.which);
           $(this).hide().next().show();
         }
       })
       .on('keydown','div.welcome_third',function(event){
         if(event.which==13){
+          console.log(event.which);
           start();
         }
       });
