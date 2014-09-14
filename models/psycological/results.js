@@ -12,6 +12,7 @@ mongoose.model('Result', resultSchema);
 var resultsSchema = new Schema({
 	name: String,
 	results:[resultSchema],
+	stage:Number,
 	timestamp:{ type: Date, default: Date.now }
 })
 mongoose.model('Results', resultsSchema);
