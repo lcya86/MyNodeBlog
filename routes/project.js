@@ -267,6 +267,7 @@ exports.sendResult = function(req,res){
 }
 
 exports.getResult = function(req,res){
+  var async = require('async');
   var name = req.query.name;
   var practice,test,train;
   async.parallel({
