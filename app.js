@@ -29,6 +29,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'html');
 app.use(express.favicon());
 app.use(express.logger('dev'));
+app.use(express.compress());
 app.use(express.bodyParser(),{keepExtensions: true, uploadDir: '/public/upload'});
 app.use(xmlBodyParser.xmlBodyParser);
 app.use(express.methodOverride());
