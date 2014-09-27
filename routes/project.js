@@ -78,7 +78,7 @@ exports.psychologicalExperiment = function(req, res) {
         cb(null);
       });
     },
-    eight:function(eb){
+    eight:function(cb){
       model.MaterialText.find(function(err, data) {
         if (err) console.error(err);
         Texts = data;
