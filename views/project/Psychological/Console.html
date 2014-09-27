@@ -459,7 +459,8 @@
         
         addForm += '</div>';
         var $addForm = $(addForm);
-        $(this).after($addForm);
+        var $this = $(this);
+        $this.after($addForm);
         $addForm.on('click.submit','a',function(event){
           var sentence = $addForm.find('input.js_sentence').val();
           var nword = $addForm.find('input.js_nword').val();
@@ -478,6 +479,9 @@
                 complete += '<div class="nword subject_item">威胁词:'+nword+'</div>';
                 complete += '<div class="pword subject_item">中性词:'+pword+'</div>';
                 complete += '<div data-id="'+data.id+'" class="subject_item" style="clear:both;">句子:'+sentence+'</div>';
+                complete += '</div>';
+                $addForm.remove()
+                $this.after(complete);
               }else{
                 alert(data.msg);
               }
