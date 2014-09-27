@@ -471,6 +471,8 @@
             function(data){
               if(data.success){
                 $(this).parent().load('/console div.text_fd >*');
+              }else{
+                alert(data.msg);
               }
             }
           );

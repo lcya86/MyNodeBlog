@@ -163,6 +163,9 @@ exports.addText = function(req,res){
   var nword = req.body.nword;
   var pword = req.body.pword;
   var stage = req.body.stage;
+  if(sentence==''||nword==''||pword==''){
+    return res.send({success:false,msg:'句子和词不能为空'});
+  }
   model.MaterialText.create({sentence:sentence,nword:nword,pword:pword,stage:stage},function(err,item){
     if (err) {
       console.error(err);
