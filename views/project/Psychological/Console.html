@@ -461,16 +461,23 @@
         var $addForm = $(addForm);
         $(this).after($addForm);
         $addForm.on('click.submit','a',function(event){
+          var sentence = $addForm.find('input.js_sentence').val();
+          var nword = $addForm.find('input.js_nword').val();
+          var pword = $addForm.find('input.js_pword').val();
           $.post('/project/psychological/console/addtext',
             {
-              sentence:$addForm.find('input.js_sentence').val(),
-              nword:$addForm.find('input.js_nword').val(),
-              pword:$addForm.find('input.js_pword').val(),
+              sentence:sentence,
+              nword:nword,
+              pword:pword,
               stage:$(this).data('stage')
             },
             function(data){
               if(data.success){
-                $(this).parent().load('/console div.text_fd >*');
+                var complete = '';
+                complete += '<div class="wrap">';
+                complete += '<div class="nword subject_item">威胁词:'+nword+'</div>';
+                complete += '<div class="pword subject_item">中性词:'+pword+'</div>';
+                complete += '<div data-id="'+data.id+'" class="subject_item" style="clear:both;">句子:'+sentence+'</div>';
               }else{
                 alert(data.msg);
               }
