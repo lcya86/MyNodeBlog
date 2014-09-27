@@ -96,9 +96,9 @@
       <%text.forEach(function(item,index,array){%>
         <%if(item.stage==1){%>
         <div class="wrap">
-          <div data-id="<%=item._id%>" class="subject_item">句子：<%=item.sentence%></div>
           <div class="nword subject_item">威胁词:<%=item.nword%></div>
           <div class="pword subject_item">中性词:<%=item.pword%></div>
+          <div data-id="<%=item._id%>" class="subject_item" style="clear:both;">句子：<%=item.sentence%></div>
         </div>
         <%}%>
       <%});%>
@@ -115,9 +115,9 @@
       <%text.forEach(function(item,index,array){%>
         <%if(item.stage==2){%>
         <div class="wrap">
-          <div data-id="<%=item._id%>" class="subject_item">句子：<%=item.sentence%></div>
           <div class="nword subject_item">威胁词:<%=item.nword%></div>
           <div class="pword subject_item">中性词:<%=item.pword%></div>
+          <div data-id="<%=item._id%>" class="subject_item" style="clear:both;">句子：<%=item.sentence%></div>
         </div>
         <%}%>
       <%});%>
@@ -134,9 +134,9 @@
       <%text.forEach(function(item,index,array){%>
         <%if(item.stage==3){%>
         <div class="wrap">
-          <div data-id="<%=item._id%>" class="subject_item">句子：<%=item.sentence%></div>
           <div class="nword subject_item">威胁词:<%=item.nword%></div>
           <div class="pword subject_item">中性词:<%=item.pword%></div>
+          <div data-id="<%=item._id%>" class="subject_item" style="clear:both;">句子：<%=item.sentence%></div>
         </div>
         <%}%>
       <%});%>
