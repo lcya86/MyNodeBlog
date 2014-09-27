@@ -10,8 +10,9 @@ var materialImgSchema = new Schema({
 mongoose.model('MaterialImg', materialImgSchema);
 
 var materialTextSchema = new Schema({
-	sententce: String,
-	pword: String,
-	nword: String
+	sentence: String,
+	pword: String,//中性词
+	nword: String,//威胁词
+	stage:Number
 });
 mongoose.model('MaterialText',materialTextSchema);

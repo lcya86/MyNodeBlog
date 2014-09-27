@@ -215,6 +215,25 @@
     }
 
 
+    .center_fd {
+      width: 48%;
+      margin-left: 26%;
+    }
+    .text_fd{
+      border: dashed 1px #F19F45;
+      min-height: 70%;
+    }
+    .nword{
+      float: left;
+      text-align: center;
+      width: 44%;
+    }
+    .pword{
+      float: right;
+      text-align: center;
+      width: 45%;
+    }
+
   </style>
 </head>
 <body>
@@ -311,7 +330,7 @@
       return nimgSequence;
     };
 
-    $('div.main')
+    $('#material')
       .on('drop.add','div.pimg_fd',function(event){
         event.preventDefault();
         function create_pupload_progress(index){
@@ -427,6 +446,30 @@
             $target.parent().load('./console div.'+$target.parent()[0].className+' >*');
           }else{
             alert('删除图片失败');
+          }
+        });
+      })
+      .on('click.add','div.add_subject',function(event){
+        event.stopPropagation();
+        var addForm = '';
+        addForm += '<div class="wrap">';
+        addForm += '<div class="subject_item">句子:<input class="js_sentence" type="text" style="width:100%;"></div>'; 
+        addForm += '<div class="nword subject_item">威胁词:<input class="js_nword" type="text" style="width:100%;"></div>'; 
+        addForm += '<div class="pword subject_item">中性词:<input class="js_pword" type="text" style="width:100%;"></div>'; 
+        addForm += '</div>';
+        var $addForm = $(addForm);
+        $(this).after($addForm);
+        $(document).one('keydown',function(event){
+          if(event.which==13){
+            $.post('/project/psychological/console/addtext',
+              {sentence:$addForm.find('input.js_sentence').val(),
+              nword:$addForm.find('input.js_nword').val(),
+              pword:$addForm.find('input.js_pword').val()},
+              function(data){
+                if(data.success){
+                  $(this).parent().load('/console div.text_fd >*');
+                }
+            });
           }
         });
       });
@@ -599,7 +642,9 @@
       $('#practice_image_bd').show();
       $('#test_image_bd').hide();
       $('#train_image_bd').hide();
-      $('#text_bd').hide();
+      $('#practice_text_bd').hide();
+      $('#test_text_bd').hide();
+      $('#train_text_bd').hide();
       $(event.target).addClass('selected').siblings().removeClass('selected');
     });
 
@@ -607,7 +652,9 @@
       $('#practice_image_bd').hide();
       $('#test_image_bd').show();
       $('#train_image_bd').hide();
-      $('#text_bd').hide();
+      $('#practice_text_bd').hide();
+      $('#test_text_bd').hide();
+      $('#train_text_bd').hide();
       $(event.target).addClass('selected').siblings().removeClass('selected');
     });
 
@@ -615,18 +662,50 @@
       $('#practice_image_bd').hide();
       $('#test_image_bd').hide();
       $('#train_image_bd').show();
-      $('#text_bd').hide();
+      $('#practice_text_bd').hide();
+      $('#test_text_bd').hide();
+      $('#train_text_bd').hide();
       $(event.target).addClass('selected').siblings().removeClass('selected');
     });
 
 
-    $('div.js_text.tab_nav').on('click',function(event){
+    $('div.js_practice_text.tab_nav').on('click',function(event){
       $('#practice_image_bd').hide();
       $('#test_image_bd').hide();
       $('#train_image_bd').hide();
-      $('#text_bd').show();
+      $('#practice_text_bd').show();
+      $('#test_text_bd').hide();
+      $('#train_text_bd').hide();
       $(event.target).addClass('selected').siblings().removeClass('selected');
     });
+
+    $('div.js_test_text.tab_nav').on('click',function(event){
+      $('#practice_image_bd').hide();
+      $('#test_image_bd').hide();
+      $('#train_image_bd').hide();
+      $('#practice_text_bd').hide();
+      $('#test_text_bd').show();
+      $('#train_text_bd').hide();
+      $(event.target).addClass('selected').siblings().removeClass('selected');
+    });
+
+    $('div.js_train_text.tab_nav').on('click',function(event){
+      $('#practice_image_bd').hide();
+      $('#test_image_bd').hide();
+      $('#train_image_bd').hide();
+      $('#practice_text_bd').hide();
+      $('#test_text_bd').hide();
+      $('#train_text_bd').show();
+      $(event.target).addClass('selected').siblings().removeClass('selected');
+    });
+
+    $('div.js_text_result.tab_nav').on('click',function(event){
+      $('#image_result_bd').hide();
+      $('#text_result_bd').show();
+      $(event.target).addClass('selected').siblings().removeClass('selected');
+    });
+
+
 
     $('div.js_material.left_nav').click(function(event){
       $('#material').show();

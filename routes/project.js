@@ -13,12 +13,8 @@ exports.articlesClassify = function(req, res) {
 
 exports.psychologicalExperiment = function(req, res) {
   var async = require('async');
-
-  var Materials, Subjects, sc_count, cs_count, ts_count, csc_count, tsc_count;
-
+  var Materials,Texts, Subjects, sc_count, cs_count, ts_count, csc_count, tsc_count;
   async.parallel({
-
-    
     one:function(cb) {
       model.Subject.find(function(err, subjects) {
         if (err) console.error(err);
@@ -81,11 +77,19 @@ exports.psychologicalExperiment = function(req, res) {
         csc_count = data;
         cb(null);
       });
+    },
+    eight:function(eb){
+      model.MaterialText.find(function(err, data) {
+        if (err) console.error(err);
+        Texts = data;
+        cb(null);
+      });
     }
   }, function(err, result) {
     if (err) console.error(err);
     return res.render('project/Psychological/Console', {
       material: Materials,
+      text:Texts,
       subjects: Subjects,
       cs_count: cs_count,
       ts_count: ts_count,
@@ -149,6 +153,25 @@ exports.addSubject = function(req, res) {
     res.send({
       success: true,
       name: item.name,
+      id: item._id
+    });
+  });
+}
+
+exports.addText = function(req,res){
+  var sentence = req.body.sentence;
+  var nword = req.body.nword;
+  var pword = req.body.pword;
+  var stage = req.body.stage;
+  model.MaterialText.create({sentence:sentence,nword:nword,pword:pword,stage:stage},function(err,item){
+    if (err) {
+      console.error(err);
+      res.send({
+        success: false
+      });
+    }
+    res.send({
+      success: true,
       id: item._id
     });
   });

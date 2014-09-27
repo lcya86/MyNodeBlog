@@ -4,7 +4,9 @@
     <div class="js_practice_image tab_nav selected">Practice Image</div>
     <div class="js_test_image tab_nav">Test Image</div>
     <div class="js_train_image tab_nav">Train Image</div>
-    <div class="js_text tab_nav">text</div>
+    <div class="js_practice_text tab_nav">Practice Text</div>
+    <div class="js_test_text tab_nav">Test Text</div>
+    <div class="js_train_text tab_nav">Train Text</div>
   </div>
 </div>
 <div id="practice_image_bd" class="main_bd">
@@ -86,6 +88,59 @@
   </div>
 </div>
 
-<div id="text_bd" class="main_bd">
-  
+<div id="practice_text_bd" class="main_bd" style="display:none;">
+  <div class="center_fd">
+    <div class="text_fd">
+      <div class="t add_subject" data-stage="1">添加句子</div>
+      <%if(text){%>
+      <%text.forEach(function(item,index,array){%>
+        <%if(item.stage==1){%>
+        <div class="wrap">
+          <div data-id="<%=item._id%>" class="subject_item">句子：<%=item.sentence%></div>
+          <div class="nword subject_item">威胁词:<%=item.nword%></div>
+          <div class="pword subject_item">中性词:<%=item.pword%></div>
+        </div>
+        <%}%>
+      <%});%>
+      <%}%>
+    </div>
+  </div>
+</div>
+
+<div id="test_text_bd" class="main_bd" style="display:none;">
+  <div class="center_fd">
+    <div class="text_fd">
+      <div class="t add_subject" data-stage="2">添加句子</div>
+      <%if(text){%>
+      <%text.forEach(function(item,index,array){%>
+        <%if(item.stage==2){%>
+        <div class="wrap">
+          <div data-id="<%=item._id%>" class="subject_item">句子：<%=item.sentence%></div>
+          <div class="nword subject_item">威胁词:<%=item.nword%></div>
+          <div class="pword subject_item">中性词:<%=item.pword%></div>
+        </div>
+        <%}%>
+      <%});%>
+      <%}%>
+    </div>
+  </div>
+</div>
+
+<div id="train_text_bd" class="main_bd" style="display:none;">
+  <div class="center_fd">
+    <div class="text_fd">
+      <div class="t add_subject" data-stage="3">添加句子</div>
+      <%if(text){%>
+      <%text.forEach(function(item,index,array){%>
+        <%if(item.stage==3){%>
+        <div class="wrap">
+          <div data-id="<%=item._id%>" class="subject_item">句子：<%=item.sentence%></div>
+          <div class="nword subject_item">威胁词:<%=item.nword%></div>
+          <div class="pword subject_item">中性词:<%=item.pword%></div>
+        </div>
+        <%}%>
+      <%});%>
+      <%}%>
+    </div>
+  </div>
 </div>
