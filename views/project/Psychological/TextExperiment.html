@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Experiment</title>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/spinner.css">
+</head>
+<style type="text/css">
+  html,body{
+    height: 100%;
+    margin: 0px;
+  }
+  .container{
+    width: 100%;
+    text-align: center;
+  }
+  @font-face{
+    font-family:'Glyphicons Halflings';
+    src:url('/fonts/glyphicons-halflings-regular.eot');
+    src:url('/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/glyphicons-halflings-regular.woff') format('woff'),
+    url('/fonts/glyphicons-halflings-regular.ttf') format('truetype'),
+    url('/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg')
+  }
+  .glyphicon{
+    position:relative;
+    top:1px;
+    display:inline-block;
+    font-family:'Glyphicons Halflings';
+    -webkit-font-smoothing:antialiased;
+    font-style:normal;
+    font-weight:normal;
+    font-size: 20px;
+    line-height:1;
+    -moz-osx-font-smoothing:grayscale
+  }
+  .glyphicon-plus:before{
+    content:"\2b"
+  }
+  .cross{
+    position: fixed;
+    top:45%;
+    left:50%;
+  }
+
+  .d_login{
+    position: fixed;
+    top:45%;
+    left:40%;
+  }
+
+  .textarea{
+    position: absolute;
+    top:25%;
+    left:25%;
+    width:50%;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .welcome{
+    position: absolute;
+    top:15%;
+    left:25%;
+    width:50%;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .welcome_first strong{
+    font-size: 25px;
+    color:#5E307E;
+  }
+
+</style>
+<body>
+  <div class="spinner">
+    <div class="rect1"></div>
+    <div class="rect2"></div>
+    <div class="rect3"></div>
+    <div class="rect4"></div>
+    <div class="rect5"></div>
+    <div class="rect6"></div>
+    <div class="rect7"></div>
+    <div class="rect8"></div>
+    <div class="rect9"></div>
+    <div class="rect10"></div>
+    <div class="rect11"></div>
+    <div class="rect12"></div>
+  </div>
+  <div class="container" style="display:none;">
+    <div class="d_login">
+      请输入姓名
+      <input type="text" placeholder="请输入姓名"/>
+      <a href="" class="b_login">确定</a>
+    </div>
+    <div class="d_experiment">
+      <div class="textarea">
+        图       
+      </div>
+    </div>
+  </div>
+  <div class="cross" style="display:none;">
+    <span class="glyphicon glyphicon-plus"></span>
+  </div>
+  <div class="welcome" style="display:none;">
+    <div class="welcome_first">
+      <h4>欢迎你来参加我们的实验！</h4>
+      <p>在接下来的实验中，我们会呈现一个句子和一个单词，你需要判断这个句子和单词之间是否有关系？</p>
+      <p>有关请按<strong>F</strong>键，无关请按<strong>J</strong>键。</p>
+      <small>准备好后请按回车</small>
+    </div>
+    <div class="welcome_second" style="display:none;">
+      <p>接下来是一组<%=stage_text%>。</p>
+      <small>准备好后请按回车</small>
+    </div>
+  </div>
+
+</body>
+<script type="text/javascript" src="/javascripts/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">
+  var texts = <%=JSON.stringify(texts);%>;
+  $(window).load(function(){
+    $('div.spinner').remove();
+    $('div.container').show();
+    var welcome = 0;
+    var stage = <%=stage%>;
+    var $cross = $('div.cross');
+    var $textarea = $('div.textarea');
+    var reactive = false;
+    var miss = true;
+    var negative = false;
+    var positive = false;
+    var count = -1;
+    var type = 0;
+    var startTime;
+    var name = '';
+    var result = [];
+    $textarea.hide();
+
+    $('a.b_login').click(function(event){
+      event.preventDefault();
+      name = $(this).prev().val();
+      $.get('/project/psychological/experiment/login',{name:name},function(data){
+        if(data.success){
+          console.log(data.complete[-1]);
+          if(data.complete[-1]){
+            alert("您已完成实验");
+          }else{
+            $('div.d_login').hide();
+            $('div.welcome').show();
+            welcome = 1;
+            type = data.type;
+          }
+        }else{
+          alert("此用户不存在");
+        }
+      });
+    });
+
+    function start(){
+      count++;
+      if(count<<%=material.length/2%>){
+        reactTime = 0;
+        result[count] = {};
+        $cross.show();
+        $textarea.empty();
+        if(stage==3||Math.floor((Math.random()*10))%2==0){
+          $textarea.text(texts[count].pword);
+          positive = true;
+        }else{
+          $textarea.text(texts[count].nword);
+          negative = true;
+        }
+        $textarea.hide();
+        setTimeout(function(){
+          $cross.hide();
+          $textarea.show();
+        },500);
+        setTimeout(function(){
+          reactive = true;
+          miss = true; 
+          $textarea.text(texts[count].sentence);
+          startTime = new Date().getTime();
+        },1000);
+        setTimeout(function(){
+          if(miss){
+            result[count].isMiss = miss;
+            result[count].reactTime = 1000;
+            start();
+          }
+        },2000);
+        setTimeout(function(){
+          if(miss){
+            result[count].isMiss = miss;
+            result[count].reactTime = 1000;
+            start();
+          }
+        },2500);
+      }else{
+        $.post('/project/psychological/experiment/sendtextresult',{result:result,name:name,stage:stage},function(data){
+          if(data.success){
+            $textarea.html('<h1>实验结束，谢谢参与</h1>');
+          }else{
+            alert('记录结果出错');
+          }
+        });
+      }
+    }
+
+    $(document).keydown(function(event){
+      if(reactive){
+        reactive = false;
+        miss = false;
+        result[count].reactTime = new Date().getTime() - startTime
+        if (event.which == 74) {
+          if(J){
+            result[count].isCorrect = true;
+          }else{
+            result[count].isCorrect = false;
+          }
+        }else if(event.which == 70){
+          if(J){
+            result[count].isCorrect = false;
+          }else{
+            result[count].isCorrect = true;
+          }
+        }else{
+          result[count].isCorrect = false;
+        }
+        start();
+      }else{
+        if(welcome==1&&event.which==13){
+          $('div.welcome_first').hide().next().show();
+          welcome++;
+        }else if(welcome==2&&event.which==13){
+          $('div.welcome').hide();
+          welcome = 0;
+          start();
+        }
+      }
+    });
+
+  });
+</script>
+</html>

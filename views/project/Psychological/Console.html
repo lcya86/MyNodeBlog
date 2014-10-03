@@ -453,9 +453,9 @@
         event.stopPropagation();
         var addForm = '';
         addForm += '<div class="wrap">';
-        addForm += '<div class="nword subject_item">威胁词:<input class="js_nword" type="text" style="width:70%;"></div>'; 
-        addForm += '<div class="pword subject_item">中性词:<input class="js_pword" type="text" style="width:70%;"></div>'; 
-        addForm += '<div class="subject_item" style="clear:both;text-align:center;">句子:<input class="js_sentence" type="text" style="width:80%;"><a data-stage="'+$(this).data('stage')+'" href="javascript:;">确定</a></div>'; 
+        addForm += '<div class="nword subject_item">消极词:<input class="js_nword" type="text" style="width:70%;"></div>';
+        addForm += '<div class="pword subject_item">积极词:<input class="js_pword" type="text" style="width:70%;"></div>';
+        addForm += '<div class="subject_item" style="clear:both;text-align:center;">句子:<input class="js_sentence" type="text" style="width:80%;"><a data-stage="'+$(this).data('stage')+'" href="javascript:;">确定</a></div>';
         
         addForm += '</div>';
         var $addForm = $(addForm);
@@ -476,8 +476,8 @@
               if(data.success){
                 var complete = '';
                 complete += '<div class="wrap">';
-                complete += '<div class="nword subject_item">威胁词:'+nword+'</div>';
-                complete += '<div class="pword subject_item">中性词:'+pword+'</div>';
+                complete += '<div class="nword subject_item">消极词:'+nword+'</div>';
+                complete += '<div class="pword subject_item">积极词:'+pword+'</div>';
                 complete += '<div data-id="'+data.id+'" class="subject_item" style="clear:both;">句子:'+sentence+'</div>';
                 complete += '</div>';
                 $addForm.remove()
