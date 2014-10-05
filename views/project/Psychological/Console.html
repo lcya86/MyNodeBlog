@@ -514,7 +514,7 @@
       })
       .on('click.addc','div.c2.add_subject',function(event){
         var $this = $(this);
-        var $item = $('<div class="subject_item"><input style="margin-left:15px;" type="text" placeholder="被试姓名" />&nbsp;&nbsp;<a data-type="0" href="javascript:;">添加</a></div>');
+        var $item = $('<div class="subject_item"><input style="margin-left:15px;" type="text" placeholder="被试姓名" />&nbsp;&nbsp;<a data-type="-1" href="javascript:;">添加</a></div>');
         $this.after($item);
         $item.find('input').focus();
       })
