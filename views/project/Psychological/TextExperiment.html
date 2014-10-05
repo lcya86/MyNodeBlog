@@ -120,8 +120,7 @@
 </body>
 <script type="text/javascript" src="/javascripts/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
-  var str = '<%=tests%>';
-  var texts = JSON.stringify(str).replace('&quot;','"');
+  var texts = <%=JSON.stringify(texts).replace(/\&quot;/g,'"')%>;
   $(function(){
     $('div.spinner').remove();
     $('div.container').show();
