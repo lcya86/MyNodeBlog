@@ -667,7 +667,6 @@
                 table += '<table class="resultTable js_practice_table'+index+'" cellspacing="0px" cellpadding="5px" width="500px" style="display:none;">';
                 table += '<thead>';
                 table += '<tr>';
-                table += '<th>是否积极图片</th>';
                 table += '<th>是否击中</th>';
                 table += '<th>反应时(ms)</th>';
                 table += '</tr>';
@@ -676,7 +675,6 @@
                 if(item.results){
                   item.results.forEach(function(item,index,array){
                     table += '<tr>';
-                    table += '<td>'+item.isUnderP+'</td>';
                     table += '<td>'+(item.isCorrect?'shit':(item.isMiss?'miss':'incorrect'))+'</td>';
                     table += '<td>'+item.reactTime+'</td>';
                     table += '</tr>';
@@ -694,7 +692,6 @@
                 table += '<table class="resultTable js_test_table'+index+'" cellspacing="0px" cellpadding="5px" width="500px" style="display:none;">';
                 table += '<thead>';
                 table += '<tr>';
-                table += '<th>是否积极图片</th>';
                 table += '<th>是否击中</th>';
                 table += '<th>反应时(ms)</th>';
                 table += '</tr>';
@@ -703,7 +700,6 @@
                 if(item.results){
                   item.results.forEach(function(item,index,array){
                     table += '<tr>';
-                    table += '<td>'+item.isUnderP+'</td>';
                     table += '<td>'+(item.isCorrect?'shit':(item.isMiss?'miss':'incorrect'))+'</td>';
                     table += '<td>'+item.reactTime+'</td>';
                     table += '</tr>';
@@ -721,7 +717,6 @@
                 table += '<table class="resultTable js_train_table'+index+'" cellspacing="0px" cellpadding="5px" width="500px" style="display:none;">';
                 table += '<thead>';
                 table += '<tr>';
-                table += '<th>是否积极图片</th>';
                 table += '<th>是否击中</th>';
                 table += '<th>反应时(ms)</th>';
                 table += '</tr>';
@@ -730,7 +725,6 @@
                 if(item.results){
                   item.results.forEach(function(item,index,array){
                     table += '<tr>';
-                    table += '<td>'+item.isUnderP+'</td>';
                     table += '<td>'+(item.isCorrect?'shit':(item.isMiss?'miss':'incorrect'))+'</td>';
                     table += '<td>'+item.reactTime+'</td>';
                     table += '</tr>';
