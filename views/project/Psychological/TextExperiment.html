@@ -52,7 +52,7 @@
 
   .textarea{
     position: absolute;
-    top:25%;
+    top:30%;
     left:25%;
     width:50%;
     font-size: 20px;
@@ -184,16 +184,20 @@
           $textarea.text(texts[count].sentence);
           startTime = new Date().getTime();
         },1000);
+        /*
         setTimeout(function(){
           if(miss){
             result[count].isMiss = miss;
             result[count].reactTime = 1000;
-            $textarea.text('错了！');
+            if(stage!=2){
+              $textarea.text('错了！');
+            }
             setTimeout(function(){
               start();
             },500);
           }
         },2000);
+*/
       }else{
         $.post('/project/psychological/experiment/sendtextresult',{result:result,name:name,stage:stage},function(data){
           if(data.success){
@@ -212,7 +216,7 @@
         result[count].reactTime = new Date().getTime() - startTime
         if (event.which == 74) {
           result[count].isCorrect = negative;
-          if(negative){
+          if(negative&&stage!=2){
             $textarea.text('你是正确的！');
           }else{
             $textarea.text('错了！');
@@ -222,7 +226,7 @@
           },500);
         }else if(event.which == 70){
           result[count].isCorrect = positive;
-          if(positive){
+          if(positive&&stage!=2){
             $textarea.text('你是正确的！');
           }else{
             $textarea.text('错了！');
