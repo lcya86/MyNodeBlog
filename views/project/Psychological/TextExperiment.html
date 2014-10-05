@@ -188,6 +188,7 @@
           if(miss){
             result[count].isMiss = miss;
             result[count].reactTime = 1000;
+            $textarea.text('错了！');
             setTimeout(function(){
               start();
             },500);
