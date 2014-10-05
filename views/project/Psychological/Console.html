@@ -160,6 +160,7 @@
     }
     .tfd{
       width: 24%;
+      margin-right: 4%;
       float: right;
     }
     .sfd{
@@ -493,9 +494,15 @@
 
     /*##########################被试管理#####################*/
     $('#subjects')
-      .on('click.addt','div.t.add_subject',function(event){
+      .on('click.addt','div.t1.add_subject',function(event){
         var $this = $(this);
         var $item = $('<div class="subject_item"><input style="margin-left:15px;" type="text" placeholder="被试姓名" />&nbsp;&nbsp;<a data-type="1" href="javascript:;">添加</a></div>');
+        $this.after($item);
+        $item.find('input').focus();
+      })
+      .on('click.addt','div.t2.add_subject',function(event){
+        var $this = $(this);
+        var $item = $('<div class="subject_item"><input style="margin-left:15px;" type="text" placeholder="被试姓名" />&nbsp;&nbsp;<a data-type="2" href="javascript:;">添加</a></div>');
         $this.after($item);
         $item.find('input').focus();
       })
