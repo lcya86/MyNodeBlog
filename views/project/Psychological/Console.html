@@ -154,12 +154,12 @@
     }
 
     .cfd{
-      width: 24%;
+      width: 21%;
       margin-right: 4%;
       float:right;
     }
     .tfd{
-      width: 24%;
+      width: 21%;
       margin-right: 4%;
       float: right;
     }
@@ -562,7 +562,7 @@
             list += '<div class="resultList practice">';
             if(data.practice){
               data.practice.forEach(function(item,index,array){
-                list += '<div data-index="'+index+'" class="result_item">第'+(index+1)+'次练习</div>';
+                list += '<div data-index="'+index+'" class="result_item">第'+(index+1)+'次练习 '+item.timestamp.toLocaleDateString()+' '+item.timestamp.toLocaleTimeString()+'</div>';
                 table += '<table class="resultTable js_practice_table'+index+'" cellspacing="0px" cellpadding="5px" width="500px" style="display:none;">';
                 table += '<thead>';
                 table += '<tr>';
@@ -589,7 +589,7 @@
             list += '<div class="resultList test">';
             if(data.test){
               data.test.forEach(function(item,index,array){
-                list += '<div data-index="'+index+'" class="result_item">第'+(index+1)+'次测试</div>';
+                list += '<div data-index="'+index+'" class="result_item">第'+(index+1)+'次测试 '+item.timestamp.toLocaleDateString()+' '+item.timestamp.toLocaleTimeString()+'</div>';
                 table += '<table class="resultTable js_test_table'+index+'" cellspacing="0px" cellpadding="5px" width="500px" style="display:none;">';
                 table += '<thead>';
                 table += '<tr>';
@@ -616,7 +616,7 @@
             list += '<div class="resultList train">';
             if(data.train){
               data.train.forEach(function(item,index,array){
-                list += '<div data-index="'+index+'" class="result_item">第'+(index+1)+'次训练</div>';
+                list += '<div data-index="'+index+'" class="result_item">第'+(index+1)+'次训练 '+item.timestamp.toLocaleDateString()+' '+item.timestamp.toLocaleTimeString()+'</div>';
                 table += '<table class="resultTable js_train_table'+index+'" cellspacing="0px" cellpadding="5px" width="500px" style="display:none;">';
                 table += '<thead>';
                 table += '<tr>';
@@ -676,7 +676,7 @@
             list += '<div class="resultList practice">';
             if(data.practice){
               data.practice.forEach(function(item,index,array){
-                list += '<div data-index="'+index+'" class="result_item">第'+(index+1)+'次练习 '+item.timestamp.toLocaleString()+'</div>';
+                list += '<div data-index="'+index+'" class="result_item">第'+(index+1)+'次练习 '+item.timestamp.toLocaleDateString()+' '+item.timestamp.toLocaleTimeString()+'</div>';
                 table += '<table class="resultTable js_practice_table'+index+'" cellspacing="0px" cellpadding="5px" width="500px" style="display:none;">';
                 table += '<thead>';
                 table += '<tr>';
@@ -701,7 +701,7 @@
             list += '<div class="resultList test">';
             if(data.test){
               data.test.forEach(function(item,index,array){
-                list += '<div data-index="'+index+'" class="result_item">第'+(index+1)+'次测试</div>';
+                list += '<div data-index="'+index+'" class="result_item">第'+(index+1)+'次测试 '+item.timestamp.toLocaleDateString()+' '+item.timestamp.toLocaleTimeString()+'</div>';
                 table += '<table class="resultTable js_test_table'+index+'" cellspacing="0px" cellpadding="5px" width="500px" style="display:none;">';
                 table += '<thead>';
                 table += '<tr>';
@@ -726,7 +726,7 @@
             list += '<div class="resultList train">';
             if(data.train){
               data.train.forEach(function(item,index,array){
-                list += '<div data-index="'+index+'" class="result_item">第'+(index+1)+'次训练</div>';
+                list += '<div data-index="'+index+'" class="result_item">第'+(index+1)+'次训练 '+item.timestamp.toLocaleDateString()+' '+item.timestamp.toLocaleTimeString()+'</div>';
                 table += '<table class="resultTable js_train_table'+index+'" cellspacing="0px" cellpadding="5px" width="500px" style="display:none;">';
                 table += '<thead>';
                 table += '<tr>';
