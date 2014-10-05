@@ -216,20 +216,24 @@
         result[count].reactTime = new Date().getTime() - startTime
         if (event.which == 74) {
           result[count].isCorrect = negative;
-          if(negative&&stage!=2){
-            $textarea.text('你是正确的！');
-          }else{
-            $textarea.text('错了！');
+          if(stage!=2){
+            if(negative){
+              $textarea.text('你是正确的！');
+            }else{
+              $textarea.text('错了！');
+            }
           }
           setTimeout(function(){
             start();
           },500);
         }else if(event.which == 70){
           result[count].isCorrect = positive;
-          if(positive&&stage!=2){
-            $textarea.text('你是正确的！');
-          }else{
-            $textarea.text('错了！');
+          if(stage!=2){
+            if(positive){
+              $textarea.text('你是正确的！');
+            }else{
+              $textarea.text('错了！');
+            }
           }
           setTimeout(function(){
             start();
