@@ -132,6 +132,9 @@
       <p>接下来是一组<%=stage_text%>。</p>
       <small>准备好后请按回车</small>
     </div>
+    <div class="end" style="display:none;">
+      <p>实验第一部分已经结束，您可以休息一段时间，休息之后按回车继续实验</p>
+    </div>
   </div>
 
   <div class="imgList" style="display:none;">
@@ -196,7 +199,7 @@
         if(Math.floor((Math.random()*10))%2==0){
           $upside.append($('#n'+(count+1)));
           $downside.append($('#p'+(count+1)));
-          if(type==0){
+          if(type==0||type==-1){
             up = Math.floor((Math.random()*10))%2==0;
           }else{
             up = Math.floor((Math.random()*10))==9;
@@ -205,7 +208,7 @@
         }else{
           $downside.append($('#n'+(count+1)));
           $upside.append($('#p'+(count+1)));
-          if(type==0){
+          if(type==0||type==-1){
             up = Math.floor((Math.random()*10))%2==0;
           }else{
             up = Math.floor((Math.random()*10))!=9;
@@ -252,8 +255,14 @@
           if(data.success){
             $upside.hide();
             $downside.hide();
-            $upside.html('<h1>实验结束，谢谢参与</h1>');
-            $upside.show();
+            if(type==1||type==0){
+              $('div.welcome div.end').show().siblings().hide();
+              $('div.welcome').show();
+              welcome = 3;
+            }else if(type==2||type==-1){
+              $upside.html('<h1>实验结束，谢谢参与</h1>');
+              $upside.show();
+            }
           }else{
             alert('记录结果出错');
           }
@@ -290,6 +299,14 @@
           $('div.welcome').hide();
           welcome = 0;
           start();
+        }else if(welcome==3&&event.which==13){
+          if(stage==1){
+            window.location.href='../textpractice';
+          }else if(stage==2){
+            window.location.href='../texttest';
+          }else if(stage==3){
+            window.location.href='../texttrain';
+          }
         }
       }
     });

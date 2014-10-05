@@ -32,12 +32,25 @@
     </div>
   </div> 
   <div class="cfd">
-    控制组
+    控制组1
     <div class="csubject_fd">
-      <div class="c add_subject">添加被试</div>
+      <div class="c1 add_subject">添加被试</div>
       <%if(subjects){%>
       <%subjects.forEach(function(item,index,array){%>
         <%if(item.type==0){%>
+        <div data-id="<%=item._id%>" class="subject_item"><%=item.name%><span style="float:right;"><%=item.complete?'(已完成)':'(未完成)'%></span></div>
+        <%}%>
+      <%});%>
+      <%}%>
+    </div>
+  </div> 
+  <div class="cfd">
+    控制组2
+    <div class="csubject_fd">
+      <div class="c2 add_subject">添加被试</div>
+      <%if(subjects){%>
+      <%subjects.forEach(function(item,index,array){%>
+        <%if(item.type==-1){%>
         <div data-id="<%=item._id%>" class="subject_item"><%=item.name%><span style="float:right;"><%=item.complete?'(已完成)':'(未完成)'%></span></div>
         <%}%>
       <%});%>

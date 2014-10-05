@@ -115,6 +115,9 @@
       <p>接下来是一组<%=stage_text%>。</p>
       <small>准备好后请按回车</small>
     </div>
+    <div class="end" style="display:none;">
+      <p>实验第一部分已经结束，您可以休息一段时间，休息之后按回车继续实验</p>
+    </div>
   </div>
 
 </body>
@@ -201,7 +204,14 @@
       }else{
         $.post('/project/psychological/experiment/sendtextresult',{result:result,name:name,stage:stage},function(data){
           if(data.success){
-            $textarea.html('<h1>实验结束，谢谢参与</h1>');
+            if(type==1||type==0){
+              $textarea.hide();
+              $('div.welcome div.end').show().siblings().hide();
+              $('div.welcome').show();
+              welcome = 3;
+            }else if(type==2||type==-1){
+              $textarea.html('<h1>实验结束，谢谢参与</h1>');
+            }
           }else{
             alert('记录结果出错');
           }
@@ -247,6 +257,14 @@
           $('div.welcome').hide();
           welcome = 0;
           start();
+        }else if(welcome==3&&event.which==13){
+          if(stage==1){
+            window.location.href='../practice';
+          }else if(stage==2){
+            window.location.href='../test';
+          }else if(stage==3){
+            window.location.href='../train';
+          }
         }
       }
     });
