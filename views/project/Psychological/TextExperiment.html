@@ -188,16 +188,11 @@
           if(miss){
             result[count].isMiss = miss;
             result[count].reactTime = 1000;
-            start();
+            setTimeout(function(){
+              start();
+            },500);
           }
         },2000);
-        setTimeout(function(){
-          if(miss){
-            result[count].isMiss = miss;
-            result[count].reactTime = 1000;
-            start();
-          }
-        },2500);
       }else{
         $.post('/project/psychological/experiment/sendtextresult',{result:result,name:name,stage:stage},function(data){
           if(data.success){
@@ -215,21 +210,26 @@
         miss = false;
         result[count].reactTime = new Date().getTime() - startTime
         if (event.which == 74) {
-          if(J){
-            result[count].isCorrect = true;
+          result[count].isCorrect = negative;
+          if(negative){
+            $textarea.text('你是正确的！');
           }else{
-            result[count].isCorrect = false;
+            $textarea.text('错了！');
           }
+          setTimeout(function(){
+            start();
+          },500);
         }else if(event.which == 70){
-          if(J){
-            result[count].isCorrect = false;
+          result[count].isCorrect = positive;
+          if(positive){
+            $textarea.text('你是正确的！');
           }else{
-            result[count].isCorrect = true;
+            $textarea.text('错了！');
           }
-        }else{
-          result[count].isCorrect = false;
+          setTimeout(function(){
+            start();
+          },500);
         }
-        start();
       }else{
         if(welcome==1&&event.which==13){
           $('div.welcome_first').hide().next().show();

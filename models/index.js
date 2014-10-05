@@ -7,6 +7,7 @@ require('./visitor');
 require('./psycological/material');
 require('./psycological/subject');
 require('./psycological/results');
+require('./psycological/textresults');
 
 exports.Post = mongoose.model('Post');
 exports.Tag = mongoose.model('Tag');
@@ -15,3 +16,4 @@ exports.MaterialImg = mongoose.model('MaterialImg');
 exports.MaterialText = mongoose.model('MaterialText');
 exports.Subject = mongoose.model('Subject');
 exports.Results = mongoose.model('Results');
+exports.TextResults = mongoose.model('TextResults');

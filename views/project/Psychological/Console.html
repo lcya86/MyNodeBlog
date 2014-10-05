@@ -480,6 +480,7 @@
                 complete += '<div class="pword subject_item">积极词:'+pword+'</div>';
                 complete += '<div data-id="'+data.id+'" class="subject_item" style="clear:both;">句子:'+sentence+'</div>';
                 complete += '</div>';
+                $this.find('span').text(Number($this.find('span').text())+1);
                 $addForm.remove()
                 $this.after(complete);
               }else{

@@ -13,7 +13,7 @@ exports.articlesClassify = function(req, res) {
 
 exports.psychologicalExperiment = function(req, res) {
   var async = require('async');
-  var Materials,Texts, Subjects, sc_count, cs_count, ts_count, csc_count, tsc_count;
+  var Materials,Texts, Subjects, sc_count, cs_count, ts_count, csc_count, tsc_count,practice_text_count,test_text_count,train_text_count;
   async.parallel({
     one:function(cb) {
       model.Subject.find(function(err, subjects) {
@@ -84,12 +84,36 @@ exports.psychologicalExperiment = function(req, res) {
         Texts = data;
         cb(null);
       });
+    },
+    nine:function(cb){
+      model.MaterialText.count({stage:1},function(err,data){
+        if (err) console.error(err);
+        practice_text_count = data
+        cb(null);
+      });
+    },
+    ten:function(cb){
+      model.MaterialText.count({stage:2},function(err,data){
+        if (err) console.error(err);
+        test_text_count = data
+        cb(null);
+      });
+    },
+    eleven:function(cb){
+      model.MaterialText.count({stage:3},function(err,data){
+        if (err) console.error(err);
+        train_text_count = data
+        cb(null);
+      });
     }
   }, function(err, result) {
     if (err) console.error(err);
     return res.render('project/Psychological/Console', {
       material: Materials,
       text:Texts,
+      practice_text_count:practice_text_count,
+      test_text_count:test_text_count,
+      train_text_count:train_text_count,
       subjects: Subjects,
       cs_count: cs_count,
       ts_count: ts_count,
@@ -136,6 +160,41 @@ exports.doTrain = function(req,res){
   });
 }
 
+exports.doTextPractice = function(req, res) {
+  model.MaterialText.find({stage:1}).sort({
+    'sequence': +1
+  }).exec(function(err, data) {
+    return res.render('project/Psychological/TextExperiment', {
+      texts: data,
+      stage:1,
+      stage_text:'练习'
+    });
+  });
+}
+
+exports.doTextTest = function(req,res){
+  model.MaterialText.find({stage:2}).sort({
+    'sequence': +1
+  }).exec(function(err, data) {
+    return res.render('project/Psychological/TextExperiment', {
+      texts: data,
+      stage:2,
+      stage_text:'测试'
+    });
+  });
+}
+
+exports.doTextTrain = function(req,res){
+  model.MaterialText.find({stage:3}).sort({
+    'sequence': +1
+  }).exec(function(err, data) {
+    return res.render('project/Psychological/TextExperiment', {
+      texts: data,
+      stage:3,
+      stage_text:'训练'
+    });
+  });
+}
 
 exports.addSubject = function(req, res) {
   var name = req.body.name;
@@ -278,6 +337,25 @@ exports.sendResult = function(req,res){
   var result = req.body.result;
   var stage = req.body.stage;
   model.Results.create({name:name,results:result,stage:stage},function(err){
+    if(err){
+      console.error(err); 
+      return res.send({success:false});
+    }
+    model.Subject.update({name:name},{complete:{$push:true}},function(err){
+      if(err){
+        console.error(err); 
+        return res.send({success:false});
+      }
+      return res.send({success:true});
+    });
+  });
+}
+
+exports.sendTextResult = function(req,res){
+  var name = req.body.name;
+  var result = req.body.result;
+  var stage = req.body.stage;
+  model.TextResults.create({name:name,results:result,stage:stage},function(err){
     if(err){
       console.error(err); 
       return res.send({success:false});

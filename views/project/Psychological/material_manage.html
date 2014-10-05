@@ -91,7 +91,7 @@
 <div id="practice_text_bd" class="main_bd" style="display:none;">
   <div class="center_fd">
     <div class="text_fd">
-      <div class="t add_subject" data-stage="1">添加句子</div>
+      <div class="t add_subject" data-stage="1">添加句子(<span><%=practice_text_count%></span>)</div>
       <%if(text){%>
       <%text.forEach(function(item,index,array){%>
         <%if(item.stage==1){%>
@@ -110,7 +110,7 @@
 <div id="test_text_bd" class="main_bd" style="display:none;">
   <div class="center_fd">
     <div class="text_fd">
-      <div class="t add_subject" data-stage="2">添加句子</div>
+      <div class="t add_subject" data-stage="2">添加句子(<span><%=test_text_count%></span>)</div>
       <%if(text){%>
       <%text.forEach(function(item,index,array){%>
         <%if(item.stage==2){%>
@@ -129,7 +129,7 @@
 <div id="train_text_bd" class="main_bd" style="display:none;">
   <div class="center_fd">
     <div class="text_fd">
-      <div class="t add_subject" data-stage="3">添加句子</div>
+      <div class="t add_subject" data-stage="3">添加句子(<span><%=train_text_count%></span>)</div>
       <%if(text){%>
       <%text.forEach(function(item,index,array){%>
         <%if(item.stage==3){%>
