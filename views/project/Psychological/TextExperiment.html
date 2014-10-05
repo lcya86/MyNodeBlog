@@ -120,7 +120,7 @@
 </body>
 <script type="text/javascript" src="/javascripts/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
-  var texts = <%=texts.toString().replace('\n','')%>;
+  var texts = <%=texts.toString().replace(/\n/g,'')%>;
   $(function(){
     $('div.spinner').remove();
     $('div.container').show();
