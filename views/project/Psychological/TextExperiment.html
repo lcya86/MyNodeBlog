@@ -204,12 +204,12 @@
       }else{
         $.post('/project/psychological/experiment/sendtextresult',{result:result,name:name,stage:stage},function(data){
           if(data.success){
-            if(type==1||type==0){
+            if(type==2||type==-1){
               $textarea.hide();
               $('div.welcome div.end').show().siblings().hide();
               $('div.welcome').show();
               welcome = 3;
-            }else if(type==2||type==-1){
+            }else if(type==1||type==0){
               $textarea.html('<h1>实验结束，谢谢参与</h1>');
             }
           }else{
