@@ -676,7 +676,7 @@
             list += '<div class="resultList practice">';
             if(data.practice){
               data.practice.forEach(function(item,index,array){
-                list += '<div data-index="'+index+'" class="result_item">第'+(index+1)+'次练习 <%=item.timestamp%></div>';
+                list += '<div data-index="'+index+'" class="result_item">第'+(index+1)+'次练习 '+item.timestamp+'</div>';
                 table += '<table class="resultTable js_practice_table'+index+'" cellspacing="0px" cellpadding="5px" width="500px" style="display:none;">';
                 table += '<thead>';
                 table += '<tr>';
