@@ -420,6 +420,57 @@ exports.getResult = function(req,res){
   });
 }
 
+exports.getTextResult = function(req,res){
+  var async = require('async');
+  var name = req.query.name;
+  var practice,test,train;
+  async.parallel({
+    one:function(cb){
+      model.TextResults.find({name:name,stage:1}).sort('+timestamp').exec(function(err,data){
+        if(err){
+          console.error(err);
+          return res.send({success:false});
+        }
+        if(data){
+          practice = data;
+        }
+        cb(null);
+      });
+    },
+    two:function(cb){
+      model.TextResults.find({name:name,stage:2}).sort('+timestamp').exec(function(err,data){
+        if(err){
+          console.error(err);
+          return res.send({success:false});
+        }
+        if(data){
+          test = data;
+        }
+        cb(null);
+      });
+    },
+    three:function(cb){
+      model.TextResults.find({name:name,stage:3}).sort('+timestamp').exec(function(err,data){
+        if(err){
+          console.error(err);
+          return res.send({success:false});
+        }
+        if(data){
+          train = data;
+        }
+        cb(null);
+      });
+    }
+  },function(err,result){
+    if(err){
+      console.error(err);
+      return res.send({success:false});
+    }
+    return res.send({success:true,practice:practice,test:test,train:train});
+  });
+}
+
+
 exports.stock = function(req, res) {
   var press = require('./superPress').press;
   press(req.query.code, req.query.times, function(labels, data) {
