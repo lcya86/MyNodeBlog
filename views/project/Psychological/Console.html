@@ -538,7 +538,7 @@
       });
 
     /*##########################结果管理#####################*/
-    $('#result')
+    $('#image_result_bd')
       .on('click','div.subject_item',function(event){
         event.stopPropagation();
         var $this = $(this);
@@ -628,28 +628,142 @@
             }
             list += '</div>';
 
-            $('div.result_fd').html(table);
-            $('div.results_fd').html(list);
+            $('#image_result_bd div.result_fd').html(table);
+            $('#image_result_bd div.results_fd').html(list);
           }
         })
       })
       .on('click','div.resultList.practice div.result_item',function(event){
         event.stopPropagation();
         var $this = $(this);
-        $('div.result_fd').children().hide();
-        $('#result table.js_practice_table'+$this.data('index')).show();
+        $('#image_result_bd div.result_fd').children().hide();
+        $('#image_result_bd table.js_practice_table'+$this.data('index')).show();
       })
       .on('click','div.resultList.test div.result_item',function(event){
         event.stopPropagation();
         var $this = $(this);
-        $('div.result_fd').children().hide();
-        $('#result table.js_test_table'+$this.data('index')).show();
+        $('#image_result_bd div.result_fd').children().hide();
+        $('#image_result_bd table.js_test_table'+$this.data('index')).show();
       })
       .on('click','div.resultList.train div.result_item',function(event){
         event.stopPropagation();
         var $this = $(this);
-        $('div.result_fd').children().hide();
-        $('#result table.js_train_table'+$this.data('index')).show();
+        $('#image_result_bd div.result_fd').children().hide();
+        $('#image_result_bd table.js_train_table'+$this.data('index')).show();
+      });
+
+    $('#text_result_bd')
+      .on('click','div.subject_item',function(event){
+        event.stopPropagation();
+        var $this = $(this);
+        $.get('/project/psychological/console/gettextresult',{name:$this.text()},function(data){
+          if(data.success){
+            var list = '实验批次';
+            var table = '实验结果';
+            list += '<div class="resultList practice">';
+            if(data.practice){
+              data.practice.forEach(function(item,index,array){
+                list += '<div data-index="'+index+'" class="result_item">第'+(index+1)+'次练习</div>';
+                table += '<table class="resultTable js_practice_table'+index+'" cellspacing="0px" cellpadding="5px" width="500px" style="display:none;">';
+                table += '<thead>';
+                table += '<tr>';
+                table += '<th>是否积极图片</th>';
+                table += '<th>是否击中</th>';
+                table += '<th>反应时(ms)</th>';
+                table += '</tr>';
+                table += '</thead>';
+                table += '<tbody>';
+                if(item.results){
+                  item.results.forEach(function(item,index,array){
+                    table += '<tr>';
+                    table += '<td>'+item.isUnderP+'</td>';
+                    table += '<td>'+(item.isCorrect?'shit':(item.isMiss?'miss':'incorrect'))+'</td>';
+                    table += '<td>'+item.reactTime+'</td>';
+                    table += '</tr>';
+                  });
+                }
+                table += '</tbody>';
+                table += '</table>';
+              });
+            }
+            list += '</div>';
+            list += '<div class="resultList test">';
+            if(data.test){
+              data.test.forEach(function(item,index,array){
+                list += '<div data-index="'+index+'" class="result_item">第'+(index+1)+'次测试</div>';
+                table += '<table class="resultTable js_test_table'+index+'" cellspacing="0px" cellpadding="5px" width="500px" style="display:none;">';
+                table += '<thead>';
+                table += '<tr>';
+                table += '<th>是否积极图片</th>';
+                table += '<th>是否击中</th>';
+                table += '<th>反应时(ms)</th>';
+                table += '</tr>';
+                table += '</thead>';
+                table += '<tbody>';
+                if(item.results){
+                  item.results.forEach(function(item,index,array){
+                    table += '<tr>';
+                    table += '<td>'+item.isUnderP+'</td>';
+                    table += '<td>'+(item.isCorrect?'shit':(item.isMiss?'miss':'incorrect'))+'</td>';
+                    table += '<td>'+item.reactTime+'</td>';
+                    table += '</tr>';
+                  });
+                }
+                table += '</tbody>';
+                table += '</table>';
+              });
+            }
+            list += '</div>';
+            list += '<div class="resultList train">';
+            if(data.train){
+              data.train.forEach(function(item,index,array){
+                list += '<div data-index="'+index+'" class="result_item">第'+(index+1)+'次训练</div>';
+                table += '<table class="resultTable js_train_table'+index+'" cellspacing="0px" cellpadding="5px" width="500px" style="display:none;">';
+                table += '<thead>';
+                table += '<tr>';
+                table += '<th>是否积极图片</th>';
+                table += '<th>是否击中</th>';
+                table += '<th>反应时(ms)</th>';
+                table += '</tr>';
+                table += '</thead>';
+                table += '<tbody>';
+                if(item.results){
+                  item.results.forEach(function(item,index,array){
+                    table += '<tr>';
+                    table += '<td>'+item.isUnderP+'</td>';
+                    table += '<td>'+(item.isCorrect?'shit':(item.isMiss?'miss':'incorrect'))+'</td>';
+                    table += '<td>'+item.reactTime+'</td>';
+                    table += '</tr>';
+                  });
+                }
+                table += '</tbody>';
+                table += '</table>';
+              });
+            }
+            list += '</div>';
+
+            $('#text_result_bd div.result_fd').html(table);
+            $('#text_result_bd div.results_fd').html(list);
+          }
+        })
+      })
+      .on('click','div.resultList.practice div.result_item',function(event){
+        event.stopPropagation();
+        var $this = $(this);
+        $('#text_result_bd div.result_fd').children().hide();
+        $('#text_result_bd table.js_practice_table'+$this.data('index')).show();
+      })
+      .on('click','div.resultList.test div.result_item',function(event){
+        event.stopPropagation();
+        var $this = $(this);
+        $('#text_result_bd div.result_fd').children().hide();
+        $('#text_result_bd table.js_test_table'+$this.data('index')).show();
+      })
+      .on('click','div.resultList.train div.result_item',function(event){
+        event.stopPropagation();
+        var $this = $(this);
+        $('#text_result_bd div.result_fd').children().hide();
+        $('#text_result_bd table.js_train_table'+$this.data('index')).show();
       });
 
 
