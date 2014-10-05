@@ -5,24 +5,26 @@
   </div>
 </div>
 <div class="main_bd">
-  <div class="sfd">
-    统计信息
-    <div class="statistics_fd">
-      <p>全部人数：<%=subjects?subjects.length:0%></p>
-      <p>已完成实验人数：<%=sc_count%></p>
-      <p>控制组人数：<%=cs_count%></p>
-      <p>控制组完成实验人数：<%=csc_count%></p>
-      <p>实验组人数：<%=ts_count%></p>
-      <p>实验组完成实验人数：<%=tsc_count%></p>
-    </div>
-  </div>
   <div class="tfd">
-    实验组
+    实验组1
     <div class="tsubject_fd">
       <div class="t add_subject">添加被试</div>
       <%if(subjects){%>
       <%subjects.forEach(function(item,index,array){%>
         <%if(item.type==1){%>
+        <div data-id="<%=item._id%>" class="subject_item"><%=item.name%><span style="float:right;"><%=item.complete?'(已完成)':'(未完成)'%></span></div>
+        <%}%>
+      <%});%>
+      <%}%>
+    </div>
+  </div> 
+  <div class="tfd">
+    实验组2
+    <div class="tsubject_fd">
+      <div class="t add_subject">添加被试</div>
+      <%if(subjects){%>
+      <%subjects.forEach(function(item,index,array){%>
+        <%if(item.type==2){%>
         <div data-id="<%=item._id%>" class="subject_item"><%=item.name%><span style="float:right;"><%=item.complete?'(已完成)':'(未完成)'%></span></div>
         <%}%>
       <%});%>
