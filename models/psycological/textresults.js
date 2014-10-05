@@ -7,7 +7,7 @@ var textresultSchema = new Schema({
 	reactTime:Number,
 	isUnderP:Boolean//字母是否在积极图片下
 })
-mongoose.model('Result', resultSchema);
+mongoose.model('TextResult', textresultSchema);
 
 var textresultsSchema = new Schema({
 	name: String,
