@@ -722,6 +722,12 @@
       $(event.target).addClass('selected').siblings().removeClass('selected');
     });
 
+    $('div.js_image_result.tab_nav').on('click',function(event){
+      $('#image_result_bd').show();
+      $('#text_result_bd').hide();
+      $(event.target).addClass('selected').siblings().removeClass('selected');
+    });
+
 
 
     $('div.js_material.left_nav').click(function(event){
