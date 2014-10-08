@@ -226,7 +226,7 @@
         result[count].reactTime = new Date().getTime() - startTime
         if (event.which == 74) {
           result[count].isCorrect = negative;
-          if(stage!=2){
+          if(stage==3){
             if(negative){
               $textarea.text('你是正确的！');
             }else{
@@ -238,7 +238,7 @@
           },500);
         }else if(event.which == 70){
           result[count].isCorrect = positive;
-          if(stage!=2){
+          if(stage==3){
             if(positive){
               $textarea.text('你是正确的！');
             }else{
