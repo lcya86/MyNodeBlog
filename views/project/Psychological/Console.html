@@ -438,6 +438,7 @@
         event.preventDefault();
         $(this).removeClass('selected');
       })
+      /*
       .on('click.delete','div.img_item.real',function(event){
         event.stopPropagation();
         $target = $(event.currentTarget);
@@ -450,6 +451,7 @@
           }
         });
       })
+*/
       .on('click.add','div.add_subject',function(event){
         event.stopPropagation();
         var addForm = '';
