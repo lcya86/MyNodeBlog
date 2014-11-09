@@ -169,7 +169,7 @@
         result[count] = {};
         $cross.show();
         $textarea.empty();
-        if(stage==3||Math.floor((Math.random()*10))%2==0){
+        if(Math.floor((Math.random()*10))%2==0){
           $textarea.text(texts[count].pword);
           positive = true;
         }else{
@@ -225,25 +225,51 @@
         miss = false;
         result[count].reactTime = new Date().getTime() - startTime
         if (event.which == 74) {
-          result[count].isCorrect = negative;
           if(stage==3){
-            if(negative){
-              $textarea.text('你是正确的！');
-            }else{
-              $textarea.text('错了！');
+            if(type==2){
+              if(negative){
+                $textarea.text('你是正确的！');
+                result[count].isCorrect = true;
+              }else{
+                $textarea.text('错了！');
+                result[count].isCorrect = false;
+              }
+            }else if(type==-1){
+              if(Math.floor((Math.random()*10))%2==0){
+                $textarea.text('你是正确的！');
+                result[count].isCorrect = true;
+              }else{
+                $textarea.text('错了！');
+                result[count].isCorrect = false;
+              }
             }
+          }else{
+            result[count].isCorrect = false;
           }
           setTimeout(function(){
             start();
           },500);
         }else if(event.which == 70){
-          result[count].isCorrect = positive;
           if(stage==3){
-            if(positive){
-              $textarea.text('你是正确的！');
-            }else{
-              $textarea.text('错了！');
+            if(type==2){
+              if(positive){
+                $textarea.text('你是正确的！');
+                result[count].isCorrect = true;
+              }else{
+                $textarea.text('错了！');
+                result[count].isCorrect = false;
+              }
+            }else if(type==-1){
+              if(Math.floor((Math.random()*10))%2==0){
+                $textarea.text('你是正确的！');
+                result[count].isCorrect = true;
+              }else{
+                $textarea.text('错了！');
+                result[count].isCorrect = false;
+              }
             }
+          }else{
+            result[count].isCorrect = true;
           }
           setTimeout(function(){
             start();
