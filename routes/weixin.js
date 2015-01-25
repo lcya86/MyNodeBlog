@@ -80,7 +80,9 @@ function route(req,res){
 				});
 				return res.send('');
 			}else if(xml.Content[0]=='捣鼓啥呢'){
-				return replyText(req,res,'<a href="http://lcy-blog.com/project/doing">好玩儿的，点我就告诉你</a>');
+				return replyText(req,res,'<a href="http://lcy-blog.com/project/painter">好玩儿的，点我就告诉你</a>');
+			}else if(xml.Content[0]=='painter'){
+				return replyText(req,res,'<a href="http://lcy-blog.com/project/painter">painter</a>');
 			}else if(xml.Content[0].search(/灵魂附体/)!=-1){
 				weixin.login(function(token,cookie){
 					var options = {
