@@ -11,6 +11,10 @@ exports.articlesClassify = function(req, res) {
   return res.render('project/articlesClassify');
 }
 
+exports.painter = function(req, res) {
+  return res.render('project/painter');
+}
+
 exports.psychologicalExperiment = function(req, res) {
   var async = require('async');
   var Materials,Texts, Subjects, sc_count, cs_count, ts_count, csc_count, tsc_count,practice_text_count,test_text_count,train_text_count;
