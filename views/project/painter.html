@@ -32,6 +32,7 @@
       ctx.moveTo(event.touches[0].clientX, event.touches[0].clientY);
     });
     canvas.addEventListener('touchmove',function(event){
+      event.preventDefault();
       ctx.lineTo(event.touches[0].clientX, event.touches[0].clientY);
       ctx.stroke();
     });
