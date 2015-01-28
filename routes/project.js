@@ -1,4 +1,5 @@
 var model = require('../models');
+var weixin = require('../tools/weixin');
 exports.doing = function(req, res) {
   return res.render('doing');
 }
@@ -12,7 +13,10 @@ exports.articlesClassify = function(req, res) {
 }
 
 exports.painter = function(req, res) {
-  return res.render('project/painter');
+  weixin.getAccessToken(function(json){
+    
+    return res.render('project/painter',{access_token:json.access_token});
+  });
 }
 
 exports.psychologicalExperiment = function(req, res) {

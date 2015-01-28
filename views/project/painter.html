@@ -17,7 +17,19 @@
       display: block;
     }
   </style>
+  <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
   <script type="text/javascript">
+  function linePoint(canvas,x,y){
+    with(canvas){
+      moveTo(x,y);
+      lineTo(x+1,y+1);
+    }
+  }
+  function circlePoint(canvas,x,y){
+    with(canvas){
+      arc(x,y,0.0001,0,Math.PI*2,true);
+    }
+  }
   function init(){
     var canvas = document.getElementById('canvas');
     canvas.width = window.innerWidth;
@@ -26,24 +38,42 @@
     var ctx = canvas.getContext('2d');
     ctx.fillStyle = '#555';
     ctx.save();
-    ctx.lineWidth = 1.0;
+    ctx.lineWidth = 0.2;
     ctx.strokeStyle = "#CC0000";
     canvas.addEventListener('touchstart',function(event){
-      ctx.moveTo(event.touches[0].clientX, event.touches[0].clientY);
+      event.preventDefault();
+      ctx.beginPath();
     });
     canvas.addEventListener('touchmove',function(event){
       event.preventDefault();
+      //circlePoint(ctx,event.touches[0].clientX, event.touches[0].clientY);
+      //linePoint(ctx,event.touches[0].clientX, event.touches[0].clientY);
       ctx.lineTo(event.touches[0].clientX, event.touches[0].clientY);
       ctx.stroke();
     });
     canvas.addEventListener('touchend',function(event){
-
+      event.preventDefault();
+      //ctx.lineTo(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
+      //ctx.stroke();
     })
+    canvas.addEventListener('tap',function(event){
+      event.preventDefault();
+    });
   }
 
   </script>
 </head>
 <body onload="init();">
   <canvas id="canvas" width="150" height="150">啥都没有。。。</canvas>
+  <script type="text/javascript">
+  wx.config({
+    debug:true,
+    appId:'wx56bfafa64e9dd642',
+    timestamp:(new Date()).parse(),
+    nonceStr:'lcya86',
+    signature:'',
+    jsApiList:['onMenuShareTimeline']
+  });
+  </script>
 </body>
 </html>

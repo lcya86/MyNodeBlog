@@ -2,6 +2,7 @@ var crypto = require('crypto');
 var https = require('https');
 var TOKEN = 'lcya86';
 var request = require('superagent');
+var access_token = '';
 exports.checkSignature = function(signature,timestamp,nonce){
 	var tmpArr = [TOKEN,timestamp,nonce];
 	tmpArr.sort();
@@ -107,4 +108,46 @@ exports.getFirstFakeId = function(option,fn){
 		this.destroy();
 	});
 	req.end();
+}
+
+function getAccessToken(fn){
+	request
+		.get('https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx56bfafa64e9dd642&secret=c448419059325fd33d0165e420d48cb2')
+		.end(function(err,res){
+			if(err){
+				return console.error(err);
+			}
+			fn(JSON.parse(res.text));
+		});
+}
+
+exports.getJsapiTicket = function(fn){
+	if(access_token==''){
+		getAccessToken(function(json){
+			access_token = json.access_token;
+		});
+	}
+	request
+	.get('https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token='+access_token+'&type=jsapi')
+	.end(function(err,res){
+		if(err){
+			return console.error(err);
+		}
+		if(JSON.parse(res.text).errcode!=0){
+			getAccessToken(function(json){
+				access_token = json.access_token;
+				request
+					.get('https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token='+access_token+'&type=jsapi')
+					.end(function(err,res){
+						if(err){
+							return console.error(err);
+						}
+						fn(JSON.parse(res.text));
+					});
+			});
+		}else{
+			fn(JSON.parse(res.text));
+		}
+	});
+	
 }
