@@ -13,6 +13,10 @@ exports.articlesClassify = function(req, res) {
 }
 
 exports.painter = function(req, res) {
+  return res.render('project/painter');
+}
+
+exports.painter1 = function(req, res) {
   weixin.getAccessToken(function(json){
     
     return res.render('project/painter',{access_token:json.access_token});
