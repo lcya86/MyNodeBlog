@@ -18,14 +18,12 @@
     }
     #button{
       padding:10px;
-      background-color:#5BBBEE;
+      /*background-color:#5BBBEE;*/
       border-radius:10%;
       position:absolute;
       top:10px;
       left:10px;
-    }
-    #button:active{
-      background-color:#4aaadd;
+      color:white;
     }
   </style>
   <!--<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>-->
@@ -53,6 +51,8 @@
 
     var ctx = canvas.getContext('2d');
     var color = getRandomColor();
+    button.style.backgroundColor = color;
+    button.style.color = getRandomColor();
     var trackList = [];
     ctx.fillStyle = color;
     ctx.save();
@@ -87,8 +87,6 @@
       console.log(trackList.length);
       if(trackList.length>0){
         ctx.putImageData(trackList.pop(),0,0);
-      }else{
-
       }
     });
   }
