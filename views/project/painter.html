@@ -19,6 +19,9 @@
   </style>
   <!--<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>-->
   <script type="text/javascript">
+  function getRandomColor(){
+    return '#'+(Math.random()*0xffffff<<0).toString(16);
+  }
   function linePoint(canvas,x,y){
     with(canvas){
       moveTo(x,y);
@@ -38,8 +41,11 @@
     var ctx = canvas.getContext('2d');
     ctx.fillStyle = '#555';
     ctx.save();
-    ctx.lineWidth = 0.2;
-    ctx.strokeStyle = "#CC0000";
+    ctx.lineWidth = 0.3;
+    ctx.strokeStyle = getRandomColor();
+    ctx.lineCap="round";
+    ctx.lineJoin = "round";
+    console.log(ctx);
     canvas.addEventListener('touchstart',function(event){
       event.preventDefault();
       ctx.beginPath();
@@ -48,6 +54,7 @@
       event.preventDefault();
       //circlePoint(ctx,event.touches[0].clientX, event.touches[0].clientY);
       //linePoint(ctx,event.touches[0].clientX, event.touches[0].clientY);
+      console.log('x:'+event.touches[0].clientX+' y:'+event.touches[0].clientY);
       ctx.lineTo(event.touches[0].clientX, event.touches[0].clientY);
       ctx.stroke();
     });
