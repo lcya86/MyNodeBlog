@@ -34,7 +34,7 @@ exports.painter = function(req, res) {
       }
     });
   }
-  return res.render('project/painter',{sign:sign,timestamp:timestamp,nonceStr:'Wm3WZYTPz0wzccnW'});
+  return res.render('project/painter',{parent:0,sign:sign,timestamp:timestamp,nonceStr:'Wm3WZYTPz0wzccnW'});
 }
 
 exports.saveImage = function(req,res){

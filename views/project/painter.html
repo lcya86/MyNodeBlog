@@ -130,7 +130,7 @@
           alert(xmlHttp.responseText);
         }
       }
-      Post('http://lcy-blog.com/painter/'+timestamp,{parent:<%=parent?parent:0%>,base64:document.getElementById('canvas').toDataURL("image/png")},function(err,data){
+      Post('http://lcy-blog.com/painter/'+timestamp,{parent:<%=parent%>,base64:document.getElementById('canvas').toDataURL("image/png")},function(err,data){
         alert(err);
         alert(data);
       });
