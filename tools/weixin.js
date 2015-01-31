@@ -4,11 +4,11 @@ var TOKEN = 'lcya86';
 var request = require('superagent');
 var access_token = {
   token:'',
-  timestamp:''
+  timestamp:Date.now()
 };
 var jsapi_ticket = {
   ticket:'',
-  timestamp:''
+  timestamp:Date.now()
 };
 exports.checkSignature = function(signature,timestamp,nonce){
   var tmpArr = [TOKEN,timestamp,nonce];

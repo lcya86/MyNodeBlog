@@ -89,6 +89,12 @@
         ctx.putImageData(trackList.pop(),0,0);
       }
     });
+
+    <%if(pic_base64){%>
+      var img = new Image();
+      img.src = "<%=pic_base64%>";
+      ctx.drawImage(img, 0, 0);
+    <%}%>
   }
 
   </script>
