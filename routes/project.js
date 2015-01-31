@@ -40,7 +40,7 @@ exports.getImage = function(req,res){
         console.error(err);
       }
       if(image){
-        return res.attachment(image.base64);
+        return res.send(image.base64);
       }else{
         return res.sendStatus(404);
       }
