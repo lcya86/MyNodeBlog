@@ -51,7 +51,7 @@
     }
   }
   function post(url,params,callback){
-    params = params || {};
+    params = params || '';
     /* 创建 XMLHttpRequest 对象 */
     var xmlHttp = new XMLHttpRequest();
     if (xmlHttp==null){
@@ -124,7 +124,7 @@
 
     finish.addEventListener('touchend',function(event){
       var timestamp = Date.now();
-      post('http://lcy-blog.com/project/painter/'+timestamp,{parent:<%=parent%>,base64:document.getElementById('canvas').toDataURL("image/png")},function(err,data){
+      post('http://lcy-blog.com/project/painter/'+timestamp,'parent=<%=parent%>&base64='+document.getElementById('canvas').toDataURL("image/png"),function(err,data){
         console.log(err);
         console.log(data);
       });
