@@ -138,9 +138,9 @@ function getAccessToken(){
     return access_token.token;
   }
 }
-getAccessToken();
+//getAccessToken();
 
-exports.getJsapiTicket = function(){
+function getJsapiTicket(){
   var differ = Date.now() - jsapi_ticket.timestamp;
   console.log('jsapi_ticket:'+JSON.stringify(jsapi_ticket));
   var access_token = getAccessToken();
@@ -162,3 +162,5 @@ exports.getJsapiTicket = function(){
     return jsapi_ticket.ticket;
   }
 }
+getJsapiTicket();
+exports.getJsapiTicket = getJsapiTicket;
