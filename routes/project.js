@@ -45,8 +45,6 @@ exports.saveImage = function(req,res){
   var timestamp = req.param("timestamp");
   var parent = req.body.parent || 0;
   var base64 = req.body.base64;
-
-  /*
   model.Subject.create({
     timestamp:timestamp,
     parent: parent,
@@ -58,13 +56,9 @@ exports.saveImage = function(req,res){
         success: false
       });
     }else{
-      res.send({
-        success: true
-      });
+      res.redirect(req.originalUrl);
     }
   });
-*/
-  res.send({success: true});
 }
 
 exports.psychologicalExperiment = function(req, res) {
