@@ -18,6 +18,7 @@ exports.painter = function(req, res) {
   var timestamp = Date.now();
   var picTimestamp = req.param('timestamp');
   var sign = 'jsapi_ticket='+weixin.getJsapiTicket()+'&noncestr=Wm3WZYTPz0wzccnW&timestamp='+timestamp+'&url=http://lcy-blog.com/project/painter/'+picTimestamp;
+  console.log(sign);
   var sha1 = crypto.createHash('sha1');
   sha1.update(sign);
   sign = sha1.digest('hex');
