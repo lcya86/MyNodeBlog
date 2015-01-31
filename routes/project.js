@@ -1,5 +1,6 @@
 var model = require('../models');
 var weixin = require('../tools/weixin');
+var crypto = require('crypto');
 exports.doing = function(req, res) {
   return res.render('doing');
 }
@@ -12,15 +13,53 @@ exports.articlesClassify = function(req, res) {
   return res.render('project/articlesClassify');
 }
 
+
 exports.painter = function(req, res) {
-  return res.render('project/painter');
+  var timestamp = Date.now();
+  var picTimestamp = req.param('timestamp');
+  var sign = 'jsapi_ticket='+weixin.getJsapiTicket()+'&noncestr=Wm3WZYTPz0wzccnW&timestamp='+timestamp+'&url=http://lcy-blog.com/project/painter/'+picTimestamp;
+  var sha1 = crypto.createHash('sha1');
+  sha1.update(sign);
+  sign = sha1.digest('hex');
+  if(picTimestamp){
+    model.Images.findOne({timestamp:picTimestamp},function(err,image){
+      if(err){
+        console.error(err);
+      }
+      if(image){
+        return res.render('project/painter',{parent:picTimestamp,pic_base64:image.base64,sign:sign,timestamp:timestamp,nonceStr:'Wm3WZYTPz0wzccnW'});
+      }else{
+        return res.render('project/painter',{sign:sign,timestamp:timestamp,nonceStr:'Wm3WZYTPz0wzccnW'});
+      }
+    });
+  }
+  return res.render('project/painter',{sign:sign,timestamp:timestamp,nonceStr:'Wm3WZYTPz0wzccnW'});
 }
 
-exports.painter1 = function(req, res) {
-  weixin.getAccessToken(function(json){
-    
-    return res.render('project/painter',{access_token:json.access_token});
+exports.saveImage = function(req,res){
+  var timestamp = req.param("timestamp");
+  var parent = req.body.parent;
+  var base64 = req.body.base64;
+
+  /*
+  model.Subject.create({
+    timestamp:timestamp,
+    parent: parent,
+    base64: base64
+  }, function(err, item) {
+    if (err) {
+      console.error(err);
+      res.send({
+        success: false
+      });
+    }else{
+      res.send({
+        success: true
+      });
+    }
   });
+*/
+  res.send({success: true});
 }
 
 exports.psychologicalExperiment = function(req, res) {
