@@ -117,7 +117,7 @@ exports.getFirstFakeId = function(option,fn){
   req.end();
 };
 
-function getAccessToken(){
+function getAccessToken(fn){
   var differ = Date.now() - access_token.timestamp;
   console.log('access_token:'+JSON.stringify(access_token));
   if(access_token.token==''||differ>7195*1000){
@@ -132,35 +132,34 @@ function getAccessToken(){
           token:JSON.parse(res.text).access_token,
           timestamp:Date.now()
         };
-        return access_token.token;
+        fn(access_token.token);
       });
   }else{
-    return access_token.token;
+    fn(access_token.token);
   }
 }
 //getAccessToken();
 
-function getJsapiTicket(){
+exports.getJsapiTicket = function(fn){
   var differ = Date.now() - jsapi_ticket.timestamp;
   console.log('jsapi_ticket:'+JSON.stringify(jsapi_ticket));
-  var access_token = getAccessToken();
-  if(jsapi_ticket.ticket==''||differ>7195*1000){
-    request
-      .get('https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token='+access_token+'&type=jsapi')
-      .end(function(err,res){
-        if(err){
-          return console.error(err);
-        }
-        console.log(JSON.parse(res.text));
-        jsapi_ticket = {
-          ticket:JSON.parse(res.text).ticket,
-          timestamp:Date.now()
-        };
-        return jsapi_ticket.ticket;
-      });
-  }else{
-    return jsapi_ticket.ticket;
-  }
-}
-getJsapiTicket();
-exports.getJsapiTicket = getJsapiTicket;
+  getAccessToken(function(access_token){
+    if(jsapi_ticket.ticket==''||differ>7195*1000){
+      request
+        .get('https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token='+access_token+'&type=jsapi')
+        .end(function(err,res){
+          if(err){
+            return console.error(err);
+          }
+          console.log(JSON.parse(res.text));
+          jsapi_ticket = {
+            ticket:JSON.parse(res.text).ticket,
+            timestamp:Date.now()
+          };
+          fn(jsapi_ticket.ticket);
+        });
+    }else{
+      fn(jsapi_ticket.ticket);
+    }
+  });
+};

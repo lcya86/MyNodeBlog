@@ -18,30 +18,32 @@ exports.painter = function(req, res) {
   var timestamp = Date.now();
   var picTimestamp = req.param('timestamp');
   var sign = '';
-  if(picTimestamp){
-    sign = 'jsapi_ticket='+weixin.getJsapiTicket()+'&noncestr=Wm3WZYTPz0wzccnW&timestamp='+timestamp+'&url=http://lcy-blog.com/project/painter/'+picTimestamp;
-  }else{
-    sign = 'jsapi_ticket='+weixin.getJsapiTicket()+'&noncestr=Wm3WZYTPz0wzccnW&timestamp='+timestamp+'&url=http://lcy-blog.com/project/painter';
-  }
-  console.log(sign);
-  var sha1 = crypto.createHash('sha1');
-  sha1.update(sign);
-  sign = sha1.digest('hex');
-  console.log(sign);
-  if(picTimestamp){
-    model.Images.findOne({timestamp:picTimestamp},function(err,image){
-      if(err){
-        console.error(err);
-      }
-      if(image){
-        return res.render('project/painter',{parent:picTimestamp,pic_base64:image.base64,sign:sign,timestamp:timestamp,nonceStr:'Wm3WZYTPz0wzccnW'});
-      }else{
-        return res.render('project/painter',{parent:picTimestamp,pic_base64:'',sign:sign,timestamp:timestamp,nonceStr:'Wm3WZYTPz0wzccnW'});
-      }
-    });
-  }else{
-    return res.render('project/painter',{parent:0,sign:sign,pic_base64:'',timestamp:timestamp,nonceStr:'Wm3WZYTPz0wzccnW'});
-  }
+  weixin.getJsapiTicket(function(ticket){
+    if(picTimestamp){
+      sign = 'jsapi_ticket='+weixin.getJsapiTicket()+'&noncestr=Wm3WZYTPz0wzccnW&timestamp='+timestamp+'&url=http://lcy-blog.com/project/painter/'+picTimestamp;
+    }else{
+      sign = 'jsapi_ticket='+weixin.getJsapiTicket()+'&noncestr=Wm3WZYTPz0wzccnW&timestamp='+timestamp+'&url=http://lcy-blog.com/project/painter';
+    }
+    console.log(sign);
+    var sha1 = crypto.createHash('sha1');
+    sha1.update(sign);
+    sign = sha1.digest('hex');
+    console.log(sign);
+    if(picTimestamp){
+      model.Images.findOne({timestamp:picTimestamp},function(err,image){
+        if(err){
+          console.error(err);
+        }
+        if(image){
+          return res.render('project/painter',{parent:picTimestamp,pic_base64:image.base64,sign:sign,timestamp:timestamp,nonceStr:'Wm3WZYTPz0wzccnW'});
+        }else{
+          return res.render('project/painter',{parent:picTimestamp,pic_base64:'',sign:sign,timestamp:timestamp,nonceStr:'Wm3WZYTPz0wzccnW'});
+        }
+      });
+    }else{
+      return res.render('project/painter',{parent:0,sign:sign,pic_base64:'',timestamp:timestamp,nonceStr:'Wm3WZYTPz0wzccnW'});
+    }
+  });
 }
 
 exports.saveImage = function(req,res){
