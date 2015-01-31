@@ -45,7 +45,7 @@ exports.saveImage = function(req,res){
   var timestamp = req.param("timestamp");
   var parent = req.body.parent || 0;
   var base64 = req.body.base64;
-  model.Subject.create({
+  model.Images.create({
     timestamp:timestamp,
     parent: parent,
     base64: base64
