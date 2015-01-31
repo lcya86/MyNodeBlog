@@ -116,9 +116,9 @@
       }
     });
 
-    <%if(pic_base64!=''){%>
+    <%if(parent!=''){%>
       var img = new Image();
-      img.src = "<%=pic_base64%>";
+      img.src = "http://lcy-blog.com/project/painter/image/<%=parent%>";
       ctx.drawImage(img, 0, 0);
     <%}%>
 

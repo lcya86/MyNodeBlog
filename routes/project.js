@@ -25,18 +25,9 @@ exports.painter = function(req, res) {
     sha1.update(sign);
     sign = sha1.digest('hex');
     if(picTimestamp){
-      model.Images.findOne({timestamp:picTimestamp},function(err,image){
-        if(err){
-          console.error(err);
-        }
-        if(image){
-          return res.render('project/painter',{parent:picTimestamp,pic_base64:image.base64,sign:sign,timestamp:timestamp,nonceStr:'Wm3WZYTPz0wzccnW'});
-        }else{
-          return res.render('project/painter',{parent:picTimestamp,pic_base64:'',sign:sign,timestamp:timestamp,nonceStr:'Wm3WZYTPz0wzccnW'});
-        }
-      });
+      return res.render('project/painter',{parent:picTimestamp,sign:sign,timestamp:timestamp,nonceStr:'Wm3WZYTPz0wzccnW'});
     }else{
-      return res.render('project/painter',{parent:0,sign:sign,pic_base64:'',timestamp:timestamp,nonceStr:'Wm3WZYTPz0wzccnW'});
+      return res.render('project/painter',{parent:'',sign:sign,timestamp:timestamp,nonceStr:'Wm3WZYTPz0wzccnW'});
     }
   });
 }
