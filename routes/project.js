@@ -20,9 +20,9 @@ exports.painter = function(req, res) {
   var sign = '';
   weixin.getJsapiTicket(function(ticket){
     if(picTimestamp){
-      sign = 'jsapi_ticket='+weixin.getJsapiTicket()+'&noncestr=Wm3WZYTPz0wzccnW&timestamp='+timestamp+'&url=http://lcy-blog.com/project/painter/'+picTimestamp;
+      sign = 'jsapi_ticket='+ticket+'&noncestr=Wm3WZYTPz0wzccnW&timestamp='+timestamp+'&url=http://lcy-blog.com/project/painter/'+picTimestamp;
     }else{
-      sign = 'jsapi_ticket='+weixin.getJsapiTicket()+'&noncestr=Wm3WZYTPz0wzccnW&timestamp='+timestamp+'&url=http://lcy-blog.com/project/painter';
+      sign = 'jsapi_ticket='+ticket+'&noncestr=Wm3WZYTPz0wzccnW&timestamp='+timestamp+'&url=http://lcy-blog.com/project/painter';
     }
     console.log(sign);
     var sha1 = crypto.createHash('sha1');
