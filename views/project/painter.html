@@ -64,7 +64,7 @@
     xmlHttp.onreadystatechange = callback;//发送事件后，收到信息了调用函数
     if (xmlHttp.readyState==4 && xmlHttp.status==200){
       // 处理返回值
-      alert(xmlHttp.responseText);
+      console.log(xmlHttp.responseText);
     }
   }
   
@@ -124,9 +124,9 @@
 
     finish.addEventListener('touchend',function(event){
       var timestamp = Date.now();
-      post('http://lcy-blog.com/painter/'+timestamp,{parent:<%=parent%>,base64:document.getElementById('canvas').toDataURL("image/png")},function(err,data){
-        alert(err);
-        alert(data);
+      post('http://lcy-blog.com/project/painter/'+timestamp,{parent:<%=parent%>,base64:document.getElementById('canvas').toDataURL("image/png")},function(err,data){
+        console.log(err);
+        console.log(data);
       });
     });
   }
