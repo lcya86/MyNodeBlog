@@ -27,7 +27,7 @@ exports.painter = function(req, res) {
     if(picTimestamp){
       return res.render('project/painter',{parent:picTimestamp,sign:sign,timestamp:timestamp,nonceStr:'Wm3WZYTPz0wzccnW'});
     }else{
-      return res.render('project/painter',{parent:'',sign:sign,timestamp:timestamp,nonceStr:'Wm3WZYTPz0wzccnW'});
+      return res.render('project/painter',{parent:0,sign:sign,timestamp:timestamp,nonceStr:'Wm3WZYTPz0wzccnW'});
     }
   });
 }
@@ -40,6 +40,7 @@ exports.getImage = function(req,res){
         console.error(err);
       }
       if(image){
+        console.log(image.base64);
         return res.format({
           'image/png': function(){
             res.send(image.base64);

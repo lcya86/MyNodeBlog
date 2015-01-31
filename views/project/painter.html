@@ -116,7 +116,7 @@
       }
     });
 
-    <%if(parent!=''){%>
+    <%if(parent!=0){%>
       var img = new Image();
       img.src = "http://lcy-blog.com/project/painter/image/<%=parent%>";
       ctx.drawImage(img, 0, 0);
