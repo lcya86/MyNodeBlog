@@ -18,6 +18,7 @@ exports.painter = function(req, res) {
   var timestamp = Date.now();
   var picTimestamp = req.param('timestamp');
   var sign = '';
+  console.log('url:'+req.originalUrl);
   weixin.getJsapiTicket(function(ticket){
     if(picTimestamp){
       sign = 'jsapi_ticket='+ticket+'&noncestr=Wm3WZYTPz0wzccnW&timestamp='+timestamp+'&url=http://lcy-blog.com/project/painter/'+picTimestamp;
