@@ -41,6 +41,22 @@ exports.painter = function(req, res) {
   });
 }
 
+exports.getImage = function(req,res){
+  var picTimestamp = req.param('timestamp');
+  if(picTimestamp){
+    model.Images.findOne({timestamp:picTimestamp},function(err,image){
+      if(err){
+        console.error(err);
+      }
+      if(image){
+        return res.sendFile(image.base64);
+      }else{
+        return res.sendStatus(404);
+      }
+    });
+  }
+}
+
 exports.saveImage = function(req,res){
   var timestamp = req.param("timestamp");
   var parent = req.body.parent || 0;
