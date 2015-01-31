@@ -21,7 +21,7 @@ exports.painter = function(req, res) {
   var sha1 = crypto.createHash('sha1');
   sha1.update(sign);
   sign = sha1.digest('hex');
-  console.log(picTimestamp);
+  console.log(sign);
   if(picTimestamp){
     model.Images.findOne({timestamp:picTimestamp},function(err,image){
       if(err){
