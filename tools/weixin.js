@@ -148,6 +148,7 @@ exports.getJsapiTicket = function(){
         if(err){
           return console.error(err);
         }
+        console.log(JSON.parse(res.text));
         jsapi_ticket = {
           ticket:JSON.parse(res.text).ticket,
           timestamp:Date.now()

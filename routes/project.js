@@ -17,7 +17,12 @@ exports.articlesClassify = function(req, res) {
 exports.painter = function(req, res) {
   var timestamp = Date.now();
   var picTimestamp = req.param('timestamp');
-  var sign = 'jsapi_ticket='+weixin.getJsapiTicket()+'&noncestr=Wm3WZYTPz0wzccnW&timestamp='+timestamp+'&url=http://lcy-blog.com/project/painter/'+picTimestamp;
+  var sign = '';
+  if(picTimestamp){
+    sign = 'jsapi_ticket='+weixin.getJsapiTicket()+'&noncestr=Wm3WZYTPz0wzccnW&timestamp='+timestamp+'&url=http://lcy-blog.com/project/painter/'+picTimestamp;
+  }else{
+    sign = 'jsapi_ticket='+weixin.getJsapiTicket()+'&noncestr=Wm3WZYTPz0wzccnW&timestamp='+timestamp+'&url=http://lcy-blog.com/project/painter';
+  }
   console.log(sign);
   var sha1 = crypto.createHash('sha1');
   sha1.update(sign);
