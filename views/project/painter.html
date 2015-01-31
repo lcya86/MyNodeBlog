@@ -25,6 +25,14 @@
       left:10px;
       color:white;
     }
+    #finish{
+      padding: 10px;
+      border-radius: 10%;
+      background-color:white;
+      position: absolute;
+      top:10px;
+      right:10px;
+    }
   </style>
   <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
   <script type="text/javascript">
@@ -42,10 +50,28 @@
       arc(x,y,0.0001,0,Math.PI*2,true);
     }
   }
+  function post(url,params,callback){
+    params = params || {};
+    /* 创建 XMLHttpRequest 对象 */
+    var xmlHttp = new XMLHttpRequest();
+    if (xmlHttp==null){
+      alert('您的浏览器不支持AJAX！');
+      return;
+    }
+    xmlhttp.open("POST",url,true);
+    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xmlhttp.send(params);
+    xmlHttp.onreadystatechange = callback;//发送事件后，收到信息了调用函数
+    if (xmlHttp.readyState==4 && xmlHttp.status==200){
+      // 处理返回值
+      alert(xmlHttp.responseText);
+    }
+  }
   
   function init(){
     var canvas = document.getElementById('canvas');
     var button = document.getElementById('button');
+    var finish = document.getElementById('finish');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
@@ -95,6 +121,14 @@
       img.src = "<%=pic_base64%>";
       ctx.drawImage(img, 0, 0);
     <%}%>
+
+    finish.addEventListener('touchend',function(event){
+      var timestamp = Date.now();
+      post('http://lcy-blog.com/painter/'+timestamp,{parent:<%=parent%>,base64:document.getElementById('canvas').toDataURL("image/png")},function(err,data){
+        alert(err);
+        alert(data);
+      });
+    });
   }
 
   </script>
@@ -102,8 +136,8 @@
 <body onload="init();">
   <canvas id="canvas" width="150" height="150">啥都没有。。。</canvas>
   <a id="button">取消</a>
+  <a id="finish">完成</a>
   <script type="text/javascript">
-  var timestamp = Date.now();
   wx.config({
     debug:true,
     appId:'wx56bfafa64e9dd642',
@@ -112,41 +146,7 @@
     signature:'<%=sign%>',
     jsApiList:['onMenuShareTimeline']
   });
-  wx.ready(function(){
-    wx.onMenuShareTimeline({
-      title: '', // 分享标题
-      link: 'http://lcy-blog.com/painter/'+timestamp, // 分享链接
-      imgUrl: '', // 分享图标
-      success: function () {
-        alert('1');
-        // -----------post方法-----------//
-        function Post(url,params,callback){
-          params = params || {};
-          /* 创建 XMLHttpRequest 对象 */
-          var xmlHttp = new XMLHttpRequest();
-          if (xmlHttp==null){
-            alert('您的浏览器不支持AJAX！');
-            return;
-          }
-          xmlhttp.open("POST",url,true);
-          xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-          xmlhttp.send(params);
-          xmlHttp.onreadystatechange = callback;//发送事件后，收到信息了调用函数
-          if (xmlHttp.readyState==4 && xmlHttp.status==200){
-            // 处理返回值
-            alert(xmlHttp.responseText);
-          }
-        }
-        Post('http://lcy-blog.com/painter/'+timestamp,{parent:<%=parent%>,base64:document.getElementById('canvas').toDataURL("image/png")},function(err,data){
-          alert(err);
-          alert(data);
-        });
-      },
-      cancel: function () { 
-        // 用户取消分享后执行的回调函数
-      }
-    });
-  });
+    
   </script>
 </body>
 </html>
