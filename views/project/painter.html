@@ -58,9 +58,9 @@
       alert('您的浏览器不支持AJAX！');
       return;
     }
-    xmlhttp.open("POST",url,true);
-    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-    xmlhttp.send(params);
+    xmlHttp.open("POST",url,true);
+    xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    xmlHttp.send(params);
     xmlHttp.onreadystatechange = callback;//发送事件后，收到信息了调用函数
     if (xmlHttp.readyState==4 && xmlHttp.status==200){
       // 处理返回值
