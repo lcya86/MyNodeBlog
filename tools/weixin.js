@@ -22,7 +22,7 @@ exports.checkSignature = function(signature,timestamp,nonce){
   }else{
     return false;
   }
-}
+};
 
 exports.login = function(fn){
   var wx_user = 'lcya86@gmail.com';
@@ -52,7 +52,7 @@ exports.login = function(fn){
       }
       fn(token,cookie);
     });
-}
+};
 
 exports.sender = function(options,fn){
   var postParams = {
@@ -80,7 +80,7 @@ exports.sender = function(options,fn){
       }
       fn(JSON.parse(res.text));
     });
-}
+};
 
 exports.getFirstFakeId = function(option,fn){
   var headers = {
@@ -115,9 +115,9 @@ exports.getFirstFakeId = function(option,fn){
     this.destroy();
   });
   req.end();
-}
+};
 
-var getAccessToken = function(){
+function getAccessToken(){
   var differ = Date.now() - access_token.timestamp;
   console.log('access_token:'+JSON.stringify(access_token));
   if(access_token.token==''||differ>7195*1000){
@@ -137,7 +137,8 @@ var getAccessToken = function(){
   }else{
     return access_token.token;
   }
-}();
+}
+getAccessToken();
 
 exports.getJsapiTicket = function(){
   var differ = Date.now() - jsapi_ticket.timestamp;
