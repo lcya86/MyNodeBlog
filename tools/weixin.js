@@ -119,7 +119,7 @@ exports.getFirstFakeId = function(option,fn){
 
 function getAccessToken(){
   var differ = Date.now() - access_token.timestamp;
-  console.log(access_token);
+  console.log('access_token:'+access_token);
   if(access_token.token==''||differ>7195*1000){
     request
       .get('https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx56bfafa64e9dd642&secret=c448419059325fd33d0165e420d48cb2')
@@ -127,6 +127,7 @@ function getAccessToken(){
         if(err){
           return console.error(err);
         }
+        console.log(JSON.parse(res.text));
         access_token = {
           token:JSON.parse(res.text).access_token,
           timestamp:Date.now()
@@ -140,7 +141,7 @@ function getAccessToken(){
 
 exports.getJsapiTicket = function(){
   var differ = Date.now() - jsapi_ticket.timestamp;
-  console.log(jsapi_ticket);
+  console.log('jsapi_ticket:'+jsapi_ticket);
   if(jsapi_ticket.ticket==''||differ>7195*1000){
     request
       .get('https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token='+getAccessToken()+'&type=jsapi')
