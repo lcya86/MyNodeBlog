@@ -40,7 +40,7 @@ exports.getImage = function(req,res){
         console.error(err);
       }
       if(image){
-        console.log(image.base64);
+        console.log(image.base64.replace('data:image/png;base64,',''));
         return res.format({
           'image/png': function(){
             res.send(image.base64.replace('data:image/png;base64,',''));
