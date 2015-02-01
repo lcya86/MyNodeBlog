@@ -30,7 +30,7 @@ exports.painter = function(req, res) {
           console.error(err);
         }
         if(image){
-          return res.render('project/painter',{base64:img.base64,parent:picTimestamp,sign:sign,timestamp:timestamp,nonceStr:'Wm3WZYTPz0wzccnW'});
+          return res.render('project/painter',{base64:image.base64,parent:picTimestamp,sign:sign,timestamp:timestamp,nonceStr:'Wm3WZYTPz0wzccnW'});
         }else{
           return res.render('project/painter',{base64:'',parent:picTimestamp,sign:sign,timestamp:timestamp,nonceStr:'Wm3WZYTPz0wzccnW'});
         }
