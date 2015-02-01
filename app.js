@@ -82,7 +82,6 @@ app.post('/', routes.Weixin.index);
 app.get('/project/doing', routes.Project.doing);
 app.get('/project/dontTouchWhite', routes.Project.dontTouchWhite);
 app.get('/project/painter', routes.Project.painter);
-app.get('/project/painter/image/:timestamp',routes.Project.getImage);
 app.get('/project/painter/:timestamp', routes.Project.painter);
 app.post('/project/painter/:timestamp', routes.Project.saveImage);
 app.get('/project/articlesClassify', routes.Project.articlesClassify);

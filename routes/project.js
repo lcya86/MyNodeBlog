@@ -25,33 +25,22 @@ exports.painter = function(req, res) {
     sha1.update(sign);
     sign = sha1.digest('hex');
     if(picTimestamp){
-      return res.render('project/painter',{parent:picTimestamp,sign:sign,timestamp:timestamp,nonceStr:'Wm3WZYTPz0wzccnW'});
+      model.Images.findOne({timestamp:picTimestamp},function(err,image){
+        if(err){
+          console.error(err);
+        }
+        if(image){
+          return res.render('project/painter',{base64:img.base64,parent:picTimestamp,sign:sign,timestamp:timestamp,nonceStr:'Wm3WZYTPz0wzccnW'});
+        }else{
+          return res.render('project/painter',{base64:'',parent:picTimestamp,sign:sign,timestamp:timestamp,nonceStr:'Wm3WZYTPz0wzccnW'});
+        }
+      });
     }else{
       return res.render('project/painter',{parent:0,sign:sign,timestamp:timestamp,nonceStr:'Wm3WZYTPz0wzccnW'});
     }
   });
 }
 
-exports.getImage = function(req,res){
-  var picTimestamp = req.param('timestamp');
-  if(picTimestamp){
-    model.Images.findOne({timestamp:picTimestamp},function(err,image){
-      if(err){
-        console.error(err);
-      }
-      if(image){
-        console.log(image.base64.replace('data:image/png;base64,',''));
-        return res.format({
-          'text/plain': function(){
-            res.send(image.base64);
-          },
-        });
-      }else{
-        return res.sendStatus(404);
-      }
-    });
-  }
-}
 
 exports.saveImage = function(req,res){
   var timestamp = req.param("timestamp");
