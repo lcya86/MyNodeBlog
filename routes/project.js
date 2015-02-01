@@ -59,7 +59,7 @@ exports.saveImage = function(req,res){
         success: false
       });
     }else{
-      res.redirect(req.originalUrl);
+      res.location(req.originalUrl);
     }
   });
 }
