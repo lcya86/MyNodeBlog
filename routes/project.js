@@ -43,7 +43,7 @@ exports.getImage = function(req,res){
         console.log(image.base64);
         return res.format({
           'image/png': function(){
-            res.send(image.base64);
+            res.send(image.base64.replace('data:image/png;base64,',''));
           },
         });
       }else{
@@ -70,7 +70,6 @@ exports.saveImage = function(req,res){
         success: false
       });
     }else{
-      res.type('image/png');
       res.redirect(req.originalUrl);
     }
   });
