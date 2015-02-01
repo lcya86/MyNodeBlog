@@ -47,7 +47,6 @@ exports.saveImage = function(req,res){
   var parent = req.body.parent || 0;
   var base64 = req.body.base64;
   base64 = base64.replace(/\s/g,'+');
-  console.log(base64);
   model.Images.create({
     timestamp:timestamp,
     parent: parent,
@@ -59,7 +58,9 @@ exports.saveImage = function(req,res){
         success: false
       });
     }else{
-      res.location(req.originalUrl);
+      res.send({
+        success: true 
+      });
     }
   });
 }

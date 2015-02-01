@@ -126,6 +126,7 @@
       post('http://lcy-blog.com/project/painter/'+timestamp,'parent=<%=parent%>&base64='+document.getElementById('canvas').toDataURL("image/png"),function(err,data){
         console.log(err);
         console.log(data);
+        window.location.href = 'http://lcy-blog.com/project/painter/'+timestamp;
       });
     });
   }
