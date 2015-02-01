@@ -41,14 +41,11 @@ exports.getImage = function(req,res){
       }
       if(image){
         console.log(image.base64.replace('data:image/png;base64,',''));
-        return res.redirect(image.base64);
-        /*
         return res.format({
-          'image/png': function(){
-            res.send(image.base64.replace('data:image/png;base64,',''));
+          'text/plain': function(){
+            res.send(image.base64);
           },
         });
-*/
       }else{
         return res.sendStatus(404);
       }
