@@ -70,6 +70,7 @@ exports.saveImage = function(req,res){
         success: false
       });
     }else{
+      res.type('image/png');
       res.redirect(req.originalUrl);
     }
   });
