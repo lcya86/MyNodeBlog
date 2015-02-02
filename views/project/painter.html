@@ -77,9 +77,7 @@
     var ctx = canvas.getContext('2d');
 
     <%if(parent!=0){%>
-    var img = new Image();
-    img.src = "<%=base64%>";
-    ctx.drawImage(img, 0, 0);
+    ctx.drawImage(document.getElementById('image'), 0, 0);
     <%}%>
     
     var color = getRandomColor();
@@ -135,6 +133,7 @@
 </head>
 <body onload="init();">
   <canvas id="canvas" width="150" height="150">啥都没有。。。</canvas>
+  <img id="image" src="<%=base64%>" style="display:none;"/>
   <a id="button">取消</a>
   <a id="finish">完成</a>
 </body>
