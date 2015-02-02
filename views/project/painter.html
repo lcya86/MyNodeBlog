@@ -100,16 +100,15 @@
       //ctx.lineTo(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
       //ctx.stroke();
     })
-    canvas.addEventListener('tap',function(event){
+    canvas.addEventListener('touchenter',function(event){
       event.preventDefault();
-      console.log('tap');
+      console.log('touchenter');
     });
 
 
     button.addEventListener('touchend',function(event){
       event.preventDefault();
       event.stopPropagation();
-      console.log(trackList.length);
       if(trackList.length>0){
         ctx.putImageData(trackList.pop(),0,0);
       }
