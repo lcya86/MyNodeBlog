@@ -68,7 +68,6 @@
   }
   
   function init(){
-    alert('画完之后点击“完成”，再从左上角分享，就可以让好友们欣赏自己的大作啦！');
     var canvas = document.getElementById('canvas');
     var button = document.getElementById('button');
     var finish = document.getElementById('finish');
@@ -128,6 +127,8 @@
         window.location.href = 'http://lcy-blog.com/project/painter/'+timestamp;
       });
     });
+
+    alert('画完之后点击“完成”，再从左上角分享，就可以让好友们欣赏到你的大作啦！');
   }
 
   </script>
