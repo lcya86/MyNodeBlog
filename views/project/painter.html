@@ -133,7 +133,9 @@
 </head>
 <body onload="init();">
   <canvas id="canvas" width="150" height="150">啥都没有。。。</canvas>
+  <%if(parent!=0){%>
   <img id="image" src="<%=base64%>" style="display:none;"/>
+  <%}%>
   <a id="button">取消</a>
   <a id="finish">完成</a>
 </body>

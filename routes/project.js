@@ -36,7 +36,7 @@ exports.painter = function(req, res) {
         }
       });
     }else{
-      return res.render('project/painter',{parent:0,sign:sign,timestamp:timestamp,nonceStr:'Wm3WZYTPz0wzccnW'});
+      return res.render('project/painter',{base64:'',parent:0,sign:sign,timestamp:timestamp,nonceStr:'Wm3WZYTPz0wzccnW'});
     }
   });
 }
