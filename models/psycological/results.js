@@ -5,6 +5,7 @@ var resultSchema = new Schema({
 	isMiss:{type:Boolean, default:false},
 	isCorrect:{type:Boolean, default:false},
 	reactTime:Number,
+	sequence:Number,
 	isUnderP:Boolean//字母是否在积极图片下
 })
 mongoose.model('Result', resultSchema);

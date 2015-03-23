@@ -124,6 +124,27 @@
 <script type="text/javascript" src="/javascripts/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
   var texts = [<%=texts.toString().replace(/\n/g,'').replace(/_id.+?,/g,'')%>];
+
+  var exptexts = texts.filter(function(item,index,array){
+    return item.type==1;
+  });
+
+  var contexts = texts.filter(function(item,index,array){
+    return item.type==0;
+  });
+
+  function randomArray(n){//返回一个包含0到n-1的随机顺序数组
+    var result = [];
+    var temp = [];
+    for(var i = 0;i<n;i++){
+      temp[i] = i;
+    }
+    for(var i = 0;i<n;i++){
+      result[i] = temp.splice(Math.floor(Math.random ()*temp.length), 1)[0];
+    }
+    return result;
+  }
+
   $(function(){
     $('div.spinner').remove();
     $('div.container').show();
@@ -140,6 +161,7 @@
     var startTime;
     var name = '';
     var result = [];
+    var sequence = [];
     $textarea.hide();
 
     $('a.b_login').click(function(event){
@@ -155,6 +177,15 @@
             $('div.welcome').show();
             welcome = 1;
             type = data.type;
+            console.log('type:'+type);
+            if(type==1){
+              texts = exptexts;
+            }else{
+              texts = contexts;
+            }
+            sequence = randomArray(texts.length);
+            console.log(texts);
+            console.log(sequence);
           }
         }else{
           alert("此用户不存在");
@@ -164,18 +195,21 @@
 
     function start(){
       count++;
-      if(count<<%=texts.length/2%>){
+      if(count<texts.length){
         reactTime = 0;
         result[count] = {};
         $cross.show();
         $textarea.empty();
-        if(Math.floor((Math.random()*10))%2==0){
-          $textarea.text(texts[count].pword);
+        if(type==0||Math.floor((Math.random()*10))%2==0){
+          $textarea.text(texts[sequence[count]].pword);
           positive = true;
+          result[count].isUnderP = true;
         }else{
-          $textarea.text(texts[count].nword);
+          $textarea.text(texts[sequence[count]].nword);
           negative = true;
+          result[count].isUnderP = false;
         }
+        result[count].sequence = sequence[count];
         $textarea.hide();
         setTimeout(function(){
           $cross.hide();
@@ -184,7 +218,7 @@
         setTimeout(function(){
           reactive = true;
           miss = true; 
-          $textarea.text(texts[count].sentence);
+          $textarea.text(texts[sequence[count]].sentence);
           startTime = new Date().getTime();
         },1500);
         /*
@@ -205,12 +239,27 @@
         $.post('/project/psychological/experiment/sendtextresult',{result:result,name:name,stage:stage},function(data){
           if(data.success){
             if(type==2||type==-1){
+              if(stage==1){
+                $textarea.html('<h1>练习结束，谢谢参与</h1>');
+              }else if(stage==2){
+                $textarea.html('<h1>测试结束，谢谢参与</h1>');
+              }else if(stage==3){
+                $textarea.html('<h1>实验结束，谢谢参与</h1>');
+              }
+              /*
               $textarea.hide();
               $('div.welcome div.end').show().siblings().hide();
               $('div.welcome').show();
               welcome = 3;
+              */
             }else if(type==1||type==0){
-              $textarea.html('<h1>实验结束，谢谢参与</h1>');
+              if(stage==1){
+                $textarea.html('<h1>练习结束，谢谢参与</h1>');
+              }else if(stage==2){
+                $textarea.html('<h1>测试结束，谢谢参与</h1>');
+              }else if(stage==3){
+                $textarea.html('<h1>实验结束，谢谢参与</h1>');
+              }
             }
           }else{
             alert('记录结果出错');
@@ -226,7 +275,7 @@
         result[count].reactTime = new Date().getTime() - startTime
         if (event.which == 74) {
           if(stage==3){
-            if(type==2){
+            if(type==1){
               if(negative){
                 $textarea.text('你是正确的！');
                 result[count].isCorrect = true;
@@ -234,7 +283,7 @@
                 $textarea.text('错了！');
                 result[count].isCorrect = false;
               }
-            }else if(type==-1){
+            }else if(type==0){
               if(Math.floor((Math.random()*10))%2==0){
                 $textarea.text('你是正确的！');
                 result[count].isCorrect = true;
@@ -251,7 +300,7 @@
           },500);
         }else if(event.which == 70){
           if(stage==3){
-            if(type==2){
+            if(type==1){
               if(positive){
                 $textarea.text('你是正确的！');
                 result[count].isCorrect = true;
@@ -259,7 +308,7 @@
                 $textarea.text('错了！');
                 result[count].isCorrect = false;
               }
-            }else if(type==-1){
+            }else if(type==0){
               if(Math.floor((Math.random()*10))%2==0){
                 $textarea.text('你是正确的！');
                 result[count].isCorrect = true;

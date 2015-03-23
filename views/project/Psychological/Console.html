@@ -89,14 +89,24 @@
       min-height: 190px;
       margin-bottom: 25px;
     }
+    .conimg_fd{
+      border: dashed 1px #F19F45;
+      min-height: 190px;
+      margin-bottom: 25px;
+    }
     .pfd{
-      width: 48%;
-      margin-right: 4%;
+      width: 30%;
+      margin-right: 3%;
       float:left;
     }
     .nfd{
-      width: 48%;
+      width: 30%;
       float: left;
+    }
+    .con_fd{
+      width: 30%;
+      float: left;
+      margin-left: 3%;
     }
 
     .pimg_fd.selected{
@@ -178,6 +188,12 @@
       color: #c5c5c5;
       cursor: pointer;
     }
+    .add_consubject{
+      text-align: center;
+      border-bottom: dashed 1px #C5C5C5;
+      color: #c5c5c5;
+      cursor: pointer;
+    }
     .subject_item{
       border-bottom: dashed 1px #c5c5c5;
       padding:0px 15px;
@@ -216,9 +232,13 @@
     }
 
 
-    .center_fd {
+    .left_fd {
       width: 48%;
-      margin-left: 26%;
+      float: left;
+    }
+    .right_fd {
+      width: 48%;
+      float: right;
     }
     .text_fd{
       border: dashed 1px #F19F45;
@@ -331,6 +351,52 @@
       return nimgSequence;
     };
 
+    var conimgCounter = function(stage){//产生sequence
+      var listName = '';
+      var conimgSequence = 0;
+      if(stage==1){
+        listName = '#practice_image_bd';
+      }else if(stage==2){
+        listName = '#test_image_bd';
+      }else if(stage==3){
+        listName = '#train_image_bd';
+      }
+      var children = $(listName+' div.conimg_fd').children();
+      if(children.length>0){
+        conimgSequence = Number(children.last().children('h3').text());
+      }else if(children.length==0){
+        conimgSequence = 0;
+      }
+      conimgSequence++;
+      return conimgSequence;
+    };
+
+    var textCounter = function(stage){//产生sequence
+      var listName = '';
+      if(stage==1){
+        listName = '#practice_text_bd';
+      }else if(stage==2){
+        listName = '#test_text_bd';
+      }else if(stage==3){
+        listName = '#train_text_bd';
+      }
+      var children = $(listName+' .left_fd .text_fd').children();
+      return children.length;
+    };
+
+    var contextCounter = function(stage){//产生sequence
+      var listName = '';
+      if(stage==1){
+        listName = '#practice_text_bd';
+      }else if(stage==2){
+        listName = '#test_text_bd';
+      }else if(stage==3){
+        listName = '#train_text_bd';
+      }
+      var children = $(listName+' .right_fd .text_fd').children();
+      return children.length;
+    };
+
     $('#material')
       .on('drop.add','div.pimg_fd',function(event){
         event.preventDefault();
@@ -368,7 +434,7 @@
           var upload = xhr.upload;
           upload.onprogress = create_pupload_progress(i+children_length);
           upload.onload = create_pupload_done(i+children_length);
-          xhr.open("POST","/project/psychological/uploadImg?name="+fileList[i].name+"&sequence="+sequence+"&polarity=1&stage="+$this.data('stage')); 
+          xhr.open("POST","/project/psychological/uploadImg?name="+fileList[i].name+"&sequence="+sequence+"&polarity=1&stage="+$this.data('stage')+'&type=1'); 
           xhr.overrideMimeType("application/octet-stream");
           xhr.send(fileList[i]);
         }
@@ -421,7 +487,7 @@
           var upload = xhr.upload;
           upload.onprogress = create_nupload_progress(i+children_length);
           upload.onload = create_nupload_done(i+children_length);
-          xhr.open("POST","/project/psychological/uploadImg?name="+fileList[i].name+"&sequence="+sequence+"&polarity=0&stage="+$this.data('stage')); 
+          xhr.open("POST","/project/psychological/uploadImg?name="+fileList[i].name+"&sequence="+sequence+"&polarity=0&stage="+$this.data('stage')+'&type=1'); 
           xhr.overrideMimeType("application/octet-stream");
           xhr.send(fileList[i]);
         }
@@ -435,6 +501,59 @@
         $(this).addClass('selected');
       })
       .on('dragleave.add','div.nimg_fd',function(event){
+        event.preventDefault();
+        $(this).removeClass('selected');
+      })
+      .on('drop.add','div.conimg_fd',function(event){
+        event.preventDefault();
+        function create_conupload_progress(index){
+          return function(event){
+            $this.find('#input_conimage'+index).css({
+              width:Math.round(event.loaded*100/event.total)+'%'
+            });
+          }
+        }
+
+        function create_conupload_done(index){
+          return function(event){
+            $this.find('#input_conimage'+index).css({
+              width:'100%'
+            });
+          }
+        }
+        $this = $(this);
+        $this.removeClass('selected');
+        var children_length = $this.children().length;
+        var fileList = event.originalEvent.dataTransfer.files;
+        for(var i = 0;i<fileList.length;i++){
+          var src = '';
+          var sequence = 0;
+          if(window.webkitURL){
+            src = window.webkitURL.createObjectURL(fileList[i]);
+          }else{
+            src = window.URL.createObjectURL(fileList[i]);
+          }
+          console.log(src);
+          sequence = conimgCounter($this.data('stage'));
+          $this.append('<div class="img_item"><h3>'+sequence+'</h3><img src="'+src+'"/><p>'+fileList[i].name+'</p><div id="input_conimage'+(i+children_length)+'" style="width:0%;"></div></div>');
+          var xhr = new XMLHttpRequest();
+          var upload = xhr.upload;
+          upload.onprogress = create_conupload_progress(i+children_length);
+          upload.onload = create_conupload_done(i+children_length);
+          xhr.open("POST","/project/psychological/uploadImg?name="+fileList[i].name+"&sequence="+sequence+"&polarity=0&stage="+$this.data('stage')+'&type=0'); 
+          xhr.overrideMimeType("application/octet-stream");
+          xhr.send(fileList[i]);
+        }
+      })
+      .on('dragenter.add','div.conimg_fd',function(event){
+        event.preventDefault();
+        $(this).addClass('selected');
+      })
+      .on('dragover.add','div.conimg_fd',function(event){
+        event.preventDefault();
+        $(this).addClass('selected');
+      })
+      .on('dragleave.add','div.conimg_fd',function(event){
         event.preventDefault();
         $(this).removeClass('selected');
       })
@@ -463,6 +582,50 @@
         addForm += '</div>';
         var $addForm = $(addForm);
         var $this = $(this);
+        var sequence = textCounter($this.data('stage'));
+        $this.after($addForm);
+        $addForm.on('click.submit','a',function(event){
+          var sentence = $addForm.find('input.js_sentence').val();
+          var nword = $addForm.find('input.js_nword').val();
+          var pword = $addForm.find('input.js_pword').val();
+          $.post('/project/psychological/console/addtext',
+            {
+              sentence:sentence,
+              sequence:sequence,
+              nword:nword,
+              pword:pword,
+              type:1,
+              stage:$(this).data('stage')
+            },
+            function(data){
+              if(data.success){
+                var complete = '';
+                complete += '<div class="wrap">';
+                complete += '<div class="nword subject_item">'+sequence+'&nbsp;&nbsp;消极词:'+nword+'</div>';
+                complete += '<div class="pword subject_item">积极词:'+pword+'</div>';
+                complete += '<div data-id="'+data.id+'" class="subject_item" style="clear:both;">句子:'+sentence+'</div>';
+                complete += '</div>';
+                $this.find('span').text(Number($this.find('span').text())+1);
+                $addForm.remove();
+                $this.after(complete);
+              }else{
+                alert(data.msg);
+              }
+            }
+          );
+        });
+      })
+      .on('click.add','div.add_consubject',function(event){
+        event.stopPropagation();
+        var addForm = '';
+        addForm += '<div class="wrap">';
+        addForm += '<div class="pword subject_item">词:<input class="js_pword" type="text" style="width:70%;"></div>';
+        addForm += '<div class="subject_item" style="clear:both;text-align:center;">句子:<input class="js_sentence" type="text" style="width:80%;"><a data-stage="'+$(this).data('stage')+'" href="javascript:;">确定</a></div>';
+        
+        addForm += '</div>';
+        var $addForm = $(addForm);
+        var $this = $(this);
+        var sequence = contextCounter($this.data('stage'));
         $this.after($addForm);
         $addForm.on('click.submit','a',function(event){
           var sentence = $addForm.find('input.js_sentence').val();
@@ -473,18 +636,20 @@
               sentence:sentence,
               nword:nword,
               pword:pword,
+              sequence:sequence,
+              type:0,
               stage:$(this).data('stage')
             },
             function(data){
               if(data.success){
                 var complete = '';
                 complete += '<div class="wrap">';
-                complete += '<div class="nword subject_item">消极词:'+nword+'</div>';
-                complete += '<div class="pword subject_item">积极词:'+pword+'</div>';
+                complete += '<div class="nword subject_item">'+sequence+'</div>';
+                complete += '<div class="pword subject_item">词:'+pword+'</div>';
                 complete += '<div data-id="'+data.id+'" class="subject_item" style="clear:both;">句子:'+sentence+'</div>';
                 complete += '</div>';
                 $this.find('span').text(Number($this.find('span').text())+1);
-                $addForm.remove()
+                $addForm.remove();
                 $this.after(complete);
               }else{
                 alert(data.msg);
@@ -498,25 +663,25 @@
     $('#subjects')
       .on('click.addt','div.t1.add_subject',function(event){
         var $this = $(this);
-        var $item = $('<div class="subject_item"><input style="margin-left:15px;" type="text" placeholder="被试姓名" />&nbsp;&nbsp;<a data-type="1" href="javascript:;">添加</a></div>');
+        var $item = $('<div class="subject_item"><input style="margin-left:15px;" type="text" placeholder="被试姓名" />&nbsp;&nbsp;<a data-type="1" href="javascript:;">添加</a>&nbsp;&nbsp;<a href="javascript:;">取消</a></div>');
         $this.after($item);
         $item.find('input').focus();
       })
       .on('click.addt','div.t2.add_subject',function(event){
         var $this = $(this);
-        var $item = $('<div class="subject_item"><input style="margin-left:15px;" type="text" placeholder="被试姓名" />&nbsp;&nbsp;<a data-type="2" href="javascript:;">添加</a></div>');
+        var $item = $('<div class="subject_item"><input style="margin-left:15px;" type="text" placeholder="被试姓名" />&nbsp;&nbsp;<a data-type="2" href="javascript:;">添加</a>&nbsp;&nbsp;<a href="javascript:;">取消</a></div>');
         $this.after($item);
         $item.find('input').focus();
       })
       .on('click.addc','div.c1.add_subject',function(event){
         var $this = $(this);
-        var $item = $('<div class="subject_item"><input style="margin-left:15px;" type="text" placeholder="被试姓名" />&nbsp;&nbsp;<a data-type="0" href="javascript:;">添加</a></div>');
+        var $item = $('<div class="subject_item"><input style="margin-left:15px;" type="text" placeholder="被试姓名" />&nbsp;&nbsp;<a data-type="0" href="javascript:;">添加</a>&nbsp;&nbsp;<a href="javascript:;">取消</a></div>');
         $this.after($item);
         $item.find('input').focus();
       })
       .on('click.addc','div.c2.add_subject',function(event){
         var $this = $(this);
-        var $item = $('<div class="subject_item"><input style="margin-left:15px;" type="text" placeholder="被试姓名" />&nbsp;&nbsp;<a data-type="-1" href="javascript:;">添加</a></div>');
+        var $item = $('<div class="subject_item"><input style="margin-left:15px;" type="text" placeholder="被试姓名" />&nbsp;&nbsp;<a data-type="-1" href="javascript:;">添加</a>&nbsp;&nbsp;<a href="javascript:;">取消</a></div>');
         $this.after($item);
         $item.find('input').focus();
       })
@@ -526,7 +691,7 @@
           $(this).find('a').trigger('click.add_submit');
         }
       })
-      .on('click.add_submit','div.subject_item a',function(event){
+      .on('click.add_submit','div.subject_item a:contains(添加)',function(event){
         event.stopPropagation();
         var $this = $(this);
         $.post('/project/psychological/console/addsubject',{type:$this.data('type'),name:$this.prev().val()},function(data){
@@ -538,18 +703,25 @@
           }
         });
       })
+      .on('click.add_cancle','div.subject_item a:contains(取消)',function(event){
+        event.stopPropagation();
+        var $this = $(this);
+        $this.parent().remove();
+      })
       .on('click.del','div.subject_item',function(event){
         event.stopPropagation();
         var $this = $(this);
-        $.post('/project/psychological/console/delsuject',{subject_id:$this.data('id')},function(data){
-          if(data.success){
-            $this.remove();
-            $('div.statistics_fd').load('./console div.statistics_fd >*');
-            $('#result div.subject_fd').load('./console #result div.subject_fd >*');
-          }else{
-            alert('删除被试失败');
-          }
-        });
+        if(confirm('您要删除被试吗？')){
+          $.post('/project/psychological/console/delsuject',{subject_id:$this.data('id')},function(data){
+            if(data.success){
+              $this.remove();
+              $('div.statistics_fd').load('./console div.statistics_fd >*');
+              $('#result div.subject_fd').load('./console #result div.subject_fd >*');
+            }else{
+              alert('删除被试失败');
+            }
+          });
+        }
       });
 
     /*##########################结果管理#####################*/
@@ -568,6 +740,7 @@
                 table += '<table class="resultTable js_practice_table'+index+'" cellspacing="0px" cellpadding="5px" width="500px" style="display:none;">';
                 table += '<thead>';
                 table += '<tr>';
+                table += '<th>图片序号</th>';
                 table += '<th>是否积极图片</th>';
                 table += '<th>是否有关</th>';
                 table += '<th>反应时(ms)</th>';
@@ -577,6 +750,7 @@
                 if(item.results){
                   item.results.forEach(function(item,index,array){
                     table += '<tr>';
+                    table += '<td>'+item.sequence+'</td>';
                     table += '<td>'+item.isUnderP+'</td>';
                     table += '<td>'+(item.isCorrect?'shit':(item.isMiss?'miss':'incorrect'))+'</td>';
                     table += '<td>'+item.reactTime+'</td>';
@@ -595,6 +769,7 @@
                 table += '<table class="resultTable js_test_table'+index+'" cellspacing="0px" cellpadding="5px" width="500px" style="display:none;">';
                 table += '<thead>';
                 table += '<tr>';
+                table += '<th>图片序号</th>';
                 table += '<th>是否积极图片</th>';
                 table += '<th>是否有关</th>';
                 table += '<th>反应时(ms)</th>';
@@ -604,6 +779,7 @@
                 if(item.results){
                   item.results.forEach(function(item,index,array){
                     table += '<tr>';
+                    table += '<td>'+item.sequence+'</td>';
                     table += '<td>'+item.isUnderP+'</td>';
                     table += '<td>'+(item.isCorrect?'shit':(item.isMiss?'miss':'incorrect'))+'</td>';
                     table += '<td>'+item.reactTime+'</td>';
@@ -622,6 +798,7 @@
                 table += '<table class="resultTable js_train_table'+index+'" cellspacing="0px" cellpadding="5px" width="500px" style="display:none;">';
                 table += '<thead>';
                 table += '<tr>';
+                table += '<th>图片序号</th>';
                 table += '<th>是否积极图片</th>';
                 table += '<th>是否击中</th>';
                 table += '<th>反应时(ms)</th>';
@@ -631,6 +808,7 @@
                 if(item.results){
                   item.results.forEach(function(item,index,array){
                     table += '<tr>';
+                    table += '<td>'+item.sequence+'</td>';
                     table += '<td>'+item.isUnderP+'</td>';
                     table += '<td>'+(item.isCorrect?'shit':(item.isMiss?'miss':'incorrect'))+'</td>';
                     table += '<td>'+item.reactTime+'</td>';
@@ -682,6 +860,8 @@
                 table += '<table class="resultTable js_practice_table'+index+'" cellspacing="0px" cellpadding="5px" width="500px" style="display:none;">';
                 table += '<thead>';
                 table += '<tr>';
+                table += '<th>句子序号</th>';
+                table += '<th>是否积极词</th>';
                 table += '<th>是否击中</th>';
                 table += '<th>反应时(ms)</th>';
                 table += '</tr>';
@@ -690,6 +870,8 @@
                 if(item.results){
                   item.results.forEach(function(item,index,array){
                     table += '<tr>';
+                    table += '<td>'+item.sequence+'</td>';
+                    table += '<td>'+item.isUnderP+'</td>';
                     table += '<td>'+(item.isCorrect?'shit':(item.isMiss?'miss':'incorrect'))+'</td>';
                     table += '<td>'+item.reactTime+'</td>';
                     table += '</tr>';
@@ -707,6 +889,8 @@
                 table += '<table class="resultTable js_test_table'+index+'" cellspacing="0px" cellpadding="5px" width="500px" style="display:none;">';
                 table += '<thead>';
                 table += '<tr>';
+                table += '<th>句子序号</th>';
+                table += '<th>是否积极词</th>';
                 table += '<th>是否击中</th>';
                 table += '<th>反应时(ms)</th>';
                 table += '</tr>';
@@ -715,6 +899,8 @@
                 if(item.results){
                   item.results.forEach(function(item,index,array){
                     table += '<tr>';
+                    table += '<td>'+item.sequence+'</td>';
+                    table += '<td>'+item.isUnderP+'</td>';
                     table += '<td>'+(item.isCorrect?'shit':(item.isMiss?'miss':'incorrect'))+'</td>';
                     table += '<td>'+item.reactTime+'</td>';
                     table += '</tr>';
@@ -732,6 +918,8 @@
                 table += '<table class="resultTable js_train_table'+index+'" cellspacing="0px" cellpadding="5px" width="500px" style="display:none;">';
                 table += '<thead>';
                 table += '<tr>';
+                table += '<th>句子序号</th>';
+                table += '<th>是否积极词</th>';
                 table += '<th>是否击中</th>';
                 table += '<th>反应时(ms)</th>';
                 table += '</tr>';
@@ -740,6 +928,8 @@
                 if(item.results){
                   item.results.forEach(function(item,index,array){
                     table += '<tr>';
+                    table += '<td>'+item.sequence+'</td>';
+                    table += '<td>'+item.isUnderP+'</td>';
                     table += '<td>'+(item.isCorrect?'shit':(item.isMiss?'miss':'incorrect'))+'</td>';
                     table += '<td>'+item.reactTime+'</td>';
                     table += '</tr>';

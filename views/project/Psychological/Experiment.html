@@ -124,12 +124,16 @@
   <div class="welcome" style="display:none;">
     <div class="welcome_first">
       <h4>欢迎你来参加我们的实验！</h4>
-      <p>在本实验中，你需要对出现的字母进行按键反应。</p>
-      <p>你将会看到<strong>F</strong>或<strong>J</strong>，分别对应键盘上的<strong>F</strong>或<strong>J</strong>键。</p>
+      <p>在本实验中，你会看到两张图片，图片消失后你将会看到<strong>F</strong>或<strong>J</strong>，分别对应键盘上的<strong>F</strong>或<strong>J</strong>键，你需要对出现的字母快速进行按键反应。</p>
       <small>准备好后请按回车</small>
+      
     </div>
     <div class="welcome_second" style="display:none;">
+      <%if(stage==3){%>
+      <p>下面是正式的实验阶段，无需考虑正确率，希望您能尽量快速进行反应。</p>
+      <%}else{%>
       <p>接下来是一组<%=stage_text%>。</p>
+      <%}%>
       <small>准备好后请按回车</small>
     </div>
     <div class="end" style="display:none;">
@@ -140,7 +144,7 @@
   <div class="imgList" style="display:none;">
     <%if(material){%>
       <%material.forEach(function(item,index,array){%>
-        <img id="<%=item.polarity==0?'n':'p'%><%=item.sequence%>" src="<%=item.content%>" alt="" class="upsideimg<%=index%>" style="height:100%;">
+        <img id="<%=item.polarity==0?'n':'p'%><%=item.type%><%=item.sequence%>" src="<%=item.content%>" alt="" class="upsideimg<%=index%>" style="height:100%;">
       <%});%>
     <%}%>
   </div>
@@ -148,6 +152,28 @@
 </body>
 <script type="text/javascript" src="/javascripts/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
+  <%
+  var exp = material.filter(function(item,index,array){
+    return item.type == 1;
+  });
+  var con = material.filter(function(item,index,array){
+    return item.type == 0;
+  });
+  %>
+
+
+  function randomArray(n){//返回一个包含1到n的随机顺序数组
+    var result = [];
+    var temp = [];
+    for(var i = 0;i<n;i++){
+      temp[i] = i+1;
+    }
+    for(var i = 0;i<n;i++){
+      result[i] = temp.splice(Math.floor(Math.random ()*temp.length), 1)[0];
+    }
+    return result;
+  }
+
   $(window).load(function(){
     $('div.spinner').remove();
     $('div.container').show();
@@ -165,6 +191,8 @@
     var startTime;
     var name = '';
     var result = [];
+    var total = 0;
+    var sequence = [];
     $upside.hide();
     $downside.hide();
 
@@ -181,6 +209,13 @@
             $('div.welcome').show();
             welcome = 1;
             type = data.type;
+            if(type==0){
+              total = <%=con.length%>;
+            }else{
+              total = <%=exp.length/2%>;
+            }
+            sequence = randomArray(total);
+            console.log(sequence);
           }
         }else{
           alert("此用户不存在");
@@ -190,30 +225,46 @@
 
     function start(){
       count++;
-      if(count<<%=material.length/2%>){
+      if(count<total){
         reactTime = 0;
         result[count] = {};
         $cross.show();
         $upside.empty();
         $downside.empty();
         if(Math.floor((Math.random()*10))%2==0){
-          $upside.append($('#n'+(count+1)));
-          $downside.append($('#p'+(count+1)));
           if(type==0||type==-1){
+            $upside.append($('#n0'+sequence[count]));
+            $downside.append($('#n0'+sequence[count]+(sequence[count]%2==0?-1:1)));
             up = Math.floor((Math.random()*10))%2==0;
+            if(up){
+              result[count].sequence = sequence[count];
+            }else{
+              result[count].sequence = sequence[count]+(sequence[count]%2==0?-1:1);
+            }
           }else{
+            $upside.append($('#n1'+sequence[count]));
+            $downside.append($('#p1'+sequence[count]));
             up = Math.floor((Math.random()*10))==9;
+            result[count].sequence = sequence[count];
+            result[count].isUnderP = !up;
           }
-          result[count].isUnderP = !up;
         }else{
-          $downside.append($('#n'+(count+1)));
-          $upside.append($('#p'+(count+1)));
           if(type==0||type==-1){
+            $downside.append($('#n0'+sequence[count]));
+            $upside.append($('#n0'+sequence[count]+(sequence[count]%2==0?-1:1)));
             up = Math.floor((Math.random()*10))%2==0;
+            if(up){
+              result[count].sequence = sequence[count]+(sequence[count]%2==0?-1:1);
+            }else{
+              result[count].sequence = sequence[count];
+            }
           }else{
+            $downside.append($('#n1'+sequence[count]));
+            $upside.append($('#p1'+sequence[count]));
             up = Math.floor((Math.random()*10))!=9;
+            result[count].sequence = sequence[count];
+            result[count].isUnderP = up;
           }
-          result[count].isUnderP = up;
         }
         $upside.hide();
         $downside.hide();
@@ -256,11 +307,27 @@
             $upside.hide();
             $downside.hide();
             if(type==1||type==0){
+              if(stage==1){
+                $upside.html('<h1>练习结束，谢谢参与</h1>');
+              }else if(stage==2){
+                $upside.html('<h1>测试结束，谢谢参与</h1>');
+              }else if(stage==3){
+                $upside.html('<h1>实验结束，谢谢参与</h1>');
+              }
+              $upside.show();
+              /*
               $('div.welcome div.end').show().siblings().hide();
               $('div.welcome').show();
               welcome = 3;
+              */
             }else if(type==2||type==-1){
-              $upside.html('<h1>实验结束，谢谢参与</h1>');
+              if(stage==1){
+                $upside.html('<h1>练习结束，谢谢参与</h1>');
+              }else if(stage==2){
+                $upside.html('<h1>测试结束，谢谢参与</h1>');
+              }else if(stage==3){
+                $upside.html('<h1>实验结束，谢谢参与</h1>');
+              }
               $upside.show();
             }
           }else{

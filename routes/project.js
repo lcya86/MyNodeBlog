@@ -67,7 +67,7 @@ exports.saveImage = function(req,res){
 
 exports.psychologicalExperiment = function(req, res) {
   var async = require('async');
-  var Materials,Texts, Subjects, sc_count, cs_count, ts_count, csc_count, tsc_count,practice_text_count,test_text_count,train_text_count;
+  var Materials,Texts, Subjects, sc_count, cs_count, ts_count, csc_count, tsc_count,practice_text_count,test_text_count,train_text_count,practice_context_count,test_context_count,train_context_count;
   async.parallel({
     one:function(cb) {
       model.Subject.find(function(err, subjects) {
@@ -140,23 +140,44 @@ exports.psychologicalExperiment = function(req, res) {
       });
     },
     nine:function(cb){
-      model.MaterialText.count({stage:1},function(err,data){
+      model.MaterialText.count({stage:1,type:1},function(err,data){
         if (err) console.error(err);
         practice_text_count = data
         cb(null);
       });
     },
     ten:function(cb){
-      model.MaterialText.count({stage:2},function(err,data){
+      model.MaterialText.count({stage:2,type:1},function(err,data){
         if (err) console.error(err);
         test_text_count = data
         cb(null);
       });
     },
     eleven:function(cb){
-      model.MaterialText.count({stage:3},function(err,data){
+      model.MaterialText.count({stage:3,type:1},function(err,data){
         if (err) console.error(err);
         train_text_count = data
+        cb(null);
+      });
+    },
+    twelve:function(cb){
+      model.MaterialText.count({stage:1,type:0},function(err,data){
+        if (err) console.error(err);
+        practice_context_count = data
+        cb(null);
+      });
+    },
+    thirteen:function(cb){
+      model.MaterialText.count({stage:2,type:0},function(err,data){
+        if (err) console.error(err);
+        test_context_count = data
+        cb(null);
+      });
+    },
+    fourteen:function(cb){
+      model.MaterialText.count({stage:3,type:0},function(err,data){
+        if (err) console.error(err);
+        train_context_count = data
         cb(null);
       });
     }
@@ -168,6 +189,9 @@ exports.psychologicalExperiment = function(req, res) {
       practice_text_count:practice_text_count,
       test_text_count:test_text_count,
       train_text_count:train_text_count,
+      practice_context_count:practice_context_count,
+      test_context_count:test_context_count,
+      train_context_count:train_context_count,
       subjects: Subjects,
       cs_count: cs_count,
       ts_count: ts_count,
@@ -276,10 +300,12 @@ exports.addText = function(req,res){
   var nword = req.body.nword;
   var pword = req.body.pword;
   var stage = req.body.stage;
+  var sequence = req.body.sequence;
+  var type = req.body.type;
   if(sentence==''||nword==''||pword==''){
     return res.send({success:false,msg:'句子和词不能为空'});
   }
-  model.MaterialText.create({sentence:sentence,nword:nword,pword:pword,stage:stage},function(err,item){
+  model.MaterialText.create({sentence:sentence,nword:nword,pword:pword,stage:stage,type:type,sequence:sequence},function(err,item){
     if (err) {
       console.error(err);
       res.send({
@@ -301,6 +327,7 @@ exports.uploadImg = function(req, res) {
   var sequence = req.query.sequence;
   var polarity = req.query.polarity;
   var stage = req.query.stage;
+  var type = req.query.type;
   var bufferHelper = new BufferHelper();
   req.on('data', function(chunk) {
     bufferHelper.concat(chunk);
@@ -313,6 +340,7 @@ exports.uploadImg = function(req, res) {
         content: '/upload/img/' + name,
         polarity: polarity,
         stage:stage,
+        type:type,
         sequence: sequence
       }, function(err) {
         if (err) console.error(err);
