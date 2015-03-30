@@ -557,20 +557,20 @@
         event.preventDefault();
         $(this).removeClass('selected');
       })
-      /*
       .on('click.delete','div.img_item.real',function(event){
         event.stopPropagation();
         $target = $(event.currentTarget);
-        $.post('/project/psychological/console/delimg',{id:$target.data('id')},function(data){
-          console.log($target.data('id'));
-          if(data.success){
-            $target.parent().load('./console div.'+$target.parent()[0].className+' >*');
-          }else{
-            alert('删除图片失败');
-          }
-        });
+        if(confirm('您要删除图片吗？')){
+          $.post('/project/psychological/console/delimg',{id:$target.data('id')},function(data){
+            console.log($target.data('id'));
+            if(data.success){
+              $target.parent().load('./console div.'+$target.parent()[0].className+' >*');
+            }else{
+              alert('删除图片失败');
+            }
+          });
+        }
       })
-*/
       .on('click.add','div.add_subject',function(event){
         event.stopPropagation();
         var addForm = '';
