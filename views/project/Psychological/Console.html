@@ -564,7 +564,11 @@
           $.post('/project/psychological/console/delimg',{id:$target.data('id')},function(data){
             console.log($target.data('id'));
             if(data.success){
-              $target.parent().load('./console div.'+$target.parent()[0].className+' >*');
+              $target.nextAll().each(function(index,element){
+                var val = $(element).find('h3').text();
+                $(element).find('h3').text(val-1);
+              });
+              $target.remove();
             }else{
               alert('删除图片失败');
             }
