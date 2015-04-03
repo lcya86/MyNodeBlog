@@ -210,11 +210,16 @@
             welcome = 1;
             type = data.type;
             if(type==0){
-              total = <%=con.length%>;
+              total = <%=con.length/2%>;
+              sequence = randomArray(total*2);
+              //提取sequence随机序列中的奇数元素
+              sequence = sequence.filter(function(item,index,array){
+                return item % 2 == 1;
+              });
             }else{
               total = <%=exp.length/2%>;
+              sequence = randomArray(total);
             }
-            sequence = randomArray(total);
             console.log(sequence);
           }
         }else{
@@ -234,7 +239,7 @@
         if(Math.floor((Math.random()*10))%2==0){
           if(type==0||type==-1){
             $upside.append($('#n0'+sequence[count]));
-            $downside.append($('#n0'+sequence[count]+(sequence[count]%2==0?-1:1)));
+            $downside.append($('#n0'+(sequence[count]+(sequence[count]%2==0?-1:1))));
             up = Math.floor((Math.random()*10))%2==0;
             if(up){
               result[count].sequence = sequence[count];
@@ -251,7 +256,7 @@
         }else{
           if(type==0||type==-1){
             $downside.append($('#n0'+sequence[count]));
-            $upside.append($('#n0'+sequence[count]+(sequence[count]%2==0?-1:1)));
+            $upside.append($('#n0'+(sequence[count]+(sequence[count]%2==0?-1:1))));
             up = Math.floor((Math.random()*10))%2==0;
             if(up){
               result[count].sequence = sequence[count]+(sequence[count]%2==0?-1:1);
