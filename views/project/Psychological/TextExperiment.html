@@ -203,10 +203,12 @@
         if(type==0||Math.floor((Math.random()*10))%2==0){
           $textarea.text(texts[sequence[count]].pword);
           positive = true;
+          negative = false;
           result[count].isUnderP = true;
         }else{
           $textarea.text(texts[sequence[count]].nword);
           negative = true;
+          positive = false;
           result[count].isUnderP = false;
         }
         result[count].sequence = sequence[count];
