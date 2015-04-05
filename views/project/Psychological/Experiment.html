@@ -231,6 +231,7 @@
     function start(){
       count++;
       if(count<total){
+        reactive = false;
         reactTime = 0;
         result[count] = {};
         $cross.show();
@@ -280,8 +281,6 @@
           $downside.show();
         },500);
         setTimeout(function(){
-          reactive = true;
-          miss = true; 
           if(up){
             if(J){
               $upside.html('<h1>J</h1>');
@@ -298,6 +297,8 @@
             $upside.html('');
           }
           startTime = new Date().getTime();
+          reactive = true;
+          miss = true; 
         },1000);
         setTimeout(function(){
           if(miss){
@@ -353,16 +354,18 @@
           }else{
             result[count].isCorrect = false;
           }
+          start();
         }else if(event.which == 70){
           if(J){
             result[count].isCorrect = false;
           }else{
             result[count].isCorrect = true;
           }
+          start();
         }else{
           result[count].isCorrect = false;
+          start();
         }
-        start();
       }else{
         if(welcome==1&&event.which==13){
           $('div.welcome_first').hide().next().show();
