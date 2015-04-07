@@ -169,7 +169,6 @@
       name = $(this).prev().val();
       $.get('/project/psychological/experiment/login',{name:name},function(data){
         if(data.success){
-          console.log(data.complete[-1]);
           if(data.complete[-1]){
             alert("您已完成实验");
           }else{
@@ -177,15 +176,12 @@
             $('div.welcome').show();
             welcome = 1;
             type = data.type;
-            console.log('type:'+type);
             if(type==1){
               texts = exptexts;
             }else{
               texts = contexts;
             }
             sequence = randomArray(texts.length);
-            console.log(texts);
-            console.log(sequence);
           }
         }else{
           alert("此用户不存在");
