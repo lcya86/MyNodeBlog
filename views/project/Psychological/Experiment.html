@@ -201,7 +201,6 @@
       name = $(this).prev().val();
       $.get('/project/psychological/experiment/login',{name:name},function(data){
         if(data.success){
-          console.log(data.complete[-1]);
           if(data.complete[-1]){
             alert("您已完成实验");
           }else{
@@ -220,7 +219,6 @@
               total = <%=exp.length/2%>;
               sequence = randomArray(total);
             }
-            console.log(sequence);
           }
         }else{
           alert("此用户不存在");
