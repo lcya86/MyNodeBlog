@@ -213,7 +213,7 @@
               total = <%=con.length/2%>;
               sequence = randomArray(total*2);
               //提取sequence随机序列中的奇数元素
-              sequence = sequence.filter(function(item,index,array){
+              sequence = $.grep(sequence,function(item,index){
                 return item % 2 == 1;
               });
             }else{
