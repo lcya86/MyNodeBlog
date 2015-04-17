@@ -126,11 +126,11 @@
 <script type="text/javascript">
   var texts = [<%=texts.toString().replace(/\n/g,'').replace(/_id.+?,/g,'')%>];
 
-  var exptexts = $.filter(texts,function(item,index){
+  var exptexts = $.grep(texts,function(item,index){
     return item.type==1;
   });
 
-  var contexts = $.filter(texts,function(item,index){
+  var contexts = $.grep(texts,function(item,index){
     return item.type==0;
   });
 
