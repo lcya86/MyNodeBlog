@@ -276,6 +276,7 @@
           alert('请重新阅读词与句子');
           count = count - 1;
           start();
+          return;
         }else{
           result[count].reactTime = reacttime;
         }
@@ -333,6 +334,7 @@
           alert('有关请按F键，无关请按J键');
           count = count - 1;
           start();
+          return;
         }
       }else{
         if(welcome==1&&event.which==13){
