@@ -274,7 +274,7 @@
         reacttime = new Date().getTime() - startTime;
         if(reacttime<500){
           alert('请重新阅读词与句子');
-          count--;
+          count = count - 1;
           start();
         }else{
           result[count].reactTime = reacttime;
@@ -331,7 +331,7 @@
           },500);
         }else{
           alert('有关请按F键，无关请按J键');
-          count--;
+          count = count - 1;
           start();
         }
       }else{
