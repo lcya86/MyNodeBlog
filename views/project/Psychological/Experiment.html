@@ -341,14 +341,7 @@
       if(reactive){
         reactive = false;
         miss = false;
-        reacttime = new Date().getTime() - startTime
-        if(reacttime<10){
-          alert('反应时过短，请重新选择');
-          count--;
-          start();
-        }else{
-          result[count].reactTime = reacttime;
-        }
+        result[count].reactTime = new Date().getTime() - startTime;
         if (event.which == 74) {
           if(J){
             result[count].isCorrect = true;

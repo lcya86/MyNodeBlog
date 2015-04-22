@@ -271,7 +271,14 @@
       if(reactive){
         reactive = false;
         miss = false;
-        result[count].reactTime = new Date().getTime() - startTime
+        reacttime = new Date().getTime() - startTime;
+        if(reacttime<500){
+          alert('请重新阅读词与句子');
+          count--;
+          start();
+        }else{
+          result[count].reactTime = reacttime;
+        }
         if (event.which == 74) {
           if(stage==3){
             if(type==1){
