@@ -329,6 +329,10 @@
           setTimeout(function(){
             start();
           },500);
+        }else{
+          alert('有关请按F键，无关请按J键');
+          count--;
+          start();
         }
       }else{
         if(welcome==1&&event.which==13){
