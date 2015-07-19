@@ -19,3 +19,14 @@ var materialTextSchema = new Schema({
 	stage:Number
 });
 mongoose.model('MaterialText',materialTextSchema);
+
+var materialImgPairSchema = new Schema({
+	upImg: String,
+	downImg: String,
+	letter: String,
+	type:{type:Number,default:1},//1为实验组，0为控制组
+	positivePosition: Number,//字母出现在中性图片后的概率
+	stage: Number,
+	sequence: Number
+});
+mongoose.model('MaterialImgPair',materialImgPairSchema);

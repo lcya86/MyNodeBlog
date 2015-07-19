@@ -1,0 +1,47 @@
+<div class="main_hd">
+  <h2>result manage</h2>
+  <div class="tab_navs">
+    <div class="js_image_result tab_nav selected">Image Result</div>
+    <div class="js_text_result tab_nav">Text Result</div>
+  </div>
+</div>
+<div id="image_result_bd" class="main_bd">
+  <div class="subject_fd">
+    被试列表
+    <div class="subjectList">
+      <%if(subjects){%>
+        <%subjects.forEach(function(item,index,array){%>
+          <%if(item.complete){%>
+          <div data-id="<%=item._id%>" class="subject_item"><%=item.name%></div>
+          <%}%>
+        <%});%>
+      <%}%>
+    </div>
+  </div>
+  <div class="results_fd">
+    
+  </div>
+  <div class="result_fd">
+    
+  </div> 
+</div>
+<div id="text_result_bd" class="main_bd" style="display:none;">
+  <div class="subject_fd">
+    被试列表
+    <div class="subjectList">
+      <%if(subjects){%>
+        <%subjects.forEach(function(item,index,array){%>
+          <%if(item.complete){%>
+          <div data-id="<%=item._id%>" class="subject_item"><%=item.name%></div>
+          <%}%>
+        <%});%>
+      <%}%>
+    </div>
+  </div>
+  <div class="results_fd">
+    
+  </div>
+  <div class="result_fd">
+    
+  </div> 
+</div>

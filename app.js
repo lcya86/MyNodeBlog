@@ -85,6 +85,26 @@ app.get('/project/painter', routes.Project.painter);
 app.get('/project/painter/:timestamp', routes.Project.painter);
 app.post('/project/painter/:timestamp', routes.Project.saveImage);
 app.get('/project/articlesClassify', routes.Project.articlesClassify);
+
+app.get('/project/psychological/v2/console', routes.Psycho.psychologicalExperiment);
+app.get('/project/psychological/v2/practice', routes.Psycho.doPractice);
+app.get('/project/psychological/v2/test', routes.Psycho.doTest);
+app.get('/project/psychological/v2/train', routes.Psycho.doTrain);
+app.get('/project/psychological/v2/textpractice', routes.Psycho.doTextPractice);
+app.get('/project/psychological/v2/texttest', routes.Psycho.doTextTest);
+app.get('/project/psychological/v2/texttrain', routes.Psycho.doTextTrain);
+app.post('/project/psychological/v2/addpairs', routes.Psycho.addPairs);
+app.post('/project/psychological/v2/uploadImg', routes.Psycho.uploadImg);
+app.post('/project/psychological/v2/console/delimg', routes.Psycho.delImg);
+app.post('/project/psychological/v2/console/addsubject', routes.Psycho.addSubject);
+app.post('/project/psychological/v2/console/addtext', routes.Psycho.addText);
+app.post('/project/psychological/v2/console/delsuject', routes.Psycho.delSubject);
+app.post('/project/psychological/v2/experiment/sendresult', routes.Psycho.sendResult);
+app.post('/project/psychological/v2/experiment/sendtextresult', routes.Psycho.sendTextResult);
+app.get('/project/psychological/v2/console/getresult', routes.Psycho.getResult);
+app.get('/project/psychological/v2/console/gettextresult', routes.Psycho.getTextResult);
+app.get('/project/psychological/v2/experiment/login', routes.Psycho.subjectLogin);
+
 app.get('/project/psychological/console', routes.Project.psychologicalExperiment);
 app.get('/project/psychological/practice', routes.Project.doPractice);
 app.get('/project/psychological/test', routes.Project.doTest);
@@ -102,6 +122,7 @@ app.post('/project/psychological/experiment/sendtextresult', routes.Project.send
 app.get('/project/psychological/console/getresult', routes.Project.getResult);
 app.get('/project/psychological/console/gettextresult', routes.Project.getTextResult);
 app.get('/project/psychological/experiment/login', routes.Project.subjectLogin);
+
 app.get('/project/stock', routes.Project.stock);
 app.get('/getpost/:id', routes.Post.getPost);
 app.get('/like/:id', routes.Post.doLike);

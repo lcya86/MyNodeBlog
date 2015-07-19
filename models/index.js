@@ -19,3 +19,4 @@ exports.Subject = mongoose.model('Subject');
 exports.Results = mongoose.model('Results');
 exports.TextResults = mongoose.model('TextResults');
 exports.Images = mongoose.model('Image');
+exports.MaterialImgPairs = mongoose.model('MaterialImgPair');

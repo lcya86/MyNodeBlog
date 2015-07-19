@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Console</title>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/spinner.css">
+  <style media="screen">
+    html{
+      height: 100%;
+      margin: 0px;
+    }
+    body{
+      margin:0px;
+      height: 100%;
+      line-height:2;
+      font-family: "Microsoft YaHei";
+      background-color: #373737;
+      color:black;
+    }
+    .container{
+      width: 100%;
+      height: 100%;
+    }
+    .left_navs{
+      width: 11%;
+      min-height: 100%;
+      float: left;
+      text-align: center;
+    }
+    .left_nav{
+      color:#666;
+    }
+    .left_nav:hover{
+      color:#eee;
+      cursor: pointer;
+      background-color: #F19F45;
+    }
+    .left_nav.selected{
+      color:#eee;
+      background-color: #F19F45;
+      box-shadow: 5px 5px 15px rgba(30,30,30,0.2) inset, -5px -5px 15px rgba(30,30,30,0.2) inset;
+    }
+    .main{
+      width: 89%;
+      min-height: 100%;
+      float: right;
+      background-color: #FAF8E4;
+      box-shadow: -10px 0px 5px rgba(3,3,3,0.1);
+    }
+    .main_hd{
+    }
+    .main_hd h2{
+      padding: 0 30px;
+      line-height: 1;
+    }
+    .tab_navs{
+      border-bottom: solid 1px #C5C5C5;
+    }
+    .tab_navs:after {
+      content: "\200B";
+      display: block;
+      height: 0;
+      clear: both;
+    }
+    .tab_nav{
+      display: inline-block;
+      float: left;
+      padding: 0px 30px;
+      margin-bottom: -1px;
+    }
+    .tab_nav:hover{
+      cursor: pointer;
+      border-bottom: solid 3px #ACACAC;
+    }
+    .tab_nav.selected{
+      border-bottom: solid 3px #F19F45;
+    }
+    .main_bd{
+      padding: 30px;
+    }
+    .pimg_fd{
+      border: dashed 1px #F19F45;
+      min-height: 190px;
+      margin-bottom: 25px;
+    }
+    .nimg_fd{
+      border: dashed 1px #F19F45;
+      min-height: 190px;
+      margin-bottom: 25px;
+    }
+    .conimg_fd{
+      border: dashed 1px #F19F45;
+      min-height: 190px;
+      margin-bottom: 25px;
+    }
+    .pfd{
+      width: 48%;
+      margin-right: 3%;
+      float:left;
+    }
+    .con_fd{
+      width: 48%;
+      float: left;
+      margin-left: 3%;
+    }
+
+    .pimg_fd.selected{
+      border: dashed 3px #F19F45;
+    }
+
+    .nimg_fd.selected{
+      border: dashed 3px #F19F45;
+    }
+
+    .img_item{
+      padding:5px;
+      margin:10px;
+      text-align:center;
+    }
+
+    .img_item:hover{
+      cursor: pointer;
+    }
+
+    .img_item .upimg{
+      width: 45%;
+      float: right;
+    }
+    .img_item .downimg{
+      width: 45%;
+      float: right;
+    }
+
+
+    .img_item h3{
+      display:inline-block;
+      margin-right:12px;
+      float:left;
+    }
+
+    .img_item img{
+      width:80px;
+      float:left;
+    }
+
+    .img_item p{
+      display:relative;
+      bottom:0px;
+      margin:0px;
+    }
+
+    .img_item i{
+      background-color:#F19F45;
+      height:1px;
+      width:100%;
+      clear:left;
+    }
+
+    .csubject_fd{
+      border: solid 1px #F19F45;
+      min-height: 190px;
+      margin-bottom: 25px;
+    }
+
+    .tsubject_fd{
+      border: solid 1px #F19F45;
+      min-height: 190px;
+      margin-bottom: 25px;
+    }
+
+    .cfd{
+      width: 21%;
+      margin-right: 4%;
+      float:right;
+    }
+    .tfd{
+      width: 21%;
+      margin-right: 4%;
+      float: right;
+    }
+    .sfd{
+      width: 40%;
+      float: left;
+    }
+    .statistics_fd{
+      border: solid 1px #F19F45;
+      min-height: 40%;
+      padding-left: 3%;
+    }
+    .add_subject{
+      text-align: center;
+      border-bottom: dashed 1px #C5C5C5;
+      color: #c5c5c5;
+      cursor: pointer;
+    }
+    .add_consubject{
+      text-align: center;
+      border-bottom: dashed 1px #C5C5C5;
+      color: #c5c5c5;
+      cursor: pointer;
+    }
+    .subject_item{
+      border-bottom: dashed 1px #c5c5c5;
+      padding:0px 15px;
+      cursor: pointer;
+    }
+    .subject_fd{
+      width: 10%;
+      float: left;
+      margin-right: 4%;
+    }
+    .subjectList{
+      border: solid 1px #F19F45;
+      min-height: 190px;
+    }
+    .results_fd{
+      width: 30%;
+      margin-right: 4%;
+      float: left;
+    }
+    .resultList{
+      border: solid 1px #F19F45;
+      min-height: 190px;
+    }
+    .result_item{
+      border-bottom: dashed 1px #c5c5c5;
+      padding:0px 15px;
+      cursor: pointer;
+    }
+    .result_fd{
+      width: 40%;
+      float: left;
+    }
+    .resultTable{
+      border:solid 1px #F19F45;
+      text-align: center;
+    }
+
+
+    .left_fd {
+      width: 48%;
+      float: left;
+    }
+    .right_fd {
+      width: 48%;
+      float: right;
+    }
+    .text_fd{
+      border: dashed 1px #F19F45;
+      min-height: 70%;
+    }
+    .nword{
+      float: left;
+      text-align: center;
+      width: 44%;
+    }
+    .pword{
+      float: right;
+      text-align: center;
+      width: 45%;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="spinner">
+    <div class="rect1"></div>
+    <div class="rect2"></div>
+    <div class="rect3"></div>
+    <div class="rect4"></div>
+    <div class="rect5"></div>
+    <div class="rect6"></div>
+    <div class="rect7"></div>
+    <div class="rect8"></div>
+    <div class="rect9"></div>
+    <div class="rect10"></div>
+    <div class="rect11"></div>
+    <div class="rect12"></div>
+  </div>
+  <div class="container" style="display:none;">
+    <div class="left_navs">
+      <div class="js_material left_nav selected">material manage</div>
+      <div class="js_subjects left_nav">subjects manage</div>
+      <div class="js_rasult left_nav">result manage</div>
+    </div>
+    <div id="material" class="main">
+      <%include material_manage.html%>
+    </div>
+    <div id="subjects" class="main" style="display:none;">
+      <%include subjects_manage.html%>
+    </div>
+    <div id="result" class="main" style="display:none;">
+      <%include result_manage.html%>
+    </div>
+  </div>
+  <script type="text/javascript" src="/javascripts/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript">
+  $(window).load(function(){
+    $('div.spinner').remove();
+    $('div.container').show();
+
+
+    /*########################上传图片###########################*/
+    $(document).on({
+      dragleave:function(e){
+        e.preventDefault();
+      },
+      drop:function(e){
+        e.preventDefault();
+      },
+      dragenter:function(e){
+        e.preventDefault();
+      },
+      dragover:function(e){
+        e.preventDefault();
+      },
+    })
+
+    var pimgCounter = function(stage){//产生sequence
+      var listName = '';
+      var pimgSequence = 0;
+      if(stage==1){
+        listName = '#practice_image_bd';
+      }else if(stage==2){
+        listName = '#test_image_bd';
+      }else if(stage==3){
+        listName = '#train_image_bd';
+      }
+      var children = $(listName+' div.pimg_fd').children();
+      if(children.length>0){
+        pimgSequence = Number(children.last().children('h3').text());
+      }else if(children.length==0){
+        pimgSequence = 0;
+      }
+      pimgSequence++;
+      return pimgSequence;
+    };
+
+    var nimgCounter = function(stage){//产生sequence
+      var listName = '';
+      var nimgSequence = 0;
+      if(stage==1){
+        listName = '#practice_image_bd';
+      }else if(stage==2){
+        listName = '#test_image_bd';
+      }else if(stage==3){
+        listName = '#train_image_bd';
+      }
+      var children = $(listName+' div.nimg_fd').children();
+      if(children.length>0){
+        nimgSequence = Number(children.last().children('h3').text());
+      }else if(children.length==0){
+        nimgSequence = 0;
+      }
+      nimgSequence++;
+      return nimgSequence;
+    };
+
+    var conimgCounter = function(stage){//产生sequence
+      var listName = '';
+      var conimgSequence = 0;
+      if(stage==1){
+        listName = '#practice_image_bd';
+      }else if(stage==2){
+        listName = '#test_image_bd';
+      }else if(stage==3){
+        listName = '#train_image_bd';
+      }
+      var children = $(listName+' div.conimg_fd').children();
+      if(children.length>0){
+        conimgSequence = Number(children.last().children('h3').text());
+      }else if(children.length==0){
+        conimgSequence = 0;
+      }
+      conimgSequence++;
+      return conimgSequence;
+    };
+
+    var textCounter = function(stage){//产生sequence
+      var listName = '';
+      if(stage==1){
+        listName = '#practice_text_bd';
+      }else if(stage==2){
+        listName = '#test_text_bd';
+      }else if(stage==3){
+        listName = '#train_text_bd';
+      }
+      var children = $(listName+' .left_fd .text_fd').children();
+      return children.length;
+    };
+
+    var contextCounter = function(stage){//产生sequence
+      var listName = '';
+      if(stage==1){
+        listName = '#practice_text_bd';
+      }else if(stage==2){
+        listName = '#test_text_bd';
+      }else if(stage==3){
+        listName = '#train_text_bd';
+      }
+      var children = $(listName+' .right_fd .text_fd').children();
+      return children.length;
+    };
+
+    $('#material')
+      .on('drop.add','div.pimg_fd',function(event){
+        event.preventDefault();
+        function create_pupload_progress(index){
+          return function(event){
+            $this.find('#input_pimage'+index).css({
+              width:Math.round(event.loaded*100/event.total)+'%'
+            });
+          }
+        }
+
+        function create_pupload_done(index){
+          return function(event){
+            $this.find('#input_pimage'+index).css({
+              width:'100%'
+            });
+          }
+        }
+        $this = $(this);
+        $this.removeClass('selected');
+        var children_length = $this.children().length;
+        var fileList = event.originalEvent.dataTransfer.files;
+        for(var i = 0;i<fileList.length;i++){
+          var src = '';
+          var sequence = 0;
+          if(window.webkitURL){
+            src = window.webkitURL.createObjectURL(fileList[i]);
+          }else{
+            src = window.URL.createObjectURL(fileList[i]);
+          }
+          console.log(src);
+          sequence = pimgCounter($this.data('stage'));
+          $this.append('<div class="img_item"><h3>'+sequence+'</h3><img src="'+src+'"/><p>'+fileList[i].name+'</p><div id="input_pimage'+(i+children_length)+'" style="width:0%;"></div></div>');
+          var xhr = new XMLHttpRequest();
+          var upload = xhr.upload;
+          upload.onprogress = create_pupload_progress(i+children_length);
+          upload.onload = create_pupload_done(i+children_length);
+          xhr.open("POST","/project/psychological/uploadImg?name="+fileList[i].name+"&sequence="+sequence+"&polarity=1&stage="+$this.data('stage')+'&type=1'); 
+          xhr.overrideMimeType("application/octet-stream");
+          xhr.send(fileList[i]);
+        }
+      })
+      .on('dragenter.add','div.pimg_fd',function(event){
+        event.preventDefault();
+        $(this).addClass('selected');
+      })
+      .on('dragover.add','div.pimg_fd',function(event){
+        event.preventDefault();
+        $(this).addClass('selected');
+      })
+      .on('dragleave.add','div.pimg_fd',function(event){
+        event.preventDefault();
+        $(this).removeClass('selected');
+      })
+      .on('drop.add','div.nimg_fd',function(event){
+        event.preventDefault();
+        function create_nupload_progress(index){
+          return function(event){
+            $this.find('#input_nimage'+index).css({
+              width:Math.round(event.loaded*100/event.total)+'%'
+            });
+          }
+        }
+
+        function create_nupload_done(index){
+          return function(event){
+            $this.find('#input_nimage'+index).css({
+              width:'100%'
+            });
+          }
+        }
+        $this = $(this);
+        $this.removeClass('selected');
+        var children_length = $this.children().length;
+        var fileList = event.originalEvent.dataTransfer.files;
+        for(var i = 0;i<fileList.length;i++){
+          var src = '';
+          var sequence = 0;
+          if(window.webkitURL){
+            src = window.webkitURL.createObjectURL(fileList[i]);
+          }else{
+            src = window.URL.createObjectURL(fileList[i]);
+          }
+          console.log(src);
+          sequence = nimgCounter($this.data('stage'));
+          $this.append('<div class="img_item"><h3>'+sequence+'</h3><img src="'+src+'"/><p>'+fileList[i].name+'</p><div id="input_nimage'+(i+children_length)+'" style="width:0%;"></div></div>');
+          var xhr = new XMLHttpRequest();
+          var upload = xhr.upload;
+          upload.onprogress = create_nupload_progress(i+children_length);
+          upload.onload = create_nupload_done(i+children_length);
+          xhr.open("POST","/project/psychological/uploadImg?name="+fileList[i].name+"&sequence="+sequence+"&polarity=0&stage="+$this.data('stage')+'&type=1'); 
+          xhr.overrideMimeType("application/octet-stream");
+          xhr.send(fileList[i]);
+        }
+      })
+      .on('dragenter.add','div.nimg_fd',function(event){
+        event.preventDefault();
+        $(this).addClass('selected');
+      })
+      .on('dragover.add','div.nimg_fd',function(event){
+        event.preventDefault();
+        $(this).addClass('selected');
+      })
+      .on('dragleave.add','div.nimg_fd',function(event){
+        event.preventDefault();
+        $(this).removeClass('selected');
+      })
+      .on('drop.add','div.conimg_fd',function(event){
+        event.preventDefault();
+        function create_conupload_progress(index){
+          return function(event){
+            $this.find('#input_conimage'+index).css({
+              width:Math.round(event.loaded*100/event.total)+'%'
+            });
+          }
+        }
+
+        function create_conupload_done(index){
+          return function(event){
+            $this.find('#input_conimage'+index).css({
+              width:'100%'
+            });
+          }
+        }
+        $this = $(this);
+        $this.removeClass('selected');
+        var children_length = $this.children().length;
+        var fileList = event.originalEvent.dataTransfer.files;
+        for(var i = 0;i<fileList.length;i++){
+          var src = '';
+          var sequence = 0;
+          if(window.webkitURL){
+            src = window.webkitURL.createObjectURL(fileList[i]);
+          }else{
+            src = window.URL.createObjectURL(fileList[i]);
+          }
+          console.log(src);
+          sequence = conimgCounter($this.data('stage'));
+          $this.append('<div class="img_item"><h3>'+sequence+'</h3><img src="'+src+'"/><p>'+fileList[i].name+'</p><div id="input_conimage'+(i+children_length)+'" style="width:0%;"></div></div>');
+          var xhr = new XMLHttpRequest();
+          var upload = xhr.upload;
+          upload.onprogress = create_conupload_progress(i+children_length);
+          upload.onload = create_conupload_done(i+children_length);
+          xhr.open("POST","/project/psychological/uploadImg?name="+fileList[i].name+"&sequence="+sequence+"&polarity=0&stage="+$this.data('stage')+'&type=0'); 
+          xhr.overrideMimeType("application/octet-stream");
+          xhr.send(fileList[i]);
+        }
+      })
+      .on('dragenter.add','div.conimg_fd',function(event){
+        event.preventDefault();
+        $(this).addClass('selected');
+      })
+      .on('dragover.add','div.conimg_fd',function(event){
+        event.preventDefault();
+        $(this).addClass('selected');
+      })
+      .on('dragleave.add','div.conimg_fd',function(event){
+        event.preventDefault();
+        $(this).removeClass('selected');
+      })
+      .on('click.delete','div.img_item.real',function(event){
+        event.stopPropagation();
+        $target = $(event.currentTarget);
+        if(confirm('您要删除图片吗？')){
+          $.post('/project/psychological/console/delimg',{id:$target.data('id')},function(data){
+            console.log($target.data('id'));
+            if(data.success){
+              $target.nextAll().each(function(index,element){
+                var val = $(element).find('h3').text();
+                $(element).find('h3').text(val-1);
+              });
+              $target.remove();
+            }else{
+              alert('删除图片失败');
+            }
+          });
+        }
+      })
+      .on('click.add','div.add_subject',function(event){
+        event.stopPropagation();
+        var addForm = '';
+        addForm += '<div class="wrap">';
+        addForm += '<div class="nword subject_item">消极词:<input class="js_nword" type="text" style="width:70%;"></div>';
+        addForm += '<div class="pword subject_item">积极词:<input class="js_pword" type="text" style="width:70%;"></div>';
+        addForm += '<div class="subject_item" style="clear:both;text-align:center;">句子:<input class="js_sentence" type="text" style="width:80%;"><a data-stage="'+$(this).data('stage')+'" href="javascript:;">确定</a></div>';
+        
+        addForm += '</div>';
+        var $addForm = $(addForm);
+        var $this = $(this);
+        var sequence = textCounter($this.data('stage'));
+        $this.after($addForm);
+        $addForm.on('click.submit','a',function(event){
+          var sentence = $addForm.find('input.js_sentence').val();
+          var nword = $addForm.find('input.js_nword').val();
+          var pword = $addForm.find('input.js_pword').val();
+          $.post('/project/psychological/console/addtext',
+            {
+              sentence:sentence,
+              sequence:sequence,
+              nword:nword,
+              pword:pword,
+              type:1,
+              stage:$(this).data('stage')
+            },
+            function(data){
+              if(data.success){
+                var complete = '';
+                complete += '<div class="wrap">';
+                complete += '<div class="nword subject_item">'+sequence+'&nbsp;&nbsp;消极词:'+nword+'</div>';
+                complete += '<div class="pword subject_item">积极词:'+pword+'</div>';
+                complete += '<div data-id="'+data.id+'" class="subject_item" style="clear:both;">句子:'+sentence+'</div>';
+                complete += '</div>';
+                $this.find('span').text(Number($this.find('span').text())+1);
+                $addForm.remove();
+                $this.after(complete);
+              }else{
+                alert(data.msg);
+              }
+            }
+          );
+        });
+      })
+      .on('click.add','div.add_materialpairs',function(event){
+        event.stopPropagation();
+        var addForm = '';
+        addForm += '<div class="wrap">';
+        addForm += '<div class="pword subject_item">词:<input class="js_pword" type="text" style="width:70%;"></div>';
+        addForm += '<div class="subject_item" style="clear:both;text-align:center;">句子:<input class="js_sentence" type="text" style="width:80%;"><a data-stage="'+$(this).data('stage')+'" href="javascript:;">确定</a></div>';
+        
+        addForm += '</div>';
+        var $addForm = $(addForm);
+        var $this = $(this);
+        var sequence = contextCounter($this.data('stage'));
+        $this.after($addForm);
+        $addForm.on('click.submit','a',function(event){
+          var sentence = $addForm.find('input.js_sentence').val();
+          var nword = $addForm.find('input.js_nword').val();
+          var pword = $addForm.find('input.js_pword').val();
+          $.post('/project/psychological/console/addpairs',
+            {
+              upImg: upImg,
+              downImg: downImg,
+              letter: letter,
+              type: type,
+              positivePosition: positivePosition,
+              sequence: sequence,
+              stage:$(this).data('stage')
+            },
+            function(data){
+              if(data.success){
+                var complete = '';
+                complete += '<div class="wrap">';
+                complete += '<div class="nword subject_item">'+sequence+'</div>';
+                complete += '<div class="pword subject_item">词:'+pword+'</div>';
+                complete += '<div data-id="'+data.id+'" class="subject_item" style="clear:both;">句子:'+sentence+'</div>';
+                complete += '</div>';
+                $this.find('span').text(Number($this.find('span').text())+1);
+                $addForm.remove();
+                $this.after(complete);
+              }else{
+                alert(data.msg);
+              }
+            }
+          );
+        });
+      })
+      .on('click.add','div.add_consubject',function(event){
+        event.stopPropagation();
+        var addForm = '';
+        addForm += '<div class="wrap">';
+        addForm += '<div class="pword subject_item">词:<input class="js_pword" type="text" style="width:70%;"></div>';
+        addForm += '<div class="subject_item" style="clear:both;text-align:center;">句子:<input class="js_sentence" type="text" style="width:80%;"><a data-stage="'+$(this).data('stage')+'" href="javascript:;">确定</a></div>';
+        
+        addForm += '</div>';
+        var $addForm = $(addForm);
+        var $this = $(this);
+        var sequence = contextCounter($this.data('stage'));
+        $this.after($addForm);
+        $addForm.on('click.submit','a',function(event){
+          var sentence = $addForm.find('input.js_sentence').val();
+          var nword = $addForm.find('input.js_nword').val();
+          var pword = $addForm.find('input.js_pword').val();
+          $.post('/project/psychological/console/addtext',
+            {
+              sentence:sentence,
+              nword:nword,
+              pword:pword,
+              sequence:sequence,
+              type:0,
+              stage:$(this).data('stage')
+            },
+            function(data){
+              if(data.success){
+                var complete = '';
+                complete += '<div class="wrap">';
+                complete += '<div class="nword subject_item">'+sequence+'</div>';
+                complete += '<div class="pword subject_item">词:'+pword+'</div>';
+                complete += '<div data-id="'+data.id+'" class="subject_item" style="clear:both;">句子:'+sentence+'</div>';
+                complete += '</div>';
+                $this.find('span').text(Number($this.find('span').text())+1);
+                $addForm.remove();
+                $this.after(complete);
+              }else{
+                alert(data.msg);
+              }
+            }
+          );
+        });
+      });
+
+    /*##########################被试管理#####################*/
+    $('#subjects')
+      .on('click.addt','div.t1.add_subject',function(event){
+        var $this = $(this);
+        var $item = $('<div class="subject_item"><input style="margin-left:15px;" type="text" placeholder="被试姓名" />&nbsp;&nbsp;<a data-type="1" href="javascript:;">添加</a>&nbsp;&nbsp;<a href="javascript:;">取消</a></div>');
+        $this.after($item);
+        $item.find('input').focus();
+      })
+      .on('click.addt','div.t2.add_subject',function(event){
+        var $this = $(this);
+        var $item = $('<div class="subject_item"><input style="margin-left:15px;" type="text" placeholder="被试姓名" />&nbsp;&nbsp;<a data-type="2" href="javascript:;">添加</a>&nbsp;&nbsp;<a href="javascript:;">取消</a></div>');
+        $this.after($item);
+        $item.find('input').focus();
+      })
+      .on('click.addc','div.c1.add_subject',function(event){
+        var $this = $(this);
+        var $item = $('<div class="subject_item"><input style="margin-left:15px;" type="text" placeholder="被试姓名" />&nbsp;&nbsp;<a data-type="0" href="javascript:;">添加</a>&nbsp;&nbsp;<a href="javascript:;">取消</a></div>');
+        $this.after($item);
+        $item.find('input').focus();
+      })
+      .on('click.addc','div.c2.add_subject',function(event){
+        var $this = $(this);
+        var $item = $('<div class="subject_item"><input style="margin-left:15px;" type="text" placeholder="被试姓名" />&nbsp;&nbsp;<a data-type="-1" href="javascript:;">添加</a>&nbsp;&nbsp;<a href="javascript:;">取消</a></div>');
+        $this.after($item);
+        $item.find('input').focus();
+      })
+      .on('keydown','div.subject_item',function(event){
+        if ( event.which == 13 ) {
+          event.preventDefault();
+          $(this).find('a').trigger('click.add_submit');
+        }
+      })
+      .on('click.add_submit','div.subject_item a:contains(添加)',function(event){
+        event.stopPropagation();
+        var $this = $(this);
+        $.post('/project/psychological/console/addsubject',{type:$this.data('type'),name:$this.prev().val()},function(data){
+          if(data.success){
+            $this.parent().data('id',data.id).html(data.name+'<span style="float:right;">(未完成)</span>');
+            $('div.statistics_fd').load('./console div.statistics_fd >*');
+          }else{
+            alert('添加被试失败');
+          }
+        });
+      })
+      .on('click.add_cancle','div.subject_item a:contains(取消)',function(event){
+        event.stopPropagation();
+        var $this = $(this);
+        $this.parent().remove();
+      })
+      .on('click.del','div.subject_item',function(event){
+        event.stopPropagation();
+        var $this = $(this);
+        if(confirm('您要删除被试吗？')){
+          $.post('/project/psychological/console/delsuject',{subject_id:$this.data('id')},function(data){
+            if(data.success){
+              $this.remove();
+              $('div.statistics_fd').load('./console div.statistics_fd >*');
+              $('#result div.subject_fd').load('./console #result div.subject_fd >*');
+            }else{
+              alert('删除被试失败');
+            }
+          });
+        }
+      });
+
+    /*##########################结果管理#####################*/
+    $('#image_result_bd')
+      .on('click','div.subject_item',function(event){
+        event.stopPropagation();
+        var $this = $(this);
+        $.get('/project/psychological/console/getresult',{name:$this.text()},function(data){
+          if(data.success){
+            var list = '实验批次';
+            var table = '实验结果';
+            list += '<div class="resultList practice">';
+            if(data.practice){
+              data.practice.forEach(function(item,index,array){
+                list += '<div data-index="'+index+'" class="result_item">第'+(index+1)+'次练习 '+item.timestamp.toString()+'</div>';
+                table += '<table class="resultTable js_practice_table'+index+'" cellspacing="0px" cellpadding="5px" width="500px" style="display:none;">';
+                table += '<thead>';
+                table += '<tr>';
+                table += '<th>图片序号</th>';
+                table += '<th>是否积极图片</th>';
+                table += '<th>是否有关</th>';
+                table += '<th>反应时(ms)</th>';
+                table += '</tr>';
+                table += '</thead>';
+                table += '<tbody>';
+                if(item.results){
+                  item.results.forEach(function(item,index,array){
+                    table += '<tr>';
+                    table += '<td>'+item.sequence+'</td>';
+                    table += '<td>'+item.isUnderP+'</td>';
+                    table += '<td>'+(item.isCorrect?'shit':(item.isMiss?'miss':'incorrect'))+'</td>';
+                    table += '<td>'+item.reactTime+'</td>';
+                    table += '</tr>';
+                  });
+                }
+                table += '</tbody>';
+                table += '</table>';
+              });
+            }
+            list += '</div>';
+            list += '<div class="resultList test">';
+            if(data.test){
+              data.test.forEach(function(item,index,array){
+                list += '<div data-index="'+index+'" class="result_item">第'+(index+1)+'次测试 '+item.timestamp.toString()+'</div>';
+                table += '<table class="resultTable js_test_table'+index+'" cellspacing="0px" cellpadding="5px" width="500px" style="display:none;">';
+                table += '<thead>';
+                table += '<tr>';
+                table += '<th>图片序号</th>';
+                table += '<th>是否积极图片</th>';
+                table += '<th>是否有关</th>';
+                table += '<th>反应时(ms)</th>';
+                table += '</tr>';
+                table += '</thead>';
+                table += '<tbody>';
+                if(item.results){
+                  item.results.forEach(function(item,index,array){
+                    table += '<tr>';
+                    table += '<td>'+item.sequence+'</td>';
+                    table += '<td>'+item.isUnderP+'</td>';
+                    table += '<td>'+(item.isCorrect?'shit':(item.isMiss?'miss':'incorrect'))+'</td>';
+                    table += '<td>'+item.reactTime+'</td>';
+                    table += '</tr>';
+                  });
+                }
+                table += '</tbody>';
+                table += '</table>';
+              });
+            }
+            list += '</div>';
+            list += '<div class="resultList train">';
+            if(data.train){
+              data.train.forEach(function(item,index,array){
+                list += '<div data-index="'+index+'" class="result_item">第'+(index+1)+'次训练 '+item.timestamp.toString()+'</div>';
+                table += '<table class="resultTable js_train_table'+index+'" cellspacing="0px" cellpadding="5px" width="500px" style="display:none;">';
+                table += '<thead>';
+                table += '<tr>';
+                table += '<th>图片序号</th>';
+                table += '<th>是否积极图片</th>';
+                table += '<th>是否有关</th>';
+                table += '<th>反应时(ms)</th>';
+                table += '</tr>';
+                table += '</thead>';
+                table += '<tbody>';
+                if(item.results){
+                  item.results.forEach(function(item,index,array){
+                    table += '<tr>';
+                    table += '<td>'+item.sequence+'</td>';
+                    table += '<td>'+item.isUnderP+'</td>';
+                    table += '<td>'+(item.isCorrect?'shit':(item.isMiss?'miss':'incorrect'))+'</td>';
+                    table += '<td>'+item.reactTime+'</td>';
+                    table += '</tr>';
+                  });
+                }
+                table += '</tbody>';
+                table += '</table>';
+              });
+            }
+            list += '</div>';
+
+            $('#image_result_bd div.result_fd').html(table);
+            $('#image_result_bd div.results_fd').html(list);
+          }
+        })
+      })
+      .on('click','div.resultList.practice div.result_item',function(event){
+        event.stopPropagation();
+        var $this = $(this);
+        $('#image_result_bd div.result_fd').children().hide();
+        $('#image_result_bd table.js_practice_table'+$this.data('index')).show();
+      })
+      .on('click','div.resultList.test div.result_item',function(event){
+        event.stopPropagation();
+        var $this = $(this);
+        $('#image_result_bd div.result_fd').children().hide();
+        $('#image_result_bd table.js_test_table'+$this.data('index')).show();
+      })
+      .on('click','div.resultList.train div.result_item',function(event){
+        event.stopPropagation();
+        var $this = $(this);
+        $('#image_result_bd div.result_fd').children().hide();
+        $('#image_result_bd table.js_train_table'+$this.data('index')).show();
+      });
+
+    $('#text_result_bd')
+      .on('click','div.subject_item',function(event){
+        event.stopPropagation();
+        var $this = $(this);
+        $.get('/project/psychological/console/gettextresult',{name:$this.text()},function(data){
+          if(data.success){
+            var list = '实验批次';
+            var table = '实验结果';
+            list += '<div class="resultList practice">';
+            if(data.practice){
+              data.practice.forEach(function(item,index,array){
+                list += '<div data-index="'+index+'" class="result_item">第'+(index+1)+'次练习 '+item.timestamp.toString()+'</div>';
+                table += '<table class="resultTable js_practice_table'+index+'" cellspacing="0px" cellpadding="5px" width="500px" style="display:none;">';
+                table += '<thead>';
+                table += '<tr>';
+                table += '<th>句子序号</th>';
+                table += '<th>是否积极词</th>';
+                table += '<th>是否击中</th>';
+                table += '<th>反应时(ms)</th>';
+                table += '</tr>';
+                table += '</thead>';
+                table += '<tbody>';
+                if(item.results){
+                  item.results.forEach(function(item,index,array){
+                    table += '<tr>';
+                    table += '<td>'+item.sequence+'</td>';
+                    table += '<td>'+item.isUnderP+'</td>';
+                    table += '<td>'+(item.isCorrect?'shit':(item.isMiss?'miss':'incorrect'))+'</td>';
+                    table += '<td>'+item.reactTime+'</td>';
+                    table += '</tr>';
+                  });
+                }
+                table += '</tbody>';
+                table += '</table>';
+              });
+            }
+            list += '</div>';
+            list += '<div class="resultList test">';
+            if(data.test){
+              data.test.forEach(function(item,index,array){
+                list += '<div data-index="'+index+'" class="result_item">第'+(index+1)+'次测试 '+item.timestamp.toString()+'</div>';
+                table += '<table class="resultTable js_test_table'+index+'" cellspacing="0px" cellpadding="5px" width="500px" style="display:none;">';
+                table += '<thead>';
+                table += '<tr>';
+                table += '<th>句子序号</th>';
+                table += '<th>是否积极词</th>';
+                table += '<th>是否击中</th>';
+                table += '<th>反应时(ms)</th>';
+                table += '</tr>';
+                table += '</thead>';
+                table += '<tbody>';
+                if(item.results){
+                  item.results.forEach(function(item,index,array){
+                    table += '<tr>';
+                    table += '<td>'+item.sequence+'</td>';
+                    table += '<td>'+item.isUnderP+'</td>';
+                    table += '<td>'+(item.isCorrect?'shit':(item.isMiss?'miss':'incorrect'))+'</td>';
+                    table += '<td>'+item.reactTime+'</td>';
+                    table += '</tr>';
+                  });
+                }
+                table += '</tbody>';
+                table += '</table>';
+              });
+            }
+            list += '</div>';
+            list += '<div class="resultList train">';
+            if(data.train){
+              data.train.forEach(function(item,index,array){
+                list += '<div data-index="'+index+'" class="result_item">第'+(index+1)+'次训练 '+item.timestamp.toString()+'</div>';
+                table += '<table class="resultTable js_train_table'+index+'" cellspacing="0px" cellpadding="5px" width="500px" style="display:none;">';
+                table += '<thead>';
+                table += '<tr>';
+                table += '<th>句子序号</th>';
+                table += '<th>是否积极词</th>';
+                table += '<th>是否击中</th>';
+                table += '<th>反应时(ms)</th>';
+                table += '</tr>';
+                table += '</thead>';
+                table += '<tbody>';
+                if(item.results){
+                  item.results.forEach(function(item,index,array){
+                    table += '<tr>';
+                    table += '<td>'+item.sequence+'</td>';
+                    table += '<td>'+item.isUnderP+'</td>';
+                    table += '<td>'+(item.isCorrect?'shit':(item.isMiss?'miss':'incorrect'))+'</td>';
+                    table += '<td>'+item.reactTime+'</td>';
+                    table += '</tr>';
+                  });
+                }
+                table += '</tbody>';
+                table += '</table>';
+              });
+            }
+            list += '</div>';
+
+            $('#text_result_bd div.result_fd').html(table);
+            $('#text_result_bd div.results_fd').html(list);
+          }
+        })
+      })
+      .on('click','div.resultList.practice div.result_item',function(event){
+        event.stopPropagation();
+        var $this = $(this);
+        $('#text_result_bd div.result_fd').children().hide();
+        $('#text_result_bd table.js_practice_table'+$this.data('index')).show();
+      })
+      .on('click','div.resultList.test div.result_item',function(event){
+        event.stopPropagation();
+        var $this = $(this);
+        $('#text_result_bd div.result_fd').children().hide();
+        $('#text_result_bd table.js_test_table'+$this.data('index')).show();
+      })
+      .on('click','div.resultList.train div.result_item',function(event){
+        event.stopPropagation();
+        var $this = $(this);
+        $('#text_result_bd div.result_fd').children().hide();
+        $('#text_result_bd table.js_train_table'+$this.data('index')).show();
+      });
+
+
+
+    /*##########################页面切换#####################*/
+    $('div.js_practice_image.tab_nav').on('click',function(event){
+      $('#practice_image_bd').show();
+      $('#test_image_bd').hide();
+      $('#train_image_bd').hide();
+      $('#practice_text_bd').hide();
+      $('#test_text_bd').hide();
+      $('#train_text_bd').hide();
+      $(event.target).addClass('selected').siblings().removeClass('selected');
+    });
+
+    $('div.js_test_image.tab_nav').on('click',function(event){
+      $('#practice_image_bd').hide();
+      $('#test_image_bd').show();
+      $('#train_image_bd').hide();
+      $('#practice_text_bd').hide();
+      $('#test_text_bd').hide();
+      $('#train_text_bd').hide();
+      $(event.target).addClass('selected').siblings().removeClass('selected');
+    });
+
+    $('div.js_train_image.tab_nav').on('click',function(event){
+      $('#practice_image_bd').hide();
+      $('#test_image_bd').hide();
+      $('#train_image_bd').show();
+      $('#practice_text_bd').hide();
+      $('#test_text_bd').hide();
+      $('#train_text_bd').hide();
+      $(event.target).addClass('selected').siblings().removeClass('selected');
+    });
+
+
+    $('div.js_practice_text.tab_nav').on('click',function(event){
+      $('#practice_image_bd').hide();
+      $('#test_image_bd').hide();
+      $('#train_image_bd').hide();
+      $('#practice_text_bd').show();
+      $('#test_text_bd').hide();
+      $('#train_text_bd').hide();
+      $(event.target).addClass('selected').siblings().removeClass('selected');
+    });
+
+    $('div.js_test_text.tab_nav').on('click',function(event){
+      $('#practice_image_bd').hide();
+      $('#test_image_bd').hide();
+      $('#train_image_bd').hide();
+      $('#practice_text_bd').hide();
+      $('#test_text_bd').show();
+      $('#train_text_bd').hide();
+      $(event.target).addClass('selected').siblings().removeClass('selected');
+    });
+
+    $('div.js_train_text.tab_nav').on('click',function(event){
+      $('#practice_image_bd').hide();
+      $('#test_image_bd').hide();
+      $('#train_image_bd').hide();
+      $('#practice_text_bd').hide();
+      $('#test_text_bd').hide();
+      $('#train_text_bd').show();
+      $(event.target).addClass('selected').siblings().removeClass('selected');
+    });
+
+    $('div.js_text_result.tab_nav').on('click',function(event){
+      $('#image_result_bd').hide();
+      $('#text_result_bd').show();
+      $(event.target).addClass('selected').siblings().removeClass('selected');
+    });
+
+    $('div.js_image_result.tab_nav').on('click',function(event){
+      $('#image_result_bd').show();
+      $('#text_result_bd').hide();
+      $(event.target).addClass('selected').siblings().removeClass('selected');
+    });
+
+
+
+    $('div.js_material.left_nav').click(function(event){
+      $('#material').show();
+      $('#result').hide();
+      $('#subjects').hide();
+      $(event.target).addClass('selected').siblings().removeClass('selected');
+    });
+
+    $('div.js_subjects.left_nav').click(function(event){
+      $('#material').hide();
+      $('#result').hide();
+      $('#subjects').show();
+      $(event.target).addClass('selected').siblings().removeClass('selected');
+    });
+
+    $('div.js_rasult.left_nav').click(function(event){
+      $('#material').hide();
+      $('#result').show();
+      $('#subjects').hide();
+      $(event.target).addClass('selected').siblings().removeClass('selected');
+    });
+  });
+  
+  </script>
+</body>
+</html>

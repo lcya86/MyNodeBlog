@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Experiment</title>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/spinner.css">
+</head>
+<style type="text/css">
+  html,body{
+    height: 100%;
+    margin: 0px;
+  }
+  .container{
+    width: 100%;
+    text-align: center;
+  }
+  @font-face{
+    font-family:'Glyphicons Halflings';
+    src:url('/fonts/glyphicons-halflings-regular.eot');
+    src:url('/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/glyphicons-halflings-regular.woff') format('woff'),
+    url('/fonts/glyphicons-halflings-regular.ttf') format('truetype'),
+    url('/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg')
+  }
+  .glyphicon{
+    position:relative;
+    top:1px;
+    display:inline-block;
+    font-family:'Glyphicons Halflings';
+    -webkit-font-smoothing:antialiased;
+    font-style:normal;
+    font-weight:normal;
+    font-size: 20px;
+    line-height:1;
+    -moz-osx-font-smoothing:grayscale
+  }
+  .glyphicon-plus:before{
+    content:"\2b"
+  }
+  .cross{
+    position: fixed;
+    top:45%;
+    left:50%;
+  }
+
+  .d_login{
+    position: fixed;
+    top:45%;
+    left:40%;
+  }
+
+  .textarea{
+    position: absolute;
+    top:30%;
+    left:25%;
+    width:50%;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .welcome{
+    position: absolute;
+    top:15%;
+    left:25%;
+    width:50%;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .welcome_first strong{
+    font-size: 25px;
+    color:#5E307E;
+  }
+
+</style>
+<body>
+  <div class="spinner">
+    <div class="rect1"></div>
+    <div class="rect2"></div>
+    <div class="rect3"></div>
+    <div class="rect4"></div>
+    <div class="rect5"></div>
+    <div class="rect6"></div>
+    <div class="rect7"></div>
+    <div class="rect8"></div>
+    <div class="rect9"></div>
+    <div class="rect10"></div>
+    <div class="rect11"></div>
+    <div class="rect12"></div>
+  </div>
+  <div class="container" style="display:none;">
+    <div class="d_login">
+      请输入姓名
+      <input type="text" placeholder="请输入姓名"/>
+      <a href="" class="b_login">确定</a>
+    </div>
+    <div class="d_experiment">
+      <div class="textarea">
+        图       
+      </div>
+    </div>
+  </div>
+  <div class="cross" style="display:none;">
+    <span class="glyphicon glyphicon-plus"></span>
+  </div>
+  <div class="welcome" style="display:none;">
+    <div class="welcome_first">
+      <h4>欢迎你来参加我们的实验！</h4>
+      <p>在接下来的实验中，我们会呈现一个句子和一个单词，你需要判断这个句子和单词之间是否有关系？</p>
+      <p>有关请按<strong>F</strong>键，无关请按<strong>J</strong>键。</p>
+      <small>准备好后请按回车</small>
+    </div>
+    <div class="welcome_second" style="display:none;">
+      <p>接下来是一组<%=stage_text%>。</p>
+      <small>准备好后请按回车</small>
+    </div>
+    <div class="end" style="display:none;">
+      <p>实验第一部分已经结束，您可以休息一段时间，休息之后按回车继续实验</p>
+    </div>
+  </div>
+
+</body>
+<script type="text/javascript" src="/javascripts/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">
+  var texts = [<%=texts.toString().replace(/\n/g,'').replace(/_id.+?,/g,'')%>];
+
+  var exptexts = $.grep(texts,function(item,index){
+    return item.type==1;
+  });
+
+  var contexts = $.grep(texts,function(item,index){
+    return item.type==0;
+  });
+
+  function randomArray(n){//返回一个包含0到n-1的随机顺序数组
+    var result = [];
+    var temp = [];
+    for(var i = 0;i<n;i++){
+      temp[i] = i;
+    }
+    for(var i = 0;i<n;i++){
+      result[i] = temp.splice(Math.floor(Math.random ()*temp.length), 1)[0];
+    }
+    return result;
+  }
+
+  $(function(){
+    $('div.spinner').remove();
+    $('div.container').show();
+    var welcome = 0;
+    var stage = <%=stage%>;
+    var $cross = $('div.cross');
+    var $textarea = $('div.textarea');
+    var reactive = false;
+    var miss = true;
+    var negative = false;
+    var positive = false;
+    var count = -1;
+    var type = 0;
+    var startTime;
+    var name = '';
+    var result = [];
+    var sequence = [];
+    $textarea.hide();
+
+    $('a.b_login').click(function(event){
+      event.preventDefault();
+      name = $(this).prev().val();
+      $.get('/project/psychological/experiment/login',{name:name},function(data){
+        if(data.success){
+          if(data.complete[-1]){
+            alert("您已完成实验");
+          }else{
+            $('div.d_login').hide();
+            $('div.welcome').show();
+            welcome = 1;
+            type = data.type;
+            if(type==1){
+              texts = exptexts;
+            }else{
+              texts = contexts;
+            }
+            sequence = randomArray(texts.length);
+          }
+        }else{
+          alert("此用户不存在");
+        }
+      });
+    });
+
+    function start(){
+      count++;
+      if(count<texts.length){
+        reactTime = 0;
+        result[count] = {};
+        $cross.show();
+        $textarea.empty();
+        if(type==0||Math.floor((Math.random()*10))%2==0){
+          $textarea.text(texts[sequence[count]].pword);
+          positive = true;
+          negative = false;
+          result[count].isUnderP = true;
+        }else{
+          $textarea.text(texts[sequence[count]].nword);
+          negative = true;
+          positive = false;
+          result[count].isUnderP = false;
+        }
+        result[count].sequence = sequence[count];
+        $textarea.hide();
+        setTimeout(function(){
+          $cross.hide();
+          $textarea.show();
+        },500);
+        setTimeout(function(){
+          reactive = true;
+          miss = true; 
+          $textarea.text(texts[sequence[count]].sentence);
+          startTime = new Date().getTime();
+        },1500);
+        /*
+        setTimeout(function(){
+          if(miss){
+            result[count].isMiss = miss;
+            result[count].reactTime = 1000;
+            if(stage!=2){
+              $textarea.text('错了！');
+            }
+            setTimeout(function(){
+              start();
+            },500);
+          }
+        },2000);
+*/
+      }else{
+        $.post('/project/psychological/experiment/sendtextresult',{result:result,name:name,stage:stage},function(data){
+          if(data.success){
+            if(type==2||type==-1){
+              if(stage==1){
+                $textarea.html('<h1>练习结束，谢谢参与</h1>');
+              }else if(stage==2){
+                $textarea.html('<h1>测试结束，谢谢参与</h1>');
+              }else if(stage==3){
+                $textarea.html('<h1>实验结束，谢谢参与</h1>');
+              }
+              /*
+              $textarea.hide();
+              $('div.welcome div.end').show().siblings().hide();
+              $('div.welcome').show();
+              welcome = 3;
+              */
+            }else if(type==1||type==0){
+              if(stage==1){
+                $textarea.html('<h1>练习结束，谢谢参与</h1>');
+              }else if(stage==2){
+                $textarea.html('<h1>测试结束，谢谢参与</h1>');
+              }else if(stage==3){
+                $textarea.html('<h1>实验结束，谢谢参与</h1>');
+              }
+            }
+          }else{
+            alert('记录结果出错');
+          }
+        });
+      }
+    }
+
+    $(document).keydown(function(event){
+      if(reactive){
+        reactive = false;
+        miss = false;
+        reacttime = new Date().getTime() - startTime;
+        if(reacttime<500){
+          alert('请重新阅读词与句子');
+          count = count - 1;
+          start();
+          return;
+        }else{
+          result[count].reactTime = reacttime;
+        }
+        if (event.which == 74) {
+          if(stage==3){
+            if(type==1){
+              if(negative){
+                $textarea.text('你是正确的！');
+                result[count].isCorrect = true;
+              }else{
+                $textarea.text('错了！');
+                result[count].isCorrect = false;
+              }
+            }else if(type==0){
+              if(Math.floor((Math.random()*10))%2==0){
+                $textarea.text('你是正确的！');
+                result[count].isCorrect = true;
+              }else{
+                $textarea.text('错了！');
+                result[count].isCorrect = false;
+              }
+            }
+          }else{
+            result[count].isCorrect = false;
+          }
+          setTimeout(function(){
+            start();
+          },500);
+        }else if(event.which == 70){
+          if(stage==3){
+            if(type==1){
+              if(positive){
+                $textarea.text('你是正确的！');
+                result[count].isCorrect = true;
+              }else{
+                $textarea.text('错了！');
+                result[count].isCorrect = false;
+              }
+            }else if(type==0){
+              if(Math.floor((Math.random()*10))%2==0){
+                $textarea.text('你是正确的！');
+                result[count].isCorrect = true;
+              }else{
+                $textarea.text('错了！');
+                result[count].isCorrect = false;
+              }
+            }
+          }else{
+            result[count].isCorrect = true;
+          }
+          setTimeout(function(){
+            start();
+          },500);
+        }else{
+          alert('有关请按F键，无关请按J键');
+          count = count - 1;
+          start();
+          return;
+        }
+      }else{
+        if(welcome==1&&event.which==13){
+          $('div.welcome_first').hide().next().show();
+          welcome++;
+        }else if(welcome==2&&event.which==13){
+          $('div.welcome').hide();
+          welcome = 0;
+          start();
+        }else if(welcome==3&&event.which==13){
+          if(stage==1){
+            window.location.href='./practice';
+          }else if(stage==2){
+            window.location.href='./test';
+          }else if(stage==3){
+            window.location.href='./train';
+          }
+        }
+      }
+    });
+
+  });
+</script>
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Experiment</title>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/spinner.css">
+</head>
+<style type="text/css">
+  html,body{
+    height: 100%;
+    margin: 0px;
+  }
+  .imgList{
+    height: 100%;
+    margin: 0px;
+  }
+  .container{
+    width: 100%;
+    text-align: center;
+  }
+  @font-face{
+    font-family:'Glyphicons Halflings';
+    src:url('/fonts/glyphicons-halflings-regular.eot');
+    src:url('/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/glyphicons-halflings-regular.woff') format('woff'),
+    url('/fonts/glyphicons-halflings-regular.ttf') format('truetype'),
+    url('/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg')
+  }
+  .glyphicon{
+    position:relative;
+    top:1px;
+    display:inline-block;
+    font-family:'Glyphicons Halflings';
+    -webkit-font-smoothing:antialiased;
+    font-style:normal;
+    font-weight:normal;
+    font-size: 20px;
+    line-height:1;
+    -moz-osx-font-smoothing:grayscale
+  }
+  .glyphicon-plus:before{
+    content:"\2b"
+  }
+  .cross{
+    position: fixed;
+    top:45%;
+    left:50%;
+  }
+
+  .d_login{
+    position: fixed;
+    top:45%;
+    left:40%;
+  }
+
+  .upside{
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    height: 45%;
+    text-align: center;
+  }
+  .downside{
+    position: fixed;
+    top: 50%;
+    width: 100%;
+    height: 45%;
+    text-align: center;
+  }
+
+  .upside h1,.downside h1{
+    margin-top: 10%;
+  }
+
+  .welcome{
+    position: absolute;
+    top:15%;
+    left:25%;
+    width:50%;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .welcome_first strong{
+    font-size: 25px;
+    color:#5E307E;
+  }
+
+</style>
+<body>
+  <div class="spinner">
+    <div class="rect1"></div>
+    <div class="rect2"></div>
+    <div class="rect3"></div>
+    <div class="rect4"></div>
+    <div class="rect5"></div>
+    <div class="rect6"></div>
+    <div class="rect7"></div>
+    <div class="rect8"></div>
+    <div class="rect9"></div>
+    <div class="rect10"></div>
+    <div class="rect11"></div>
+    <div class="rect12"></div>
+  </div>
+  <div class="container" style="display:none;">
+    <div class="d_login">
+      请输入姓名
+      <input type="text" placeholder="请输入姓名"/>
+      <a href="" class="b_login">确定</a>
+    </div>
+    <div class="d_experiment">
+      <div class="upside">
+        图       
+      </div>
+      <div class="downside">
+        图
+      </div>
+    </div>
+  </div>
+  <div class="cross" style="display:none;">
+    <span class="glyphicon glyphicon-plus"></span>
+  </div>
+  <div class="welcome" style="display:none;">
+    <div class="welcome_first">
+      <h4>欢迎你来参加我们的实验！</h4>
+      <p>在本实验中，你会看到两张图片，图片消失后你将会看到<strong>F</strong>或<strong>J</strong>，分别对应键盘上的<strong>F</strong>或<strong>J</strong>键，你需要对出现的字母快速进行按键反应。</p>
+      <small>准备好后请按回车</small>
+      
+    </div>
+    <div class="welcome_second" style="display:none;">
+      <%if(stage==3){%>
+      <p>下面是正式的实验阶段，无需考虑正确率，希望您能尽量快速进行反应。</p>
+      <%}else{%>
+      <p>接下来是一组<%=stage_text%>。</p>
+      <%}%>
+      <small>准备好后请按回车</small>
+    </div>
+    <div class="end" style="display:none;">
+      <p>实验第一部分已经结束，您可以休息一段时间，休息之后按回车继续实验</p>
+    </div>
+  </div>
+
+  <div class="imgList" style="display:none;">
+    <%if(material){%>
+      <%material.forEach(function(item,index,array){%>
+        <img id="<%=item.polarity==0?'n':'p'%><%=item.type%><%=item.sequence%>" src="<%=item.content%>" alt="" class="upsideimg<%=index%>" style="height:100%;">
+      <%});%>
+    <%}%>
+  </div>
+
+</body>
+<script type="text/javascript" src="/javascripts/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">
+  <%
+  var exp = material.filter(function(item,index,array){
+    return item.type == 1;
+  });
+  var con = material.filter(function(item,index,array){
+    return item.type == 0;
+  });
+  %>
+
+
+  function randomArray(n){//返回一个包含1到n的随机顺序数组
+    var result = [];
+    var temp = [];
+    for(var i = 0;i<n;i++){
+      temp[i] = i+1;
+    }
+    for(var i = 0;i<n;i++){
+      result[i] = temp.splice(Math.floor(Math.random ()*temp.length), 1)[0];
+    }
+    return result;
+  }
+
+  $(window).load(function(){
+    $('div.spinner').remove();
+    $('div.container').show();
+    var welcome = 0;
+    var stage = <%=stage%>;
+    var $cross = $('div.cross');
+    var $upside = $('div.upside');
+    var $downside = $('div.downside');
+    var reactive = false;
+    var miss = true;
+    var up = false;
+    var J = false;
+    var count = -1;
+    var type = 0;
+    var startTime;
+    var name = '';
+    var result = [];
+    var total = 0;
+    var sequence = [];
+    $upside.hide();
+    $downside.hide();
+
+    $('a.b_login').click(function(event){
+      event.preventDefault();
+      name = $(this).prev().val();
+      $.get('/project/psychological/experiment/login',{name:name},function(data){
+        if(data.success){
+          if(data.complete[-1]){
+            alert("您已完成实验");
+          }else{
+            $('div.d_login').hide();
+            $('div.welcome').show();
+            welcome = 1;
+            type = data.type;
+            if(type==0){
+              total = <%=con.length/2%>;
+              sequence = randomArray(total*2);
+              //提取sequence随机序列中的奇数元素
+              sequence = $.grep(sequence,function(item,index){
+                return item % 2 == 1;
+              });
+            }else{
+              total = <%=exp.length/2%>;
+              sequence = randomArray(total);
+            }
+          }
+        }else{
+          alert("此用户不存在");
+        }
+      });
+    });
+
+    function start(){
+      count++;
+      if(count<total){
+        reactive = false;
+        reactTime = 0;
+        result[count] = {};
+        $cross.show();
+        $upside.empty();
+        $downside.empty();
+        if(Math.floor((Math.random()*10))%2==0){
+          if(type==0||type==-1){
+            $upside.append($('#n0'+sequence[count]));
+            $downside.append($('#n0'+(sequence[count]+(sequence[count]%2==0?-1:1))));
+            up = Math.floor((Math.random()*10))%2==0;
+            if(up){
+              result[count].sequence = sequence[count];
+            }else{
+              result[count].sequence = sequence[count]+(sequence[count]%2==0?-1:1);
+            }
+          }else{
+            $upside.append($('#n1'+sequence[count]));
+            $downside.append($('#p1'+sequence[count]));
+            up = Math.floor((Math.random()*10))==9;
+            result[count].sequence = sequence[count];
+            result[count].isUnderP = !up;
+          }
+        }else{
+          if(type==0||type==-1){
+            $downside.append($('#n0'+sequence[count]));
+            $upside.append($('#n0'+(sequence[count]+(sequence[count]%2==0?-1:1))));
+            up = Math.floor((Math.random()*10))%2==0;
+            if(up){
+              result[count].sequence = sequence[count]+(sequence[count]%2==0?-1:1);
+            }else{
+              result[count].sequence = sequence[count];
+            }
+          }else{
+            $downside.append($('#n1'+sequence[count]));
+            $upside.append($('#p1'+sequence[count]));
+            up = Math.floor((Math.random()*10))!=9;
+            result[count].sequence = sequence[count];
+            result[count].isUnderP = up;
+          }
+        }
+        $upside.hide();
+        $downside.hide();
+        J = Math.floor((Math.random()*10))%2==0;
+        setTimeout(function(){
+          $cross.hide();
+          $upside.show();
+          $downside.show();
+        },500);
+        setTimeout(function(){
+          if(up){
+            if(J){
+              $upside.html('<h1>J</h1>');
+            }else{
+              $upside.html('<h1>F</h1>');
+            }
+            $downside.html('');
+          }else{
+            if(J){
+              $downside.html('<h1>J</h1>');
+            }else{
+              $downside.html('<h1>F</h1>');
+            }
+            $upside.html('');
+          }
+          startTime = new Date().getTime();
+          reactive = true;
+          miss = true; 
+        },1000);
+        setTimeout(function(){
+          if(miss){
+            result[count].isMiss = miss;
+            result[count].reactTime = 1000;
+            start();
+          }
+        },2000);
+      }else{
+        $.post('/project/psychological/experiment/sendresult',{result:result,name:name,stage:stage},function(data){
+          if(data.success){
+            $upside.hide();
+            $downside.hide();
+            if(type==1||type==0){
+              if(stage==1){
+                $upside.html('<h1>练习结束，谢谢参与</h1>');
+              }else if(stage==2){
+                $upside.html('<h1>测试结束，谢谢参与</h1>');
+              }else if(stage==3){
+                $upside.html('<h1>实验结束，谢谢参与</h1>');
+              }
+              $upside.show();
+            }else if(type==2||type==-1){
+              if(stage==1){
+                $upside.html('<h1>练习结束，谢谢参与</h1>');
+              }else if(stage==2){
+                $upside.html('<h1>测试结束，谢谢参与</h1>');
+              }else if(stage==3){
+                $upside.html('<h1>实验结束，谢谢参与</h1>');
+              }
+              $upside.show();
+            }
+          }else{
+            alert('记录结果出错');
+          }
+        });
+      }
+    }
+
+    $(document).keydown(function(event){
+      if(reactive){
+        reactive = false;
+        miss = false;
+        result[count].reactTime = new Date().getTime() - startTime;
+        if (event.which == 74) {
+          if(J){
+            result[count].isCorrect = true;
+          }else{
+            result[count].isCorrect = false;
+          }
+          start();
+        }else if(event.which == 70){
+          if(J){
+            result[count].isCorrect = false;
+          }else{
+            result[count].isCorrect = true;
+          }
+          start();
+        }else{
+          result[count].isCorrect = false;
+          start();
+        }
+      }else{
+        if(welcome==1&&event.which==13){
+          $('div.welcome_first').hide().next().show();
+          welcome++;
+        }else if(welcome==2&&event.which==13){
+          $('div.welcome').hide();
+          welcome = 0;
+          start();
+        }else if(welcome==3&&event.which==13){
+          if(stage==1){
+            window.location.href='./textpractice';
+          }else if(stage==2){
+            window.location.href='./texttest';
+          }else if(stage==3){
+            window.location.href='./texttrain';
+          }
+        }
+      }
+    });
+
+  });
+</script>
+</html>

@@ -5,5 +5,5 @@ exports.Login = require('./login');
 exports.Post = require('./post');
 exports.Weixin = require('./weixin');
 exports.Project = require('./project');
-
+exports.Psycho = require('./psycho');
 
