@@ -2,7 +2,21 @@ var model = require('../models');
 
 exports.psychologicalExperiment = function(req, res) {
   var async = require('async');
-  var Materials,Texts, Subjects, sc_count, cs_count, ts_count, csc_count, tsc_count,practice_text_count,test_text_count,train_text_count,practice_context_count,test_context_count,train_context_count;
+  var materialpairs,
+      Texts, 
+      Subjects, 
+      practice_materialpairs_count, 
+      test_materialpairs_count,
+      train_materialpairs_count,
+      practice_con_materialpairs_count, 
+      test_con_materialpairs_count,
+      train_con_materialpairs_count,
+      practice_text_count,
+      test_text_count,
+      train_text_count,
+      practice_context_count,
+      test_context_count,
+      train_context_count;
   async.parallel({
     one:function(cb) {
       model.Subject.find(function(err, subjects) {
@@ -12,58 +26,46 @@ exports.psychologicalExperiment = function(req, res) {
       });
     },
     two:function(cb) {
-      model.MaterialImg.find().sort({
+      model.MaterialImgPairs.find().sort({
         'sequence': +1
-      }).exec(function(err, materials) {
+      }).exec(function(err, materialpairs) {
         if (err) console.error(err);
-        Materials = materials;
+        materialpairs = materialpairs;
         cb(null);
       });
     },
     three:function(cb) {
-      model.Subject.count({
-        complete: true
-      }, function(err, data) { //实验组人数
+      model.MaterialImgPairs.count({stage:1,type:1},function(err,data){
         if (err) console.error(err);
-        sc_count = data;
+        practice_materialpairs_count = data
         cb(null);
       });
     },
     four:function(cb) {
-      model.Subject.count({
-        type: 1
-      }, function(err, data) { //实验组人数
+      model.MaterialImgPairs.count({stage:1,type:0},function(err,data){
         if (err) console.error(err);
-        ts_count = data;
+        practice_con_materialpairs_count = data
         cb(null);
       });
     },
     five:function(cb) {
-      model.Subject.count({
-        type: 0
-      }, function(err, data) { //控制组人数
+      model.MaterialImgPairs.count({stage:2,type:1},function(err,data){
         if (err) console.error(err);
-        cs_count = data;
+        test_materialpairs_count = data
         cb(null);
       });
     },
     six:function(cb) {
-      model.Subject.count({
-        type: 1,
-        complete: true
-      }, function(err, data) { //实验组完成人数
+      model.MaterialImgPairs.count({stage:2,type:0},function(err,data){
         if (err) console.error(err);
-        tsc_count = data;
+        test_con_materialpairs_count = data
         cb(null);
       });
     },
     seven:function(cb) {
-      model.Subject.count({
-        type: 0,
-        complete: true
-      }, function(err, data) { //控制组完成人数
+      model.MaterialImgPairs.count({stage:3,type:1},function(err,data){
         if (err) console.error(err);
-        csc_count = data;
+        train_materialpairs_count = data
         cb(null);
       });
     },
@@ -75,9 +77,9 @@ exports.psychologicalExperiment = function(req, res) {
       });
     },
     nine:function(cb){
-      model.MaterialText.count({stage:1,type:1},function(err,data){
+      model.MaterialImgPairs.count({stage:3,type:0},function(err,data){
         if (err) console.error(err);
-        practice_text_count = data
+        train_con_materialpairs_count = data
         cb(null);
       });
     },
@@ -115,30 +117,38 @@ exports.psychologicalExperiment = function(req, res) {
         train_context_count = data
         cb(null);
       });
+    },
+    fifteen:function(cb){
+      model.MaterialText.count({stage:1,type:1},function(err,data){
+        if (err) console.error(err);
+        practice_text_count = data
+        cb(null);
+      });
     }
   }, function(err, result) {
     if (err) console.error(err);
     return res.render('project/Psychological/v2/Console', {
       material: Materials,
-      text:Texts,
+      text: Texts,
+      practice_materialpairs_count:practice_materialpairs_count, 
+      test_materialpairs_count:test_materialpairs_count,
+      train_materialpairs_count:train_materialpairs_count,
+      practice_con_materialpairs_count:practice_con_materialpairs_count, 
+      test_con_materialpairs_count:test_con_materialpairs_count,
+      train_con_materialpairs_count:train_con_materialpairs_count,
       practice_text_count:practice_text_count,
       test_text_count:test_text_count,
       train_text_count:train_text_count,
       practice_context_count:practice_context_count,
       test_context_count:test_context_count,
       train_context_count:train_context_count,
-      subjects: Subjects,
-      cs_count: cs_count,
-      ts_count: ts_count,
-      sc_count: sc_count,
-      csc_count: csc_count,
-      tsc_count: tsc_count
+      subjects: Subjects
     });
   });
 }
 
 exports.doPractice = function(req, res) {
-  model.MaterialImg.find({stage:1}).sort({
+  model.MaterialImgPairs.find({stage:1}).sort({
     'sequence': +1
   }).exec(function(err, materials) {
     return res.render('project/Psychological/v2/Experiment', {
@@ -150,7 +160,7 @@ exports.doPractice = function(req, res) {
 }
 
 exports.doTest = function(req,res){
-  model.MaterialImg.find({stage:2}).sort({
+  model.MaterialImgPairs.find({stage:2}).sort({
     'sequence': +1
   }).exec(function(err, materials) {
     return res.render('project/Psychological/v2/Experiment', {
@@ -162,7 +172,7 @@ exports.doTest = function(req,res){
 }
 
 exports.doTrain = function(req,res){
-  model.MaterialImg.find({stage:3}).sort({
+  model.MaterialImgPairs.find({stage:3}).sort({
     'sequence': +1
   }).exec(function(err, materials) {
     return res.render('project/Psychological/v2/Experiment', {
