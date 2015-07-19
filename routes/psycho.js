@@ -128,7 +128,7 @@ exports.psychologicalExperiment = function(req, res) {
   }, function(err, result) {
     if (err) console.error(err);
     return res.render('project/Psychological/v2/Console', {
-      material: Materials,
+      materialpairs: materialpairs,
       text: Texts,
       practice_materialpairs_count:practice_materialpairs_count, 
       test_materialpairs_count:test_materialpairs_count,
