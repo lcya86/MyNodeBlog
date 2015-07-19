@@ -1,10 +1,10 @@
 var weixin = require('../tools/weixin');
-var simsimi = require('../tools/simsimi');
+//var simsimi = require('../tools/simsimi');
 var XMLWriter = require('xml-writer');
 var chatList = [];
 var waitList = {};
 
-setInterval(isMidNight,1000*60);
+//setInterval(isMidNight,1000*60);
 
 function isMidNight(){
 	var currentTime = new Date();
@@ -65,6 +65,7 @@ function route(req,res){
 			return res.send('');
 		}else{
 			if(waitList.hasOwnProperty(xml.FromUserName[0])){
+				/*
 				weixin.login(function(token,cookie){
 					simsimi.getReply(xml.Content[0],function(reply){
 						var options = {
@@ -79,6 +80,7 @@ function route(req,res){
 					});
 				});
 				return res.send('');
+				*/
 			}else if(xml.Content[0]=='捣鼓啥呢'){
 				return replyText(req,res,'<a href="http://lcy-blog.com/project/painter">好玩儿的，点我就告诉你</a>');
 			}else if(xml.Content[0]=='painter'){
