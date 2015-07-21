@@ -1,168 +1,220 @@
-<div class="main_hd">
+<div class="main_hd" ng-controller="material_manage">
   <h2>material manage</h2>
   <div class="tab_navs">
-    <div class="js_practice_image tab_nav selected">Practice Image</div>
-    <div class="js_test_image tab_nav">Test Image</div>
-    <div class="js_train_image tab_nav">Train Image</div>
-    <div class="js_practice_text tab_nav">Practice Text</div>
-    <div class="js_test_text tab_nav">Test Text</div>
-    <div class="js_train_text tab_nav">Train Text</div>
+    <div ng-click="select(1)" ng-class="selected:isSelected(1)" class="js_practice_image tab_nav">Practice Image</div>
+    <div ng-click="select(2)" ng-class="selected:isSelected(2)" class="js_test_image tab_nav">Test Image</div>
+    <div ng-click="select(3)" ng-class="selected:isSelected(3)" class="js_train_image tab_nav">Train Image</div>
+    <div ng-click="select(4)" ng-class="selected:isSelected(4)" class="js_practice_text tab_nav">Practice Text</div>
+    <div ng-click="select(5)" ng-class="selected:isSelected(5)" class="js_test_text tab_nav">Test Text</div>
+    <div ng-click="select(6)" ng-class="selected:isSelected(6)" class="js_train_text tab_nav">Train Text</div>
   </div>
 </div>
-<div id="practice_image_bd" class="main_bd">
-  <div class="pfd">
+<div id="practice_image_bd" class="main_bd" ng-show="isSelected(1)">
+  <div class="pfd" ng-controller="practice_image">
     实验组
-    <div class="pimg_fd" data-stage="1">
-      <div class="t add_materialpairs" data-type="1" data-stage="1">添加图片对(<span><%=practice_materialpairs_count%></span>)</div>
-      <%if(materialpairs){%>
-        <%materialpairs.forEach(function(item,index,array){%>
-          <%if(item.type==1&&item.stage==1){%>
-          <div data-id="<%=item._id%>" class="img_item real">
-            <h3><%=item.sequence%></h3>
-            <div class="upimg">
-              <img src="<%=item.upImg%>"/>
-              <p><%=item.content.split('/')[3]%></p>
-              <i></i>
-            </div>
-            <div class="downimg">
-              <img src="<%=item.downImg%>"/>
-              <p><%=item.content.split('/')[3]%></p>
-              <i></i>
-            </div>
-          </div>
-          <%}%>
-        <%});%>
-      <%}%>
+    <div class="pimg_fd">
+      <div ng-hide="isCreating()" ng-click="creating()" class="t add_materialpairs">添加图片对(<span>{{array.length}}</span>)</div>
+      <div ng-show="isCreating()" class="img_item real">
+        <h3>{{array.length+1}}</h3>
+        <div class="upimg" imageDrop>
+          <h1>上图</h1>
+        </div>
+        <div class="downimg" imageDrop>
+          <h1>下图</h1>
+        </div>
+        <p>
+          <input ng-model="letter" name="letter"/>
+          <input ng-model="position" name="position"/>
+          <a ng-click="submit()">确定</a>
+        </p>
+      </div>
+      <div ng-repeat="item in array" class="img_item real">
+        <h3>{{item.sequence}}</h3>
+        <div class="upimg">
+          <img ng-src="{{item.upImg}}"/>
+          <p>{{item.upImg.split('/')[3]}}</p>
+          <i></i>
+        </div>
+        <div class="downimg">
+          <img ng-src="{{item.downImg}}"/>
+          <p>{{item.downImg.split('/')[3]}}</p>
+          <i></i>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="con_fd">
+  <div class="con_fd" ng-controller="practice_image_con">
     控制组 
-    <div class="conimg_fd" data-stage="1">
-      <div class="t add_materialpairs" data-type="0" data-stage="1">添加图片对(<span><%=practice_con_materialpairs_count%></span>)</div>
-      <%if(materialpairs){%>
-        <%materialpairs.forEach(function(item,index,array){%>
-          <%if(item.type==0&&item.stage==1){%>
-          <div data-id="<%=item._id%>" class="img_item real">
-            <h3><%=item.sequence%></h3>
-            <div class="upimg">
-              <img src="<%=item.upImg%>"/>
-              <p><%=item.content.split('/')[3]%></p>
-              <i></i>
-            </div>
-            <div class="downimg">
-              <img src="<%=item.downImg%>"/>
-              <p><%=item.content.split('/')[3]%></p>
-              <i></i>
-            </div>
-          </div>
-          <%}%>
-        <%});%>
-      <%}%>
+    <div class="conimg_fd">
+      <div ng-hide="isCreating()" ng-click="creating()" class="t add_materialpairs">添加图片对(<span>{{array.length}}</span>)</div>
+      <div ng-show="isCreating()" class="img_item real">
+        <h3>{{array.length+1}}</h3>
+        <div class="upimg">
+          <h1>上图</h1>
+        </div>
+        <div class="downimg">
+          <h1>下图</h1>
+        </div>
+        <p>
+          <input ng-model="letter" name="letter"/>
+          <input ng-model="position" name="position"/>
+          <a ng-click="submit()">确定</a>
+        </p>
+      </div>
+      <div ng-repeat="item in array" class="img_item real">
+        <h3>{{item.sequence}}</h3>
+        <div class="upimg">
+          <img ng-src="{{item.upImg}}"/>
+          <p>{{item.upImg.split('/')[3]}}</p>
+          <i></i>
+        </div>
+        <div class="downimg">
+          <img ng-src="{{item.downImg}}"/>
+          <p>{{item.downImg.split('/')[3]}}</p>
+          <i></i>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-<div id="test_image_bd" class="main_bd" style="display:none;">
-  <div class="pfd">
+<div id="test_image_bd" class="main_bd" ng-show="isSelected(2)">
+  <div class="pfd" ng-controller="test_image">
     实验组
-    <div class="pimg_fd" data-stage="2">
-      <%if(materialpairs){%>
-        <%materialpairs.forEach(function(item,index,array){%>
-          <%if(item.type==1&&item.stage==2){%>
-          <div data-id="<%=item._id%>" class="img_item real">
-            <h3><%=item.sequence%></h3>
-            <div class="upimg">
-              <img src="<%=item.upImg%>"/>
-              <p><%=item.content.split('/')[3]%></p>
-              <i></i>
-            </div>
-            <div class="downimg">
-              <img src="<%=item.downImg%>"/>
-              <p><%=item.content.split('/')[3]%></p>
-              <i></i>
-            </div>
-          </div>
-          <%}%>
-        <%});%>
-      <%}%>
-    </div>
-  </div> 
-  <div class="nfd">
-    控制组
-    <div class="nimg_fd"  data-stage="2">
-      <%if(materialpairs){%>
-        <%materialpairs.forEach(function(item,index,array){%>
-          <%if(item.type==0&&item.stage==2){%>
-          <div data-id="<%=item._id%>" class="img_item real">
-            <h3><%=item.sequence%></h3>
-            <div class="upimg">
-              <img src="<%=item.upImg%>"/>
-              <p><%=item.content.split('/')[3]%></p>
-              <i></i>
-            </div>
-            <div class="downimg">
-              <img src="<%=item.downImg%>"/>
-              <p><%=item.content.split('/')[3]%></p>
-              <i></i>
-            </div>
-          </div>
-          <%}%>
-        <%});%>
-      <%}%>
+    <div class="pimg_fd">
+      <div ng-hide="isCreating()" ng-click="creating()" class="t add_materialpairs">添加图片对(<span>{{array.length}}</span>)</div>
+      <div ng-show="isCreating()" class="img_item real">
+        <h3>{{array.length+1}}</h3>
+        <div class="upimg">
+          <h1>上图</h1>
+        </div>
+        <div class="downimg">
+          <h1>下图</h1>
+        </div>
+        <p>
+          <input ng-model="letter" name="letter"/>
+          <input ng-model="position" name="position"/>
+          <a ng-click="submit()">确定</a>
+        </p>
+      </div>
+      <div ng-repeat="item in array" class="img_item real">
+        <h3>{{item.sequence}}</h3>
+        <div class="upimg">
+          <img ng-src="{{item.upImg}}"/>
+          <p>{{item.upImg.split('/')[3]}}</p>
+          <i></i>
+        </div>
+        <div class="downimg">
+          <img ng-src="{{item.downImg}}"/>
+          <p>{{item.downImg.split('/')[3]}}</p>
+          <i></i>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-<div id="train_image_bd" class="main_bd" style="display:none;">
-  <div class="pfd">
-    实验组
-    <div class="pimg_fd" data-stage="3">
-      <%if(materialpairs){%>
-        <%materialpairs.forEach(function(item,index,array){%>
-          <%if(item.type==1&&item.stage==3){%>
-          <div data-id="<%=item._id%>" class="img_item real">
-            <h3><%=item.sequence%></h3>
-            <div class="upimg">
-              <img src="<%=item.upImg%>"/>
-              <p><%=item.content.split('/')[3]%></p>
-              <i></i>
-            </div>
-            <div class="downimg">
-              <img src="<%=item.downImg%>"/>
-              <p><%=item.content.split('/')[3]%></p>
-              <i></i>
-            </div>
-          </div>
-          <%}%>
-        <%});%>
-      <%}%>
-    </div>
-  </div> 
-  <div class="con_fd">
+  <div class="con_fd" ng-controller="test_image_con">
     控制组 
-    <div class="conimg_fd" data-stage="3">
-      <%if(materialpairs){%>
-        <%materialpairs.forEach(function(item,index,array){%>
-          <%if(item.type==0&&item.stage==3){%>
-          <div data-id="<%=item._id%>" class="img_item real">
-            <h3><%=item.sequence%></h3>
-            <div class="upimg">
-              <img src="<%=item.upImg%>"/>
-              <p><%=item.content.split('/')[3]%></p>
-              <i></i>
-            </div>
-            <div class="downimg">
-              <img src="<%=item.downImg%>"/>
-              <p><%=item.content.split('/')[3]%></p>
-              <i></i>
-            </div>
-          </div>
-          <%}%>
-        <%});%>
-      <%}%>
+    <div class="conimg_fd">
+      <div ng-hide="isCreating()" ng-click="creating()" class="t add_materialpairs">添加图片对(<span>{{array.length}}</span>)</div>
+      <div ng-show="isCreating()" class="img_item real">
+        <h3>{{array.length+1}}</h3>
+        <div class="upimg">
+          <h1>上图</h1>
+        </div>
+        <div class="downimg">
+          <h1>下图</h1>
+        </div>
+        <p>
+          <input ng-model="letter" name="letter"/>
+          <input ng-model="position" name="position"/>
+          <a ng-click="submit()">确定</a>
+        </p>
+      </div>
+      <div ng-repeat="item in array" class="img_item real">
+        <h3>{{item.sequence}}</h3>
+        <div class="upimg">
+          <img ng-src="{{item.upImg}}"/>
+          <p>{{item.upImg.split('/')[3]}}</p>
+          <i></i>
+        </div>
+        <div class="downimg">
+          <img ng-src="{{item.downImg}}"/>
+          <p>{{item.downImg.split('/')[3]}}</p>
+          <i></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="train_image_bd" class="main_bd" ng-show="isSelected(3)">
+  <div class="pfd" ng-controller="train_image">
+    实验组
+    <div class="pimg_fd">
+      <div ng-hide="isCreating()" ng-click="creating()" class="t add_materialpairs">添加图片对(<span>{{array.length}}</span>)</div>
+      <div ng-show="isCreating()" class="img_item real">
+        <h3>{{array.length+1}}</h3>
+        <div class="upimg">
+          <h1>上图</h1>
+        </div>
+        <div class="downimg">
+          <h1>下图</h1>
+        </div>
+        <p>
+          <input ng-model="letter" name="letter"/>
+          <input ng-model="position" name="position"/>
+          <a ng-click="submit()">确定</a>
+        </p>
+      </div>
+      <div ng-repeat="item in array" class="img_item real">
+        <h3>{{item.sequence}}</h3>
+        <div class="upimg">
+          <img ng-src="{{item.upImg}}"/>
+          <p>{{item.upImg.split('/')[3]}}</p>
+          <i></i>
+        </div>
+        <div class="downimg">
+          <img ng-src="{{item.downImg}}"/>
+          <p>{{item.downImg.split('/')[3]}}</p>
+          <i></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="con_fd" ng-controller="train_image_con">
+    控制组 
+    <div class="conimg_fd">
+      <div ng-hide="isCreating()" ng-click="creating()" class="t add_materialpairs">添加图片对(<span>{{array.length}}</span>)</div>
+      <div ng-show="isCreating()" class="img_item real">
+        <h3>{{array.length+1}}</h3>
+        <div class="upimg">
+          <h1>上图</h1>
+        </div>
+        <div class="downimg">
+          <h1>下图</h1>
+        </div>
+        <p>
+          <input ng-model="letter" name="letter"/>
+          <input ng-model="position" name="position"/>
+          <a ng-click="submit()">确定</a>
+        </p>
+      </div>
+      <div ng-repeat="item in array" class="img_item real">
+        <h3>{{item.sequence}}</h3>
+        <div class="upimg">
+          <img ng-src="{{item.upImg}}"/>
+          <p>{{item.upImg.split('/')[3]}}</p>
+          <i></i>
+        </div>
+        <div class="downimg">
+          <img ng-src="{{item.downImg}}"/>
+          <p>{{item.downImg.split('/')[3]}}</p>
+          <i></i>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-<div id="practice_text_bd" class="main_bd" style="display:none;">
+<div id="practice_text_bd" class="main_bd" ng-show="isSelected(4)">
   <div class="left_fd">
     实验组
     <div class="text_fd">
@@ -199,7 +251,7 @@
   </div>
 </div>
 
-<div id="test_text_bd" class="main_bd" style="display:none;">
+<div id="test_text_bd" class="main_bd" ng-show="isSelected(5)">
   <div class="left_fd">
     实验组
     <div class="text_fd">
@@ -236,7 +288,7 @@
   </div>
 </div>
 
-<div id="train_text_bd" class="main_bd" style="display:none;">
+<div id="train_text_bd" class="main_bd" ng-show="isSelected(6)">
   <div class="left_fd">
     实验组
     <div class="text_fd">

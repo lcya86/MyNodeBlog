@@ -266,7 +266,6 @@ exports.addText = function(req,res){
 
 exports.uploadImg = function(req, res) {
   var fs = require('fs');
-  var model = require('../models');
   var BufferHelper = require('bufferhelper');
   var name = req.query.name;
   var bufferHelper = new BufferHelper();

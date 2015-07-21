@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="psychological">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -94,13 +94,19 @@
       min-height: 190px;
       margin-bottom: 25px;
     }
+    .add_materialpairs {
+      text-align: center;
+      border-bottom: dashed 1px #C5C5C5;
+      color: #c5c5c5;
+      cursor: pointer;
+    }
     .pfd{
-      width: 48%;
+      width: 45%;
       margin-right: 3%;
       float:left;
     }
     .con_fd{
-      width: 48%;
+      width: 45%;
       float: left;
       margin-left: 3%;
     }
@@ -125,14 +131,18 @@
 
     .img_item .upimg{
       width: 45%;
-      float: right;
+      float: left;
+      border: 1px dotted #F19F45;
     }
     .img_item .downimg{
       width: 45%;
       float: right;
+      border: 1px dotted #F19F45;
     }
 
-
+    .img_item h1{
+      color: #C5C5C5;
+    }
     .img_item h3{
       display:inline-block;
       margin-right:12px;
@@ -148,6 +158,14 @@
       display:relative;
       bottom:0px;
       margin:0px;
+    }
+
+    .img_item>p{
+      clear: both;
+    }
+
+    .img_item input{
+      width: 35%;
     }
 
     .img_item i{
@@ -262,6 +280,7 @@
     }
 
   </style>
+  <script type="text/javascript" src="javascripts/angular.min.js"></script>
 </head>
 <body>
   <div class="spinner">
@@ -295,6 +314,8 @@
     </div>
   </div>
   <script type="text/javascript" src="/javascripts/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="/javascripts/psychological/controllers.js"></script>
+  <script type="text/javascript" src="/javascripts/psychological/directives.js"></script>
   <script type="text/javascript">
   $(window).load(function(){
     $('div.spinner').remove();
@@ -317,401 +338,7 @@
       },
     })
 
-    var pimgCounter = function(stage){//产生sequence
-      var listName = '';
-      var pimgSequence = 0;
-      if(stage==1){
-        listName = '#practice_image_bd';
-      }else if(stage==2){
-        listName = '#test_image_bd';
-      }else if(stage==3){
-        listName = '#train_image_bd';
-      }
-      var children = $(listName+' div.pimg_fd').children();
-      if(children.length>0){
-        pimgSequence = Number(children.last().children('h3').text());
-      }else if(children.length==0){
-        pimgSequence = 0;
-      }
-      pimgSequence++;
-      return pimgSequence;
-    };
-
-    var nimgCounter = function(stage){//产生sequence
-      var listName = '';
-      var nimgSequence = 0;
-      if(stage==1){
-        listName = '#practice_image_bd';
-      }else if(stage==2){
-        listName = '#test_image_bd';
-      }else if(stage==3){
-        listName = '#train_image_bd';
-      }
-      var children = $(listName+' div.nimg_fd').children();
-      if(children.length>0){
-        nimgSequence = Number(children.last().children('h3').text());
-      }else if(children.length==0){
-        nimgSequence = 0;
-      }
-      nimgSequence++;
-      return nimgSequence;
-    };
-
-    var conimgCounter = function(stage){//产生sequence
-      var listName = '';
-      var conimgSequence = 0;
-      if(stage==1){
-        listName = '#practice_image_bd';
-      }else if(stage==2){
-        listName = '#test_image_bd';
-      }else if(stage==3){
-        listName = '#train_image_bd';
-      }
-      var children = $(listName+' div.conimg_fd').children();
-      if(children.length>0){
-        conimgSequence = Number(children.last().children('h3').text());
-      }else if(children.length==0){
-        conimgSequence = 0;
-      }
-      conimgSequence++;
-      return conimgSequence;
-    };
-
-    var textCounter = function(stage){//产生sequence
-      var listName = '';
-      if(stage==1){
-        listName = '#practice_text_bd';
-      }else if(stage==2){
-        listName = '#test_text_bd';
-      }else if(stage==3){
-        listName = '#train_text_bd';
-      }
-      var children = $(listName+' .left_fd .text_fd').children();
-      return children.length;
-    };
-
-    var contextCounter = function(stage){//产生sequence
-      var listName = '';
-      if(stage==1){
-        listName = '#practice_text_bd';
-      }else if(stage==2){
-        listName = '#test_text_bd';
-      }else if(stage==3){
-        listName = '#train_text_bd';
-      }
-      var children = $(listName+' .right_fd .text_fd').children();
-      return children.length;
-    };
-
-    $('#material')
-      .on('drop.add','div.pimg_fd',function(event){
-        event.preventDefault();
-        function create_pupload_progress(index){
-          return function(event){
-            $this.find('#input_pimage'+index).css({
-              width:Math.round(event.loaded*100/event.total)+'%'
-            });
-          }
-        }
-
-        function create_pupload_done(index){
-          return function(event){
-            $this.find('#input_pimage'+index).css({
-              width:'100%'
-            });
-          }
-        }
-        $this = $(this);
-        $this.removeClass('selected');
-        var children_length = $this.children().length;
-        var fileList = event.originalEvent.dataTransfer.files;
-        for(var i = 0;i<fileList.length;i++){
-          var src = '';
-          var sequence = 0;
-          if(window.webkitURL){
-            src = window.webkitURL.createObjectURL(fileList[i]);
-          }else{
-            src = window.URL.createObjectURL(fileList[i]);
-          }
-          console.log(src);
-          sequence = pimgCounter($this.data('stage'));
-          $this.append('<div class="img_item"><h3>'+sequence+'</h3><img src="'+src+'"/><p>'+fileList[i].name+'</p><div id="input_pimage'+(i+children_length)+'" style="width:0%;"></div></div>');
-          var xhr = new XMLHttpRequest();
-          var upload = xhr.upload;
-          upload.onprogress = create_pupload_progress(i+children_length);
-          upload.onload = create_pupload_done(i+children_length);
-          xhr.open("POST","/project/psychological/uploadImg?name="+fileList[i].name+"&sequence="+sequence+"&polarity=1&stage="+$this.data('stage')+'&type=1'); 
-          xhr.overrideMimeType("application/octet-stream");
-          xhr.send(fileList[i]);
-        }
-      })
-      .on('dragenter.add','div.pimg_fd',function(event){
-        event.preventDefault();
-        $(this).addClass('selected');
-      })
-      .on('dragover.add','div.pimg_fd',function(event){
-        event.preventDefault();
-        $(this).addClass('selected');
-      })
-      .on('dragleave.add','div.pimg_fd',function(event){
-        event.preventDefault();
-        $(this).removeClass('selected');
-      })
-      .on('drop.add','div.nimg_fd',function(event){
-        event.preventDefault();
-        function create_nupload_progress(index){
-          return function(event){
-            $this.find('#input_nimage'+index).css({
-              width:Math.round(event.loaded*100/event.total)+'%'
-            });
-          }
-        }
-
-        function create_nupload_done(index){
-          return function(event){
-            $this.find('#input_nimage'+index).css({
-              width:'100%'
-            });
-          }
-        }
-        $this = $(this);
-        $this.removeClass('selected');
-        var children_length = $this.children().length;
-        var fileList = event.originalEvent.dataTransfer.files;
-        for(var i = 0;i<fileList.length;i++){
-          var src = '';
-          var sequence = 0;
-          if(window.webkitURL){
-            src = window.webkitURL.createObjectURL(fileList[i]);
-          }else{
-            src = window.URL.createObjectURL(fileList[i]);
-          }
-          console.log(src);
-          sequence = nimgCounter($this.data('stage'));
-          $this.append('<div class="img_item"><h3>'+sequence+'</h3><img src="'+src+'"/><p>'+fileList[i].name+'</p><div id="input_nimage'+(i+children_length)+'" style="width:0%;"></div></div>');
-          var xhr = new XMLHttpRequest();
-          var upload = xhr.upload;
-          upload.onprogress = create_nupload_progress(i+children_length);
-          upload.onload = create_nupload_done(i+children_length);
-          xhr.open("POST","/project/psychological/uploadImg?name="+fileList[i].name+"&sequence="+sequence+"&polarity=0&stage="+$this.data('stage')+'&type=1'); 
-          xhr.overrideMimeType("application/octet-stream");
-          xhr.send(fileList[i]);
-        }
-      })
-      .on('dragenter.add','div.nimg_fd',function(event){
-        event.preventDefault();
-        $(this).addClass('selected');
-      })
-      .on('dragover.add','div.nimg_fd',function(event){
-        event.preventDefault();
-        $(this).addClass('selected');
-      })
-      .on('dragleave.add','div.nimg_fd',function(event){
-        event.preventDefault();
-        $(this).removeClass('selected');
-      })
-      .on('drop.add','div.conimg_fd',function(event){
-        event.preventDefault();
-        function create_conupload_progress(index){
-          return function(event){
-            $this.find('#input_conimage'+index).css({
-              width:Math.round(event.loaded*100/event.total)+'%'
-            });
-          }
-        }
-
-        function create_conupload_done(index){
-          return function(event){
-            $this.find('#input_conimage'+index).css({
-              width:'100%'
-            });
-          }
-        }
-        $this = $(this);
-        $this.removeClass('selected');
-        var children_length = $this.children().length;
-        var fileList = event.originalEvent.dataTransfer.files;
-        for(var i = 0;i<fileList.length;i++){
-          var src = '';
-          var sequence = 0;
-          if(window.webkitURL){
-            src = window.webkitURL.createObjectURL(fileList[i]);
-          }else{
-            src = window.URL.createObjectURL(fileList[i]);
-          }
-          console.log(src);
-          sequence = conimgCounter($this.data('stage'));
-          $this.append('<div class="img_item"><h3>'+sequence+'</h3><img src="'+src+'"/><p>'+fileList[i].name+'</p><div id="input_conimage'+(i+children_length)+'" style="width:0%;"></div></div>');
-          var xhr = new XMLHttpRequest();
-          var upload = xhr.upload;
-          upload.onprogress = create_conupload_progress(i+children_length);
-          upload.onload = create_conupload_done(i+children_length);
-          xhr.open("POST","/project/psychological/uploadImg?name="+fileList[i].name+"&sequence="+sequence+"&polarity=0&stage="+$this.data('stage')+'&type=0'); 
-          xhr.overrideMimeType("application/octet-stream");
-          xhr.send(fileList[i]);
-        }
-      })
-      .on('dragenter.add','div.conimg_fd',function(event){
-        event.preventDefault();
-        $(this).addClass('selected');
-      })
-      .on('dragover.add','div.conimg_fd',function(event){
-        event.preventDefault();
-        $(this).addClass('selected');
-      })
-      .on('dragleave.add','div.conimg_fd',function(event){
-        event.preventDefault();
-        $(this).removeClass('selected');
-      })
-      .on('click.delete','div.img_item.real',function(event){
-        event.stopPropagation();
-        $target = $(event.currentTarget);
-        if(confirm('您要删除图片吗？')){
-          $.post('/project/psychological/console/delimg',{id:$target.data('id')},function(data){
-            console.log($target.data('id'));
-            if(data.success){
-              $target.nextAll().each(function(index,element){
-                var val = $(element).find('h3').text();
-                $(element).find('h3').text(val-1);
-              });
-              $target.remove();
-            }else{
-              alert('删除图片失败');
-            }
-          });
-        }
-      })
-      .on('click.add','div.add_subject',function(event){
-        event.stopPropagation();
-        var addForm = '';
-        addForm += '<div class="wrap">';
-        addForm += '<div class="nword subject_item">消极词:<input class="js_nword" type="text" style="width:70%;"></div>';
-        addForm += '<div class="pword subject_item">积极词:<input class="js_pword" type="text" style="width:70%;"></div>';
-        addForm += '<div class="subject_item" style="clear:both;text-align:center;">句子:<input class="js_sentence" type="text" style="width:80%;"><a data-stage="'+$(this).data('stage')+'" href="javascript:;">确定</a></div>';
-        
-        addForm += '</div>';
-        var $addForm = $(addForm);
-        var $this = $(this);
-        var sequence = textCounter($this.data('stage'));
-        $this.after($addForm);
-        $addForm.on('click.submit','a',function(event){
-          var sentence = $addForm.find('input.js_sentence').val();
-          var nword = $addForm.find('input.js_nword').val();
-          var pword = $addForm.find('input.js_pword').val();
-          $.post('/project/psychological/console/addtext',
-            {
-              sentence:sentence,
-              sequence:sequence,
-              nword:nword,
-              pword:pword,
-              type:1,
-              stage:$(this).data('stage')
-            },
-            function(data){
-              if(data.success){
-                var complete = '';
-                complete += '<div class="wrap">';
-                complete += '<div class="nword subject_item">'+sequence+'&nbsp;&nbsp;消极词:'+nword+'</div>';
-                complete += '<div class="pword subject_item">积极词:'+pword+'</div>';
-                complete += '<div data-id="'+data.id+'" class="subject_item" style="clear:both;">句子:'+sentence+'</div>';
-                complete += '</div>';
-                $this.find('span').text(Number($this.find('span').text())+1);
-                $addForm.remove();
-                $this.after(complete);
-              }else{
-                alert(data.msg);
-              }
-            }
-          );
-        });
-      })
-      .on('click.add','div.add_materialpairs',function(event){
-        event.stopPropagation();
-        var addForm = '';
-        addForm += '<div class="wrap">';
-        addForm += '<div class="pword subject_item">词:<input class="js_pword" type="text" style="width:70%;"></div>';
-        addForm += '<div class="subject_item" style="clear:both;text-align:center;">句子:<input class="js_sentence" type="text" style="width:80%;"><a data-stage="'+$(this).data('stage')+'" href="javascript:;">确定</a></div>';
-        
-        addForm += '</div>';
-        var $addForm = $(addForm);
-        var $this = $(this);
-        var sequence = contextCounter($this.data('stage'));
-        $this.after($addForm);
-        $addForm.on('click.submit','a',function(event){
-          var sentence = $addForm.find('input.js_sentence').val();
-          var nword = $addForm.find('input.js_nword').val();
-          var pword = $addForm.find('input.js_pword').val();
-          $.post('/project/psychological/console/addpairs',
-            {
-              upImg: upImg,
-              downImg: downImg,
-              letter: letter,
-              type: type,
-              positivePosition: positivePosition,
-              sequence: sequence,
-              stage:$(this).data('stage')
-            },
-            function(data){
-              if(data.success){
-                var complete = '';
-                complete += '<div class="wrap">';
-                complete += '<div class="nword subject_item">'+sequence+'</div>';
-                complete += '<div class="pword subject_item">词:'+pword+'</div>';
-                complete += '<div data-id="'+data.id+'" class="subject_item" style="clear:both;">句子:'+sentence+'</div>';
-                complete += '</div>';
-                $this.find('span').text(Number($this.find('span').text())+1);
-                $addForm.remove();
-                $this.after(complete);
-              }else{
-                alert(data.msg);
-              }
-            }
-          );
-        });
-      })
-      .on('click.add','div.add_consubject',function(event){
-        event.stopPropagation();
-        var addForm = '';
-        addForm += '<div class="wrap">';
-        addForm += '<div class="pword subject_item">词:<input class="js_pword" type="text" style="width:70%;"></div>';
-        addForm += '<div class="subject_item" style="clear:both;text-align:center;">句子:<input class="js_sentence" type="text" style="width:80%;"><a data-stage="'+$(this).data('stage')+'" href="javascript:;">确定</a></div>';
-        
-        addForm += '</div>';
-        var $addForm = $(addForm);
-        var $this = $(this);
-        var sequence = contextCounter($this.data('stage'));
-        $this.after($addForm);
-        $addForm.on('click.submit','a',function(event){
-          var sentence = $addForm.find('input.js_sentence').val();
-          var nword = $addForm.find('input.js_nword').val();
-          var pword = $addForm.find('input.js_pword').val();
-          $.post('/project/psychological/console/addtext',
-            {
-              sentence:sentence,
-              nword:nword,
-              pword:pword,
-              sequence:sequence,
-              type:0,
-              stage:$(this).data('stage')
-            },
-            function(data){
-              if(data.success){
-                var complete = '';
-                complete += '<div class="wrap">';
-                complete += '<div class="nword subject_item">'+sequence+'</div>';
-                complete += '<div class="pword subject_item">词:'+pword+'</div>';
-                complete += '<div data-id="'+data.id+'" class="subject_item" style="clear:both;">句子:'+sentence+'</div>';
-                complete += '</div>';
-                $this.find('span').text(Number($this.find('span').text())+1);
-                $addForm.remove();
-                $this.after(complete);
-              }else{
-                alert(data.msg);
-              }
-            }
-          );
-        });
-      });
+    
 
     /*##########################被试管理#####################*/
     $('#subjects')
@@ -1022,81 +649,6 @@
 
 
     /*##########################页面切换#####################*/
-    $('div.js_practice_image.tab_nav').on('click',function(event){
-      $('#practice_image_bd').show();
-      $('#test_image_bd').hide();
-      $('#train_image_bd').hide();
-      $('#practice_text_bd').hide();
-      $('#test_text_bd').hide();
-      $('#train_text_bd').hide();
-      $(event.target).addClass('selected').siblings().removeClass('selected');
-    });
-
-    $('div.js_test_image.tab_nav').on('click',function(event){
-      $('#practice_image_bd').hide();
-      $('#test_image_bd').show();
-      $('#train_image_bd').hide();
-      $('#practice_text_bd').hide();
-      $('#test_text_bd').hide();
-      $('#train_text_bd').hide();
-      $(event.target).addClass('selected').siblings().removeClass('selected');
-    });
-
-    $('div.js_train_image.tab_nav').on('click',function(event){
-      $('#practice_image_bd').hide();
-      $('#test_image_bd').hide();
-      $('#train_image_bd').show();
-      $('#practice_text_bd').hide();
-      $('#test_text_bd').hide();
-      $('#train_text_bd').hide();
-      $(event.target).addClass('selected').siblings().removeClass('selected');
-    });
-
-
-    $('div.js_practice_text.tab_nav').on('click',function(event){
-      $('#practice_image_bd').hide();
-      $('#test_image_bd').hide();
-      $('#train_image_bd').hide();
-      $('#practice_text_bd').show();
-      $('#test_text_bd').hide();
-      $('#train_text_bd').hide();
-      $(event.target).addClass('selected').siblings().removeClass('selected');
-    });
-
-    $('div.js_test_text.tab_nav').on('click',function(event){
-      $('#practice_image_bd').hide();
-      $('#test_image_bd').hide();
-      $('#train_image_bd').hide();
-      $('#practice_text_bd').hide();
-      $('#test_text_bd').show();
-      $('#train_text_bd').hide();
-      $(event.target).addClass('selected').siblings().removeClass('selected');
-    });
-
-    $('div.js_train_text.tab_nav').on('click',function(event){
-      $('#practice_image_bd').hide();
-      $('#test_image_bd').hide();
-      $('#train_image_bd').hide();
-      $('#practice_text_bd').hide();
-      $('#test_text_bd').hide();
-      $('#train_text_bd').show();
-      $(event.target).addClass('selected').siblings().removeClass('selected');
-    });
-
-    $('div.js_text_result.tab_nav').on('click',function(event){
-      $('#image_result_bd').hide();
-      $('#text_result_bd').show();
-      $(event.target).addClass('selected').siblings().removeClass('selected');
-    });
-
-    $('div.js_image_result.tab_nav').on('click',function(event){
-      $('#image_result_bd').show();
-      $('#text_result_bd').hide();
-      $(event.target).addClass('selected').siblings().removeClass('selected');
-    });
-
-
-
     $('div.js_material.left_nav').click(function(event){
       $('#material').show();
       $('#result').hide();
