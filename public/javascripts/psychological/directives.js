@@ -1,4 +1,4 @@
-angular.model('psychological.directives',[])
+angular.module('psychological.directives',[])
 
 
 .directive("imageDrop",['$parse',function ($parse, fileReader) {
