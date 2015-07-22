@@ -29,6 +29,10 @@ angular.module('psychological',[])
     return $scope.is_creating;
   };
 
+  $scope.cancelCreating = function(){
+    $scope.is_creating = false;
+  };
+
   $scope.submit = function(){
     if($scope.upImg=='' || $scope.downImg==''){
       alert('请添加图片');
@@ -64,6 +68,9 @@ angular.module('psychological',[])
 
   $scope.isCreating = function(){
     return $scope.is_creating;
+  };
+  $scope.cancelCreating = function(){
+    $scope.is_creating = false;
   };
 
   $scope.submit = function(){
@@ -102,7 +109,9 @@ angular.module('psychological',[])
   $scope.isCreating = function(){
     return $scope.is_creating;
   };
-
+  $scope.cancelCreating = function(){
+    $scope.is_creating = false;
+  };
   $scope.submit = function(){
     if($scope.upImg=='' || $scope.downImg==''){
       alert('请添加图片');
@@ -139,7 +148,9 @@ angular.module('psychological',[])
   $scope.isCreating = function(){
     return $scope.is_creating;
   };
-
+  $scope.cancelCreating = function(){
+    $scope.is_creating = false;
+  };
   $scope.submit = function(){
     if($scope.upImg=='' || $scope.downImg==''){
       alert('请添加图片');
@@ -176,7 +187,9 @@ angular.module('psychological',[])
   $scope.isCreating = function(){
     return $scope.is_creating;
   };
-
+  $scope.cancelCreating = function(){
+    $scope.is_creating = false;
+  };
   $scope.submit = function(){
     if($scope.upImg=='' || $scope.downImg==''){
       alert('请添加图片');
@@ -213,7 +226,9 @@ angular.module('psychological',[])
   $scope.isCreating = function(){
     return $scope.is_creating;
   };
-
+  $scope.cancelCreating = function(){
+    $scope.is_creating = false;
+  };
   $scope.submit = function(){
     if($scope.upImg=='' || $scope.downImg==''){
       alert('请添加图片');
