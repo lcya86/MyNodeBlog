@@ -1,12 +1,12 @@
 <div class="main_hd" ng-controller="material_manage">
   <h2>material manage</h2>
   <div class="tab_navs">
-    <div ng-click="select(1)" ng-class="selected:isSelected(1)" class="js_practice_image tab_nav">Practice Image</div>
-    <div ng-click="select(2)" ng-class="selected:isSelected(2)" class="js_test_image tab_nav">Test Image</div>
-    <div ng-click="select(3)" ng-class="selected:isSelected(3)" class="js_train_image tab_nav">Train Image</div>
-    <div ng-click="select(4)" ng-class="selected:isSelected(4)" class="js_practice_text tab_nav">Practice Text</div>
-    <div ng-click="select(5)" ng-class="selected:isSelected(5)" class="js_test_text tab_nav">Test Text</div>
-    <div ng-click="select(6)" ng-class="selected:isSelected(6)" class="js_train_text tab_nav">Train Text</div>
+    <div ng-click="select(1)" ng-class="{selected:isSelected(1)}" class="js_practice_image tab_nav">Practice Image</div>
+    <div ng-click="select(2)" ng-class="{selected:isSelected(2)}" class="js_test_image tab_nav">Test Image</div>
+    <div ng-click="select(3)" ng-class="{selected:isSelected(3)}" class="js_train_image tab_nav">Train Image</div>
+    <div ng-click="select(4)" ng-class="{selected:isSelected(4)}" class="js_practice_text tab_nav">Practice Text</div>
+    <div ng-click="select(5)" ng-class="{selected:isSelected(5)}" class="js_test_text tab_nav">Test Text</div>
+    <div ng-click="select(6)" ng-class="{selected:isSelected(6)}" class="js_train_text tab_nav">Train Text</div>
   </div>
 </div>
 <div id="practice_image_bd" class="main_bd" ng-show="isSelected(1)">
@@ -44,7 +44,7 @@
     </div>
   </div>
   <div class="con_fd" ng-controller="practice_image_con">
-    控制组 
+    控制组
     <div class="conimg_fd">
       <div ng-hide="isCreating()" ng-click="creating()" class="t add_materialpairs">添加图片对(<span>{{array.length}}</span>)</div>
       <div ng-show="isCreating()" class="img_item real">
@@ -112,7 +112,7 @@
     </div>
   </div>
   <div class="con_fd" ng-controller="test_image_con">
-    控制组 
+    控制组
     <div class="conimg_fd">
       <div ng-hide="isCreating()" ng-click="creating()" class="t add_materialpairs">添加图片对(<span>{{array.length}}</span>)</div>
       <div ng-show="isCreating()" class="img_item real">
@@ -180,7 +180,7 @@
     </div>
   </div>
   <div class="con_fd" ng-controller="train_image_con">
-    控制组 
+    控制组
     <div class="conimg_fd">
       <div ng-hide="isCreating()" ng-click="creating()" class="t add_materialpairs">添加图片对(<span>{{array.length}}</span>)</div>
       <div ng-show="isCreating()" class="img_item real">
