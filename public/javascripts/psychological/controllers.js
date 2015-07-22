@@ -30,6 +30,10 @@ angular.module('psychological',[])
   };
 
   $scope.submit = function(){
+    if($scope.upImg=='' || $scope.downImg==''){
+      alert('请添加图片');
+      return false;
+    }
     $http.post('/project/psychological/v2/addpairs',{
       upImg: $scope.upImg,
       downImg: $scope.downImg,
@@ -63,6 +67,10 @@ angular.module('psychological',[])
   };
 
   $scope.submit = function(){
+    if($scope.upImg=='' || $scope.downImg==''){
+      alert('请添加图片');
+      return false;
+    }
     $http.post('/project/psychological/v2/addpairs',{
       upImg: upImg,
       downImg: downImg,
@@ -96,6 +104,10 @@ angular.module('psychological',[])
   };
 
   $scope.submit = function(){
+    if($scope.upImg=='' || $scope.downImg==''){
+      alert('请添加图片');
+      return false;
+    }
     $http.post('/project/psychological/v2/addpairs',{
       upImg: upImg,
       downImg: downImg,
@@ -129,6 +141,10 @@ angular.module('psychological',[])
   };
 
   $scope.submit = function(){
+    if($scope.upImg=='' || $scope.downImg==''){
+      alert('请添加图片');
+      return false;
+    }
     $http.post('/project/psychological/v2/addpairs',{
       upImg: upImg,
       downImg: downImg,
@@ -162,6 +178,10 @@ angular.module('psychological',[])
   };
 
   $scope.submit = function(){
+    if($scope.upImg=='' || $scope.downImg==''){
+      alert('请添加图片');
+      return false;
+    }
     $http.post('/project/psychological/v2/addpairs',{
       upImg: upImg,
       downImg: downImg,
@@ -195,6 +215,10 @@ angular.module('psychological',[])
   };
 
   $scope.submit = function(){
+    if($scope.upImg=='' || $scope.downImg==''){
+      alert('请添加图片');
+      return false;
+    }
     $http.post('/project/psychological/v2/addpairs',{
       upImg: upImg,
       downImg: downImg,
