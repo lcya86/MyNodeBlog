@@ -4,7 +4,7 @@ angular.module('psychological.directives',[])
 .directive("imageDrop",['$parse',function ($parse, fileReader) {
 
   return {
-    restrict: "EA",
+    restrict: "A",
     link: function (scope, element, attrs) {
 
       var expression = attrs.imageDrop;
