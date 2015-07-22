@@ -303,7 +303,7 @@
       <div class="js_subjects left_nav">subjects manage</div>
       <div class="js_rasult left_nav">result manage</div>
     </div>
-    <div id="material" class="main">
+    <div id="material" class="main" ng-controller="material_manage">
       <%include material_manage.html%>
     </div>
     <div id="subjects" class="main" style="display:none;">
@@ -338,7 +338,7 @@
       },
     })
 
-    
+
 
     /*##########################被试管理#####################*/
     $('#subjects')
@@ -670,7 +670,7 @@
       $(event.target).addClass('selected').siblings().removeClass('selected');
     });
   });
-  
+
   </script>
 </body>
 </html>

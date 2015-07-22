@@ -11,7 +11,7 @@ angular.module('psychological',[])
     return $scope.activeTab === tab;
   };
 
-  
+
 })
 
 
