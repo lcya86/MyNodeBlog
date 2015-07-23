@@ -20,8 +20,6 @@ angular.module('psychological',['psychological.directives'])
   $scope.is_creating = false;
   $scope.upImg = '';
   $scope.downImg = '';
-  $scope.letter = '';
-  $scope.position = 0;
 
   $scope.creating = function(){
     $scope.is_creating = true;
@@ -54,7 +52,7 @@ angular.module('psychological',['psychological.directives'])
       alert('请添加图片');
       return false;
     }
-    if($scope.letter===''||$scope.position==0){
+    if(!$scope.letter||!$scope.position){
       alert('请填写显示字母和积极概率');
       return false;
     }
