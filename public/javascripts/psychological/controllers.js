@@ -20,6 +20,8 @@ angular.module('psychological',['psychological.directives'])
   $scope.is_creating = false;
   $scope.upImg = '';
   $scope.downImg = '';
+  $scope.letter = '';
+  $scope.position = 0;
 
   $scope.creating = function(){
     $scope.is_creating = true;
@@ -302,6 +304,8 @@ angular.module('psychological',['psychological.directives'])
   $scope.is_creating = false;
   $scope.upImg = '';
   $scope.downImg = '';
+  $scope.letter = '';
+  $scope.position = 0;
 
   $scope.creating = function(){
     $scope.is_creating = true;
