@@ -286,9 +286,11 @@ exports.addPairs = function(req, res){
   var downImg = req.body.downImg;
   var letter = req.body.letter;
   var type = req.body.type;//1为实验组，0为控制组
-  var positivePosition = req.body.probability;//字母出现在中性图片后的概率
+  var positivePosition = req.body.positivePosition;//字母出现在中性图片后的概率
   var stage = req.body.stage;
   var sequence = req.body.sequence;
+  console.log(letter);
+  console.log(positivePosition);
   model.MaterialImgPairs.create({
     upImg: upImg,
     downImg: downImg,
