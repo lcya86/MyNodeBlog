@@ -49,6 +49,7 @@ angular.module('psychological',['psychological.directives'])
   }
 
   $scope.submit = function(){
+    console.log($scope);
     if($scope.upImg=='' || $scope.downImg==''){
       alert('请添加图片');
       return false;
