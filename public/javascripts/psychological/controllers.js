@@ -251,14 +251,14 @@ angular.module('psychological',[])
     });
   };
 }])
-.directive("imageDrop",['$parse',function ($parse, fileReader) {
+.directive("imageDrop",function () {
 
   return {
     restrict: "A",
     link: function (scope, element, attrs) {
 
-      var expression = attrs.imageDrop;
-      var accesor = $parse(expression);
+      // var expression = attrs.imageDrop;
+      // var accesor = $parse(expression);
 
       var onDragEnter = function (e) {
         e.preventDefault();
@@ -280,9 +280,9 @@ angular.module('psychological',[])
         element.removeClass("selected");
       };
 
-      var placeImage = function (imageData) {
-        accesor.assign(scope, imageData);
-      };
+      // var placeImage = function (imageData) {
+      //   accesor.assign(scope, imageData);
+      // };
 
       var resampleImage = function (imageData) {
         return resampler.resample(imageData, element.width(),element.height(), scope);
@@ -331,9 +331,9 @@ angular.module('psychological',[])
           loadFile(e.originalEvent.dataTransfer.files[0]);
       });
 
-      scope.$watch(expression, function () {
-        element.attr("src", accesor(scope));
-      });
+      // scope.$watch(expression, function () {
+      //   element.attr("src", accesor(scope));
+      // });
     }
   };
 }]);
