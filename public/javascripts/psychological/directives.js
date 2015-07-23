@@ -51,14 +51,16 @@ angular.module('psychological.directives',[])
           src = window.URL.createObjectURL(file);
         }
         element.find('h1').remove();
-        element.append('<img src="'+src+'" />');
-        element.append('<p>'+file.name+'</p>');
-        element.append('<i></i>');
         if(element.hasClass('upimg')){
           scope.$parent.upImg = '/upload/img/' + file.name;
+          element.preppend('<p>上图</p>');
         }else if(element.hasClass('downimg')){
           scope.$parent.downImg = '/upload/img/' + file.name;
+          element.preppend('<p>下图</p>');
         }
+        element.preppend('<p>'+file.name+'</p>');
+        element.prepend('<img src="'+src+'" />');
+        element.append('<i></i>');
         var xhr = new XMLHttpRequest();
         var upload = xhr.upload;
         upload.onprogress = create_pupload_progress();
