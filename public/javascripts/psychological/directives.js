@@ -1,15 +1,14 @@
 angular.module('psychological.directives',[])
 
 
-.directive("imagedrop",['$parse',function ($parse, fileReader) {
+.directive("imagedrop",function () {
 
   return {
     restrict: "A",
     link: function (scope, element, attrs) {
-
-      var expression = attrs.imageDrop;
-      var accesor = $parse(expression);
-
+      console.log(scope);
+      console.log(scope.upimg);
+      console.log(scope.downimg);
       var onDragEnter = function (e) {
         e.preventDefault();
         element.addClass("selected");
@@ -30,14 +29,6 @@ angular.module('psychological.directives',[])
         element.removeClass("selected");
       };
 
-      var placeImage = function (imageData) {
-        accesor.assign(scope, imageData);
-      };
-
-      var resampleImage = function (imageData) {
-        return resampler.resample(imageData, element.width(),element.height(), scope);
-      };
-
       var loadFile = function (file) {
         event.preventDefault();
         function create_pupload_progress(){
@@ -50,7 +41,7 @@ angular.module('psychological.directives',[])
 
         function create_pupload_done(){
           return function(event){
-            element.css({
+            element.find('i').css({
               width:'100%'
             });
           }
@@ -84,10 +75,6 @@ angular.module('psychological.directives',[])
           onDragEnd(e);
           loadFile(e.dataTransfer.files[0]);
       });
-
-      scope.$watch(expression, function () {
-        element.attr("src", accesor(scope));
-      });
     }
   };
-}]);
+});
