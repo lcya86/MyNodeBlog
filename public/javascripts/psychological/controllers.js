@@ -89,14 +89,28 @@ angular.module('psychological',['psychological.directives'])
     $scope.is_creating = false;
   };
 
+  
+  $scope.getPairs = function(){
+    $http.get('/project/psychological/v2/getpairs?type=0&stage=1').success(function(data){
+      $scope.array = data.pairs;
+    });
+  };
+
+  $scope.delete = function(item){
+    $http.delete('/project/psychological/v2/pairs/'+item._id)
+      .success(function(data){
+        $scope.getPairs();
+      });
+  }
+
   $scope.submit = function(){
     if($scope.upImg=='' || $scope.downImg==''){
       alert('请添加图片');
       return false;
     }
     $http.post('/project/psychological/v2/addpairs',{
-      upImg: upImg,
-      downImg: downImg,
+      upImg: $scope.upImg,
+      downImg: $scope.downImg,
       letter: $scope.letter,
       type: 0,
       positivePosition: $scope.position,
@@ -105,11 +119,14 @@ angular.module('psychological',['psychological.directives'])
     }).success(function(data){
       if(data.success){
         $scope.is_creating = false;
+        $scope.getPairs();
       }else{
         alert('添加失败');
       }
     });
   };
+
+  $scope.getPairs();
 }])
 
 .controller('test_image',['$scope','$http',function($scope,$http){
@@ -128,14 +145,28 @@ angular.module('psychological',['psychological.directives'])
   $scope.cancelCreating = function(){
     $scope.is_creating = false;
   };
+  
+  $scope.getPairs = function(){
+    $http.get('/project/psychological/v2/getpairs?type=1&stage=2').success(function(data){
+      $scope.array = data.pairs;
+    });
+  };
+
+  $scope.delete = function(item){
+    $http.delete('/project/psychological/v2/pairs/'+item._id)
+      .success(function(data){
+        $scope.getPairs();
+      });
+  }
+
   $scope.submit = function(){
     if($scope.upImg=='' || $scope.downImg==''){
       alert('请添加图片');
       return false;
     }
     $http.post('/project/psychological/v2/addpairs',{
-      upImg: upImg,
-      downImg: downImg,
+      upImg: $scope.upImg,
+      downImg: $scope.downImg,
       letter: $scope.letter,
       type: 1,
       positivePosition: $scope.position,
@@ -144,11 +175,14 @@ angular.module('psychological',['psychological.directives'])
     }).success(function(data){
       if(data.success){
         $scope.is_creating = false;
+        $scope.getPairs();
       }else{
         alert('添加失败');
       }
     });
   };
+
+  $scope.getPairs();
 }])
 
 .controller('test_image_con',['$scope','$http',function($scope,$http){
@@ -167,14 +201,28 @@ angular.module('psychological',['psychological.directives'])
   $scope.cancelCreating = function(){
     $scope.is_creating = false;
   };
+  
+  $scope.getPairs = function(){
+    $http.get('/project/psychological/v2/getpairs?type=0&stage=2').success(function(data){
+      $scope.array = data.pairs;
+    });
+  };
+
+  $scope.delete = function(item){
+    $http.delete('/project/psychological/v2/pairs/'+item._id)
+      .success(function(data){
+        $scope.getPairs();
+      });
+  }
+
   $scope.submit = function(){
     if($scope.upImg=='' || $scope.downImg==''){
       alert('请添加图片');
       return false;
     }
     $http.post('/project/psychological/v2/addpairs',{
-      upImg: upImg,
-      downImg: downImg,
+      upImg: $scope.upImg,
+      downImg: $scope.downImg,
       letter: $scope.letter,
       type: 0,
       positivePosition: $scope.position,
@@ -183,11 +231,14 @@ angular.module('psychological',['psychological.directives'])
     }).success(function(data){
       if(data.success){
         $scope.is_creating = false;
+        $scope.getPairs();
       }else{
         alert('添加失败');
       }
     });
   };
+
+  $scope.getPairs();
 }])
 
 .controller('train_image',['$scope','$http',function($scope,$http){
@@ -206,14 +257,28 @@ angular.module('psychological',['psychological.directives'])
   $scope.cancelCreating = function(){
     $scope.is_creating = false;
   };
+  
+  $scope.getPairs = function(){
+    $http.get('/project/psychological/v2/getpairs?type=1&stage=3').success(function(data){
+      $scope.array = data.pairs;
+    });
+  };
+
+  $scope.delete = function(item){
+    $http.delete('/project/psychological/v2/pairs/'+item._id)
+      .success(function(data){
+        $scope.getPairs();
+      });
+  }
+
   $scope.submit = function(){
     if($scope.upImg=='' || $scope.downImg==''){
       alert('请添加图片');
       return false;
     }
     $http.post('/project/psychological/v2/addpairs',{
-      upImg: upImg,
-      downImg: downImg,
+      upImg: $scope.upImg,
+      downImg: $scope.downImg,
       letter: $scope.letter,
       type: 1,
       positivePosition: $scope.position,
@@ -222,11 +287,14 @@ angular.module('psychological',['psychological.directives'])
     }).success(function(data){
       if(data.success){
         $scope.is_creating = false;
+        $scope.getPairs();
       }else{
         alert('添加失败');
       }
     });
   };
+
+  $scope.getPairs();
 }])
 
 .controller('train_image_con',['$scope','$http',function($scope,$http){
@@ -245,14 +313,28 @@ angular.module('psychological',['psychological.directives'])
   $scope.cancelCreating = function(){
     $scope.is_creating = false;
   };
+  
+  $scope.getPairs = function(){
+    $http.get('/project/psychological/v2/getpairs?type=0&stage=3').success(function(data){
+      $scope.array = data.pairs;
+    });
+  };
+
+  $scope.delete = function(item){
+    $http.delete('/project/psychological/v2/pairs/'+item._id)
+      .success(function(data){
+        $scope.getPairs();
+      });
+  }
+
   $scope.submit = function(){
     if($scope.upImg=='' || $scope.downImg==''){
       alert('请添加图片');
       return false;
     }
     $http.post('/project/psychological/v2/addpairs',{
-      upImg: upImg,
-      downImg: downImg,
+      upImg: $scope.upImg,
+      downImg: $scope.downImg,
       letter: $scope.letter,
       type: 0,
       positivePosition: $scope.position,
@@ -261,9 +343,12 @@ angular.module('psychological',['psychological.directives'])
     }).success(function(data){
       if(data.success){
         $scope.is_creating = false;
+        $scope.getPairs();
       }else{
         alert('添加失败');
       }
     });
   };
+
+  $scope.getPairs();
 }]);
