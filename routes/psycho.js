@@ -289,8 +289,6 @@ exports.addPairs = function(req, res){
   var positivePosition = req.body.positivePosition;//字母出现在中性图片后的概率
   var stage = req.body.stage;
   var sequence = req.body.sequence;
-  console.log(letter);
-  console.log(positivePosition);
   model.MaterialImgPairs.create({
     upImg: upImg,
     downImg: downImg,
