@@ -6,10 +6,6 @@ angular.module('psychological.directives',[])
   return {
     restrict: "A",
     link: function (scope, element, attrs) {
-      console.log(scope);
-      console.log($scope);
-      console.log(scope.$parent.upimg);
-      console.log(scope.downimg);
       var onDragEnter = function (e) {
         e.preventDefault();
         element.addClass("selected");
@@ -58,6 +54,11 @@ angular.module('psychological.directives',[])
         element.append('<img src="'+src+'" />');
         element.append('<p>'+file.name+'</p>');
         element.append('<i></i>');
+        if(element.hasClass('upimg')){
+          scope.$parent.upImg = '/upload/img/' + file.name;
+        }else if(element.hasClass('downimg')){
+          scope.$parent.downImg = '/upload/img/' + file.name;
+        }
         var xhr = new XMLHttpRequest();
         var upload = xhr.upload;
         upload.onprogress = create_pupload_progress();
