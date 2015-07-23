@@ -327,10 +327,30 @@ exports.getPairs = function(req, res){
 
 exports.deletePair = function(req, res){
   var id = req.params.id;
-  model.MaterialImgPairs.findByIdAndRemove(id,function(err){
-    if(err) throw err;
-    return res.send({success:true});
-  })
+  model.MaterialImgPairs.findById(id, function(err, pair) {
+    if (err) {
+      console.error(err);
+    }
+    model.MaterialImgPairs.update({
+      type: pair.type,
+      stage:pair.stage,
+      sequence: {
+        $gt: pair.sequence
+      }
+    }, {
+      $inc: {
+        sequence: -1
+      }
+    }, {
+      multi: true
+    },function(err){
+      if(err) throw err;
+      model.MaterialImgPairs.findByIdAndRemove(id, function(err) {
+        if(err) throw err;
+        return res.send({success:true});
+      });
+    });
+  });
 }
 
 exports.delImg = function(req, res) {
