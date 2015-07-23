@@ -7,7 +7,8 @@ angular.module('psychological.directives',[])
     restrict: "A",
     link: function (scope, element, attrs) {
       console.log(scope);
-      console.log(scope.upimg);
+      console.log($scope);
+      console.log(scope.$parent.upimg);
       console.log(scope.downimg);
       var onDragEnter = function (e) {
         e.preventDefault();

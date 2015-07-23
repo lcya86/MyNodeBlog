@@ -3,12 +3,12 @@ var model = require('../models');
 exports.psychologicalExperiment = function(req, res) {
   var async = require('async');
   var materialpairs,
-      Texts, 
-      Subjects, 
-      practice_materialpairs_count, 
+      Texts,
+      Subjects,
+      practice_materialpairs_count,
       test_materialpairs_count,
       train_materialpairs_count,
-      practice_con_materialpairs_count, 
+      practice_con_materialpairs_count,
       test_con_materialpairs_count,
       train_con_materialpairs_count,
       practice_text_count,
@@ -130,10 +130,10 @@ exports.psychologicalExperiment = function(req, res) {
     return res.render('project/Psychological/v2/Console', {
       materialpairs: materialpairs,
       text: Texts,
-      practice_materialpairs_count:practice_materialpairs_count, 
+      practice_materialpairs_count:practice_materialpairs_count,
       test_materialpairs_count:test_materialpairs_count,
       train_materialpairs_count:train_materialpairs_count,
-      practice_con_materialpairs_count:practice_con_materialpairs_count, 
+      practice_con_materialpairs_count:practice_con_materialpairs_count,
       test_con_materialpairs_count:test_con_materialpairs_count,
       train_con_materialpairs_count:train_con_materialpairs_count,
       practice_text_count:practice_text_count,
@@ -276,6 +276,7 @@ exports.uploadImg = function(req, res) {
     fs.writeFile('/root/MyNodeBlog/public/upload/img/' + name, bufferHelper.toBuffer(), function(err) {
       if (err) throw err;
       console.log('The "data to append" was appended to file!');
+      res.send({sucess:true});
     });
   });
 }
@@ -376,12 +377,12 @@ exports.sendResult = function(req,res){
   var stage = req.body.stage;
   model.Results.create({name:name,results:result,stage:stage},function(err){
     if(err){
-      console.error(err); 
+      console.error(err);
       return res.send({success:false});
     }
     model.Subject.update({name:name},{complete:{$push:true}},function(err){
       if(err){
-        console.error(err); 
+        console.error(err);
         return res.send({success:false});
       }
       return res.send({success:true});
@@ -395,12 +396,12 @@ exports.sendTextResult = function(req,res){
   var stage = req.body.stage;
   model.TextResults.create({name:name,results:result,stage:stage},function(err){
     if(err){
-      console.error(err); 
+      console.error(err);
       return res.send({success:false});
     }
     model.Subject.update({name:name},{complete:{$push:true}},function(err){
       if(err){
-        console.error(err); 
+        console.error(err);
         return res.send({success:false});
       }
       return res.send({success:true});
