@@ -34,10 +34,7 @@ angular.module('psychological',['psychological.directives'])
   };
 
   $scope.getPairs = function(){
-    $http.get('/project/psychological/v2/getpairs',{
-      type:1,
-      stage:1
-    }).success(function(data){
+    $http.get('/project/psychological/v2/getpairs?type=1&stage=1').success(function(data){
       $scope.array = data.pairs;
     });
   };
