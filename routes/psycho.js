@@ -311,6 +311,19 @@ exports.addPairs = function(req, res){
   });
 }
 
+exports.getPairs = function(req, res){
+  var type = req.body.type;
+  var stage = req.body.stage;
+
+  model.MaterialImgPairs.find({
+    type:type,
+    stage:stage
+  },function(err,data){
+    if(err) throw err;
+    return res.send({success:true,pairs:data});
+  });
+}
+
 exports.delImg = function(req, res) {
   var model = require('../models');
   var id = req.body.id;

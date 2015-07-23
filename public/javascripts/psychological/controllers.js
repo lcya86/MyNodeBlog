@@ -33,6 +33,15 @@ angular.module('psychological',['psychological.directives'])
     $scope.is_creating = false;
   };
 
+  $scope.getPairs = function(){
+    $http.get('/project/psychological/v2/getpairs',{
+      type:1,
+      stage:1
+    }).success(function(data){
+      $scope.array = data.pairs;
+    });
+  };
+
   $scope.submit = function(){
     if($scope.upImg=='' || $scope.downImg==''){
       alert('请添加图片');
@@ -54,6 +63,8 @@ angular.module('psychological',['psychological.directives'])
       }
     });
   };
+
+  $scope.getPairs();
 }])
 
 .controller('practice_image_con',['$scope','$http',function($scope,$http){
