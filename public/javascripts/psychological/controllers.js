@@ -54,7 +54,7 @@ angular.module('psychological',['psychological.directives'])
       return false;
     }
     if($scope.letter===''||$scope.position==0){
-      alert('请填写显示字母和积极概率')；
+      alert('请填写显示字母和积极概率');
       return false;
     }
     $http.post('/project/psychological/v2/addpairs',{
