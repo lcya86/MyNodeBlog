@@ -1,14 +1,14 @@
 angular.module('psychological.directives',[])
 
 
-.directive("imagedrop",['$parse',function ($parse, fileReader) {
+.directive("imagedrop",function () {
 
   return {
     restrict: "A",
     link: function (scope, element, attrs) {
 
-      var expression = attrs.imageDrop;
-      var accesor = $parse(expression);
+      // var expression = attrs.imageDrop;
+      // var accesor = $parse(expression);
 
       var onDragEnter = function (e) {
         e.preventDefault();
@@ -78,12 +78,13 @@ angular.module('psychological.directives',[])
         .bind("dragenter", onDragEnter)
         .bind("drop", function (e) {
           onDragEnd(e);
+          console.log(e);
           loadFile(e.originalEvent.dataTransfer.files[0]);
       });
 
-      scope.$watch(expression, function () {
-        element.attr("src", accesor(scope));
-      });
+      // scope.$watch(expression, function () {
+      //   element.attr("src", accesor(scope));
+      // });
     }
   };
-}]);
+});
