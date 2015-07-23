@@ -314,7 +314,7 @@ exports.addPairs = function(req, res){
 exports.getPairs = function(req, res){
   var type = req.body.type;
   var stage = req.body.stage;
-
+  console.log(type+" "+stage);
   model.MaterialImgPairs.find({
     type:type,
     stage:stage
