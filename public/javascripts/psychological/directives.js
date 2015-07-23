@@ -42,7 +42,7 @@ angular.module('psychological.directives',[])
         event.preventDefault();
         function create_pupload_progress(){
           return function(event){
-            element.css({
+            element.find('i').css({
               width:Math.round(event.loaded*100/event.total)+'%'
             });
           }
@@ -62,6 +62,10 @@ angular.module('psychological.directives',[])
         }else{
           src = window.URL.createObjectURL(file);
         }
+        element.find('h1').remove();
+        element.append('<img src="'+src+'" />');
+        element.append('<p>'+file.name+'</p>');
+        element.append('<i></i>');
         var xhr = new XMLHttpRequest();
         var upload = xhr.upload;
         upload.onprogress = create_pupload_progress();
@@ -78,7 +82,6 @@ angular.module('psychological.directives',[])
         .bind("dragenter", onDragEnter)
         .bind("drop", function (e) {
           onDragEnd(e);
-          console.log(e);
           loadFile(e.dataTransfer.files[0]);
       });
 
