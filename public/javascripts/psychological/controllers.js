@@ -1,4 +1,4 @@
-angular.module('psychological',[])
+angular.module('psychological',['psychological.directives'])
 
 .controller('material_manage',function($scope){
   $scope.activeTab = 1;
