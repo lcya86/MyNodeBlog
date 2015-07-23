@@ -52,16 +52,16 @@ angular.module('psychological',['psychological.directives'])
       alert('请添加图片');
       return false;
     }
-    if(!$scope.$$childHead.letter||!$scope.$$childHead.position){
+    if(!$scope.$$childTail.letter||!$scope.$$childTail.position){
       alert('请填写显示字母和积极概率');
       return false;
     }
     $http.post('/project/psychological/v2/addpairs',{
       upImg: $scope.upImg,
       downImg: $scope.downImg,
-      letter: $scope.$$childHead.letter,
+      letter: $scope.$$childTail.letter,
       type: 1,
-      positivePosition: $scope.$$childHead.position,
+      positivePosition: $scope.$$childTail.position,
       stage: 1,
       sequence: $scope.array.length+1
     }).success(function(data){
@@ -113,16 +113,16 @@ angular.module('psychological',['psychological.directives'])
       alert('请添加图片');
       return false;
     }
-    if(!$scope.$$childHead.letter||!$scope.$$childHead.position){
+    if(!$scope.$$childTail.letter||!$scope.$$childTail.position){
       alert('请填写显示字母和积极概率');
       return false;
     }
     $http.post('/project/psychological/v2/addpairs',{
       upImg: $scope.upImg,
       downImg: $scope.downImg,
-      letter: $scope.$$childHead.letter,
+      letter: $scope.$$childTail.letter,
       type: 0,
-      positivePosition: $scope.$$childHead.position,
+      positivePosition: $scope.$$childTail.position,
       stage: 1,
       sequence: $scope.array.length+1
     }).success(function(data){
@@ -173,16 +173,16 @@ angular.module('psychological',['psychological.directives'])
       alert('请添加图片');
       return false;
     }
-    if(!$scope.$$childHead.letter||!$scope.$$childHead.position){
+    if(!$scope.$$childTail.letter||!$scope.$$childTail.position){
       alert('请填写显示字母和积极概率');
       return false;
     }
     $http.post('/project/psychological/v2/addpairs',{
       upImg: $scope.upImg,
       downImg: $scope.downImg,
-      letter: $scope.$$childHead.letter,
+      letter: $scope.$$childTail.letter,
       type: 1,
-      positivePosition: $scope.$$childHead.position,
+      positivePosition: $scope.$$childTail.position,
       stage: 2,
       sequence: $scope.array.length+1
     }).success(function(data){
@@ -233,16 +233,16 @@ angular.module('psychological',['psychological.directives'])
       alert('请添加图片');
       return false;
     }
-    if(!$scope.$$childHead.letter||!$scope.$$childHead.position){
+    if(!$scope.$$childTail.letter||!$scope.$$childTail.position){
       alert('请填写显示字母和积极概率');
       return false;
     }
     $http.post('/project/psychological/v2/addpairs',{
       upImg: $scope.upImg,
       downImg: $scope.downImg,
-      letter: $scope.$$childHead.letter,
+      letter: $scope.$$childTail.letter,
       type: 0,
-      positivePosition: $scope.$$childHead.position,
+      positivePosition: $scope.$$childTail.position,
       stage: 2,
       sequence: $scope.array.length+1
     }).success(function(data){
@@ -293,16 +293,16 @@ angular.module('psychological',['psychological.directives'])
       alert('请添加图片');
       return false;
     }
-    if(!$scope.$$childHead.letter||!$scope.$$childHead.position){
+    if(!$scope.$$childTail.letter||!$scope.$$childTail.position){
       alert('请填写显示字母和积极概率');
       return false;
     }
     $http.post('/project/psychological/v2/addpairs',{
       upImg: $scope.upImg,
       downImg: $scope.downImg,
-      letter: $scope.$$childHead.letter,
+      letter: $scope.$$childTail.letter,
       type: 1,
-      positivePosition: $scope.$$childHead.position,
+      positivePosition: $scope.$$childTail.position,
       stage: 3,
       sequence: $scope.array.length+1
     }).success(function(data){
@@ -355,16 +355,16 @@ angular.module('psychological',['psychological.directives'])
       alert('请添加图片');
       return false;
     }
-    if(!$scope.$$childHead.letter||!$scope.$$childHead.position){
+    if(!$scope.$$childTail.letter||!$scope.$$childTail.position){
       alert('请填写显示字母和积极概率');
       return false;
     }
     $http.post('/project/psychological/v2/addpairs',{
       upImg: $scope.upImg,
       downImg: $scope.downImg,
-      letter: $scope.$$childHead.letter,
+      letter: $scope.$$childTail.letter,
       type: 0,
-      positivePosition: $scope.$$childHead.position,
+      positivePosition: $scope.$$childTail.position,
       stage: 3,
       sequence: $scope.array.length+1
     }).success(function(data){
