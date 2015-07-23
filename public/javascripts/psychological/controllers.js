@@ -44,24 +44,23 @@ angular.module('psychological',['psychological.directives'])
       .success(function(data){
         $scope.getPairs();
       });
-  }
+  };
 
   $scope.submit = function(){
-    console.log($scope);
     if($scope.upImg=='' || $scope.downImg==''){
       alert('请添加图片');
       return false;
     }
-    if(!$scope.letter||!$scope.position){
+    if(!$scope.$$childHead.letter||!$scope.$$childHead.position){
       alert('请填写显示字母和积极概率');
       return false;
     }
     $http.post('/project/psychological/v2/addpairs',{
       upImg: $scope.upImg,
       downImg: $scope.downImg,
-      letter: $scope.letter,
+      letter: $scope.$$childHead.letter,
       type: 1,
-      positivePosition: $scope.position,
+      positivePosition: $scope.$$childHead.position,
       stage: 1,
       sequence: $scope.array.length+1
     }).success(function(data){
