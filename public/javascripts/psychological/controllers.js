@@ -251,7 +251,7 @@ angular.module('psychological',[])
     });
   };
 }])
-.directive("imageDrop",function () {
+.directive("imagedrop",function () {
 
   return {
     restrict: "A",
