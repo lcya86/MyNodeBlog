@@ -336,4 +336,4 @@ angular.module('psychological',[])
       // });
     }
   };
-}]);
+});
