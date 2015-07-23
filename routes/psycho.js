@@ -323,6 +323,14 @@ exports.getPairs = function(req, res){
   });
 }
 
+exports.deletePair = function(req, res){
+  var id = req.params.id;
+  model.MaterialImgPairs.findByIdAndRemove(id,function(err){
+    if(err) throw err;
+    return res.send({success:true});
+  })
+}
+
 exports.delImg = function(req, res) {
   var model = require('../models');
   var id = req.body.id;

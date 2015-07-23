@@ -95,6 +95,7 @@ app.get('/project/psychological/v2/texttest', routes.Psycho.doTextTest);
 app.get('/project/psychological/v2/texttrain', routes.Psycho.doTextTrain);
 app.post('/project/psychological/v2/addpairs', routes.Psycho.addPairs);
 app.get('/project/psychological/v2/getpairs', routes.Psycho.getPairs);
+app.delete('/project/psychological/v2/pairs/:id', routes.Psycho.deletePair);
 app.post('/project/psychological/v2/uploadImg', routes.Psycho.uploadImg);
 app.post('/project/psychological/v2/console/delimg', routes.Psycho.delImg);
 app.post('/project/psychological/v2/console/addsubject', routes.Psycho.addSubject);
