@@ -3,6 +3,7 @@ angular.module('psychological.experiment',[])
 .controller('doExperiment',['$scope',function($scope){
   $scope.state = {};
   $scope.state.current = 0;
+  $scope.state.name = '';
 
   $scope.state.nextStep = function(){
     $scope.state.current += 1;
@@ -14,22 +15,22 @@ angular.module('psychological.experiment',[])
 .controller('login',['$scope','$http',function($scope,$http){
   $scope.step = {};
   $scope.step.index = 0;
-  $scope.step.name = '';
 
   $scope.step.isCurrent = function(){
     return $scope.state.current === $scope.step.index;
   };
 
   $scope.step.login = function(){
-    $http.post('/project/psychological/experiment/login',{
-      name:name
-    }).success(function(data){
-      if(data.success){
-        $scope.state.nextStep();
-      }else{
-        alert(data.msg);
-      }
-    });
+    console.log($scope.state.name);
+    // $http.post('/project/psychological/experiment/login',{
+    //   name:name
+    // }).success(function(data){
+    //   if(data.success){
+    //     $scope.state.nextStep();
+    //   }else{
+    //     alert(data.msg);
+    //   }
+    // });
   };
 
 }])
@@ -111,7 +112,7 @@ angular.module('psychological.experiment',[])
   $scope.step.sendResult = function(){
     $http.post('/project/psychological/experiment/sendresult',{
       result:$scope.step.results,
-      name:$scope.name,
+      name:$scope.state.name,
       stage:$scope.step.stage
     }).success(function(data){
       $scope.state.nextStep();

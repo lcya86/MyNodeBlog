@@ -95,7 +95,7 @@
     <div ng-controller="login" class="d_login" ng-show="step.isCurrent()">
       请输入姓名
       <input type="text" placeholder="请输入姓名"/>
-      <a href="" class="b_login">确定</a>
+      <a ng-click="step.login()" class="b_login">确定</a>
     </div>
     <div ng-controller="welcome" class="welcome_first" ng-show="step.isCurrent()">
       <h4>欢迎你来参加我们的实验！</h4>
