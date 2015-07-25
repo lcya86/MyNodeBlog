@@ -159,28 +159,8 @@ exports.doPractice = function(req, res) {
   });
 }
 
-exports.doTest = function(req,res){
-  model.MaterialImgPairs.find({stage:2}).sort({
-    'sequence': +1
-  }).exec(function(err, materials) {
-    return res.render('project/Psychological/v2/Experiment', {
-      material: materials,
-      stage:2,
-      stage_text:'测试'
-    });
-  });
-}
-
-exports.doTrain = function(req,res){
-  model.MaterialImgPairs.find({stage:3}).sort({
-    'sequence': +1
-  }).exec(function(err, materials) {
-    return res.render('project/Psychological/v2/Experiment', {
-      material: materials,
-      stage:3,
-      stage_text:'训练'
-    });
-  });
+exports.doTestTrain = function(req,res){
+  res.render('project/Psychological/v2/Experiment/test&train');
 }
 
 exports.doTextPractice = function(req, res) {

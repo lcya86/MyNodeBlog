@@ -88,8 +88,7 @@ app.get('/project/articlesClassify', routes.Project.articlesClassify);
 
 app.get('/project/psychological/v2/console', routes.Psycho.psychologicalExperiment);
 app.get('/project/psychological/v2/practice', routes.Psycho.doPractice);
-app.get('/project/psychological/v2/test', routes.Psycho.doTest);
-app.get('/project/psychological/v2/train', routes.Psycho.doTrain);
+app.get('/project/psychological/v2/test&train', routes.Psycho.doTestTrain);
 app.get('/project/psychological/v2/textpractice', routes.Psycho.doTextPractice);
 app.get('/project/psychological/v2/texttest', routes.Psycho.doTextTest);
 app.get('/project/psychological/v2/texttrain', routes.Psycho.doTextTrain);
