@@ -383,11 +383,11 @@ exports.delSubject = function(req,res){
 }
 
 exports.subjectLogin = function(req,res){
-  var name = req.query.name;
+  var name = req.body.name;
   model.Subject.find({name:name},function(err,subject){
     if(err) console.error(err);
     if(subject.length>0) return res.send({success:true,type:subject[0].type,complete:subject[0].complete});
-    return res.send({success:false});
+    return res.send({success:false,msg:'姓名不存在！'});
   });
 }
 
