@@ -104,7 +104,7 @@ app.post('/project/psychological/v2/experiment/sendresult', routes.Psycho.sendRe
 app.post('/project/psychological/v2/experiment/sendtextresult', routes.Psycho.sendTextResult);
 app.get('/project/psychological/v2/console/getresult', routes.Psycho.getResult);
 app.get('/project/psychological/v2/console/gettextresult', routes.Psycho.getTextResult);
-app.get('/project/psychological/v2/experiment/login', routes.Psycho.subjectLogin);
+app.post('/project/psychological/v2/experiment/login', routes.Psycho.subjectLogin);
 
 app.get('/project/psychological/console', routes.Project.psychologicalExperiment);
 app.get('/project/psychological/practice', routes.Project.doPractice);

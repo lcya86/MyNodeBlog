@@ -21,7 +21,7 @@ angular.module('psychological.experiment',[])
   };
 
   $scope.step.login = function(){
-    $http.post('/project/psychological/experiment/login',{
+    $http.post('/project/psychological/v2/experiment/login',{
       name:$scope.state.name
     }).success(function(data){
       if(data.success){
