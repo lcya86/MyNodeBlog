@@ -2,7 +2,7 @@ angular.module('psychological.experiment',[])
 
 .controller('doExperiment',['$scope',function($scope){
   $scope.state = {};
-  $scope.state.current = 1;
+  $scope.state.current = 0;
 
   $scope.state.nextStep = function(){
     $scope.state.current += 1;
