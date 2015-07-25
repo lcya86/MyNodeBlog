@@ -72,15 +72,14 @@ angular.module('psychological.experiment',[])
   $scope.step.getPairs();
   
   $scope.step.clickButton = function(button,pair){
-    if($scope.step.subStage == 3){
-      $scope.step.results[$scope.step.currentPair].reactTime = (new Date().getTime()) - $scope.step.startTime;
-      if(button==pair.letter){
-        result[count].isCorrect = true;
-      }else{
-        result[count].isCorrect = false;
-      }
-      $scope.step.nextPair();
+    $scope.step.miss = false;
+    $scope.step.results[$scope.step.currentPair].reactTime = (new Date().getTime()) - $scope.step.startTime;
+    if(button==pair.letter){
+      result[count].isCorrect = true;
+    }else{
+      result[count].isCorrect = false;
     }
+    $scope.step.nextPair();
   };
 
   $scope.step.nextSubStage = function(){
@@ -109,11 +108,10 @@ angular.module('psychological.experiment',[])
     $timeout(function(){
       $scope.step.nextSubStage();
       $scope.step.startTime = new Date().getTime();
-      reactive = true;
-      miss = true; 
+      $scope.step.miss = true; 
     },1000);
     $timeout(function(){
-      if(miss){
+      if($scope.step.miss){
         $scope.step.results[$scope.step.currentPair].isMiss = miss;
         $scope.step.results[$scope.step.currentPair].reactTime = 1000;
         $scope.step.nextPair();

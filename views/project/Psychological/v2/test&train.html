@@ -121,7 +121,7 @@
     margin-top: 5px;
   }
 
-  .fButton{
+  .eButton{
     left: 0px;
     width: 50px;
     position: fixed;
@@ -130,7 +130,7 @@
     padding: 10px;
     text-align: center;
   }
-  .jButton{
+  .fButton{
     right: 0px;
     width: 50px;
     position: fixed;
@@ -139,11 +139,11 @@
     padding: 10px;
     text-align: center;
   }
-  .fButton strong{
+  .eButton strong{
     display: block;
     margin-top: 200px;
   }
-  .jButton strong{
+  .fButton strong{
     display: block;
     margin-top: 200px;
   }
@@ -174,14 +174,14 @@
           <img ng-src="{{pair.downImg}}" alt="下图">
         </div>
         <div ng-show="step.subStage == 3">
-          <div class="fButton" ng-click="clickButton('F',pair)"><strong>F</strong></div>
+          <div class="eButton" ng-click="clickButton('E',pair)"><strong>E</strong></div>
           <div class="upside" ng-show="step.showUp">
             <strong>{{pair.letter}}</strong>
           </div>
           <div class="downside" ng-show="!step.showUp">
             <strong>{{pair.letter}}</strong>
           </div>
-          <div class="jButton" ng-click="clickButton('J',pair)"><strong>J</strong></div>
+          <div class="fButton" ng-click="clickButton('F',pair)"><strong>F</strong></div>
         </div>
       </div>
     </div>
