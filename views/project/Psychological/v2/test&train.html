@@ -71,9 +71,11 @@
   }
 
   .upside strong{
+    display: block;
     margin-top: 20%;
   }
   .downside strong{
+    display: block;
     margin-top: 20%;
   }
 
@@ -97,6 +99,7 @@
     background-color: #76b7ff;
     display: absolute;
     top: 0px;
+    position: fixed;
   }
 
   .start{
@@ -112,20 +115,28 @@
   }
 
   .fButton{
+    left: 0px;
+    width: 50px;
+    position: fixed;
     height: 100%;
-    float: left;
     background-color: antiquewhite;
     padding: 10px;
     text-align: center;
-    vertical-align: center;
   }
   .jButton{
+    right: 0px;
+    width: 50px;
+    position: fixed;
     height: 100%;
-    float: right;
     background-color: antiquewhite;
     padding: 10px;
     text-align: center;
-    vertical-align: center;
+  }
+  .fButton strong{
+    margin-top: 40%;
+  }
+  .jButton strong{
+    margin-top: 40%;
   }
 </style>
 <body>
