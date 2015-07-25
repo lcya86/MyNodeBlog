@@ -56,6 +56,7 @@ angular.module('psychological.experiment',[])
   $scope.step.reactive = false;
   $scope.step.miss = false;
   $scope.step.showUp = false;
+  $scope.step.timer = null;
   $scope.step.pbstyle = {
     "width":$scope.step.progress+"%"
   };
@@ -72,6 +73,7 @@ angular.module('psychological.experiment',[])
   $scope.step.getPairs();
   
   $scope.step.clickButton = function(button,pair){
+    $timeout.cancel($scope.step.timer);
     $scope.step.miss = false;
     $scope.step.results[$scope.step.currentPair].isMiss = false;
     $scope.step.results[$scope.step.currentPair].reactTime = (new Date().getTime()) - $scope.step.startTime;
@@ -111,13 +113,13 @@ angular.module('psychological.experiment',[])
       $scope.step.startTime = new Date().getTime();
       $scope.step.miss = true; 
     },1000);
-    $timeout(function(){
+    $scope.step.timer = $timeout(function(){
       if($scope.step.miss){
         $scope.step.results[$scope.step.currentPair].isMiss = true;
         $scope.step.results[$scope.step.currentPair].reactTime = 1000;
         $scope.step.nextPair();
       }
-    },2000);
+    },4000);
   };
 
   $scope.step.sendResult = function(){
