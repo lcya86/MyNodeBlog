@@ -21,16 +21,15 @@ angular.module('psychological.experiment',[])
   };
 
   $scope.step.login = function(){
-    console.log($scope.state.name);
-    // $http.post('/project/psychological/experiment/login',{
-    //   name:name
-    // }).success(function(data){
-    //   if(data.success){
-    //     $scope.state.nextStep();
-    //   }else{
-    //     alert(data.msg);
-    //   }
-    // });
+    $http.post('/project/psychological/experiment/login',{
+      name:$scope.state.name
+    }).success(function(data){
+      if(data.success){
+        $scope.state.nextStep();
+      }else{
+        alert(data.msg);
+      }
+    });
   };
 
 }])
