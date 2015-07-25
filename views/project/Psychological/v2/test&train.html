@@ -51,9 +51,8 @@
   }
 
   .d_login{
-    position: fixed;
-    top:45%;
-    left:40%;
+    width: 300px;
+    margin: 200px auto;
   }
 
   .upside{
@@ -98,6 +97,13 @@
     top: 0px;
   }
 
+  .start{
+    background-color: antiquewhite;
+    padding: 10px;
+    cursor: pointer;
+    display: inline-block;
+    border-radius: 5px;
+  }
 </style>
 <body>
   <div class="container" ng-controller="doExperiment">
@@ -109,7 +115,7 @@
     <div ng-controller="welcome" class="welcome_first" ng-show="step.isCurrent()">
       <h4>欢迎你来参加我们的实验！</h4>
       <p>在本实验中，你会看到两张图片，图片消失后你将会看到<strong>F</strong>或<strong>J</strong>，分别对应键盘上的<strong>F</strong>或<strong>J</strong>键，你需要对出现的字母快速进行按键反应。</p>
-      <a ng-click="state.nextStep()">点我开始</a>
+      <a class="start" ng-click="state.nextStep()">点我开始</a>
     </div>
     <div ng-controller="test" class="d_experiment" ng-show="step.isCurrent()">
       <div class="progress-bar" ng-style="step.pbstyle"></div>
