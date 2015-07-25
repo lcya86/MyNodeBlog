@@ -160,7 +160,7 @@ exports.doPractice = function(req, res) {
 }
 
 exports.doTestTrain = function(req,res){
-  res.render('project/Psychological/v2/Experiment/test&train');
+  res.render('project/Psychological/v2/test&train');
 }
 
 exports.doTextPractice = function(req, res) {
