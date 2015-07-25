@@ -2,11 +2,12 @@ angular.module('psychological.experiment',[])
 
 .controller('doExperiment',['$scope',function($scope){
   $scope.state = {};
-  $scope.state.current = 2;
+  $scope.state.current = 1;
 
   $scope.state.nextStep = function(){
     $scope.state.current += 1;
   };
+  
 
 }])
 
@@ -47,13 +48,14 @@ angular.module('psychological.experiment',[])
   $scope.step.pairs = [];
   $scope.step.currentPair = -1;
   $scope.step.progress = 0;
-  $scope.step.stage = 0;
-  $scope.step.type = 0;
+  $scope.step.stage = 1;
+  $scope.step.type = 1;
   $scope.step.subStage = 1;
   $scope.step.results = [];
   $scope.step.startTime = 0;
   $scope.step.reactive = false;
   $scope.step.miss = false;
+  
   
   $scope.step.isCurrent = function(){
     return $scope.state.current === $scope.step.index;
@@ -83,9 +85,11 @@ angular.module('psychological.experiment',[])
   };
 
   $scope.step.nextPair = function(){
+    
     $scope.step.subStage = 1;
     $scope.step.currentPair += 1;
-    $scope.step.progress = ($scope.step.current/$scope.step.list.length).toFixed(2);
+    $scope.step.results[$scope.step.currentPair] = {};
+    $scope.step.progress = ($scope.step.currentPair/$scope.step.pairs.length).toFixed(2);
     $timeout(function(){
       $scope.step.nextSubStage();
     },500);
@@ -112,5 +116,12 @@ angular.module('psychological.experiment',[])
     }).success(function(data){
       $scope.state.nextStep();
     });
-  }
+  };
+
+  $scope.$watch('state.current',function(nv,ov){
+    if(nv===2){
+      $scope.step.nextPair();
+    }
+  });
+
 }]);
