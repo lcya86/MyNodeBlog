@@ -84,8 +84,11 @@ angular.module('psychological.experiment',[])
     $scope.step.subStage += 1;
   };
 
+  $scope.step.showUp = function(pair){
+    return Math.random().toFixed(2) < pair.positivePosition.toFixed(2);
+  };
+
   $scope.step.nextPair = function(){
-    
     $scope.step.subStage = 1;
     $scope.step.currentPair += 1;
     $scope.step.results[$scope.step.currentPair] = {};
