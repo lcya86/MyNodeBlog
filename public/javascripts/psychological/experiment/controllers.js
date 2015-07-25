@@ -137,4 +137,12 @@ angular.module('psychological.experiment',[])
     }
   });
 
+}])
+
+.controller('end',['$scope',function($scope){
+  $scope.step = {};
+  $scope.step.index = 3;
+  $scope.step.isCurrent = function(){
+    return $scope.state.current === $scope.step.index;
+  }
 }]);
