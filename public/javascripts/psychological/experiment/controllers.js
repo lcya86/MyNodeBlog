@@ -119,7 +119,7 @@ angular.module('psychological.experiment',[])
         $scope.step.results[$scope.step.currentPair].reactTime = 1000;
         $scope.step.nextPair();
       }
-    },4000);
+    },2000);
   };
 
   $scope.step.sendResult = function(){
