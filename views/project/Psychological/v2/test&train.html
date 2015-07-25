@@ -113,8 +113,8 @@
         <div class="downside" ng-show="step.subStage == 2">
           <img ng-src="{{pair.downImg}}" alt="下图">
         </div>
-        <div class="upside" ng-show="step.subStage == 3 && step.showUp(pair)">{{pair.letter}}</div>
-        <div class="downside" ng-show="step.subStage == 3 && !step.showUp(pair)">{{pair.letter}}</div>
+        <div class="upside" ng-show="step.subStage == 2 && step.showUp(pair)">{{pair.letter}}</div>
+        <div class="downside" ng-show="step.subStage == 2 && !step.showUp(pair)">{{pair.letter}}</div>
       </div>
     </div>
   </div>
