@@ -89,6 +89,15 @@
     color:#5E307E;
   }
 
+  .progress-bar{
+    width: 100%;
+    height: 5px;
+    margin-bottom: 5px;
+    background-color: #76b7ff;
+    display: absolute;
+    top: 0px;
+  }
+
 </style>
 <body>
   <div class="container" ng-controller="doExperiment">
@@ -103,6 +112,7 @@
       <a ng-click="state.nextStep()">点我开始</a>
     </div>
     <div ng-controller="test" class="d_experiment" ng-show="step.isCurrent()">
+      <div class="progress-bar" ng-style="step.pbstyle"></div>
       <div ng-repeat="pair in step.pairs" ng-show="step.currentPair == $index">
         <div class="cross" ng-show="step.subStage == 1">
           <span class="glyphicon glyphicon-plus"></span>

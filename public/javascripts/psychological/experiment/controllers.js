@@ -56,6 +56,9 @@ angular.module('psychological.experiment',[])
   $scope.step.reactive = false;
   $scope.step.miss = false;
   $scope.step.showUp = false;
+  $scope.step.pbstyle = {
+    "width":$scope.step.progress+"%"
+  }
   
   $scope.step.isCurrent = function(){
     return $scope.state.current === $scope.step.index;
@@ -92,7 +95,7 @@ angular.module('psychological.experiment',[])
     $scope.step.subStage = 1;
     $scope.step.currentPair += 1;
     $scope.step.results[$scope.step.currentPair] = {};
-    $scope.step.progress = ($scope.step.currentPair/$scope.step.pairs.length).toFixed(2);
+    $scope.step.progress = ($scope.step.currentPair/$scope.step.pairs.length).toFixed(2)*100;
     $timeout(function(){
       $scope.step.nextSubStage();
       $scope.step.showUp = $scope.step.isShowUp($scope.step.pairs[$scope.step.currentPair]);
