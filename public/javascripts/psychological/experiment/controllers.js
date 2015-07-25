@@ -92,6 +92,9 @@ angular.module('psychological.experiment',[])
   };
 
   $scope.step.nextPair = function(){
+    if($scope.step.currentPair == $scope.step.pairs.length){
+      return $scope.step.sendResult();
+    }
     $scope.step.subStage = 1;
     $scope.step.currentPair += 1;
     $scope.step.results[$scope.step.currentPair] = {};
