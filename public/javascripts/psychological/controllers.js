@@ -51,10 +51,6 @@ angular.module('psychological',['psychological.directives'])
       alert('请添加图片');
       return false;
     }
-    if(!$scope.$$childTail.letter||!$scope.$$childTail.position){
-      alert('请填写显示字母和积极概率');
-      return false;
-    }
     $http.post('/project/psychological/v2/addpairs',{
       upImg: $scope.upImg,
       downImg: $scope.downImg,
@@ -110,10 +106,6 @@ angular.module('psychological',['psychological.directives'])
   $scope.submit = function(){
     if($scope.upImg=='' || $scope.downImg==''){
       alert('请添加图片');
-      return false;
-    }
-    if(!$scope.$$childTail.letter||!$scope.$$childTail.position){
-      alert('请填写显示字母和积极概率');
       return false;
     }
     $http.post('/project/psychological/v2/addpairs',{
@@ -172,10 +164,6 @@ angular.module('psychological',['psychological.directives'])
       alert('请添加图片');
       return false;
     }
-    if(!$scope.$$childTail.letter||!$scope.$$childTail.position){
-      alert('请填写显示字母和积极概率');
-      return false;
-    }
     $http.post('/project/psychological/v2/addpairs',{
       upImg: $scope.upImg,
       downImg: $scope.downImg,
@@ -230,10 +218,6 @@ angular.module('psychological',['psychological.directives'])
   $scope.submit = function(){
     if($scope.upImg=='' || $scope.downImg==''){
       alert('请添加图片');
-      return false;
-    }
-    if(!$scope.$$childTail.letter||!$scope.$$childTail.position){
-      alert('请填写显示字母和积极概率');
       return false;
     }
     $http.post('/project/psychological/v2/addpairs',{
@@ -292,10 +276,6 @@ angular.module('psychological',['psychological.directives'])
       alert('请添加图片');
       return false;
     }
-    if(!$scope.$$childTail.letter||!$scope.$$childTail.position){
-      alert('请填写显示字母和积极概率');
-      return false;
-    }
     $http.post('/project/psychological/v2/addpairs',{
       upImg: $scope.upImg,
       downImg: $scope.downImg,
@@ -352,10 +332,6 @@ angular.module('psychological',['psychological.directives'])
   $scope.submit = function(){
     if($scope.upImg=='' || $scope.downImg==''){
       alert('请添加图片');
-      return false;
-    }
-    if(!$scope.$$childTail.letter||!$scope.$$childTail.position){
-      alert('请填写显示字母和积极概率');
       return false;
     }
     $http.post('/project/psychological/v2/addpairs',{
