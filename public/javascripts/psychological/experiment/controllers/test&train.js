@@ -104,16 +104,19 @@ angular.module('psychological.test&train',[])
     $scope.step.pbstyle = {
       "width":$scope.step.progress+"%"
     };
-    $timeout(function(){
+    var t1 = $timeout(function(){
       $scope.step.nextSubStage();
       $scope.step.showUp = $scope.step.isShowUp($scope.step.pairs[$scope.step.currentPair]);
     },500);
-    $timeout(function(){
+    var t2 = $timeout(function(){
       $scope.step.nextSubStage();
       $scope.step.startTime = new Date().getTime();
       $scope.step.miss = true; 
     },1000);
-    $scope.step.timer = $timeout(function(){
+    var t3 = $scope.step.timer = $timeout(function(){
+      $timeout.cancel(t1);
+      $timeout.cancel(t2);
+      $timeout.cancel(t3);
       if($scope.step.miss){
         $scope.step.results[$scope.step.currentPair].isMiss = true;
         $scope.step.results[$scope.step.currentPair].reactTime = 1000;
@@ -210,16 +213,19 @@ angular.module('psychological.test&train',[])
     $scope.step.pbstyle = {
       "width":$scope.step.progress+"%"
     };
-    $timeout(function(){
+    var t1 = $timeout(function(){
       $scope.step.nextSubStage();
       $scope.step.showUp = $scope.step.isShowUp($scope.step.pairs[$scope.step.currentPair]);
     },500);
-    $timeout(function(){
+    var t2 = $timeout(function(){
       $scope.step.nextSubStage();
       $scope.step.startTime = new Date().getTime();
       $scope.step.miss = true; 
     },1000);
-    $scope.step.timer = $timeout(function(){
+    var t3 = $scope.step.timer = $timeout(function(){
+      $timeout.cancel(t1);
+      $timeout.cancel(t2);
+      $timeout.cancel(t3);
       if($scope.step.miss){
         $scope.step.results[$scope.step.currentPair].isMiss = true;
         $scope.step.results[$scope.step.currentPair].reactTime = 1000;
