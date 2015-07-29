@@ -179,7 +179,7 @@
         <div class="downside" ng-show="step.subStage == 2">
           <img ng-src="{{pair.downImg}}" alt="下图">
         </div>
-        <div ng-show="step.subStage == 3">
+        <div ng-show="step.subStage == 3 && pair.letter">
           <a class="eButton" ng-click="step.clickButton('E',pair)"><strong>E</strong></a>
           <div class="upside" ng-show="step.showUp">
             <strong>{{pair.letter}}</strong>
