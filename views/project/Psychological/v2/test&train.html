@@ -167,27 +167,27 @@
       <p>注意：请保持注意力集中，又对又快的进行判断。这部分练习将持续20分钟左右，如果理解上述说明，请点击“继续”。</p>
       <a class="start" ng-click="state.nextStep()">继续</a>
     </div>
-    <div ng-controller="test" class="d_experiment" ng-show="step.isCurrent()">
-      <div class="progress-bar" ng-style="step.pbstyle"></div>
-      <div ng-repeat="pair in step.pairs" ng-show="step.currentPair == $index">
-        <div class="cross" ng-show="step.subStage == 1">
+    <div ng-controller="testController" class="d_experiment" ng-show="test.isCurrent()">
+      <div class="progress-bar" ng-style="test.pbstyle"></div>
+      <div ng-repeat="pair in test.pairs" ng-show="test.currentPair == $index">
+        <div class="cross" ng-show="test.subStage == 1">
           <span class="glyphicon glyphicon-plus"></span>
         </div>
-        <div class="upside" ng-show="step.subStage == 2">
+        <div class="upside" ng-show="test.subStage == 2">
           <img ng-src="{{pair.upImg}}" alt="上图">
         </div>
-        <div class="downside" ng-show="step.subStage == 2">
+        <div class="downside" ng-show="test.subStage == 2">
           <img ng-src="{{pair.downImg}}" alt="下图">
         </div>
-        <div ng-show="step.subStage == 3 && pair.letter">
-          <a class="eButton" ng-click="step.clickButton('E',pair)"><strong>E</strong></a>
-          <div class="upside" ng-show="step.showUp">
+        <div ng-show="test.subStage == 3 && pair.letter">
+          <a class="eButton" ng-click="test.clickButton('E',pair)"><strong>E</strong></a>
+          <div class="upside" ng-show="test.showUp">
             <strong>{{pair.letter}}</strong>
           </div>
-          <div class="downside" ng-show="!step.showUp">
+          <div class="downside" ng-show="!test.showUp">
             <strong>{{pair.letter}}</strong>
           </div>
-          <a class="fButton" ng-click="step.clickButton('F',pair)"><strong>F</strong></a>
+          <a class="fButton" ng-click="test.clickButton('F',pair)"><strong>F</strong></a>
         </div>
       </div>
     </div>
@@ -195,31 +195,31 @@
       <h4>请休息1min，进入下一阶段。</h4>
       <a class="start" ng-click="state.nextStep()">继续</a>
     </div>
-    <div ng-controller="train" class="d_experiment" ng-show="step.isCurrent()">
-      <div class="progress-bar" ng-style="step.pbstyle"></div>
-      <div ng-repeat="pair in step.pairs" ng-show="step.currentPair == $index">
-        <div class="cross" ng-show="step.subStage == 1">
+    <div ng-controller="trainController" class="d_experiment" ng-show="train.isCurrent()">
+      <div class="progress-bar" ng-style="train.pbstyle"></div>
+      <div ng-repeat="pair in train.pairs" ng-show="train.currentPair == $index">
+        <div class="cross" ng-show="train.subStage == 1">
           <span class="glyphicon glyphicon-plus"></span>
         </div>
-        <div class="upside" ng-show="step.subStage == 2">
+        <div class="upside" ng-show="train.subStage == 2">
           <img ng-src="{{pair.upImg}}" alt="上图">
         </div>
-        <div class="downside" ng-show="step.subStage == 2">
+        <div class="downside" ng-show="train.subStage == 2">
           <img ng-src="{{pair.downImg}}" alt="下图">
         </div>
-        <div ng-show="step.subStage == 3 && pair.letter">
-          <a class="eButton" ng-click="step.clickButton('E',pair)"><strong>E</strong></a>
-          <div class="upside" ng-show="step.showUp">
+        <div ng-show="train.subStage == 3 && pair.letter">
+          <a class="eButton" ng-click="train.clickButton('E',pair)"><strong>E</strong></a>
+          <div class="upside" ng-show="train.showUp">
             <strong>{{pair.letter}}</strong>
           </div>
-          <div class="downside" ng-show="!step.showUp">
+          <div class="downside" ng-show="!train.showUp">
             <strong>{{pair.letter}}</strong>
           </div>
-          <a class="fButton" ng-click="step.clickButton('F',pair)"><strong>F</strong></a>
+          <a class="fButton" ng-click="train.clickButton('F',pair)"><strong>F</strong></a>
         </div>
       </div>
     </div>
-    <div ng-controller="end" class="welcome" ng-show="step.isCurrent()">
+    <div ng-controller="end" class="welcome" ng-show="train.isCurrent()">
       <h4>实验结束，感谢您参与我们的实验。</h4>
     </div>
   </div>
