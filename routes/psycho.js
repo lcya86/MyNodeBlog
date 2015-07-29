@@ -148,15 +148,7 @@ exports.psychologicalExperiment = function(req, res) {
 }
 
 exports.doPractice = function(req, res) {
-  model.MaterialImgPairs.find({stage:1}).sort({
-    'sequence': +1
-  }).exec(function(err, materials) {
-    return res.render('project/Psychological/v2/Experiment', {
-      material: materials,
-      stage:1,
-      stage_text:'练习'
-    });
-  });
+  res.render('project/Psychological/v2/practice');
 }
 
 exports.doTestTrain = function(req,res){

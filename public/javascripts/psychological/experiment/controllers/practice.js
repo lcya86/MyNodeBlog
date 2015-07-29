@@ -42,13 +42,13 @@ angular.module('psychological.experiment',[])
   }
 }])
 
-.controller('test',['$scope','$http','$timeout',function($scope,$http,$timeout){
+.controller('practice',['$scope','$http','$timeout',function($scope,$http,$timeout){
   $scope.step = {};
   $scope.step.index = 2;
   $scope.step.pairs = [];
   $scope.step.currentPair = -1;
   $scope.step.progress = 0;
-  $scope.step.stage = 1;
+  $scope.step.stage = 2;
   $scope.step.type = 1;
   $scope.step.subStage = 1;
   $scope.step.results = [];
