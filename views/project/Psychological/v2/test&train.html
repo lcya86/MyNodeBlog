@@ -156,71 +156,83 @@
 </style>
 <body>
   <div class="container" ng-controller="doExperiment">
-    <div ng-controller="login" class="d_login" ng-if="step.isCurrent()">
-      请输入姓名
-      <input ng-model="state.name" type="text" placeholder="请输入姓名"/>
-      <a ng-click="step.login()" class="b_login">确定</a>
+    <div ng-controller="login">
+      <div class="d_login" ng-if="step.isCurrent()">
+        请输入姓名
+        <input ng-model="state.name" type="text" placeholder="请输入姓名"/>
+        <a ng-click="step.login()" class="b_login">确定</a>
+      </div>
     </div>
-    <div ng-controller="welcome" class="welcome" ng-if="step.isCurrent()">
-      <h4>欢迎你来参加我们的实验！</h4>
-      <p>在本实验中，屏幕将出现两个面孔，之后面孔消失，会出现字母<strong>E</strong>或<strong>F</strong>，如果出现<strong>E</strong>，请触摸屏幕中字母“<strong>E</strong>”，如果出现字母<strong>F</strong>，请触摸屏幕中的字母“<strong>F</strong>”。</p>
-      <p>注意：请保持注意力集中，又对又快的进行判断。这部分练习将持续20分钟左右，如果理解上述说明，请点击“继续”。</p>
-      <a class="start" ng-click="state.nextStep()">继续</a>
+    <div ng-controller="welcome">
+      <div class="welcome" ng-if="step.isCurrent()">
+        <h4>欢迎你来参加我们的实验！</h4>
+        <p>在本实验中，屏幕将出现两个面孔，之后面孔消失，会出现字母<strong>E</strong>或<strong>F</strong>，如果出现<strong>E</strong>，请触摸屏幕中字母“<strong>E</strong>”，如果出现字母<strong>F</strong>，请触摸屏幕中的字母“<strong>F</strong>”。</p>
+        <p>注意：请保持注意力集中，又对又快的进行判断。这部分练习将持续20分钟左右，如果理解上述说明，请点击“继续”。</p>
+        <a class="start" ng-click="state.nextStep()">继续</a>
+      </div>
     </div>
-    <div ng-controller="testController" class="d_experiment" ng-if="test.isCurrent()">
-      <div class="progress-bar" ng-style="test.pbstyle"></div>
-      <div ng-repeat="pair in test.pairs" ng-show="test.currentPair == $index">
-        <div class="cross" ng-show="test.subStage == 1">
-          <span class="glyphicon glyphicon-plus"></span>
-        </div>
-        <div class="upside" ng-show="test.subStage == 2">
-          <img ng-src="{{pair.upImg}}" alt="上图">
-        </div>
-        <div class="downside" ng-show="test.subStage == 2">
-          <img ng-src="{{pair.downImg}}" alt="下图">
-        </div>
-        <div ng-show="test.subStage == 3 && pair.letter">
-          <a class="eButton" ng-click="test.clickButton('E',pair)"><strong>E</strong></a>
-          <div class="upside" ng-show="test.showUp">
-            <strong>{{pair.letter}}</strong>
+    <div ng-controller="testController">
+      <div class="d_experiment" ng-if="test.isCurrent()">
+        <div class="progress-bar" ng-style="test.pbstyle"></div>
+        <div ng-repeat="pair in test.pairs" ng-show="test.currentPair == $index">
+          <div class="cross" ng-show="test.subStage == 1">
+            <span class="glyphicon glyphicon-plus"></span>
           </div>
-          <div class="downside" ng-show="!test.showUp">
-            <strong>{{pair.letter}}</strong>
+          <div class="upside" ng-show="test.subStage == 2">
+            <img ng-src="{{pair.upImg}}" alt="上图">
           </div>
-          <a class="fButton" ng-click="test.clickButton('F',pair)"><strong>F</strong></a>
+          <div class="downside" ng-show="test.subStage == 2">
+            <img ng-src="{{pair.downImg}}" alt="下图">
+          </div>
+          <div ng-show="test.subStage == 3 && pair.letter">
+            <a class="eButton" ng-click="test.clickButton('E',pair)"><strong>E</strong></a>
+            <div class="upside" ng-show="test.showUp">
+              <strong>{{pair.letter}}</strong>
+            </div>
+            <div class="downside" ng-show="!test.showUp">
+              <strong>{{pair.letter}}</strong>
+            </div>
+            <a class="fButton" ng-click="test.clickButton('F',pair)"><strong>F</strong></a>
+          </div>
         </div>
       </div>
     </div>
-    <div ng-controller="break" class="welcome" ng-if="step.isCurrent()">
-      <h4>请休息1min，进入下一阶段。</h4>
-      <a class="start" ng-click="state.nextStep()">继续</a>
+    <div ng-controller="break">
+      <div class="welcome" ng-if="step.isCurrent()">
+        <h4>请休息1min，进入下一阶段。</h4>
+        <a class="start" ng-click="state.nextStep()">继续</a>
+      </div>
     </div>
-    <div ng-controller="trainController" class="d_experiment" ng-if="train.isCurrent()">
-      <div class="progress-bar" ng-style="train.pbstyle"></div>
-      <div ng-repeat="pair in train.pairs" ng-show="train.currentPair == $index">
-        <div class="cross" ng-show="train.subStage == 1">
-          <span class="glyphicon glyphicon-plus"></span>
-        </div>
-        <div class="upside" ng-show="train.subStage == 2">
-          <img ng-src="{{pair.upImg}}" alt="上图">
-        </div>
-        <div class="downside" ng-show="train.subStage == 2">
-          <img ng-src="{{pair.downImg}}" alt="下图">
-        </div>
-        <div ng-show="train.subStage == 3 && pair.letter">
-          <a class="eButton" ng-click="train.clickButton('E',pair)"><strong>E</strong></a>
-          <div class="upside" ng-show="train.showUp">
-            <strong>{{pair.letter}}</strong>
+    <div ng-controller="trainController">
+      <div class="d_experiment" ng-if="train.isCurrent()">
+        <div class="progress-bar" ng-style="train.pbstyle"></div>
+        <div ng-repeat="pair in train.pairs" ng-show="train.currentPair == $index">
+          <div class="cross" ng-show="train.subStage == 1">
+            <span class="glyphicon glyphicon-plus"></span>
           </div>
-          <div class="downside" ng-show="!train.showUp">
-            <strong>{{pair.letter}}</strong>
+          <div class="upside" ng-show="train.subStage == 2">
+            <img ng-src="{{pair.upImg}}" alt="上图">
           </div>
-          <a class="fButton" ng-click="train.clickButton('F',pair)"><strong>F</strong></a>
+          <div class="downside" ng-show="train.subStage == 2">
+            <img ng-src="{{pair.downImg}}" alt="下图">
+          </div>
+          <div ng-show="train.subStage == 3 && pair.letter">
+            <a class="eButton" ng-click="train.clickButton('E',pair)"><strong>E</strong></a>
+            <div class="upside" ng-show="train.showUp">
+              <strong>{{pair.letter}}</strong>
+            </div>
+            <div class="downside" ng-show="!train.showUp">
+              <strong>{{pair.letter}}</strong>
+            </div>
+            <a class="fButton" ng-click="train.clickButton('F',pair)"><strong>F</strong></a>
+          </div>
         </div>
       </div>
     </div>
-    <div ng-controller="end" class="welcome" ng-if="train.isCurrent()">
-      <h4>实验结束，感谢您参与我们的实验。</h4>
+    <div ng-controller="end">
+      <div class="welcome" ng-if="train.isCurrent()">
+        <h4>实验结束，感谢您参与我们的实验。</h4>
+      </div>
     </div>
   </div>
 </html>
