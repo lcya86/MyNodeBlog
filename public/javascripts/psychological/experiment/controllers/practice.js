@@ -1,5 +1,11 @@
 angular.module('psychological.experiment',['angular-gestures'])
 
+.config(function (hammerDefaultOptsProvider) {
+  hammerDefaultOptsProvider.set({
+      recognizers: [[Hammer.Tap, {time: 250}]]
+  });
+})
+
 .controller('doExperiment',['$scope',function($scope){
   $scope.state = {};
   $scope.state.current = 0;
