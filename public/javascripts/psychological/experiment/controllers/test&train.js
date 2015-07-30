@@ -1,4 +1,4 @@
-angular.module('psychological.test&train',['psychological.services'])
+angular.module('psychological.test&train',[])
 
 .controller('doExperiment',['$scope',function($scope){
   $scope.state = {};
@@ -42,7 +42,7 @@ angular.module('psychological.test&train',['psychological.services'])
   }
 }])
 
-.controller('testController',['$scope','$http','$timeout','randomArray',function($scope,$http,$timeout,randomArray){
+.controller('testController',['$scope','$http','$timeout',function($scope,$http,$timeout){
   $scope.test = {};
   $scope.test.index = 2;
   $scope.test.pairs = [];
