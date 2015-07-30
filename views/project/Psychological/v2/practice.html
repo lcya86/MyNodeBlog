@@ -162,13 +162,13 @@
     <div ng-controller="login" class="d_login" ng-show="step.isCurrent()">
       请输入姓名
       <input ng-model="state.name" type="text" placeholder="请输入姓名"/>
-      <a ng-click="step.login()" class="b_login">确定</a>
+      <a hm-tap="step.login()" class="b_login">确定</a>
     </div>
     <div ng-controller="welcome" class="welcome" ng-show="step.isCurrent()">
       <h4>欢迎你来参加我们的实验！</h4>
       <p>在本实验中，屏幕将出现两个面孔，之后面孔消失，会出现字母<strong>E</strong>或<strong>F</strong>，如果出现<strong>E</strong>，请触摸屏幕中字母“<strong>E</strong>”，如果出现字母<strong>F</strong>，请触摸屏幕中的字母“<strong>F</strong>”。</p>
       <p>注意：请保持注意力集中，又对又快的进行判断。这部分练习将持续20分钟左右，如果理解上述说明，请点击“继续”。</p>
-      <a class="start" ng-click="state.nextStep()">继续</a>
+      <a class="start" hm-tap="state.nextStep()">继续</a>
     </div>
     <div ng-controller="practice" class="d_experiment" ng-show="step.isCurrent()">
       <div class="progress-bar" ng-style="step.pbstyle"></div>
@@ -183,14 +183,14 @@
           <img ng-src="{{pair.downImg}}" alt="下图">
         </div>
         <div ng-show="step.subStage == 3 && pair.letter">
-          <a class="eButton" ng-click="step.clickButton('E',pair)"><strong>E</strong></a>
+          <a class="eButton" hm-tap="step.clickButton('E',pair)"><strong>E</strong></a>
           <div class="upside" ng-show="step.showUp">
             <strong>{{pair.letter}}</strong>
           </div>
           <div class="downside" ng-show="!step.showUp">
             <strong>{{pair.letter}}</strong>
           </div>
-          <a class="fButton" ng-click="step.clickButton('F',pair)"><strong>F</strong></a>
+          <a class="fButton" hm-tap="step.clickButton('F',pair)"><strong>F</strong></a>
         </div>
       </div>
     </div>

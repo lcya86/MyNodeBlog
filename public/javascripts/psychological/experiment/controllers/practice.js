@@ -1,4 +1,4 @@
-angular.module('psychological.experiment',[])
+angular.module('psychological.experiment',['angular-gestures'])
 
 .controller('doExperiment',['$scope',function($scope){
   $scope.state = {};
