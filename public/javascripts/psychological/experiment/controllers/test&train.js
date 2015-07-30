@@ -136,7 +136,7 @@ angular.module('psychological.test&train',[])
   };
 
   $scope.$watch('state.current',function(nv,ov){
-    if(nv===2){
+    if(nv===$scope.test.index){
       $scope.test.nextPair();
     }
   });
@@ -245,7 +245,7 @@ angular.module('psychological.test&train',[])
   };
 
   $scope.$watch('state.current',function(nv,ov){
-    if(nv===2){
+    if(nv===$scope.train.index){
       $scope.train.nextPair();
     }
   });

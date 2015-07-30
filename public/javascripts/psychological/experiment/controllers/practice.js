@@ -136,7 +136,7 @@ angular.module('psychological.experiment',[])
   };
 
   $scope.$watch('state.current',function(nv,ov){
-    if(nv===2){
+    if(nv===$scope.step.index){
       $scope.step.nextPair();
     }
   });
