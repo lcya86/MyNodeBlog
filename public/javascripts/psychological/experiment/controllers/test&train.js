@@ -1,4 +1,4 @@
-angular.module('psychological.test&train',[])
+angular.module('psychological.test&train',['psychological.services'])
 
 .controller('doExperiment',['$scope',function($scope){
   $scope.state = {};
@@ -42,7 +42,7 @@ angular.module('psychological.test&train',[])
   }
 }])
 
-.controller('testController',['$scope','$http','$timeout',function($scope,$http,$timeout){
+.controller('testController',['$scope','$http','$timeout','randomArray',function($scope,$http,$timeout,randomArray){
   $scope.test = {};
   $scope.test.index = 2;
   $scope.test.pairs = [];
@@ -67,7 +67,9 @@ angular.module('psychological.test&train',[])
   $scope.test.getPairs = function(){
     $http.get('/project/psychological/v2/getpairs?type='+$scope.test.type+'&stage='+$scope.test.stage)
       .success(function(data){
-        $scope.test.pairs = data.pairs;
+        $scope.test.pairs = data.pairs.sort(function(){
+          return Math.random() > .5 ? -1 : 1;
+        });
       });
   };
   $scope.test.getPairs();
@@ -176,7 +178,9 @@ angular.module('psychological.test&train',[])
   $scope.train.getPairs = function(){
     $http.get('/project/psychological/v2/getpairs?type='+$scope.train.type+'&stage='+$scope.train.stage)
       .success(function(data){
-        $scope.train.pairs = data.pairs;
+        $scope.train.pairs = data.pairs.sort(function(){
+          return Math.random() > .5 ? -1 : 1;
+        });
       });
   };
   $scope.train.getPairs();

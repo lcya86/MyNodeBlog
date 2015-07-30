@@ -67,7 +67,9 @@ angular.module('psychological.experiment',[])
   $scope.step.getPairs = function(){
     $http.get('/project/psychological/v2/getpairs?type='+$scope.step.type+'&stage='+$scope.step.stage)
       .success(function(data){
-        $scope.step.pairs = data.pairs;
+        $scope.step.pairs = data.pairs.sort(function(){
+          return Math.random() > .5 ? -1 : 1;
+        });
       });
   };
   $scope.step.getPairs();
