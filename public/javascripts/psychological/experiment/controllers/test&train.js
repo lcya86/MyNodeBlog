@@ -2,7 +2,7 @@ angular.module('psychological.test&train',['angular-gestures'])
 
 .config(function (hammerDefaultOptsProvider) {
   hammerDefaultOptsProvider.set({
-      recognizers: [[Hammer.Tap, {time: 10}]]
+      recognizers: [[Hammer.Tap, {time: 250}]]
   });
 })
 
