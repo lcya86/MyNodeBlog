@@ -201,10 +201,10 @@
             <span class="glyphicon glyphicon-plus"></span>
           </div>
           <div class="upside" ng-show="test.subStage == 2">
-            <img src="{{pair.upImg}}" alt="上图">
+            <img ng-src="{{pair.upImg}}" alt="上图">
           </div>
           <div class="downside" ng-show="test.subStage == 2">
-            <img src="{{pair.downImg}}" alt="下图">
+            <img ng-src="{{pair.downImg}}" alt="下图">
           </div>
           <div ng-show="test.subStage == 3 && pair.letter">
             <a class="eButton" hm-tap="test.clickButton('E',pair)"><strong>E</strong></a>
@@ -233,10 +233,10 @@
             <span class="glyphicon glyphicon-plus"></span>
           </div>
           <div class="upside" ng-show="train.subStage == 2">
-            <img src="{{pair.upImg}}" alt="上图">
+            <img ng-src="{{pair.upImg}}" alt="上图">
           </div>
           <div class="downside" ng-show="train.subStage == 2">
-            <img src="{{pair.downImg}}" alt="下图">
+            <img ng-src="{{pair.downImg}}" alt="下图">
           </div>
           <div ng-show="train.subStage == 3 && pair.letter">
             <a class="eButton" hm-tap="train.clickButton('E',pair)"><strong>E</strong></a>
@@ -258,9 +258,11 @@
     </div>
   </div>
   <script type="text/javascript">
-    window.onload = function(){
+    window.setTimeout('load();',5000);
+
+    function load(){
       document.body.removeChild(document.getElementById('spinner'));
       document.getElementById('container').style.display = 'block';
-    };
+    }
   </script>
 </html>
