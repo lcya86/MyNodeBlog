@@ -81,10 +81,10 @@ angular.module('psychological.test&train',['angular-gestures'])
   $scope.test.getPairs();
   
   $scope.test.clickButton = function(button,pair){
-    $timeout.cancel($scope.test.timer);
-    $scope.test.miss = false;
-    $scope.test.results[$scope.test.currentPair].isMiss = false;
     $scope.test.results[$scope.test.currentPair].reactTime = (new Date().getTime()) - $scope.test.startTime;
+    $scope.test.miss = false;
+    $timeout.cancel($scope.test.timer);
+    $scope.test.results[$scope.test.currentPair].isMiss = false;
     if(button==pair.letter){
       $scope.test.results[$scope.test.currentPair].isCorrect = true;
     }else{
@@ -192,10 +192,10 @@ angular.module('psychological.test&train',['angular-gestures'])
   $scope.train.getPairs();
   
   $scope.train.clickButton = function(button,pair){
-    $timeout.cancel($scope.train.timer);
-    $scope.train.miss = false;
-    $scope.train.results[$scope.train.currentPair].isMiss = false;
     $scope.train.results[$scope.train.currentPair].reactTime = (new Date().getTime()) - $scope.train.startTime;
+    $scope.train.miss = false;
+    $timeout.cancel($scope.train.timer);
+    $scope.train.results[$scope.train.currentPair].isMiss = false;
     if(button==pair.letter){
       $scope.train.results[$scope.train.currentPair].isCorrect = true;
     }else{

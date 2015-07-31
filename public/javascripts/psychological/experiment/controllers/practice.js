@@ -81,10 +81,10 @@ angular.module('psychological.experiment',['angular-gestures'])
   $scope.step.getPairs();
   
   $scope.step.clickButton = function(button,pair){
-    $timeout.cancel($scope.step.timer);
-    $scope.step.miss = false;
-    $scope.step.results[$scope.step.currentPair].isMiss = false;
     $scope.step.results[$scope.step.currentPair].reactTime = (new Date().getTime()) - $scope.step.startTime;
+    $scope.step.miss = false;
+    $timeout.cancel($scope.step.timer);
+    $scope.step.results[$scope.step.currentPair].isMiss = false;
     if(button==pair.letter){
       $scope.step.results[$scope.step.currentPair].isCorrect = true;
     }else{
