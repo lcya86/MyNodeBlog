@@ -9,10 +9,10 @@
   <script type="text/javascript" src="/javascripts/hammer.min.js"></script>
   <script type="text/javascript" src="/javascripts/gestures.min.js"></script>
   <script type="text/javascript" src="/javascripts/psychological/experiment/controllers/practice.js"></script>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/spinner.css">
 </head>
 <style type="text/css">
   html,body{
-    height: 100%;
     margin: 0px;
   }
   .imgList{
@@ -162,7 +162,21 @@
   }
 </style>
 <body>
-  <div class="container" ng-controller="doExperiment">
+  <div id="spinner" class="spinner">
+    <div class="rect1"></div>
+    <div class="rect2"></div>
+    <div class="rect3"></div>
+    <div class="rect4"></div>
+    <div class="rect5"></div>
+    <div class="rect6"></div>
+    <div class="rect7"></div>
+    <div class="rect8"></div>
+    <div class="rect9"></div>
+    <div class="rect10"></div>
+    <div class="rect11"></div>
+    <div class="rect12"></div>
+  </div>
+  <div id="container" class="container" ng-controller="doExperiment" style="display:none;">
     <div ng-controller="login" class="d_login" ng-show="step.isCurrent()">
       请输入姓名
       <input ng-model="state.name" type="text" placeholder="请输入姓名"/>
@@ -202,4 +216,12 @@
       <h4>实验结束，感谢您参与我们的实验。</h4>
     </div>
   </div>
+  <script type="text/javascript">
+    window.setTimeout('load();',15000);
+
+    function load(){
+      document.body.removeChild(document.getElementById('spinner'));
+      document.getElementById('container').style.display = 'block';
+    }
+  </script>
 </html>
