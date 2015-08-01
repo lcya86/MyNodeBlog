@@ -85,6 +85,7 @@ angular.module('psychological.experiment',['angular-gestures'])
     $scope.step.miss = false;
     $timeout.cancel($scope.step.timer);
     $scope.step.results[$scope.step.currentPair].isMiss = false;
+    $scope.step.results[$scope.test.currentPair].sequence = pair.sequence;
     if(button==pair.letter){
       $scope.step.results[$scope.step.currentPair].isCorrect = true;
     }else{
@@ -128,6 +129,7 @@ angular.module('psychological.experiment',['angular-gestures'])
       if($scope.step.miss){
         $scope.step.results[$scope.step.currentPair].isMiss = true;
         $scope.step.results[$scope.step.currentPair].reactTime = 1000;
+        $scope.step.resulte[$scope.step.currentPair].sequence = $scope.step.pairs[$scope.step.currentPair].sequence;
         $scope.step.nextPair();
       }
     },2000);

@@ -85,6 +85,7 @@ angular.module('psychological.test&train',['angular-gestures'])
     $scope.test.miss = false;
     $timeout.cancel($scope.test.timer);
     $scope.test.results[$scope.test.currentPair].isMiss = false;
+    $scope.test.results[$scope.test.currentPair].sequence = pair.sequence;
     if(button==pair.letter){
       $scope.test.results[$scope.test.currentPair].isCorrect = true;
     }else{
@@ -128,6 +129,7 @@ angular.module('psychological.test&train',['angular-gestures'])
       if($scope.test.miss){
         $scope.test.results[$scope.test.currentPair].isMiss = true;
         $scope.test.results[$scope.test.currentPair].reactTime = 1000;
+        $scope.test.resulte[$scope.test.currentPair].sequence = $scope.test.pairs[$scope.test.currentPair].sequence;
         $scope.test.nextPair();
       }
     },2000);
@@ -196,6 +198,7 @@ angular.module('psychological.test&train',['angular-gestures'])
     $scope.train.miss = false;
     $timeout.cancel($scope.train.timer);
     $scope.train.results[$scope.train.currentPair].isMiss = false;
+    $scope.train.results[$scope.train.currentPair].sequence = pair.sequence;
     if(button==pair.letter){
       $scope.train.results[$scope.train.currentPair].isCorrect = true;
     }else{
@@ -239,6 +242,7 @@ angular.module('psychological.test&train',['angular-gestures'])
       if($scope.train.miss){
         $scope.train.results[$scope.train.currentPair].isMiss = true;
         $scope.train.results[$scope.train.currentPair].reactTime = 1000;
+        $scope.train.resulte[$scope.train.currentPair].sequence = $scope.train.pairs[$scope.train.currentPair].sequence;
         $scope.train.nextPair();
       }
     },2000);
