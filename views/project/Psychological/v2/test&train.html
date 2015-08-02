@@ -257,9 +257,35 @@
     </div>
   </div>
   <script type="text/javascript">
-    document.ready = function(){
-      load();
+    console.log(window);
+    console.log(document);
+    window.onload = function(){
+      console.log('onload');
     }
+    document.ready = function(){
+      console.log('ready');
+    }
+    document.onready = function(){
+      console.log('onready');
+    }
+    window.load = function(){
+      console.log('load');
+    }
+    window.addEventListener('onload',function(){
+      console.log('add onload');
+    },false);
+
+    document.addEventListener('ready',function(){
+      console.log('add ready');
+    },false);
+
+    document.addEventListener('DOMContentLoaded',function(){
+      console.log('add DOMContentLoaded');
+    });
+
+    // document.ready = function(){
+    //   load();
+    // }
 
     function load(){
       document.body.removeChild(document.getElementById('spinner'));
