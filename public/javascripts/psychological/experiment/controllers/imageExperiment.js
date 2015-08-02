@@ -154,8 +154,6 @@ angular.module('psychological.test&train',['angular-gestures'])
   }
 
   $scope.step.repeat = function(){
-    $scope.step.index = 2;
-    $scope.step.pairs = [];
     $scope.step.currentPair = -1;
     $scope.step.progress = 0;
     $scope.step.stage = 2;
@@ -171,6 +169,8 @@ angular.module('psychological.test&train',['angular-gestures'])
     $scope.step.pbstyle = {
       "width":$scope.step.progress+"%"
     };
+    $scope.step.getPairs();
+    $scope.step.nextPair();
   };
 
   $scope.$watch('state.current',function(nv,ov){
