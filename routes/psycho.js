@@ -151,8 +151,8 @@ exports.doPractice = function(req, res) {
   res.render('project/Psychological/v2/practice');
 }
 
-exports.doTestTrain = function(req,res){
-  res.render('project/Psychological/v2/test&train');
+exports.doImageExperiment = function(req,res){
+  res.render('project/Psychological/v2/imageExperiment');
 }
 
 exports.doTextPractice = function(req, res) {

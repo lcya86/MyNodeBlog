@@ -15,6 +15,10 @@ angular.module('psychological.test&train',['angular-gestures'])
   $scope.state.nextStep = function(){
     $scope.state.current += 1;
   };
+
+  $scope.state.toStep = function(index){
+    $scope.state.current = index;
+  };
   
 
 }])
@@ -49,9 +53,145 @@ angular.module('psychological.test&train',['angular-gestures'])
   }
 }])
 
+.controller('practice',['$scope','$http','$timeout',function($scope,$http,$timeout){
+  $scope.step = {};
+  $scope.step.index = 2;
+  $scope.step.pairs = [];
+  $scope.step.currentPair = -1;
+  $scope.step.progress = 0;
+  $scope.step.stage = 2;
+  $scope.step.type = 1;
+  $scope.step.subStage = 1;
+  $scope.step.results = [];
+  $scope.step.startTime = 0;
+  $scope.step.reactive = false;
+  $scope.step.miss = false;
+  $scope.step.showUp = false;
+  $scope.step.timer = null;
+  $scope.step.repeatTime = 0;
+  $scope.step.pbstyle = {
+    "width":$scope.step.progress+"%"
+  };
+  
+  $scope.step.isCurrent = function(){
+    return $scope.state.current === $scope.step.index;
+  }
+  $scope.step.getPairs = function(){
+    $http.get('/project/psychological/v2/getpairs?type='+$scope.step.type+'&stage='+$scope.step.stage)
+      .success(function(data){
+        $scope.step.pairs = data.pairs.sort(function(){
+          return Math.random() > .5 ? -1 : 1;
+        });
+      });
+  };
+  $scope.step.getPairs();
+  
+  $scope.step.clickButton = function(button,pair){
+    $scope.step.results[$scope.step.currentPair].reactTime = (new Date().getTime()) - $scope.step.startTime;
+    $scope.step.miss = false;
+    $timeout.cancel($scope.step.timer);
+    $scope.step.results[$scope.step.currentPair].isMiss = false;
+    $scope.step.results[$scope.test.currentPair].sequence = pair.sequence;
+    if(button==pair.letter){
+      $scope.step.results[$scope.step.currentPair].isCorrect = true;
+    }else{
+      $scope.step.results[$scope.step.currentPair].isCorrect = false;
+    }
+    $scope.step.nextPair();
+  };
+
+  $scope.step.nextSubStage = function(){
+    $scope.step.subStage += 1;
+  };
+
+  $scope.step.isShowUp = function(pair){
+    return Math.random().toFixed(2) < pair.positivePosition.toFixed(2);
+  };
+
+  $scope.step.nextPair = function(){
+    if($scope.step.currentPair == $scope.step.pairs.length-1){
+      if($scope.step.correctRate() > 0.95 || $scope.step.repeatTime > 2){
+        $scope.state.nextStep();
+      }else{
+        alert('您的正确率为'+''+' 没有达到95%，请重新练习。');
+        $scope.step.repeat();
+      }
+    }
+    $scope.step.subStage = 1;
+    $scope.step.currentPair += 1;
+    $scope.step.results[$scope.step.currentPair] = {};
+    $scope.step.progress = ($scope.step.currentPair/$scope.step.pairs.length).toFixed(2)*100;
+    $scope.step.pbstyle = {
+      "width":$scope.step.progress+"%"
+    };
+    var t1 = $timeout(function(){
+      $scope.step.nextSubStage();
+      $scope.step.showUp = $scope.step.isShowUp($scope.step.pairs[$scope.step.currentPair]);
+    },500);
+    var t2 = $timeout(function(){
+      $scope.step.nextSubStage();
+      $scope.step.startTime = new Date().getTime();
+      $scope.step.miss = true; 
+    },1000);
+    var t3 = $scope.step.timer = $timeout(function(){
+      $timeout.cancel(t1);
+      $timeout.cancel(t2);
+      $timeout.cancel(t3);
+      if($scope.step.miss){
+        $scope.step.results[$scope.step.currentPair].isMiss = true;
+        $scope.step.results[$scope.step.currentPair].reactTime = 1000;
+        $scope.step.results[$scope.step.currentPair].sequence = $scope.step.pairs[$scope.step.currentPair].sequence;
+        $scope.step.nextPair();
+      }
+    },2000);
+  };
+
+  $scope.step.correctRate = function(){
+    var correctCount = $scope.step.pairs.filter(function(item){
+      return item.isCorrect;
+    }).length;
+    return (correctCount/$scope.step.pairs.length).toFixed(2);
+  }
+
+  $scope.step.repeat = function(){
+    $scope.step.index = 2;
+    $scope.step.pairs = [];
+    $scope.step.currentPair = -1;
+    $scope.step.progress = 0;
+    $scope.step.stage = 2;
+    $scope.step.type = 1;
+    $scope.step.subStage = 1;
+    $scope.step.results = [];
+    $scope.step.startTime = 0;
+    $scope.step.reactive = false;
+    $scope.step.miss = false;
+    $scope.step.showUp = false;
+    $scope.step.timer = null;
+    $scope.step.repeatTime += 1;
+    $scope.step.pbstyle = {
+      "width":$scope.step.progress+"%"
+    };
+  };
+
+  $scope.$watch('state.current',function(nv,ov){
+    if(nv===$scope.step.index){
+      $scope.step.nextPair();
+    }
+  });
+
+}])
+
+.controller('break',['$scope',function($scope){
+  $scope.step = {};
+  $scope.step.index = 3;
+  $scope.step.isCurrent = function(){
+    return $scope.state.current === $scope.step.index;
+  };
+}])
+
 .controller('testController',['$scope','$http','$timeout',function($scope,$http,$timeout){
   $scope.test = {};
-  $scope.test.index = 2;
+  $scope.test.index = 4;
   $scope.test.pairs = [];
   $scope.test.currentPair = -1;
   $scope.test.progress = 0;
@@ -156,7 +296,7 @@ angular.module('psychological.test&train',['angular-gestures'])
 
 .controller('break',['$scope',function($scope){
   $scope.step = {};
-  $scope.step.index = 3;
+  $scope.step.index = 5;
   $scope.step.isCurrent = function(){
     return $scope.state.current === $scope.step.index;
   };
@@ -164,7 +304,7 @@ angular.module('psychological.test&train',['angular-gestures'])
 
 .controller('trainController',['$scope','$http','$timeout',function($scope,$http,$timeout){
   $scope.train = {};
-  $scope.train.index = 4;
+  $scope.train.index = 6;
   $scope.train.pairs = [];
   $scope.train.currentPair = -1;
   $scope.train.progress = 0;
@@ -269,7 +409,7 @@ angular.module('psychological.test&train',['angular-gestures'])
 
 .controller('end',['$scope',function($scope){
   $scope.step = {};
-  $scope.step.index = 5;
+  $scope.step.index = 7;
   $scope.step.isCurrent = function(){
     return $scope.state.current === $scope.step.index;
   }
