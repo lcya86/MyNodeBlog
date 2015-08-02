@@ -6,6 +6,7 @@ angular.module('psychological.test&train',['angular-gestures'])
   });
 })
 
+
 .controller('doExperiment',['$scope',function($scope){
   $scope.state = {};
   $scope.state.current = 0;

@@ -257,7 +257,9 @@
     </div>
   </div>
   <script type="text/javascript">
-    window.setTimeout('load();',15000);
+    window.onload = function(){
+      load();
+    }
 
     function load(){
       document.body.removeChild(document.getElementById('spinner'));
