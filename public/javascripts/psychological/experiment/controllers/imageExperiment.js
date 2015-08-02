@@ -59,7 +59,7 @@ angular.module('psychological.test&train',['angular-gestures'])
   $scope.step.pairs = [];
   $scope.step.currentPair = -1;
   $scope.step.progress = 0;
-  $scope.step.stage = 2;
+  $scope.step.stage = 1;
   $scope.step.type = 1;
   $scope.step.subStage = 1;
   $scope.step.results = [];
