@@ -169,7 +169,9 @@ angular.module('psychological.test&train',['angular-gestures'])
     $scope.step.pbstyle = {
       "width":$scope.step.progress+"%"
     };
-    $scope.step.getPairs();
+    $scope.step.pairs = $scope.step.pairs.sort(function(){
+      return Math.random() > .5 ? -1 : 1;
+    });
     $scope.step.nextPair();
   };
 
