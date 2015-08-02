@@ -129,7 +129,7 @@ angular.module('psychological.experiment',['angular-gestures'])
       if($scope.step.miss){
         $scope.step.results[$scope.step.currentPair].isMiss = true;
         $scope.step.results[$scope.step.currentPair].reactTime = 1000;
-        $scope.step.resulte[$scope.step.currentPair].sequence = $scope.step.pairs[$scope.step.currentPair].sequence;
+        $scope.step.results[$scope.step.currentPair].sequence = $scope.step.pairs[$scope.step.currentPair].sequence;
         $scope.step.nextPair();
       }
     },2000);

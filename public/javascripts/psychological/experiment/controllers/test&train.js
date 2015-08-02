@@ -129,7 +129,7 @@ angular.module('psychological.test&train',['angular-gestures'])
       if($scope.test.miss){
         $scope.test.results[$scope.test.currentPair].isMiss = true;
         $scope.test.results[$scope.test.currentPair].reactTime = 1000;
-        $scope.test.resulte[$scope.test.currentPair].sequence = $scope.test.pairs[$scope.test.currentPair].sequence;
+        $scope.test.results[$scope.test.currentPair].sequence = $scope.test.pairs[$scope.test.currentPair].sequence;
         $scope.test.nextPair();
       }
     },2000);
@@ -212,7 +212,7 @@ angular.module('psychological.test&train',['angular-gestures'])
   };
 
   $scope.train.isShowUp = function(pair){
-    return Math.random().toFixed(2) < pair.positivePosition.toFixed(2);
+    return /.+03.+/.test(pair.upImg);
   };
 
   $scope.train.nextPair = function(){
@@ -242,7 +242,7 @@ angular.module('psychological.test&train',['angular-gestures'])
       if($scope.train.miss){
         $scope.train.results[$scope.train.currentPair].isMiss = true;
         $scope.train.results[$scope.train.currentPair].reactTime = 1000;
-        $scope.train.resulte[$scope.train.currentPair].sequence = $scope.train.pairs[$scope.train.currentPair].sequence;
+        $scope.train.results[$scope.train.currentPair].sequence = $scope.train.pairs[$scope.train.currentPair].sequence;
         $scope.train.nextPair();
       }
     },2000);
