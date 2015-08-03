@@ -9,7 +9,6 @@
   <script type="text/javascript" src="/javascripts/hammer.min.js"></script>
   <script type="text/javascript" src="/javascripts/gestures.min.js"></script>
   <script type="text/javascript" src="/javascripts/psychological/experiment/controllers/imageExperiment.js"></script>
-  <link rel="stylesheet" type="text/css" href="/stylesheets/spinner.css">
 </head>
 <style type="text/css">
   html,body{
@@ -163,21 +162,7 @@
   }
 </style>
 <body>
-  <div id="spinner" class="spinner">
-    <div class="rect1"></div>
-    <div class="rect2"></div>
-    <div class="rect3"></div>
-    <div class="rect4"></div>
-    <div class="rect5"></div>
-    <div class="rect6"></div>
-    <div class="rect7"></div>
-    <div class="rect8"></div>
-    <div class="rect9"></div>
-    <div class="rect10"></div>
-    <div class="rect11"></div>
-    <div class="rect12"></div>
-  </div>
-  <div id="container" class="container" ng-controller="doExperiment" style="display:none;">
+  <div id="container" class="container" ng-controller="doExperiment">
     <div ng-controller="login">
       <div class="d_login" ng-show="step.isCurrent()">
         请输入姓名
@@ -196,7 +181,7 @@
     <div ng-controller="testController">
       <div class="d_experiment" ng-show="test.isCurrent()">
         <div class="progress-bar" ng-style="test.pbstyle"></div>
-        <div ng-repeat="pair in test.pairs" ng-show="test.currentPair == $index">
+        <div ng-repeat="pair in test.pairs" ng-if="test.currentPair == $index">
           <div class="cross" ng-show="test.subStage == 1">
             <span class="glyphicon glyphicon-plus"></span>
           </div>
@@ -221,7 +206,7 @@
     </div>
     <div ng-controller="practice" class="d_experiment" ng-show="step.isCurrent()">
       <div class="progress-bar" ng-style="step.pbstyle"></div>
-      <div ng-repeat="pair in step.pairs" ng-show="step.currentPair == $index">
+      <div ng-repeat="pair in step.pairs" ng-if="step.currentPair == $index">
         <div class="cross" ng-show="step.subStage == 1">
           <span class="glyphicon glyphicon-plus"></span>
         </div>
@@ -252,7 +237,7 @@
     <div ng-controller="trainController">
       <div class="d_experiment" ng-show="train.isCurrent()">
         <div class="progress-bar" ng-style="train.pbstyle"></div>
-        <div ng-repeat="pair in train.pairs" ng-show="train.currentPair == $index">
+        <div ng-repeat="pair in train.pairs" ng-if="train.currentPair == $index">
           <div class="cross" ng-show="train.subStage == 1">
             <span class="glyphicon glyphicon-plus"></span>
           </div>
@@ -281,15 +266,4 @@
       </div>
     </div>
   </div>
-  <script type="text/javascript">
-
-    window.onload = function(){
-      load();
-    }
-
-    function load(){
-      document.body.removeChild(document.getElementById('spinner'));
-      document.getElementById('container').style.display = 'block';
-    }
-  </script>
 </html>
