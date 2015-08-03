@@ -91,7 +91,7 @@ angular.module('psychological.test&train',['angular-gestures'])
     $scope.step.miss = false;
     $timeout.cancel($scope.step.timer);
     $scope.step.results[$scope.step.currentPair].isMiss = false;
-    $scope.step.results[$scope.test.currentPair].sequence = pair.sequence;
+    $scope.step.results[$scope.step.currentPair].sequence = pair.sequence;
     if(button==pair.letter){
       $scope.step.results[$scope.step.currentPair].isCorrect = true;
     }else{
