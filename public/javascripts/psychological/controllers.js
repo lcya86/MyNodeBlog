@@ -259,7 +259,7 @@ angular.module('psychological',['psychological.directives'])
   };
   
   $scope.getPairs = function(){
-    $http.get('/project/psychological/v2/getpairs?type=1&stage=2').success(function(data){
+    $http.get('/project/psychological/v2/getpairs?type=1&stage=4').success(function(data){
       $scope.array = data.pairs;
     });
   };
@@ -315,7 +315,7 @@ angular.module('psychological',['psychological.directives'])
   };
   
   $scope.getPairs = function(){
-    $http.get('/project/psychological/v2/getpairs?type=0&stage=2').success(function(data){
+    $http.get('/project/psychological/v2/getpairs?type=0&stage=4').success(function(data){
       $scope.array = data.pairs;
     });
   };
