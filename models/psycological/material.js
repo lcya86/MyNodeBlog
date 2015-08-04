@@ -26,7 +26,7 @@ var materialImgPairSchema = new Schema({
 	letter: String,
 	type:{type:Number,default:1},//1为实验组，0为控制组
 	positivePosition: Number,//字母出现在中性图片后的概率
-	stage: Number,
+	stage: Number,//1:practice,2:test1,3:train,4:test2
 	sequence: Number
 });
 mongoose.model('MaterialImgPair',materialImgPairSchema);
