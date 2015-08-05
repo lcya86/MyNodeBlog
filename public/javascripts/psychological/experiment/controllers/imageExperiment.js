@@ -148,10 +148,10 @@ angular.module('psychological.test&train',['angular-gestures'])
   };
 
   $scope.step.correctRate = function(){
-    var correctCount = $scope.step.pairs.filter(function(item){
+    var correctCountList = $scope.step.pairs.filter(function(item){
       return item.isCorrect;
-    }).length;
-    return (correctCount/$scope.step.pairs.length).toFixed(2);
+    });
+    return (correctCountList.length/$scope.step.pairs.length).toFixed(2);
   }
 
   $scope.step.repeat = function(){
