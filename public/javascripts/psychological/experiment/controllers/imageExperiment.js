@@ -111,10 +111,10 @@ angular.module('psychological.test&train',['angular-gestures'])
   $scope.step.nextPair = function(){
     if($scope.step.currentPair == $scope.step.pairs.length-1){
       var cr = $scope.step.correctRate();
-      if($scope.step.correctRate() > 0.7 || $scope.step.repeatTime >= 2){
+      if(cr >= 0.7 || $scope.step.repeatTime >= 2){
         return $scope.state.nextStep();
       }else{
-        alert('您的正确率为'+(cr*100)+'% 没有达到95%，请重新练习。');
+        alert('您的正确率为'+(cr*100)+'% 没有达到70%，请重新练习。');
         return $scope.step.repeat();
       }
     }
