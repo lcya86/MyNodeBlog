@@ -1,6 +1,6 @@
 angular.module('psychological.directives',[])
 
-.directive("textmaterial",function(){
+.directive("textmaterial",['$http',function($http){
 
   return {
     restrict: "E",
@@ -8,6 +8,7 @@ angular.module('psychological.directives',[])
       stage:'@stage',
       type:'@type'
     },
+    replace:true,
     link:function(scope, element, attrs){
       scope.materials = [];
       scope.is_creating = false;
@@ -76,7 +77,7 @@ angular.module('psychological.directives',[])
       scope.getMaterials();
     }
   }
-})
+}])
 
 .directive("imagedrop",function () {
 
