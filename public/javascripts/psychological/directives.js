@@ -9,6 +9,7 @@ angular.module('psychological.directives',[])
       type:'@type'
     },
     replace:true,
+    templateUrl:'/templates/psychological/text_material.html',
     link:function(scope, element, attrs){
       scope.materials = [];
       scope.is_creating = false;
