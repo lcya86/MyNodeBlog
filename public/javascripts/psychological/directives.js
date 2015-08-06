@@ -29,7 +29,7 @@ angular.module('psychological.directives',[])
       };
 
       scope.getMaterials = function(){
-        $http.get('/project/psychological/v2/getSentences?type='+scope.type+'&stage='+scope.stage).success(function(data){
+        $http.get('/project/psychological/v2/console/getSentences?type='+scope.type+'&stage='+scope.stage).success(function(data){
           scope.materials = data.sentences;
         });
       };
