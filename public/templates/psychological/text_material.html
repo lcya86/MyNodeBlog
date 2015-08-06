@@ -1,5 +1,5 @@
 <div class="text_fd">
-  <div class="t add_subject" data-stage="1">添加句子(<span>{{materials.length}}</span>)</div>
+  <div class="t add_subject" ng-click="creating()">添加句子(<span>{{materials.length}}</span>)</div>
   <div class="wrap" ng-show="isCreating()">
     <input type="text" placeholder="消极词" class="nword subject_item" ng-model="nword">
     <input type="text" placeholder="积极词" class="pword subject_item" ng-model="pword">
