@@ -236,6 +236,46 @@ exports.addText = function(req,res){
   });
 }
 
+exports.getSentences = function(req,res){
+  var type = req.query.type;
+  var stage = req.query.stage;
+  model.MaterialText.find({
+    type:type,
+    stage:stage
+  },function(err,data){
+    if(err) throw err;
+    return res.send({success:true,sentences:data});
+  });
+}
+
+exports.deleteSentence = function(req,res){
+  var id = req.params.id;
+  model.MaterialText.findById(id, function(err, pair) {
+    if (err) {
+      console.error(err);
+    }
+    model.MaterialText.update({
+      type: pair.type,
+      stage:pair.stage,
+      sequence: {
+        $gt: pair.sequence
+      }
+    }, {
+      $inc: {
+        sequence: -1
+      }
+    }, {
+      multi: true
+    },function(err){
+      if(err) throw err;
+      model.MaterialText.findByIdAndRemove(id, function(err) {
+        if(err) throw err;
+        return res.send({success:true});
+      });
+    });
+  });
+}
+
 exports.uploadImg = function(req, res) {
   var fs = require('fs');
   var BufferHelper = require('bufferhelper');

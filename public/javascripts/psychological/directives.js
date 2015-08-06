@@ -1,5 +1,82 @@
 angular.module('psychological.directives',[])
 
+.directive("textmaterial",function(){
+
+  return {
+    restrict: "E",
+    scope:{
+      stage:'@stage',
+      type:'@type'
+    },
+    link:function(scope, element, attrs){
+      scope.materials = [];
+      scope.is_creating = false;
+      scope.nword = '';
+      scope.pword = '';
+      scope.sentence = '';
+
+      scope.creating = function(){
+        scope.is_creating = true;
+      };
+
+      scope.isCreating = function(){
+        return scope.is_creating;
+      };
+
+      scope.cancelCreating = function(){
+        scope.is_creating = false;
+      };
+
+      scope.getMaterials = function(){
+        $http.get('/project/psychological/v2/getSentences?type='+scope.type+'&stage='+scope.stage).success(function(data){
+          scope.materials = data.sentences;
+        });
+      };
+
+      scope.delete = function(item){
+        $http.delete('/project/psychological/v2/sentences/'+item._id)
+          .success(function(data){
+            scope.getMaterials();
+          });
+      };
+
+      scope.submit = function(){
+        if(scope.pword==''){
+          alert('请输入积极词');
+          return false;
+        }
+        if(scope.nword==''){
+          alert('请输入消极词');
+          return false;
+        }
+        if(scope.sentence==''){
+          alert('请输入句子');
+          return false;
+        }
+        $http.post('/project/psychological/v2/console/addtext',{
+          sentence: scope.sentence,
+          nword: scope.nword,
+          pword: scope.pword,
+          stage: scope.stage,
+          sequence: scope.materials.length+1,
+          type: scope.type
+        }).success(function(data){
+          if(data.success){
+            scope.is_creating = false;
+            scope.getMaterials();
+            scope.nword = '';
+            scope.pword = '';
+            scope.sentence = '';
+          }else{
+            alert('添加失败');
+          }
+        });
+      };
+
+      scope.getMaterials();
+    }
+  }
+})
 
 .directive("imagedrop",function () {
 

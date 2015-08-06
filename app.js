@@ -99,6 +99,8 @@ app.post('/project/psychological/v2/uploadImg', routes.Psycho.uploadImg);
 app.post('/project/psychological/v2/console/delimg', routes.Psycho.delImg);
 app.post('/project/psychological/v2/console/addsubject', routes.Psycho.addSubject);
 app.post('/project/psychological/v2/console/addtext', routes.Psycho.addText);
+app.post('/project/psychological/v2/console/getSentences', routes.Psycho.getSentences);
+app.delete('/project/psychological/v2/sentences/:id', routes.Psycho.deleteSentence);
 app.post('/project/psychological/v2/console/delsuject', routes.Psycho.delSubject);
 app.post('/project/psychological/v2/experiment/sendresult', routes.Psycho.sendResult);
 app.post('/project/psychological/v2/experiment/sendtextresult', routes.Psycho.sendTextResult);

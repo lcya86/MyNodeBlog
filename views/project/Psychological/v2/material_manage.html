@@ -6,7 +6,8 @@
     <div ng-click="select(7)" ng-class="{selected:isSelected(7)}" class="js_test_image tab_nav">Test2 Image</div>
     <div ng-click="select(3)" ng-class="{selected:isSelected(3)}" class="js_train_image tab_nav">Train Image</div>
     <div ng-click="select(4)" ng-class="{selected:isSelected(4)}" class="js_practice_text tab_nav">Practice Text</div>
-    <div ng-click="select(5)" ng-class="{selected:isSelected(5)}" class="js_test_text tab_nav">Test Text</div>
+    <div ng-click="select(5)" ng-class="{selected:isSelected(5)}" class="js_test_text tab_nav">Test1 Text</div>
+    <div ng-click="select(8)" ng-class="{selected:isSelected(5)}" class="js_test_text tab_nav">Test2 Text</div>
     <div ng-click="select(6)" ng-class="{selected:isSelected(6)}" class="js_train_text tab_nav">Train Text</div>
   </div>
 </div>
@@ -366,112 +367,46 @@
 </div>
 
 <div id="practice_text_bd" class="main_bd" ng-show="isSelected(4)">
-  <div class="left_fd">
+  <div class="left_fd" ng-controller="train_text">
     实验组
-    <div class="text_fd">
-      <div class="t add_subject" data-stage="1">添加句子(<span><%=practice_text_count%></span>)</div>
-      <%if(text){%>
-      <%text.forEach(function(item,index,array){%>
-        <%if(item.type==1&&item.stage==1){%>
-        <div class="wrap">
-          <div class="nword subject_item"><%=item.sequence%>&nbsp;&nbsp;消极词:<%=item.nword%></div>
-          <div class="pword subject_item">积极词:<%=item.pword%></div>
-          <div data-id="<%=item._id%>" class="subject_item" style="clear:both;">句子：<%=item.sentence%></div>
-        </div>
-        <%}%>
-      <%});%>
-      <%}%>
-    </div>
+    <textmaterial stage="1" type="1"></textmaterial>
   </div>
-  <div class="right_fd">
+  <div class="right_fd" ng-controller="train_text_con">
     控制组
-    <div class="text_fd">
-      <div class="t add_consubject" data-stage="1">添加句子(<span><%=practice_context_count%></span>)</div>
-      <%if(text){%>
-      <%text.forEach(function(item,index,array){%>
-        <%if(item.type==0&&item.stage==1){%>
-        <div class="wrap">
-          <div class="nword subject_item"><%=item.sequence%></div>
-          <div class="pword subject_item">词:<%=item.pword%></div>
-          <div data-id="<%=item._id%>" class="subject_item" style="clear:both;">句子：<%=item.sentence%></div>
-        </div>
-        <%}%>
-      <%});%>
-      <%}%>
-    </div>
+    <textmaterial stage="1" type="0"></textmaterial>
   </div>
 </div>
 
 <div id="test_text_bd" class="main_bd" ng-show="isSelected(5)">
   <div class="left_fd">
     实验组
-    <div class="text_fd">
-      <div class="t add_subject" data-stage="2">添加句子(<span><%=test_text_count%></span>)</div>
-      <%if(text){%>
-      <%text.forEach(function(item,index,array){%>
-        <%if(item.type==1&&item.stage==2){%>
-        <div class="wrap">
-          <div class="nword subject_item"><%=item.sequence%>&nbsp;&nbsp;消极词:<%=item.nword%></div>
-          <div class="pword subject_item">积极词:<%=item.pword%></div>
-          <div data-id="<%=item._id%>" class="subject_item" style="clear:both;">句子：<%=item.sentence%></div>
-        </div>
-        <%}%>
-      <%});%>
-      <%}%>
-    </div>
+    <textmaterial stage="2" type="1"></textmaterial>
   </div>
   <div class="right_fd">
     控制组
-    <div class="text_fd">
-      <div class="t add_consubject" data-stage="2">添加句子(<span><%=test_context_count%></span>)</div>
-      <%if(text){%>
-      <%text.forEach(function(item,index,array){%>
-        <%if(item.type==0&&item.stage==2){%>
-        <div class="wrap">
-          <div class="nword subject_item"><%=item.sequence%></div>
-          <div class="pword subject_item">词:<%=item.pword%></div>
-          <div data-id="<%=item._id%>" class="subject_item" style="clear:both;">句子：<%=item.sentence%></div>
-        </div>
-        <%}%>
-      <%});%>
-      <%}%>
-    </div>
+    <textmaterial stage="2" type="0"></textmaterial>
   </div>
 </div>
 
 <div id="train_text_bd" class="main_bd" ng-show="isSelected(6)">
   <div class="left_fd">
     实验组
-    <div class="text_fd">
-      <div class="t add_subject" data-stage="3">添加句子(<span><%=train_text_count%></span>)</div>
-      <%if(text){%>
-      <%text.forEach(function(item,index,array){%>
-        <%if(item.type==1&&item.stage==3){%>
-        <div class="wrap">
-          <div class="nword subject_item"><%=item.sequence%>&nbsp;&nbsp;消极词:<%=item.nword%></div>
-          <div class="pword subject_item">积极词:<%=item.pword%></div>
-          <div data-id="<%=item._id%>" class="subject_item" style="clear:both;">句子：<%=item.sentence%></div>
-        </div>
-        <%}%>
-      <%});%>
-      <%}%>
-    </div>
+    <textmaterial stage="3" type="1"></textmaterial>
   </div>
   <div class="right_fd">
     控制组
-    <div class="text_fd">
-      <div class="t add_consubject" data-stage="3">添加句子(<span><%=train_context_count%></span>)</div>
-      <%if(text){%>
-      <%text.forEach(function(item,index,array){%>
-        <%if(item.type==0&&item.stage==3){%>
-        <div class="wrap">
-          <div class="nword subject_item"><%=item.sequence%></div>
-          <div class="pword subject_item">词:<%=item.pword%></div>
-          <div data-id="<%=item._id%>" class="subject_item" style="clear:both;">句子：<%=item.sentence%></div>
-        </div>
-        <%}%>
-      <%});%>
-      <%}%>
-    </div>
+    <textmaterial stage="3" type="0"></textmaterial>
   </div>
 </div>
+
+<div id="train_text_bd" class="main_bd" ng-show="isSelected(8)">
+  <div class="left_fd">
+    实验组
+    <textmaterial stage="4" type="1"></textmaterial>
+  </div>
+  <div class="right_fd">
+    控制组
+    <textmaterial stage="4" type="0"></textmaterial>
+  </div>
+</div>
+

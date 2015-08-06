@@ -1,0 +1,15 @@
+<div class="text_fd">
+  <div class="t add_subject" data-stage="1">添加句子(<span>{{materials.length}}</span>)</div>
+  <div class="wrap" ng-show="isCreating()">
+    <input type="text" placeholder="消极词" class="nword subject_item" ng-model="nword">
+    <input type="text" placeholder="积极词" class="pword subject_item" ng-model="pword">
+    <input type="text" placeholder="句子" class="subject_item" style="clear:both;" ng-model="sentence">
+    <a ng-click="submit()">确定</a>
+    <a ng-click="cancelCreating()">取消</a>
+  </div>
+  <div class="wrap" ng-repeat="material in materials" ng-click="delete(material)">
+    <div class="nword subject_item">{{material.sequence}}&nbsp;&nbsp;消极词:{{material.nword}}</div>
+    <div class="pword subject_item">积极词:{{material.pword}}</div>
+    <div class="subject_item" style="clear:both;">句子：{{material.sentence}}</div>
+  </div>
+</div>
