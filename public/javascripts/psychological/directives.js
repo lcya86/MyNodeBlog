@@ -36,10 +36,12 @@ angular.module('psychological.directives',[])
       };
 
       scope.delete = function(item){
-        $http.delete('/project/psychological/v2/sentences/'+item._id)
-          .success(function(data){
-            scope.getMaterials();
-          });
+        if(confirm('确定要删除？')){
+          $http.delete('/project/psychological/v2/sentences/'+item._id)
+            .success(function(data){
+              scope.getMaterials();
+            });
+        }
       };
 
       scope.submit = function(){
