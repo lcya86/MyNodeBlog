@@ -5,6 +5,7 @@
     <a ng-click="addSubject()">添加</a>&nbsp;&nbsp;<a ng-click="cancelAdding()">取消</a>
   </div>
   <div class="subject_item" ng-repeat="subject in subjects">
+  	{{subject.name}}
     <span style="float:right;">{{subject.complete?'(已完成)':'(未完成)'}}</span>
   </div>
 </div>
