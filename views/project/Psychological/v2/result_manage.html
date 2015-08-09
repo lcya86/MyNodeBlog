@@ -1,31 +1,55 @@
 <div class="main_hd">
   <h2>result manage</h2>
   <div class="tab_navs">
-    <div class="js_image_result tab_nav selected">Image Result</div>
-    <div class="js_text_result tab_nav">Text Result</div>
+    <div class="tab_nav" ng-class="{isSelect(1):selected}" ng-click="select(1)">Image Result</div>
+    <div class="tab_nav" ng-class="{isSelect(2):selected}" ng-click="select(2)">Text Result</div>
   </div>
 </div>
-<div id="image_result_bd" class="main_bd">
+<div id="image_result_bd" class="main_bd" ng-shwo="isSelect(1)" ng-controller="imageresult">
   <div class="subject_fd">
     被试列表
     <div class="subjectList">
-      <%if(subjects){%>
-        <%subjects.forEach(function(item,index,array){%>
-          <%if(item.complete){%>
-          <div data-id="<%=item._id%>" class="subject_item"><%=item.name%></div>
-          <%}%>
-        <%});%>
-      <%}%>
+      <div class="subject_item" ng-click="getResults(subject)" ng-repeat="subject in subjects">{{subject.name}}</div>
     </div>
   </div>
   <div class="results_fd">
-    
+    实验批次
+    <div class="resultList">
+      <div class="result_item" ng-click="showResult(result)" ng-repeat="result in practice_results">第{{$index+1}}次练习 {{result.timestamp.toString()}}</div>
+    </div>
+    <div class="resultList">
+      <div class="result_item" ng-click="showResult(result)" ng-repeat="result in test1_results">第{{$index+1}}次测试1 {{result.timestamp.toString()}}</div>
+    </div>
+    <div class="resultList">
+      <div class="result_item" ng-click="showResult(result)" ng-repeat="result in test2_results">第{{$index+1}}次测试2 {{result.timestamp.toString()}}</div>
+    </div>
+    <div class="resultList">
+      <div class="result_item" ng-click="showResult(result)" ng-repeat="result in train_results">第{{$index+1}}次训练 {{result.timestamp.toString()}}</div>
+    </div>
   </div>
   <div class="result_fd">
-    
+    实验结果
+    <table class="resultTable" cellspacing="0px" cellpadding="5px" width="500px">
+      <thead>
+        <tr>
+          <th>图片序号</th>
+          <th>是否积极图片</th>
+          <th>是否有关</th>
+          <th>反应时(ms)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in current_result">
+          <td>{{item.sequence}}</td>
+          <td>{{item.isUnderP}}</td>
+          <td>{{(item.isCorrect?'shit':(item.isMiss?'miss':'incorrect'))}}</td>
+          <td>{{item.reactTime}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div> 
 </div>
-<div id="text_result_bd" class="main_bd" style="display:none;">
+<div id="text_result_bd" class="main_bd" ng-show="isSelect(2)" ng-controller="imageresult">
   <div class="subject_fd">
     被试列表
     <div class="subjectList">
@@ -39,9 +63,39 @@
     </div>
   </div>
   <div class="results_fd">
-    
+    实验批次
+    <div class="resultList">
+      <div class="result_item" ng-click="showResult(result)" ng-repeat="result in practice_results">第{{$index+1}}次练习 {{result.timestamp.toString()}}</div>
+    </div>
+    <div class="resultList">
+      <div class="result_item" ng-click="showResult(result)" ng-repeat="result in test1_results">第{{$index+1}}次测试1 {{result.timestamp.toString()}}</div>
+    </div>
+    <div class="resultList">
+      <div class="result_item" ng-click="showResult(result)" ng-repeat="result in test2_results">第{{$index+1}}次测试2 {{result.timestamp.toString()}}</div>
+    </div>
+    <div class="resultList">
+      <div class="result_item" ng-click="showResult(result)" ng-repeat="result in train_results">第{{$index+1}}次训练 {{result.timestamp.toString()}}</div>
+    </div>
   </div>
   <div class="result_fd">
-    
+    实验结果
+    <table class="resultTable" cellspacing="0px" cellpadding="5px" width="500px">
+      <thead>
+        <tr>
+          <th>句子序号</th>
+          <th>是否积极词</th>
+          <th>是否击中</th>
+          <th>反应时(ms)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in current_result">
+          <td>'+item.sequence+'</td>
+          <td>'+item.isUnderP+'</td>
+          <td>'+(item.isCorrect?'shit':(item.isMiss?'miss':'incorrect'))+'</td>
+          <td>'+item.reactTime+'</td>
+        </tr>
+      </tbody>
+    </table>
   </div> 
 </div>

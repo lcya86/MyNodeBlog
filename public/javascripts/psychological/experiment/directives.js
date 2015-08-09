@@ -249,7 +249,7 @@ angular.module('experiment.directives',['angular-gestures'])
       };
 
       scope.step.sendResult = function(){
-        $http.post('/project/psychological/experiment/sendresult',{
+        $http.post('/project/psychological/experiment/sendtextresult',{
           result:scope.step.results,
           name:scope.$parent.state.name,
           stage:scope.step.stage

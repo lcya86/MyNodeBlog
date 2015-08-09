@@ -6,11 +6,27 @@ exports.console = function(req,res){
 
 exports.getSubjects = function(req,res){
   var type = req.query.type;
-
-  model.Subject.find(function(err, data) {
-    if(err) throw err;
-    return res.send({success:true,subjects:data});
-  });
+  var complete = req.query.complete;
+  if(type){
+    model.Subject.find({
+      type:type
+    },function(err, data) {
+      if(err) throw err;
+      return res.send({success:true,subjects:data});
+    });
+  }else if(complete){
+    model.Subject.find({
+      complete:complete
+    },function(err, data) {
+      if(err) throw err;
+      return res.send({success:true,subjects:data});
+    });
+  }else{
+    model.Subject.find(function(err, data) {
+      if(err) throw err;
+      return res.send({success:true,subjects:data});
+    });
+  }
 }
 
 exports.doPractice = function(req, res) {
@@ -334,7 +350,7 @@ exports.sendTextResult = function(req,res){
 exports.getResult = function(req,res){
   var async = require('async');
   var name = req.query.name;
-  var practice,test,train;
+  var practice,test1,train,test2;
   async.parallel({
     one:function(cb){
       model.Results.find({name:name,stage:1}).sort('+timestamp').exec(function(err,data){
@@ -355,7 +371,7 @@ exports.getResult = function(req,res){
           return res.send({success:false});
         }
         if(data){
-          test = data;
+          test1 = data;
         }
         cb(null);
       });
@@ -371,20 +387,32 @@ exports.getResult = function(req,res){
         }
         cb(null);
       });
+    },
+    four:function(cb){
+      model.Results.find({name:name,stage:4}).sort('+timestamp').exec(function(err,data){
+        if(err){
+          console.error(err);
+          return res.send({success:false});
+        }
+        if(data){
+          test2 = data;
+        }
+        cb(null);
+      });
     }
   },function(err,result){
     if(err){
       console.error(err);
       return res.send({success:false});
     }
-    return res.send({success:true,practice:practice,test:test,train:train});
+    return res.send({success:true,practice:practice,test1:test1,train:train,test2:test2});
   });
 }
 
 exports.getTextResult = function(req,res){
   var async = require('async');
   var name = req.query.name;
-  var practice,test,train;
+  var practice,test1,train,test2;
   async.parallel({
     one:function(cb){
       model.TextResults.find({name:name,stage:1}).sort('+timestamp').exec(function(err,data){
@@ -405,7 +433,7 @@ exports.getTextResult = function(req,res){
           return res.send({success:false});
         }
         if(data){
-          test = data;
+          test1 = data;
         }
         cb(null);
       });
@@ -421,12 +449,24 @@ exports.getTextResult = function(req,res){
         }
         cb(null);
       });
+    },
+    four:function(cb){
+      model.TextResults.find({name:name,stage:4}).sort('+timestamp').exec(function(err,data){
+        if(err){
+          console.error(err);
+          return res.send({success:false});
+        }
+        if(data){
+          test2 = data;
+        }
+        cb(null);
+      });
     }
   },function(err,result){
     if(err){
       console.error(err);
       return res.send({success:false});
     }
-    return res.send({success:true,practice:practice,test:test,train:train});
+    return res.send({success:true,practice:practice,test1:test1,train:train,test2:test2});
   });
 }
