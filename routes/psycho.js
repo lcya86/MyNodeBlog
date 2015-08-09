@@ -1,149 +1,15 @@
 var model = require('../models');
 
-exports.psychologicalExperiment = function(req, res) {
-  var async = require('async');
-  var materialpairs,
-      Texts,
-      Subjects,
-      practice_materialpairs_count,
-      test_materialpairs_count,
-      train_materialpairs_count,
-      practice_con_materialpairs_count,
-      test_con_materialpairs_count,
-      train_con_materialpairs_count,
-      practice_text_count,
-      test_text_count,
-      train_text_count,
-      practice_context_count,
-      test_context_count,
-      train_context_count;
-  async.parallel({
-    one:function(cb) {
-      model.Subject.find(function(err, subjects) {
-        if (err) console.error(err);
-        Subjects = subjects;
-        cb(null);
-      });
-    },
-    two:function(cb) {
-      model.MaterialImgPairs.find().sort({
-        'sequence': +1
-      }).exec(function(err, materialpairs) {
-        if (err) console.error(err);
-        materialpairs = materialpairs;
-        cb(null);
-      });
-    },
-    three:function(cb) {
-      model.MaterialImgPairs.count({stage:1,type:1},function(err,data){
-        if (err) console.error(err);
-        practice_materialpairs_count = data
-        cb(null);
-      });
-    },
-    four:function(cb) {
-      model.MaterialImgPairs.count({stage:1,type:0},function(err,data){
-        if (err) console.error(err);
-        practice_con_materialpairs_count = data
-        cb(null);
-      });
-    },
-    five:function(cb) {
-      model.MaterialImgPairs.count({stage:2,type:1},function(err,data){
-        if (err) console.error(err);
-        test_materialpairs_count = data
-        cb(null);
-      });
-    },
-    six:function(cb) {
-      model.MaterialImgPairs.count({stage:2,type:0},function(err,data){
-        if (err) console.error(err);
-        test_con_materialpairs_count = data
-        cb(null);
-      });
-    },
-    seven:function(cb) {
-      model.MaterialImgPairs.count({stage:3,type:1},function(err,data){
-        if (err) console.error(err);
-        train_materialpairs_count = data
-        cb(null);
-      });
-    },
-    eight:function(cb){
-      model.MaterialText.find(function(err, data) {
-        if (err) console.error(err);
-        Texts = data;
-        cb(null);
-      });
-    },
-    nine:function(cb){
-      model.MaterialImgPairs.count({stage:3,type:0},function(err,data){
-        if (err) console.error(err);
-        train_con_materialpairs_count = data
-        cb(null);
-      });
-    },
-    ten:function(cb){
-      model.MaterialText.count({stage:2,type:1},function(err,data){
-        if (err) console.error(err);
-        test_text_count = data
-        cb(null);
-      });
-    },
-    eleven:function(cb){
-      model.MaterialText.count({stage:3,type:1},function(err,data){
-        if (err) console.error(err);
-        train_text_count = data
-        cb(null);
-      });
-    },
-    twelve:function(cb){
-      model.MaterialText.count({stage:1,type:0},function(err,data){
-        if (err) console.error(err);
-        practice_context_count = data
-        cb(null);
-      });
-    },
-    thirteen:function(cb){
-      model.MaterialText.count({stage:2,type:0},function(err,data){
-        if (err) console.error(err);
-        test_context_count = data
-        cb(null);
-      });
-    },
-    fourteen:function(cb){
-      model.MaterialText.count({stage:3,type:0},function(err,data){
-        if (err) console.error(err);
-        train_context_count = data
-        cb(null);
-      });
-    },
-    fifteen:function(cb){
-      model.MaterialText.count({stage:1,type:1},function(err,data){
-        if (err) console.error(err);
-        practice_text_count = data
-        cb(null);
-      });
-    }
-  }, function(err, result) {
-    if (err) console.error(err);
-    return res.render('project/Psychological/v2/Console', {
-      materialpairs: materialpairs,
-      text: Texts,
-      practice_materialpairs_count:practice_materialpairs_count,
-      test_materialpairs_count:test_materialpairs_count,
-      train_materialpairs_count:train_materialpairs_count,
-      practice_con_materialpairs_count:practice_con_materialpairs_count,
-      test_con_materialpairs_count:test_con_materialpairs_count,
-      train_con_materialpairs_count:train_con_materialpairs_count,
-      practice_text_count:practice_text_count,
-      test_text_count:test_text_count,
-      train_text_count:train_text_count,
-      practice_context_count:practice_context_count,
-      test_context_count:test_context_count,
-      train_context_count:train_context_count,
-      subjects: Subjects
-    });
+exports.console = function(req,res){
+  res.render('project/Psychological/v2/console');
+}
+
+exports.getSubjects = function(req,res){
+  var type = req.query.type;
+
+  model.Subject.find(function(err, data) {
+    if(err) throw err;
+    return res.send({success:true,subjects:data});
   });
 }
 
@@ -280,6 +146,21 @@ exports.deleteSentence = function(req,res){
   });
 }
 
+exports.deleteSubject = function(req,res){
+  var id = req.params.id;
+  model.Subject.findByIdAndRemove(id, function(err) {
+    if (err) {
+      console.error(err);
+      return res.send({
+        success: false
+      });
+    }
+    return res.send({
+      success: true
+    });
+  });
+}
+
 exports.uploadImg = function(req, res) {
   var fs = require('fs');
   var BufferHelper = require('bufferhelper');
@@ -399,21 +280,6 @@ exports.delImg = function(req, res) {
           success: true
         });
       });
-    });
-  });
-}
-
-exports.delSubject = function(req,res){
-  var id = req.body.subject_id;
-  model.Subject.findByIdAndRemove(id, function(err) {
-    if (err) {
-      console.error(err);
-      return res.send({
-        success: false
-      });
-    }
-    return res.send({
-      success: true
     });
   });
 }

@@ -93,6 +93,8 @@ app.get('/project/psychological/v2/CBM-I', routes.Psycho.doTextExperiment);
 app.get('/project/psychological/v2/textpractice', routes.Psycho.doTextPractice);
 app.get('/project/psychological/v2/texttest', routes.Psycho.doTextTest);
 app.get('/project/psychological/v2/texttrain', routes.Psycho.doTextTrain);
+app.get('/project/psychological/v2/getsubjects', routes.Psycho.getSubjects);
+app.delete('/project/psychological/v2/subjects/:id', routes.Psycho.deleteSubject);
 app.post('/project/psychological/v2/addpairs', routes.Psycho.addPairs);
 app.get('/project/psychological/v2/getpairs', routes.Psycho.getPairs);
 app.delete('/project/psychological/v2/pairs/:id', routes.Psycho.deletePair);
