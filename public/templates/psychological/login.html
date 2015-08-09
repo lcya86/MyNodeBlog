@@ -1,5 +1,5 @@
-<div>
-  <div class="d_login" ng-show="step.isCurrent()">
+<div ng-show="step.isCurrent()">
+  <div class="d_login">
     请输入姓名
     <input ng-model="$parent.state.name" type="text" placeholder="请输入姓名"/>
     <a hm-tap="step.login()" class="b_login">确定</a>
