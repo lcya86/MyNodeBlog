@@ -93,7 +93,8 @@ angular.module('experiment.text.directives',['angular-gestures'])
       index:'@index',
       stage:'@stage',
       type:'@type',
-      hasFeedBack:'@hasfeedback'
+      hasFeedBack:'@hasfeedback',
+      upLoadResult:'@uploadresult'
     },
     templateUrl:'/templates/psychological/text_experiment.html',
     replace:true,
@@ -169,11 +170,16 @@ angular.module('experiment.text.directives',['angular-gestures'])
       scope.step.nextSentence = function(){
         if(scope.step.currentSentence == scope.step.sentences.length-1){
           var cr = scope.step.correctRate();
-          if(cr >= 0.7 || scope.step.repeatTime >= 2){
-            return scope.$parent.state.nextStep();
+
+          if(scope.upLoadResult){
+            return scope.step.sendResult();
           }else{
-            alert('您的正确率为'+(cr*100)+'% 没有达到70%，请重新练习。');
-            return scope.step.repeat();
+            if(cr >= 0.7 || scope.step.repeatTime >= 2){
+              return scope.$parent.state.nextStep();
+            }else{
+              alert('您的正确率为'+(cr*100)+'% 没有达到70%，请重新练习。');
+              return scope.step.repeat();
+            }
           }
         }
         scope.step.subStage = 1;
@@ -222,6 +228,16 @@ angular.module('experiment.text.directives',['angular-gestures'])
           return Math.random() > .5 ? -1 : 1;
         });
         scope.step.nextSentence();
+      };
+
+      scope.step.sendResult = function(){
+        $http.post('/project/psychological/experiment/sendresult',{
+          result:scope.step.results,
+          name:scope.$parent.state.name,
+          stage:scope.step.stage
+        }).success(function(data){
+          scope.$parent.state.nextStep();
+        });
       };
 
       scope.$watch('$parent.state.current',function(nv,ov){
