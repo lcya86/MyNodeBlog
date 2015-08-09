@@ -55,7 +55,7 @@ angular.module('psychological',['psychological.directives'])
   }
 
   $scope.getSubjects = function(){
-    $http.get('/project/psychological/v2/console/getSubjects?complete=true').success(function(data){
+    $http.get('/project/psychological/v2/console/getsubjects?complete=true').success(function(data){
       scope.subjects = data.subjects;
     });
   };
@@ -85,7 +85,7 @@ angular.module('psychological',['psychological.directives'])
   }
 
   $scope.getSubjects = function(){
-    $http.get('/project/psychological/v2/console/getSubjects?complete=true').success(function(data){
+    $http.get('/project/psychological/v2/console/getsubjects?complete=true').success(function(data){
       scope.subjects = data.subjects;
     });
   };
