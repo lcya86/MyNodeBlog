@@ -156,14 +156,14 @@ angular.module('psychological.directives',[])
   return {
     restrict:'E',
     scope:{
-      type:'@type',
-      name:'=name'
+      type:'@type'
     },
     replace:true,
     templateUrl:'/templates/psychological/subjects.html',
     link:function(scope, element, attr){
       scope.isAdding = false;
       scope.subjects = [];
+      scope.name = '';
 
       scope.getSubjects = function(){
         $http.get('/project/psychological/v2/console/getSubjects?type='+scope.type).success(function(data){
