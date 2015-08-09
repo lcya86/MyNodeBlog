@@ -1,7 +1,7 @@
 var model = require('../models');
 
 exports.console = function(req,res){
-  res.render('project/Psychological/v2/console');
+  res.render('project/Psychological/v2/Console');
 }
 
 exports.getSubjects = function(req,res){
@@ -34,7 +34,7 @@ exports.doPractice = function(req, res) {
 }
 
 exports.doImageExperiment = function(req,res){
-  res.render('project/Psychological/v2/imageExperiment');
+  res.render('project/Psychological/v2/ImageExperiment');
 }
 
 exports.doTextExperiment = function(req,res){
