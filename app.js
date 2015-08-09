@@ -104,7 +104,6 @@ app.post('/project/psychological/v2/console/addsubject', routes.Psycho.addSubjec
 app.post('/project/psychological/v2/console/addtext', routes.Psycho.addText);
 app.get('/project/psychological/v2/console/getSentences', routes.Psycho.getSentences);
 app.delete('/project/psychological/v2/sentences/:id', routes.Psycho.deleteSentence);
-app.post('/project/psychological/v2/console/delsuject', routes.Psycho.delSubject);
 app.post('/project/psychological/v2/experiment/sendresult', routes.Psycho.sendResult);
 app.post('/project/psychological/v2/experiment/sendtextresult', routes.Psycho.sendTextResult);
 app.get('/project/psychological/v2/console/getresult', routes.Psycho.getResult);
