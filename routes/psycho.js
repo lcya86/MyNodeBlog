@@ -7,8 +7,6 @@ exports.console = function(req,res){
 exports.getSubjects = function(req,res){
   var type = req.query.type;
   var complete = req.query.complete;
-  console.log(type);
-  console.log(complete);
   if(type){
     model.Subject.find({
       type:type
