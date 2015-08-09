@@ -17,5 +17,8 @@
       <div class="textarea">词和句子是否有关？有关请按1，无关请按3。</div>
       <a class="fButton" hm-tap="step.clickButton(3,sentence)"><strong>3</strong></a>
     </div>
+    <div class="d_experiment" ng-show="step.subStage == 5">
+      <div class="welcome">{{step.feedback}}</div>
+    </div>
   </div>
 </div>

@@ -86,13 +86,16 @@ angular.module('experiment.text.directives',['angular-gestures'])
 })
 
 
-.directive('textPractice',['$http','$timeout',function($http,$timeout){
+.directive('textExperiment',['$http','$timeout',function($http,$timeout){
   return {
     restrict:'E',
     scope:{
-      index:'@index'
+      index:'@index',
+      stage:'@stage',
+      type:'@type',
+      hasFeedBack:'@hasfeedback'
     },
-    templateUrl:'/templates/psychological/text_practice.html',
+    templateUrl:'/templates/psychological/text_experiment.html',
     replace:true,
     link:function(scope,element,attr){
       scope.step = {};
@@ -100,8 +103,8 @@ angular.module('experiment.text.directives',['angular-gestures'])
       scope.step.sentences = [];
       scope.step.currentSentence = -1;
       scope.step.progress = 0;
-      scope.step.stage = 1;
-      scope.step.type = 1;
+      scope.step.stage = scope.stage;
+      scope.step.type = scope.type;
       scope.step.subStage = 1;
       scope.step.results = [];
       scope.step.startTime = 0;
@@ -109,6 +112,7 @@ angular.module('experiment.text.directives',['angular-gestures'])
       scope.step.miss = false;
       scope.step.showPword = false;
       scope.step.repeatTime = 0;
+      scope.step.feedback = '';
       scope.step.pbstyle = {
         "width":scope.step.progress+"%"
       };
@@ -133,10 +137,20 @@ angular.module('experiment.text.directives',['angular-gestures'])
         scope.step.results[scope.step.currentSentence].sequence = sentence.sequence;
         if((button===1 && scope.step.showPword)||(button===3 && !scope.step.showPword)){
           scope.step.results[scope.step.currentSentence].isCorrect = true;
+          scope.step.feedback = "你是正确的！";
         }else{
           scope.step.results[scope.step.currentSentence].isCorrect = false;
+          scope.step.feedback = "你是错误的！";
         }
-        scope.step.nextSentence();
+        if(scope.hasFeedBack){
+          scope.step.nextSubStage();
+          var t1 = $timeout(function(){
+            $timeout.cancel(t1);
+            scope.step.nextSentence();
+          },500);
+        }else{
+          scope.step.nextSentence();
+        }
       };
 
       scope.step.nextSubStage = function(){
@@ -170,13 +184,13 @@ angular.module('experiment.text.directives',['angular-gestures'])
           "width":scope.step.progress+"%"
         };
         var t1 = $timeout(function(){
+          $timeout.cancel(t1);
           scope.step.nextSubStage();
           scope.step.showPword = scope.step.isShowPword();
         },500);
         var t2 = $timeout(function(){
           scope.step.nextSubStage();
           scope.step.miss = true;
-          $timeout.cancel(t1);
           $timeout.cancel(t2);
         },1000);
       };
