@@ -86,7 +86,7 @@ angular.module('experiment.text.directives',['angular-gestures'])
 })
 
 
-.directive('textPractice',['$http','$timeout',function($http){
+.directive('textPractice',['$http','$timeout',function($http,$timeout){
   return {
     restrict:'E',
     scope:{
