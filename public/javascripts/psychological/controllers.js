@@ -38,7 +38,7 @@ angular.module('psychological',['psychological.directives'])
   };
 
   $scope.isSelected = function(tab){
-    return $scope.activeTab === tab;
+    return $scope.activeTab == tab;
   };
 }])
 

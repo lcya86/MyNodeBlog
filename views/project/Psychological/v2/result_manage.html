@@ -5,7 +5,7 @@
     <div class="tab_nav" ng-class="{selected:isSelected(2)}" ng-click="select(2)">Text Result</div>
   </div>
 </div>
-<div id="image_result_bd" class="main_bd" ng-shwo="isSelected(1)" ng-controller="imageresult">
+<div id="image_result_bd" class="main_bd" ng-show="isSelected(1)" ng-controller="imageresult">
   <div class="subject_fd">
     被试列表
     <div class="subjectList">
@@ -49,7 +49,7 @@
     </table>
   </div> 
 </div>
-<div id="text_result_bd" class="main_bd" ng-show="isSelected(2)" ng-controller="imageresult">
+<div id="text_result_bd" class="main_bd" ng-show="isSelected(2)" ng-controller="textresult">
   <div class="subject_fd">
     被试列表
     <div class="subjectList">
