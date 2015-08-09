@@ -41,6 +41,14 @@ exports.doTextExperiment = function(req,res){
   res.render('project/Psychological/v2/TextExperiment');
 }
 
+exports.doMixExperiment = function(req,res){
+  res.render('project/Psychological/v2/MixExperiment');
+}
+
+exports.doControlExperiment = function(req,res){
+  res.render('project/Psychological/v2/ControlExperiment');
+}
+
 exports.doTextPractice = function(req, res) {
   model.MaterialText.find({stage:1}).sort({
     'sequence': +1
