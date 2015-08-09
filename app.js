@@ -86,7 +86,7 @@ app.get('/project/painter/:timestamp', routes.Project.painter);
 app.post('/project/painter/:timestamp', routes.Project.saveImage);
 app.get('/project/articlesClassify', routes.Project.articlesClassify);
 
-app.get('/project/psychological/v2/console', routes.Psycho.psychologicalExperiment);
+app.get('/project/psychological/v2/console', routes.Psycho.console);
 app.get('/project/psychological/v2/practice', routes.Psycho.doPractice);
 app.get('/project/psychological/v2/CBM-A', routes.Psycho.doImageExperiment);
 app.get('/project/psychological/v2/CBM-I', routes.Psycho.doTextExperiment);
