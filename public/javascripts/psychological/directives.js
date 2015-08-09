@@ -166,10 +166,11 @@ angular.module('psychological.directives',[])
       scope.name = '';
 
       scope.getSubjects = function(){
-        $http.get('/project/psychological/v2/console/getSubjects?type='+scope.type).success(function(data){
+        $http.get('/project/psychological/v2/console/getsubjects?type='+scope.type).success(function(data){
           scope.subjects = data.subjects;
         });
-      }
+      };
+      scope.getSubjects();
 
       scope.addSubject = function(){
         $.post('/project/psychological/console/addsubject',{type:scope.type,name:scope.name}).success(function(data){
