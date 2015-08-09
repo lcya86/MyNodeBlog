@@ -53,13 +53,7 @@
   <div class="subject_fd">
     被试列表
     <div class="subjectList">
-      <%if(subjects){%>
-        <%subjects.forEach(function(item,index,array){%>
-          <%if(item.complete){%>
-          <div data-id="<%=item._id%>" class="subject_item"><%=item.name%></div>
-          <%}%>
-        <%});%>
-      <%}%>
+      <div class="subject_item" ng-click="getResults(subject)" ng-repeat="subject in subjects">{{subject.name}}</div>
     </div>
   </div>
   <div class="results_fd">
@@ -90,10 +84,10 @@
       </thead>
       <tbody>
         <tr ng-repeat="item in current_result">
-          <td>'+item.sequence+'</td>
-          <td>'+item.isUnderP+'</td>
-          <td>'+(item.isCorrect?'shit':(item.isMiss?'miss':'incorrect'))+'</td>
-          <td>'+item.reactTime+'</td>
+          <td>{{item.sequence}}</td>
+          <td>{{item.isUnderP}}</td>
+          <td>{{(item.isCorrect?'shit':(item.isMiss?'miss':'incorrect'))}}</td>
+          <td>{{item.reactTime}}</td>
         </tr>
       </tbody>
     </table>
