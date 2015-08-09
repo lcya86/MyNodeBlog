@@ -30,3 +30,7 @@ angular.module('psychological',['psychological.directives'])
   
 })
 
+.controller('result_manage', ['$scope', function($scope){
+  
+}])
+
