@@ -9,20 +9,19 @@ angular.module('experiment.text.directives',['angular-gestures'])
     templateUrl:'/templates/psychological/login.html',
     replace:true,
     link:function(scope,element,attr){
-      console.log(scope);
       scope.step = {};
       scope.step.index = 0;
 
       scope.step.isCurrent = function(){
-        return scope.state.current === scope.step.index;
+        return scope.$parent.state.current === scope.step.index;
       };
 
       scope.step.login = function(){
         $http.post('/project/psychological/v2/experiment/login',{
-          name:scope.state.name
+          name:scope.$parent.state.name
         }).success(function(data){
           if(data.success){
-            scope.state.nextStep();
+            scope.$parent.state.nextStep();
           }else{
             alert(data.msg);
           }
@@ -44,7 +43,7 @@ angular.module('experiment.text.directives',['angular-gestures'])
       scope.step = {};
       scope.step.index = scope.index;
       scope.step.isCurrent = function(){
-        return scope.state.current === scope.step.index;
+        return scope.$parent.state.current === scope.step.index;
       };
     }
   }
@@ -62,7 +61,7 @@ angular.module('experiment.text.directives',['angular-gestures'])
       scope.step = {};
       scope.step.index = scope.index;
       scope.step.isCurrent = function(){
-        return scope.state.current === scope.step.index;
+        return scope.$parent.state.current === scope.step.index;
       };
     }
   }
@@ -80,7 +79,7 @@ angular.module('experiment.text.directives',['angular-gestures'])
       scope.step = {};
       scope.step.index = scope.index;
       scope.step.isCurrent = function(){
-        return scope.state.current === scope.step.index;
+        return scope.$parent.state.current === scope.step.index;
       } 
     }
   }
@@ -115,7 +114,7 @@ angular.module('experiment.text.directives',['angular-gestures'])
       };
       
       scope.step.isCurrent = function(){
-        return scope.state.current === scope.step.index;
+        return scope.$parent.state.current === scope.step.index;
       }
       scope.step.getSentences = function(){
         $http.get('/project/psychological/v2/console/getSentences?type='+scope.step.type+'&stage='+scope.step.stage)
@@ -157,7 +156,7 @@ angular.module('experiment.text.directives',['angular-gestures'])
         if(scope.step.currentSentence == scope.step.sentences.length-1){
           var cr = scope.step.correctRate();
           if(cr >= 0.7 || scope.step.repeatTime >= 2){
-            return scope.state.nextStep();
+            return scope.$parent.state.nextStep();
           }else{
             alert('您的正确率为'+(cr*100)+'% 没有达到70%，请重新练习。');
             return scope.step.repeat();
