@@ -1,5 +1,74 @@
 angular.module('psychological.directives',[])
 
+.directive("imagematerial",['$http',function($http){
+
+  return {
+    restrict:"E",
+    scope:{
+      stage:'@stage',
+      type:'@type'
+    },
+    replace:true,
+    templateUrl:'/templates/psychological/image_material.html',
+    link:function(scope, element, attr){
+      scope.array = [];
+      scope.is_creating = false;
+      scope.upImg = '';
+      scope.downImg = '';
+
+      scope.creating = function(){
+        scope.is_creating = true;
+      };
+
+      scope.isCreating = function(){
+        return scope.is_creating;
+      };
+
+      scope.cancelCreating = function(){
+        scope.is_creating = false;
+      };
+
+      scope.getPairs = function(){
+        $http.get('/project/psychological/v2/getpairs?type='+scope.type+'&stage='+scope.stage).success(function(data){
+          scope.array = data.pairs;
+        });
+      };
+
+      scope.delete = function(item){
+        $http.delete('/project/psychological/v2/pairs/'+item._id)
+          .success(function(data){
+            scope.getPairs();
+          });
+      };
+
+      scope.submit = function(){
+        if(scope.upImg=='' || scope.downImg==''){
+          alert('请添加图片');
+          return false;
+        }
+        $http.post('/project/psychological/v2/addpairs',{
+          upImg: scope.upImg,
+          downImg: scope.downImg,
+          letter: scope.$$childTail.letter,
+          type: scope.type,
+          positivePosition: scope.$$childTail.position,
+          stage: scope.stage,
+          sequence: scope.array.length+1
+        }).success(function(data){
+          if(data.success){
+            scope.is_creating = false;
+            scope.getPairs();
+          }else{
+            alert('添加失败');
+          }
+        });
+      };
+
+      scope.getPairs();
+    }
+  }
+}])
+
 .directive("textmaterial",['$http',function($http){
 
   return {

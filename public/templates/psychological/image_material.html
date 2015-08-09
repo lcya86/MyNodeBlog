@@ -1,0 +1,40 @@
+<div class="pimg_fd">
+  <div ng-hide="isCreating()" ng-click="creating()" class="t add_materialpairs">添加图片对(<span>{{array.length}}</span>)</div>
+  <div ng-if="isCreating()" class="img_item real">
+    <h3>{{array.length+1}}</h3>
+    <div class="upimg" imageDrop>
+      <h1>上图</h1>
+      <p>显示字母:{{letter}}</p>
+    </div>
+    <div class="downimg" imageDrop>
+      <h1>下图</h1>
+      <p>积极概率:{{position}}</p>
+    </div>
+    <p>
+      <input ng-model="letter" name="letter" placeholder="显示字母"/>
+      <input ng-model="position" name="position" placeholder="显示在积极图片后的概率"/>
+      <a ng-click="submit()">确定</a>
+      <a ng-click="cancelCreating()">取消</a>
+    </p>
+  </div>
+  <div ng-repeat="item in array" class="img_item real">
+    <h3>{{item.sequence}}</h3>
+    <div class="upimg">
+      <img ng-src="{{item.upImg}}"/>
+      <p>{{item.upImg.split('/')[3]}}</p>
+      <p>上图</p>
+      <p>显示字母:{{item.letter}}</p>
+      <i></i>
+    </div>
+    <div class="downimg">
+      <img ng-src="{{item.downImg}}"/>
+      <p>{{item.downImg.split('/')[3]}}</p>
+      <p>下图</p>
+      <p>积极概率:{{item.positivePosition}}</p>
+      <i></i>
+    </div>
+    <p>
+      <a ng-click="delete(item)">删除</a>
+    </p>
+  </div>
+</div>

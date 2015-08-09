@@ -11,362 +11,50 @@
     <div ng-click="select(6)" ng-class="{selected:isSelected(6)}" class="js_train_text tab_nav">Train Text</div>
   </div>
 </div>
-<div id="practice_image_bd" class="main_bd" ng-show="isSelected(1)">
+<div class="main_bd" ng-show="isSelected(1)">
   <div class="pfd" ng-controller="practice_image">
     实验组
-    <div class="pimg_fd">
-      <div ng-hide="isCreating()" ng-click="creating()" class="t add_materialpairs">添加图片对(<span>{{array.length}}</span>)</div>
-      <div ng-if="isCreating()" class="img_item real">
-        <h3>{{array.length+1}}</h3>
-        <div class="upimg" imageDrop>
-          <h1>上图</h1>
-          <p>显示字母:{{letter}}</p>
-        </div>
-        <div class="downimg" imageDrop>
-          <h1>下图</h1>
-          <p>积极概率:{{position}}</p>
-        </div>
-        <p>
-          <input ng-model="letter" name="letter" placeholder="显示字母"/>
-          <input ng-model="position" name="position" placeholder="显示在积极图片后的概率"/>
-          <a ng-click="submit()">确定</a>
-          <a ng-click="cancelCreating()">取消</a>
-        </p>
-      </div>
-      <div ng-repeat="item in array" class="img_item real">
-        <h3>{{item.sequence}}</h3>
-        <div class="upimg">
-          <img ng-src="{{item.upImg}}"/>
-          <p>{{item.upImg.split('/')[3]}}</p>
-          <p>上图</p>
-          <p>显示字母:{{item.letter}}</p>
-          <i></i>
-        </div>
-        <div class="downimg">
-          <img ng-src="{{item.downImg}}"/>
-          <p>{{item.downImg.split('/')[3]}}</p>
-          <p>下图</p>
-          <p>积极概率:{{item.positivePosition}}</p>
-          <i></i>
-        </div>
-        <p>
-          <a ng-click="delete(item)">删除</a>
-        </p>
-      </div>
-    </div>
+    <imagematerial stage="1" type="1"></imagematerial>
   </div>
   <div class="con_fd" ng-controller="practice_image_con">
     控制组
-    <div class="conimg_fd">
-      <div ng-hide="isCreating()" ng-click="creating()" class="t add_materialpairs">添加图片对(<span>{{array.length}}</span>)</div>
-      <div ng-if="isCreating()" class="img_item real">
-        <h3>{{array.length+1}}</h3>
-        <div class="upimg" imageDrop>
-          <h1>上图</h1>
-          <p>显示字母:{{letter}}</p>
-        </div>
-        <div class="downimg" imageDrop>
-          <h1>下图</h1>
-          <p>积极概率:{{position}}</p>
-        </div>
-        <p>
-          <input ng-model="letter" name="letter" placeholder="显示字母" required/>
-          <input ng-model="position" name="position" placeholder="显示在积极图片后的概率" required/>
-          <a ng-click="submit()">确定</a>
-          <a ng-click="cancelCreating()">取消</a>
-        </p>
-      </div>
-      <div ng-repeat="item in array" class="img_item real">
-        <h3>{{item.sequence}}</h3>
-        <div class="upimg">
-          <img ng-src="{{item.upImg}}"/>
-          <p>{{item.upImg.split('/')[3]}}</p>
-          <p>上图</p>
-          <p>显示字母:{{item.letter}}</p>
-          <i></i>
-        </div>
-        <div class="downimg">
-          <img ng-src="{{item.downImg}}"/>
-          <p>{{item.downImg.split('/')[3]}}</p>
-          <p>下图</p>
-          <p>积极概率:{{item.positivePosition}}</p>
-          <i></i>
-        </div>
-        <p>
-          <a ng-click="delete(item)">删除</a>
-        </p>
-      </div>
-    </div>
+    <imagematerial stage="1" type="0"></imagematerial>
   </div>
 </div>
-<div id="test_image_bd" class="main_bd" ng-show="isSelected(2)">
+<div class="main_bd" ng-show="isSelected(2)">
   <div class="pfd" ng-controller="test1_image">
     实验组
-    <div class="pimg_fd">
-      <div ng-hide="isCreating()" ng-click="creating()" class="t add_materialpairs">添加图片对(<span>{{array.length}}</span>)</div>
-      <div ng-if="isCreating()" class="img_item real">
-        <h3>{{array.length+1}}</h3>
-        <div class="upimg" imageDrop>
-          <h1>上图</h1>
-          <p>显示字母:{{letter}}</p>
-        </div>
-        <div class="downimg" imageDrop>
-          <h1>下图</h1>
-          <p>积极概率:{{position}}</p>
-        </div>
-        <p>
-          <input ng-model="letter" name="letter" placeholder="显示字母" required/>
-          <input ng-model="position" name="position" placeholder="显示在积极图片后的概率" required/>
-          <a ng-click="submit()">确定</a>
-          <a ng-click="cancelCreating()">取消</a>
-        </p>
-      </div>
-      <div ng-repeat="item in array" class="img_item real">
-        <h3>{{item.sequence}}</h3>
-        <div class="upimg">
-          <img ng-src="{{item.upImg}}"/>
-          <p>{{item.upImg.split('/')[3]}}</p>
-          <p>上图</p>
-          <p>显示字母:{{item.letter}}</p>
-          <i></i>
-        </div>
-        <div class="downimg">
-          <img ng-src="{{item.downImg}}"/>
-          <p>{{item.downImg.split('/')[3]}}</p>
-          <p>下图</p>
-          <p>积极概率:{{item.positivePosition}}</p>
-          <i></i>
-        </div>
-        <p>
-          <a ng-click="delete(item)">删除</a>
-        </p>
-      </div>
-    </div>
+    <imagematerial stage="2" type="1"></imagematerial>
   </div>
   <div class="con_fd" ng-controller="test1_image_con">
     控制组
-    <div class="conimg_fd">
-      <div ng-hide="isCreating()" ng-click="creating()" class="t add_materialpairs">添加图片对(<span>{{array.length}}</span>)</div>
-      <div ng-if="isCreating()" class="img_item real">
-        <h3>{{array.length+1}}</h3>
-        <div class="upimg" imageDrop>
-          <h1>上图</h1>
-          <p>显示字母:{{letter}}</p>
-        </div>
-        <div class="downimg" imageDrop>
-          <h1>下图</h1>
-          <p>积极概率:{{position}}</p>
-        </div>
-        <p>
-          <input ng-model="letter" name="letter" placeholder="显示字母" required/>
-          <input ng-model="position" name="position" placeholder="显示在积极图片后的概率" required/>
-          <a ng-click="submit()">确定</a>
-          <a ng-click="cancelCreating()">取消</a>
-        </p>
-      </div>
-      <div ng-repeat="item in array" class="img_item real">
-        <h3>{{item.sequence}}</h3>
-        <div class="upimg">
-          <img ng-src="{{item.upImg}}"/>
-          <p>{{item.upImg.split('/')[3]}}</p>
-          <p>上图</p>
-          <p>显示字母:{{item.letter}}</p>
-          <i></i>
-        </div>
-        <div class="downimg">
-          <img ng-src="{{item.downImg}}"/>
-          <p>{{item.downImg.split('/')[3]}}</p>
-          <p>下图</p>
-          <p>积极概率:{{item.positivePosition}}</p>
-          <i></i>
-        </div>
-        <p>
-          <a ng-click="delete(item)">删除</a>
-        </p>
-      </div>
-    </div>
+    <imagematerial stage="2" type="0"></imagematerial>
   </div>
 </div>
 
-<div id="test2_image_bd" class="main_bd" ng-show="isSelected(7)">
+<div class="main_bd" ng-show="isSelected(7)">
   <div class="pfd" ng-controller="test2_image">
     实验组
-    <div class="pimg_fd">
-      <div ng-hide="isCreating()" ng-click="creating()" class="t add_materialpairs">添加图片对(<span>{{array.length}}</span>)</div>
-      <div ng-if="isCreating()" class="img_item real">
-        <h3>{{array.length+1}}</h3>
-        <div class="upimg" imageDrop>
-          <h1>上图</h1>
-          <p>显示字母:{{letter}}</p>
-        </div>
-        <div class="downimg" imageDrop>
-          <h1>下图</h1>
-          <p>积极概率:{{position}}</p>
-        </div>
-        <p>
-          <input ng-model="letter" name="letter" placeholder="显示字母" required/>
-          <input ng-model="position" name="position" placeholder="显示在积极图片后的概率" required/>
-          <a ng-click="submit()">确定</a>
-          <a ng-click="cancelCreating()">取消</a>
-        </p>
-      </div>
-      <div ng-repeat="item in array" class="img_item real">
-        <h3>{{item.sequence}}</h3>
-        <div class="upimg">
-          <img ng-src="{{item.upImg}}"/>
-          <p>{{item.upImg.split('/')[3]}}</p>
-          <p>上图</p>
-          <p>显示字母:{{item.letter}}</p>
-          <i></i>
-        </div>
-        <div class="downimg">
-          <img ng-src="{{item.downImg}}"/>
-          <p>{{item.downImg.split('/')[3]}}</p>
-          <p>下图</p>
-          <p>积极概率:{{item.positivePosition}}</p>
-          <i></i>
-        </div>
-        <p>
-          <a ng-click="delete(item)">删除</a>
-        </p>
-      </div>
-    </div>
+    <imagematerial stage="4" type="1"></imagematerial>
   </div>
   <div class="con_fd" ng-controller="test2_image_con">
     控制组
-    <div class="conimg_fd">
-      <div ng-hide="isCreating()" ng-click="creating()" class="t add_materialpairs">添加图片对(<span>{{array.length}}</span>)</div>
-      <div ng-if="isCreating()" class="img_item real">
-        <h3>{{array.length+1}}</h3>
-        <div class="upimg" imageDrop>
-          <h1>上图</h1>
-          <p>显示字母:{{letter}}</p>
-        </div>
-        <div class="downimg" imageDrop>
-          <h1>下图</h1>
-          <p>积极概率:{{position}}</p>
-        </div>
-        <p>
-          <input ng-model="letter" name="letter" placeholder="显示字母" required/>
-          <input ng-model="position" name="position" placeholder="显示在积极图片后的概率" required/>
-          <a ng-click="submit()">确定</a>
-          <a ng-click="cancelCreating()">取消</a>
-        </p>
-      </div>
-      <div ng-repeat="item in array" class="img_item real">
-        <h3>{{item.sequence}}</h3>
-        <div class="upimg">
-          <img ng-src="{{item.upImg}}"/>
-          <p>{{item.upImg.split('/')[3]}}</p>
-          <p>上图</p>
-          <p>显示字母:{{item.letter}}</p>
-          <i></i>
-        </div>
-        <div class="downimg">
-          <img ng-src="{{item.downImg}}"/>
-          <p>{{item.downImg.split('/')[3]}}</p>
-          <p>下图</p>
-          <p>积极概率:{{item.positivePosition}}</p>
-          <i></i>
-        </div>
-        <p>
-          <a ng-click="delete(item)">删除</a>
-        </p>
-      </div>
-    </div>
+    <imagematerial stage="4" type="0"></imagematerial>
   </div>
 </div>
 
-<div id="train_image_bd" class="main_bd" ng-show="isSelected(3)">
+<div class="main_bd" ng-show="isSelected(3)">
   <div class="pfd" ng-controller="train_image">
     实验组
-    <div class="pimg_fd">
-      <div ng-hide="isCreating()" ng-click="creating()" class="t add_materialpairs">添加图片对(<span>{{array.length}}</span>)</div>
-      <div ng-if="isCreating()" class="img_item real">
-        <h3>{{array.length+1}}</h3>
-        <div class="upimg" imageDrop>
-          <h1>上图</h1>
-          <p>显示字母:{{letter}}</p>
-        </div>
-        <div class="downimg" imageDrop>
-          <h1>下图</h1>
-          <p>积极概率:{{position}}</p>
-        </div>
-        <p>
-          <input ng-model="letter" name="letter" placeholder="显示字母" required/>
-          <input ng-model="position" name="position" placeholder="显示在积极图片后的概率" required/>
-          <a ng-click="submit()">确定</a>
-          <a ng-click="cancelCreating()">取消</a>
-        </p>
-      </div>
-      <div ng-repeat="item in array" class="img_item real">
-        <h3>{{item.sequence}}</h3>
-        <div class="upimg">
-          <img ng-src="{{item.upImg}}"/>
-          <p>{{item.upImg.split('/')[3]}}</p>
-          <p>上图</p>
-          <p>显示字母:{{item.letter}}</p>
-          <i></i>
-        </div>
-        <div class="downimg">
-          <img ng-src="{{item.downImg}}"/>
-          <p>{{item.downImg.split('/')[3]}}</p>
-          <p>下图</p>
-          <p>积极概率:{{item.positivePosition}}</p>
-          <i></i>
-        </div>
-        <p>
-          <a ng-click="delete(item)">删除</a>
-        </p>
-      </div>
-    </div>
+    <imagematerial stage="3" type="1"></imagematerial>
   </div>
   <div class="con_fd" ng-controller="train_image_con">
     控制组
-    <div class="conimg_fd">
-      <div ng-hide="isCreating()" ng-click="creating()" class="t add_materialpairs">添加图片对(<span>{{array.length}}</span>)</div>
-      <div ng-if="isCreating()" class="img_item real">
-        <h3>{{array.length+1}}</h3>
-        <div class="upimg" imageDrop>
-          <h1>上图</h1>
-          <p>显示字母:{{letter}}</p>
-        </div>
-        <div class="downimg" imageDrop>
-          <h1>下图</h1>
-          <p>积极概率:{{position}}</p>
-        </div>
-        <p>
-          <input ng-model="letter" name="letter" placeholder="显示字母" required/>
-          <input ng-model="position" name="position" placeholder="显示在积极图片后的概率" required/>
-          <a ng-click="submit()">确定</a>
-          <a ng-click="cancelCreating()">取消</a>
-        </p>
-      </div>
-      <div ng-repeat="item in array" class="img_item real">
-        <h3>{{item.sequence}}</h3>
-        <div class="upimg">
-          <img ng-src="{{item.upImg}}"/>
-          <p>{{item.upImg.split('/')[3]}}</p>
-          <p>上图</p>
-          <p>显示字母:{{item.letter}}</p>
-          <i></i>
-        </div>
-        <div class="downimg">
-          <img ng-src="{{item.downImg}}"/>
-          <p>{{item.downImg.split('/')[3]}}</p>
-          <p>下图</p>
-          <p>积极概率:{{item.positivePosition}}</p>
-          <i></i>
-        </div>
-        <p>
-          <a ng-click="delete(item)">删除</a>
-        </p>
-      </div>
-    </div>
+    <imagematerial stage="3" type="0"></imagematerial>
   </div>
 </div>
 
-<div id="practice_text_bd" class="main_bd" ng-show="isSelected(4)">
+<div class="main_bd" ng-show="isSelected(4)">
   <div class="left_fd">
     实验组
     <textmaterial stage="1" type="1"></textmaterial>
@@ -377,7 +65,7 @@
   </div>
 </div>
 
-<div id="test_text_bd" class="main_bd" ng-show="isSelected(5)">
+<div class="main_bd" ng-show="isSelected(5)">
   <div class="left_fd">
     实验组
     <textmaterial stage="2" type="1"></textmaterial>
@@ -388,7 +76,7 @@
   </div>
 </div>
 
-<div id="train_text_bd" class="main_bd" ng-show="isSelected(6)">
+<div class="main_bd" ng-show="isSelected(6)">
   <div class="left_fd">
     实验组
     <textmaterial stage="3" type="1"></textmaterial>
@@ -399,7 +87,7 @@
   </div>
 </div>
 
-<div id="train_text_bd" class="main_bd" ng-show="isSelected(8)">
+<div class="main_bd" ng-show="isSelected(8)">
   <div class="left_fd">
     实验组
     <textmaterial stage="4" type="1"></textmaterial>
