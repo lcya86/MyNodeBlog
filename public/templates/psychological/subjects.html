@@ -1,0 +1,10 @@
+<div class="tsubject_fd">
+  <div class="t1 add_subject" ng-click="add()">添加被试</div>
+  <div class="subject_item" ng-show="isAdding">
+    <input style="margin-left:15px;" type="text" placeholder="被试姓名" ng-model="name"/>
+    <a ng-click="addSubject()">添加</a>&nbsp;&nbsp;<a ng-click="cancelAdding()">取消</a>
+  </div>
+  <div class="subject_item" ng-repeat="subject in subjects">
+    <span style="float:right;">{{subject.complete?'(已完成)':'(未完成)'}}</span>
+  </div>
+</div>

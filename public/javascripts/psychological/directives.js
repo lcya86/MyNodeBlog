@@ -151,6 +151,58 @@ angular.module('psychological.directives',[])
   }
 }])
 
+.directive("subjects",['$http',function($http){
+
+  return {
+    restrict:'E',
+    scope:{
+      type:'@type',
+      name:'=name'
+    },
+    replace:true,
+    templateUrl:'/templates/psychological/subjects.html',
+    link:function(scope, element, attr){
+      scope.isAdding = false;
+      scope.subjects = [];
+
+      scope.getSubjects = function(){
+        $http.get('/project/psychological/v2/console/getSubjects?type='+scope.type).success(function(data){
+          scope.subjects = data.subjects;
+        });
+      }
+
+      scope.addSubject = function(){
+        $.post('/project/psychological/console/addsubject',{type:scope.type,name:scope.name}).success(function(data){
+          if(data.success){
+            scope.isAdding = false;
+            scope.getSubjects();
+            scope.name = '';
+          }else{
+            alert('添加被试失败');
+          }
+        });
+      }
+
+      scope.add = function(){
+        return scope.isAdding = true;
+      }
+
+      scope.cancelAdding = function(){
+        return scope.isAdding = false;
+      }
+
+      scope.deleteSubject = function(subject){
+        if(confirm('您要删除被试吗？')){
+          $http.delete('/project/psychological/console/delsuject'+subject._id)
+            .success(function(data){
+              scope.getSubjects();
+            });
+        }
+      }
+    }
+  }
+}])
+
 .directive("imagedrop",function () {
 
   return {

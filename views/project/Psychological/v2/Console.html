@@ -4,7 +4,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Console</title>
-  <link rel="stylesheet" type="text/css" href="/stylesheets/spinner.css">
   <style media="screen">
     html{
       height: 100%;
@@ -310,33 +309,19 @@
   <script type="text/javascript" src="/javascripts/angular.min.js"></script>
 </head>
 <body>
-  <div class="spinner">
-    <div class="rect1"></div>
-    <div class="rect2"></div>
-    <div class="rect3"></div>
-    <div class="rect4"></div>
-    <div class="rect5"></div>
-    <div class="rect6"></div>
-    <div class="rect7"></div>
-    <div class="rect8"></div>
-    <div class="rect9"></div>
-    <div class="rect10"></div>
-    <div class="rect11"></div>
-    <div class="rect12"></div>
-  </div>
-  <div class="container" style="display:none;">
+  <div class="container" ng-controller="console">
     <div class="left_navs">
-      <div class="js_material left_nav selected">material manage</div>
-      <div class="js_subjects left_nav">subjects manage</div>
-      <div class="js_rasult left_nav">result manage</div>
+      <div ng-click="active('material')" ng-class="{selected:isActive('material')}" class="left_nav">material manage</div>
+      <div ng-click="active('subjects')" ng-class="{selected:isActive('subjects')}" class="left_nav">subjects manage</div>
+      <div ng-click="active('result')" ng-class="{selected:isActive('result')}" class="left_nav">result manage</div>
     </div>
-    <div id="material" class="main" ng-controller="material_manage">
+    <div id="material" class="main" ng-controller="material_manage" ng-show="isActive('material')">
       <%include material_manage.html%>
     </div>
-    <div id="subjects" class="main" style="display:none;">
+    <div id="subjects" class="main" ng-controller="subjects_manage" ng-show="isActive('subjects')">
       <%include subjects_manage.html%>
     </div>
-    <div id="result" class="main" style="display:none;">
+    <div id="result" class="main" ng-controller="result_manage" ng-show="isActive('result')">
       <%include result_manage.html%>
     </div>
   </div>
