@@ -13,7 +13,7 @@ angular.module('experiment.text.directives',['angular-gestures'])
       scope.step.index = 0;
 
       scope.step.isCurrent = function(){
-        return scope.$parent.state.current === scope.step.index;
+        return scope.$parent.state.current == scope.step.index;
       };
 
       scope.step.login = function(){
@@ -43,7 +43,7 @@ angular.module('experiment.text.directives',['angular-gestures'])
       scope.step = {};
       scope.step.index = scope.index;
       scope.step.isCurrent = function(){
-        return scope.$parent.state.current === scope.step.index;
+        return scope.$parent.state.current == scope.step.index;
       };
     }
   }
@@ -61,7 +61,7 @@ angular.module('experiment.text.directives',['angular-gestures'])
       scope.step = {};
       scope.step.index = scope.index;
       scope.step.isCurrent = function(){
-        return scope.$parent.state.current === scope.step.index;
+        return scope.$parent.state.current == scope.step.index;
       };
     }
   }
@@ -79,7 +79,7 @@ angular.module('experiment.text.directives',['angular-gestures'])
       scope.step = {};
       scope.step.index = scope.index;
       scope.step.isCurrent = function(){
-        return scope.$parent.state.current === scope.step.index;
+        return scope.$parent.state.current == scope.step.index;
       } 
     }
   }
@@ -114,7 +114,7 @@ angular.module('experiment.text.directives',['angular-gestures'])
       };
       
       scope.step.isCurrent = function(){
-        return scope.$parent.state.current === scope.step.index;
+        return scope.$parent.state.current == scope.step.index;
       }
       scope.step.getSentences = function(){
         $http.get('/project/psychological/v2/console/getSentences?type='+scope.step.type+'&stage='+scope.step.stage)
@@ -211,7 +211,7 @@ angular.module('experiment.text.directives',['angular-gestures'])
       };
 
       scope.$watch('state.current',function(nv,ov){
-        if(nv===scope.step.index){
+        if(nv==scope.step.index){
           scope.step.nextSentence();
         }
       });
