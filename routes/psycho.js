@@ -155,6 +155,10 @@ exports.doImageExperiment = function(req,res){
   res.render('project/Psychological/v2/imageExperiment');
 }
 
+exports.doTextExperiment = function(req,res){
+  res.render('project/Psychological/v2/TextExperiment');
+}
+
 exports.doTextPractice = function(req, res) {
   model.MaterialText.find({stage:1}).sort({
     'sequence': +1

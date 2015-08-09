@@ -1,0 +1,21 @@
+<div class="d_experiment" ng-show="step.isCurrent()">
+  <div class="progress-bar" ng-style="step.pbstyle"></div>
+  <div ng-repeat="sentence in step.sentences" ng-if="step.currentSentence == $index">
+    <div class="cross" ng-show="step.subStage == 1">
+      <span class="glyphicon glyphicon-plus"></span>
+    </div>
+    <div class="d_experiment" ng-show="step.subStage == 2">
+      <div class="textarea" ng-show="step.showPword">{{sentence.pword}}</div>
+      <div class="textarea" ng-show="!step.showPword">{{sentence.nword}}</div>
+    </div>
+    <div class="d_experiment" ng-show="step.subStage == 3">
+      <div class="textarea">{{sentence.sentence}}</div>
+      <a class="start" hm-tap="step.continue()">继续</a>
+    </div>
+    <div ng-show="step.subStage == 4">
+      <a class="eButton" hm-tap="step.clickButton(1,sentence)"><strong>1</strong></a>
+      <div class="textarea">词和句子是否有关？有关请按1，无关请按3。</div>
+      <a class="fButton" hm-tap="step.clickButton(3,sentence)"><strong>3</strong></a>
+    </div>
+  </div>
+</div>
