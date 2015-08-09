@@ -1,4 +1,4 @@
-angular.module('psychological.text',['angular-gestures','experiment.text.directives'])
+angular.module('psychological.text',['angular-gestures','experiment.directives'])
 
 .config(function (hammerDefaultOptsProvider) {
   hammerDefaultOptsProvider.set({
