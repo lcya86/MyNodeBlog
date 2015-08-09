@@ -1,6 +1,6 @@
 angular.module('experiment.text.directives',['angular-gestures'])
 
-.directive('login',['$http',function(){
+.directive('login',['$http',function($http){
   return {
     restrict:'E',
     scope:{
