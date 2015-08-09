@@ -210,7 +210,7 @@ angular.module('experiment.text.directives',['angular-gestures'])
         scope.step.nextSentence();
       };
 
-      scope.$watch('state.current',function(nv,ov){
+      scope.$watch('$parent.state.current',function(nv,ov){
         if(nv==scope.step.index){
           scope.step.nextSentence();
         }
