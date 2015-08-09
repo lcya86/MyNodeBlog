@@ -43,7 +43,8 @@ angular.module('experiment.text.directives',['angular-gestures'])
       scope.step = {};
       scope.step.index = scope.index;
       scope.step.isCurrent = function(){
-        return scope.$parent.state.current === scope.step.index;
+        scope.$parent.state.current === scope.step.index;
+        return scope.$apply();
       };
     }
   }
