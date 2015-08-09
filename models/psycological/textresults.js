@@ -14,6 +14,7 @@ var textresultsSchema = new Schema({
 	name: String,
 	results:[textresultSchema],
 	stage:Number,
+	correctRate: String,
 	timestamp:{ type: Date, default: Date.now }
 })
 mongoose.model('TextResults', textresultsSchema);

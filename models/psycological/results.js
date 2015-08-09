@@ -14,6 +14,7 @@ var resultsSchema = new Schema({
 	name: String,
 	results:[resultSchema],
 	stage:Number,
+	correctRate: String,
 	timestamp:{ type: Date, default: Date.now }
 })
 mongoose.model('Results', resultsSchema);

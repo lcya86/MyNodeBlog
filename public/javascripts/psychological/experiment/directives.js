@@ -190,7 +190,7 @@ angular.module('experiment.directives',['angular-gestures'])
           var cr = scope.step.correctRate();
 
           if(scope.upLoadResult){
-            return scope.step.sendResult();
+            return scope.step.sendResult((cr*100)+'');
           }else{
             if(cr >= 0.7 || scope.step.repeatTime >= 2){
               return scope.$parent.state.nextStep();
@@ -248,11 +248,12 @@ angular.module('experiment.directives',['angular-gestures'])
         scope.step.nextSentence();
       };
 
-      scope.step.sendResult = function(){
+      scope.step.sendResult = function(correctRate){
         $http.post('/project/psychological/experiment/sendtextresult',{
           result:scope.step.results,
           name:scope.$parent.state.name,
-          stage:scope.step.stage
+          stage:scope.step.stage,
+          correctRate:correctRate
         }).success(function(data){
           scope.$parent.state.nextStep();
         });
@@ -338,7 +339,7 @@ angular.module('experiment.directives',['angular-gestures'])
         if(scope.step.currentPair == scope.step.pairs.length-1){
           var cr = scope.step.correctRate();
           if(scope.upLoadResult){
-            return scope.step.sendResult();
+            return scope.step.sendResult((cr*100)+'');
           }else{
             if(cr >= 0.7 || scope.step.repeatTime >= 2){
               return scope.$parent.state.nextStep();
@@ -406,9 +407,11 @@ angular.module('experiment.directives',['angular-gestures'])
         scope.step.nextPair();
       };
 
-      scope.step.sendResult = function(){
+      scope.step.sendResult = function(correctRate){
+
         $http.post('/project/psychological/experiment/sendresult',{
           result:scope.step.results,
+          correctRate:correctRate
           name:scope.$parent.state.name,
           stage:scope.step.stage
         }).success(function(data){

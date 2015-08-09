@@ -15,16 +15,16 @@
   <div class="results_fd">
     实验批次
     <div class="resultList">
-      <div class="result_item" ng-click="showResult(result)" ng-repeat="result in practice_results">第{{$index+1}}次练习 {{result.timestamp.toString()}}</div>
+      <div class="result_item" ng-click="showResult(result)" ng-repeat="result in practice_results">第{{$index+1}}次练习 {{result.timestamp|date : 'short'}}</div>
     </div>
     <div class="resultList">
-      <div class="result_item" ng-click="showResult(result)" ng-repeat="result in test1_results">第{{$index+1}}次测试1 {{result.timestamp.toString()}}</div>
+      <div class="result_item" ng-click="showResult(result)" ng-repeat="result in test1_results">第{{$index+1}}次测试1 {{result.timestamp|date : 'short'}}</div>
     </div>
     <div class="resultList">
-      <div class="result_item" ng-click="showResult(result)" ng-repeat="result in test2_results">第{{$index+1}}次测试2 {{result.timestamp.toString()}}</div>
+      <div class="result_item" ng-click="showResult(result)" ng-repeat="result in test2_results">第{{$index+1}}次测试2 {{result.timestamp|date : 'short'}}</div>
     </div>
     <div class="resultList">
-      <div class="result_item" ng-click="showResult(result)" ng-repeat="result in train_results">第{{$index+1}}次训练 {{result.timestamp.toString()}}</div>
+      <div class="result_item" ng-click="showResult(result)" ng-repeat="result in train_results">第{{$index+1}}次训练 {{result.timestamp|date : 'short'}}</div>
     </div>
   </div>
   <div class="result_fd">
@@ -59,16 +59,16 @@
   <div class="results_fd">
     实验批次
     <div class="resultList">
-      <div class="result_item" ng-click="showResult(result)" ng-repeat="result in practice_results">第{{$index+1}}次练习 {{result.timestamp.toString()}}</div>
+      <div class="result_item" ng-click="showResult(result)" ng-repeat="result in practice_results">第{{$index+1}}次练习 {{result.timestamp|date : 'short'}}</div>
     </div>
     <div class="resultList">
-      <div class="result_item" ng-click="showResult(result)" ng-repeat="result in test1_results">第{{$index+1}}次测试1 {{result.timestamp.toString()}}</div>
+      <div class="result_item" ng-click="showResult(result)" ng-repeat="result in test1_results">第{{$index+1}}次测试1 {{result.timestamp|date : 'short'}}</div>
     </div>
     <div class="resultList">
-      <div class="result_item" ng-click="showResult(result)" ng-repeat="result in test2_results">第{{$index+1}}次测试2 {{result.timestamp.toString()}}</div>
+      <div class="result_item" ng-click="showResult(result)" ng-repeat="result in test2_results">第{{$index+1}}次测试2 {{result.timestamp|date : 'short'}}</div>
     </div>
     <div class="resultList">
-      <div class="result_item" ng-click="showResult(result)" ng-repeat="result in train_results">第{{$index+1}}次训练 {{result.timestamp.toString()}}</div>
+      <div class="result_item" ng-click="showResult(result)" ng-repeat="result in train_results">第{{$index+1}}次训练 {{result.timestamp|date : 'short'}}</div>
     </div>
   </div>
   <div class="result_fd">
