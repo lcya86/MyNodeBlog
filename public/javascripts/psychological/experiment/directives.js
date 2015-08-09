@@ -9,6 +9,7 @@ angular.module('experiment.text.directives',['angular-gestures'])
     templateUrl:'/templates/psychological/login.html',
     replace:true,
     link:function(scope,element,attr){
+      console.log(scope);
       scope.step = {};
       scope.step.index = 0;
 
