@@ -249,6 +249,7 @@ angular.module('experiment.directives',['angular-gestures'])
       };
 
       scope.step.sendResult = function(correctRate){
+        console.log(scope);
         $http.post('/project/psychological/experiment/sendtextresult',{
           result:scope.step.results,
           name:scope.$parent.state.name,
