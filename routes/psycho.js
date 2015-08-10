@@ -34,7 +34,7 @@ exports.doPractice = function(req, res) {
 }
 
 exports.doImageExperiment = function(req,res){
-  res.render('project/Psychological/v2/ImageExperiment');
+  res.render('project/Psychological/v2/imageExperiment');
 }
 
 exports.doTextExperiment = function(req,res){
