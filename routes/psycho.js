@@ -136,7 +136,9 @@ exports.getSentences = function(req,res){
   model.MaterialText.find({
     type:type,
     stage:stage
-  },function(err,data){
+  }).sort({
+    'sequence': +1
+  }).exec(function(err,data){
     if(err) throw err;
     return res.send({success:true,sentences:data});
   });
@@ -238,7 +240,9 @@ exports.getPairs = function(req, res){
   model.MaterialImgPairs.find({
     type:type,
     stage:stage
-  },function(err,data){
+  }).sort({
+    'sequence': +1
+  }).exec(function(err,data){
     if(err) throw err;
     return res.send({success:true,pairs:data});
   });
