@@ -325,7 +325,8 @@ exports.sendResult = function(req,res){
   var name = req.body.name;
   var result = req.body.result;
   var stage = req.body.stage;
-  model.Results.create({name:name,results:result,stage:stage},function(err){
+  var correctRate = req.body.correctRate;
+  model.Results.create({name:name,results:result,stage:stage,correctRate:correctRate},function(err){
     if(err){
       console.error(err);
       return res.send({success:false});
@@ -344,7 +345,8 @@ exports.sendTextResult = function(req,res){
   var name = req.body.name;
   var result = req.body.result;
   var stage = req.body.stage;
-  model.TextResults.create({name:name,results:result,stage:stage},function(err){
+  var correctRate = req.body.correctRate;
+  model.TextResults.create({name:name,results:result,stage:stage,correctRate:correctRate},function(err){
     if(err){
       console.error(err);
       return res.send({success:false});

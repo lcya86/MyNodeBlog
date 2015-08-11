@@ -211,6 +211,7 @@ angular.module('experiment.directives',['angular-gestures'])
           $timeout.cancel(t1);
           scope.step.nextSubStage();
           scope.step.showPword = scope.step.isShowPword();
+          scope.step.results[scope.step.currentSentence].isUnderP = scope.step.showPword;
         },500);
         var t2 = $timeout(function(){
           scope.step.nextSubStage();
@@ -362,6 +363,13 @@ angular.module('experiment.directives',['angular-gestures'])
         },500);
         var t2 = $timeout(function(){
           scope.step.nextSubStage();
+          if(scope.step.showUp&&/.*(03|04).*/.test(scope.step.pairs[scope.step.currentPair].upImg)){
+            scope.step.results[scope.step.currentPair].isUnderP = true;
+          }else if(!scope.step.showUp&&/.*(03|04).*/.test(scope.step.pairs[scope.step.currentPair].downImg)){
+            scope.step.results[scope.step.currentPair].isUnderP = true;
+          }else{
+            scope.step.results[scope.step.currentPair].isUnderP = false;
+          }
           scope.step.startTime = new Date().getTime();
           scope.step.miss = true; 
         },1000);
