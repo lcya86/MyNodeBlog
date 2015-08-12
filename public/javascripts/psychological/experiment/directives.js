@@ -284,7 +284,8 @@ angular.module('experiment.directives',['angular-gestures'])
       index:'@index',
       stage:'@stage',
       type:'@type',
-      upLoadResult:'@uploadresult'
+      upLoadResult:'@uploadresult',
+      halflist:'@halflist'
     },
     templateUrl:'/templates/psychological/image_experiment.html',
     replace:true,
@@ -314,9 +315,34 @@ angular.module('experiment.directives',['angular-gestures'])
       scope.step.getPairs = function(){
         $http.get('/project/psychological/v2/getpairs?type='+scope.step.type+'&stage='+scope.step.stage)
           .success(function(data){
-            scope.step.pairs = data.pairs.sort(function(){
-              return Math.random() > .5 ? -1 : 1;
-            });
+            if(halflist){
+              var range = [];
+              for(var i=0;i<80;i++){
+                range.push(i+1);
+              }
+              for(i=160;i<240;i++){
+                range.push(i+1);
+              }
+              for(i=320;i<400;i++){
+                range.push(i+1);
+              }
+              for(i=480;i<560;i++){
+                range.push(i+1);
+              }
+              for(i=640;i<680;i++){
+                range.push(i+1);
+              }
+              for(i=720;i<760;i++){
+                range.push(i+1);
+              }
+              scope.step.pairs = data.pairs.filter(function(item,index,array){
+                return item.sequence in range;
+              });
+            }else{
+              scope.step.pairs = data.pairs.sort(function(){
+                return Math.random() > .5 ? -1 : 1;
+              });
+            }
           });
       };
       scope.step.getPairs();
