@@ -315,7 +315,7 @@ angular.module('experiment.directives',['angular-gestures'])
       scope.step.getPairs = function(){
         $http.get('/project/psychological/v2/getpairs?type='+scope.step.type+'&stage='+scope.step.stage)
           .success(function(data){
-            if(halflist){
+            if(scope.halflist){
               var range = [];
               for(var i=0;i<80;i++){
                 range.push(i+1);
@@ -337,6 +337,8 @@ angular.module('experiment.directives',['angular-gestures'])
               }
               scope.step.pairs = data.pairs.filter(function(item,index,array){
                 return item.sequence in range;
+              }).sort(function(){
+                return Math.random() > .5 ? -1 : 1;
               });
             }else{
               scope.step.pairs = data.pairs.sort(function(){
