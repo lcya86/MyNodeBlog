@@ -79,6 +79,7 @@
           <th>句子序号</th>
           <th>是否积极词</th>
           <th>是否击中</th>
+          <th>读句子(ms)</th>
           <th>反应时(ms)</th>
         </tr>
       </thead>
@@ -87,6 +88,7 @@
           <td>{{item.sequence}}</td>
           <td>{{item.isUnderP}}</td>
           <td>{{(item.isCorrect?'shit':(item.isMiss?'miss':'incorrect'))}}</td>
+          <td>{{item.readTime}}</td>
           <td>{{item.reactTime}}</td>
         </tr>
       </tbody>

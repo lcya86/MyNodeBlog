@@ -128,6 +128,7 @@ angular.module('experiment.directives',['angular-gestures'])
       scope.step.subStage = 1;
       scope.step.results = [];
       scope.step.startTime = 0;
+      scope.step.readTime = 0;
       scope.step.reactive = false;
       scope.step.miss = false;
       scope.step.showPword = false;
@@ -184,8 +185,15 @@ angular.module('experiment.directives',['angular-gestures'])
       };
 
       scope.step.continue = function(){
-        scope.step.subStage += 1;
-        scope.step.startTime = new Date().getTime();
+        var readtime = (new Date().getTime()) - scope.step.readTime;
+        if(readtime<1500){
+          alert('请认真阅读情境');
+          scope.step.readTime = new Date().getTime();
+        }else{
+          scope.step.subStage += 1;
+          scope.step.results[scope.step.currentSentence].readTime = readtime;
+          scope.step.startTime = new Date().getTime();
+        }
       };
 
       scope.step.isShowPword = function(){
@@ -197,14 +205,9 @@ angular.module('experiment.directives',['angular-gestures'])
           var cr = scope.step.correctRate();
 
           if(scope.upLoadResult){
-            return scope.step.sendResult((cr*100)+'');
+            return scope.step.sendResult((cr*100)+'%');
           }else{
-            if(cr >= 0.7 || scope.step.repeatTime >= 2){
-              return scope.$parent.state.nextStep();
-            }else{
-              alert('您的正确率为'+(cr*100)+'% 没有达到70%，请重新练习。');
-              return scope.step.repeat();
-            }
+            return scope.$parent.state.nextStep();
           }
         }
         scope.step.subStage = 1;
@@ -223,6 +226,7 @@ angular.module('experiment.directives',['angular-gestures'])
         var t2 = $timeout(function(){
           scope.step.nextSubStage();
           scope.step.miss = true;
+          scope.step.readTime = new Date().getTime();
           $timeout.cancel(t2);
         },1000);
       };
@@ -375,7 +379,7 @@ angular.module('experiment.directives',['angular-gestures'])
         if(scope.step.currentPair == scope.step.pairs.length-1){
           var cr = scope.step.correctRate();
           if(scope.upLoadResult){
-            return scope.step.sendResult((cr*100)+'');
+            return scope.step.sendResult((cr*100)+'%');
           }else{
             if(cr >= 0.7 || scope.step.repeatTime >= 2){
               return scope.$parent.state.nextStep();
