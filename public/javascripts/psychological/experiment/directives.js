@@ -368,7 +368,7 @@ angular.module('experiment.directives',['angular-gestures'])
       };
 
       scope.step.isShowUp = function(pair){
-        return Math.random().toFixed(2) < pair.positivePosition.toFixed(2);
+        return (Math.random().toFixed(2) < pair.positivePosition.toFixed(2))&&(/.*(03).*/.test(scope.step.pairs[scope.step.currentPair].upImg));
       };
 
       scope.step.nextPair = function(){
@@ -398,9 +398,9 @@ angular.module('experiment.directives',['angular-gestures'])
         },500);
         var t2 = $timeout(function(){
           scope.step.nextSubStage();
-          if(scope.step.showUp&&/.*(03|04).*/.test(scope.step.pairs[scope.step.currentPair].upImg)){
+          if(scope.step.showUp&&/.*(03).*/.test(scope.step.pairs[scope.step.currentPair].upImg)){
             scope.step.results[scope.step.currentPair].isUnderP = true;
-          }else if(!scope.step.showUp&&/.*(03|04).*/.test(scope.step.pairs[scope.step.currentPair].downImg)){
+          }else if(!scope.step.showUp&&/.*(03).*/.test(scope.step.pairs[scope.step.currentPair].downImg)){
             scope.step.results[scope.step.currentPair].isUnderP = true;
           }else{
             scope.step.results[scope.step.currentPair].isUnderP = false;
