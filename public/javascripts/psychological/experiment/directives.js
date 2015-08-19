@@ -372,7 +372,11 @@ angular.module('experiment.directives',['angular-gestures'])
       };
 
       scope.step.isShowUp = function(pair){
-        return (Math.random().toFixed(2) < pair.positivePosition.toFixed(2))&&(/.*(03).*/.test(scope.step.pairs[scope.step.currentPair].upImg));
+        if(scope.stage==2||scope.stage==4){
+          return (Math.random().toFixed(2) < pair.positivePosition.toFixed(2));
+        }else{
+          return (Math.random().toFixed(2) < pair.positivePosition.toFixed(2))&&(/.*(03).*/.test(scope.step.pairs[scope.step.currentPair].upImg));
+        }
       };
 
       scope.step.nextPair = function(){
