@@ -173,7 +173,7 @@ angular.module('psychological.directives',[])
       scope.getSubjects();
 
       scope.addSubject = function(){
-        $.post('/project/psychological/console/addsubject',{type:scope.type,name:scope.name}).success(function(data){
+        $http.post('/project/psychological/console/addsubject',{type:scope.type,name:scope.name}).success(function(data){
           if(data.success){
             scope.isAdding = false;
             scope.getSubjects();
