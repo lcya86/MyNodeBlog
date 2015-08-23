@@ -406,15 +406,25 @@ angular.module('experiment.directives',['angular-gestures'])
         },500);
         var t2 = $timeout(function(){
           scope.step.nextSubStage();
-          if(scope.step.showUp&&/.*(03).*/.test(scope.step.pairs[scope.step.currentPair].upImg)){
-            scope.step.results[scope.step.currentPair].isUnderP = true;
-          }else if(!scope.step.showUp&&/.*(03).*/.test(scope.step.pairs[scope.step.currentPair].downImg)){
-            scope.step.results[scope.step.currentPair].isUnderP = true;
+          if(scope.step.stage==3){
+            if(scope.step.showUp&&/.*(-03).*/.test(scope.step.pairs[scope.step.currentPair].upImg)){
+              scope.step.results[scope.step.currentPair].isUnderP = true;
+            }else if(!scope.step.showUp&&/.*(-03).*/.test(scope.step.pairs[scope.step.currentPair].downImg)){
+              scope.step.results[scope.step.currentPair].isUnderP = true;
+            }else{
+              scope.step.results[scope.step.currentPair].isUnderP = false;
+            }
           }else{
-            scope.step.results[scope.step.currentPair].isUnderP = false;
+            if(scope.step.showUp&&/.*(-04).*/.test(scope.step.pairs[scope.step.currentPair].upImg)){
+              scope.step.results[scope.step.currentPair].isUnderP = true;
+            }else if(!scope.step.showUp&&/.*(-04).*/.test(scope.step.pairs[scope.step.currentPair].downImg)){
+              scope.step.results[scope.step.currentPair].isUnderP = true;
+            }else{
+              scope.step.results[scope.step.currentPair].isUnderP = false;
+            }
           }
           scope.step.startTime = new Date().getTime();
-          scope.step.miss = true; 
+          scope.step.miss = true;
         },1000);
         var t3 = scope.step.timer = $timeout(function(){
           $timeout.cancel(t1);
