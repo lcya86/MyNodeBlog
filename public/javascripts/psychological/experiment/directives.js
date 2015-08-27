@@ -39,6 +39,7 @@ angular.module('experiment.directives',['angular-gestures'])
     },
     templateUrl:'/templates/psychological/image_welcome.html',
     replace:true,
+    transclude:true,
     link:function(scope,element,attr){
       scope.step = {};
       scope.step.index = scope.index;
