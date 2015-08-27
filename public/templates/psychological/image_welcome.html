@@ -1,5 +1,5 @@
 <div ng-show="step.isCurrent()">
-  <div class="welcome">
+  <div class="welcome" ng-transclude>
     
   </div>
   <a class="start" hm-tap="$parent.state.nextStep()">继续</a>
