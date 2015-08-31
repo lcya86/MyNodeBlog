@@ -338,9 +338,9 @@ angular.module('experiment.directives',['angular-gestures'])
       scope.step.getPairs();
       
       scope.step.clickButton = function(button,pair){
+        $timeout.cancel(scope.step.timer);
         scope.step.results[scope.step.currentPair].reactTime = (new Date().getTime()) - scope.step.startTime;
         scope.step.miss = false;
-        $timeout.cancel(scope.step.timer);
         scope.step.results[scope.step.currentPair].isMiss = false;
         scope.step.results[scope.step.currentPair].sequence = pair.sequence;
         if(button==pair.letter){
@@ -410,10 +410,7 @@ angular.module('experiment.directives',['angular-gestures'])
           scope.step.startTime = new Date().getTime();
           scope.step.miss = true;
         },1000);
-        var t3 = scope.step.timer = $timeout(function(){
-          $timeout.cancel(t1);
-          $timeout.cancel(t2);
-          $timeout.cancel(t3);
+        scope.step.timer = $timeout(function(){
           if(scope.step.miss){
             scope.step.results[scope.step.currentPair].isMiss = true;
             scope.step.results[scope.step.currentPair].reactTime = 2000;
