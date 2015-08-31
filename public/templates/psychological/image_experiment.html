@@ -1,6 +1,6 @@
 <div class="d_experiment" ng-show="step.isCurrent()">
   <div class="progress-bar" ng-style="step.pbstyle"></div>
-  <div ng-repeat="pair in step.pairs" ng-if="step.currentPair == $index || step.currentPair + 1 == $index">
+  <div ng-repeat="pair in step.pairs" ng-if="step.currentPair == $index || step.currentPair + 1 == $index" ng-show="step.currentPair == $index">
     <div class="cross" ng-show="step.subStage == 1">
       <span class="glyphicon glyphicon-plus"></span>
     </div>
