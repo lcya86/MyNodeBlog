@@ -31,7 +31,7 @@ angular.module('experiment.directives',['angular-gestures'])
   }
 }])
 
-.directive('imageWelcome',function(){
+.directive('break',function(){
   return {
     restrict:'E',
     scope:{
@@ -68,23 +68,6 @@ angular.module('experiment.directives',['angular-gestures'])
   }
 })
 
-.directive('break',function(){
-  return {
-    restrict:'E',
-    scope:{
-      index:'@index'
-    },
-    templateUrl:'/templates/psychological/break.html',
-    replace:true,
-    link:function(scope,element,attr){
-      scope.step = {};
-      scope.step.index = scope.index;
-      scope.step.isCurrent = function(){
-        return scope.$parent.state.current == scope.step.index;
-      };
-    }
-  }
-})
 
 .directive('end',function(){
   return {
@@ -437,7 +420,7 @@ angular.module('experiment.directives',['angular-gestures'])
             scope.step.results[scope.step.currentPair].sequence = scope.step.pairs[scope.step.currentPair].sequence;
             scope.step.nextPair();
           }
-        },2000);
+        },3000);
       };
 
       scope.step.correctRate = function(){
