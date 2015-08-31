@@ -416,7 +416,7 @@ angular.module('experiment.directives',['angular-gestures'])
           $timeout.cancel(t3);
           if(scope.step.miss){
             scope.step.results[scope.step.currentPair].isMiss = true;
-            scope.step.results[scope.step.currentPair].reactTime = 1000;
+            scope.step.results[scope.step.currentPair].reactTime = 2000;
             scope.step.results[scope.step.currentPair].sequence = scope.step.pairs[scope.step.currentPair].sequence;
             scope.step.nextPair();
           }
