@@ -19,6 +19,10 @@ angular.module('psychological.image',['angular-gestures','experiment.directives'
   $scope.state.toStep = function(index){
     $scope.state.current = index;
   };
+
+  $scope.state.toEnd = function(){
+    $scope.state.current = 10;
+  };
   
 
 }])

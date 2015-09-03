@@ -19,6 +19,9 @@ angular.module('psychological.control',['angular-gestures','experiment.directive
   $scope.state.toStep = function(index){
     $scope.state.current = index;
   };
+  $scope.state.toEnd = function(){
+    $scope.state.current = 18;
+  };
   
 
 }])

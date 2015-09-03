@@ -369,8 +369,10 @@ angular.module('experiment.directives',['angular-gestures'])
           if(scope.upLoadResult){
             return scope.step.sendResult((cr*100)+'%');
           }else{
-            if(cr >= 0.7 || scope.step.repeatTime >= 2){
+            if(cr >= 0.7){
               return scope.$parent.state.nextStep();
+            }else if(scope.step.repeatTime >= 2){
+              return scope.$parent.state.toEnd();
             }else{
               alert('您的正确率为'+(cr*100)+'% 没有达到70%，请重新练习。');
               return scope.step.repeat();
