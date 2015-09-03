@@ -391,9 +391,9 @@ angular.module('experiment.directives',['angular-gestures'])
         var t2 = $timeout(function(){
           scope.step.nextSubStage();
           if(scope.step.showUp){
-            scope.step.results[scope.step.currentPair].isUnderP = scope.step.pairs[scope.step.currentPair].upImg.substr(a.indexOf('-')+1,2);
+            scope.step.results[scope.step.currentPair].isUnderP = scope.step.pairs[scope.step.currentPair].upImg.substr(scope.step.pairs[scope.step.currentPair].upImg.indexOf('-')+1,2);
           }else{
-            scope.step.results[scope.step.currentPair].isUnderP = scope.step.pairs[scope.step.currentPair].downImg.substr(a.indexOf('-')+1,2);
+            scope.step.results[scope.step.currentPair].isUnderP = scope.step.pairs[scope.step.currentPair].downImg.substr(scope.step.pairs[scope.step.currentPair].downImg.indexOf('-')+1,2);
           }
           scope.step.startTime = new Date().getTime();
           scope.step.miss = true;
