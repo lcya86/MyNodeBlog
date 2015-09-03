@@ -401,10 +401,10 @@ angular.module('experiment.directives',['angular-gestures'])
         scope.step.timer = $timeout(function(){
           if(scope.step.miss){
             scope.step.results[scope.step.currentPair].isMiss = true;
-            if(scope.step.pairs[scope.step.currentPair].letter==''){
-              scope.step.results[scope.step.currentPair].reactTime = 9999;
-            }else{
+            if(scope.step.pairs[scope.step.currentPair].letter){
               scope.step.results[scope.step.currentPair].reactTime = 2000;
+            }else{
+              scope.step.results[scope.step.currentPair].reactTime = 9999;
             }
             scope.step.results[scope.step.currentPair].sequence = scope.step.pairs[scope.step.currentPair].sequence;
             scope.step.nextPair();
