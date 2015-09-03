@@ -390,22 +390,10 @@ angular.module('experiment.directives',['angular-gestures'])
         },500);
         var t2 = $timeout(function(){
           scope.step.nextSubStage();
-          if(scope.step.stage==3){
-            if(scope.step.showUp&&/.*(-03).*/.test(scope.step.pairs[scope.step.currentPair].upImg)){
-              scope.step.results[scope.step.currentPair].isUnderP = true;
-            }else if(!scope.step.showUp&&/.*(-03).*/.test(scope.step.pairs[scope.step.currentPair].downImg)){
-              scope.step.results[scope.step.currentPair].isUnderP = true;
-            }else{
-              scope.step.results[scope.step.currentPair].isUnderP = false;
-            }
+          if(scope.step.showUp){
+            scope.step.results[scope.step.currentPair].isUnderP = scope.step.pairs[scope.step.currentPair].upImg.substr(a.indexOf('-')+1,2);
           }else{
-            if(scope.step.showUp&&/.*(-04).*/.test(scope.step.pairs[scope.step.currentPair].upImg)){
-              scope.step.results[scope.step.currentPair].isUnderP = true;
-            }else if(!scope.step.showUp&&/.*(-04).*/.test(scope.step.pairs[scope.step.currentPair].downImg)){
-              scope.step.results[scope.step.currentPair].isUnderP = true;
-            }else{
-              scope.step.results[scope.step.currentPair].isUnderP = false;
-            }
+            scope.step.results[scope.step.currentPair].isUnderP = scope.step.pairs[scope.step.currentPair].downImg.substr(a.indexOf('-')+1,2);
           }
           scope.step.startTime = new Date().getTime();
           scope.step.miss = true;
@@ -413,7 +401,11 @@ angular.module('experiment.directives',['angular-gestures'])
         scope.step.timer = $timeout(function(){
           if(scope.step.miss){
             scope.step.results[scope.step.currentPair].isMiss = true;
-            scope.step.results[scope.step.currentPair].reactTime = 2000;
+            if(scope.step.pairs[scope.step.currentPair].letter==''){
+              scope.step.results[scope.step.currentPair].reactTime = 9999;
+            }else{
+              scope.step.results[scope.step.currentPair].reactTime = 2000;
+            }
             scope.step.results[scope.step.currentPair].sequence = scope.step.pairs[scope.step.currentPair].sequence;
             scope.step.nextPair();
           }
