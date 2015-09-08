@@ -94,9 +94,19 @@ app.get('/project/psychological/v2/MIX', routes.Psycho.doMixExperiment);
 app.get('/project/psychological/v2/RCC', routes.Psycho.doControlExperiment);
 
 
-app.get('/project/psychological/v2/textpractice', routes.Psycho.doTextPractice);
-app.get('/project/psychological/v2/texttest', routes.Psycho.doTextTest);
-app.get('/project/psychological/v2/texttrain', routes.Psycho.doTextTrain);
+app.get('/project/psychological/v2/CBM-A1', routes.Psycho.doImageTest1);
+app.get('/project/psychological/v2/CBM-A3', routes.Psycho.doImageTest2);
+app.get('/project/psychological/v2/CBM-A2', routes.Psycho.doImageTrain);
+
+app.get('/project/psychological/v2/CBM-I1', routes.Psycho.doTextTest1);
+app.get('/project/psychological/v2/CBM-I3', routes.Psycho.doTextTest2);
+app.get('/project/psychological/v2/CBM-I2', routes.Psycho.doTextTrain);
+
+app.get('/project/psychological/v2/AIM1', routes.Psycho.doAIM1);
+app.get('/project/psychological/v2/AIM2', routes.Psycho.doAIM2);
+app.get('/project/psychological/v2/RCC1', routes.Psycho.doRCC1);
+app.get('/project/psychological/v2/RCC2', routes.Psycho.doRCC2);
+
 app.get('/project/psychological/v2/console/getsubjects', routes.Psycho.getSubjects);
 app.delete('/project/psychological/v2/subjects/:id', routes.Psycho.deleteSubject);
 app.post('/project/psychological/v2/addpairs', routes.Psycho.addPairs);

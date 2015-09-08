@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html ng-app="psychological.text">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Experiment</title>
+  <script type="text/javascript" src="/javascripts/angular.min.js"></script>
+  <script type="text/javascript" src="/javascripts/hammer.min.js"></script>
+  <script type="text/javascript" src="/javascripts/gestures.min.js"></script>
+  <script type="text/javascript" src="/javascripts/psychological/experiment/controllers/textExperiment.js"></script>
+  <script type="text/javascript" src="/javascripts/psychological/experiment/directives.js"></script>
+</head>
+<style type="text/css">
+  html,body{
+    height: 100%;
+    margin: 0px;
+  }
+  .container{
+    width: 100%;
+    text-align: center;
+  }
+  @font-face{
+    font-family:'Glyphicons Halflings';
+    src:url('/fonts/glyphicons-halflings-regular.eot');
+    src:url('/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/glyphicons-halflings-regular.woff') format('woff'),
+    url('/fonts/glyphicons-halflings-regular.ttf') format('truetype'),
+    url('/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg')
+  }
+  .glyphicon{
+    position:relative;
+    top:1px;
+    display:inline-block;
+    font-family:'Glyphicons Halflings';
+    -webkit-font-smoothing:antialiased;
+    font-style:normal;
+    font-weight:normal;
+    font-size: 20px;
+    line-height:1;
+    -moz-osx-font-smoothing:grayscale
+  }
+  .glyphicon-plus:before{
+    content:"\2b"
+  }
+  .cross{
+    position: fixed;
+    top:45%;
+    left:50%;
+  }
+
+  .d_login{
+    width: 300px;
+    margin: 200px auto;
+  }
+  .b_login{
+    display: block;
+  }
+
+  .textarea{
+    position: absolute;
+    top:30%;
+    left:25%;
+    width:50%;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .welcome{
+    padding: 10px;
+    margin-top:40%;
+  }
+
+  .progress-bar{
+    width: 100%;
+    height: 5px;
+    margin-bottom: 5px;
+    background-color: #76b7ff;
+    display: absolute;
+    top: 0px;
+    position: fixed;
+  }
+
+  .start{
+    background-color: antiquewhite;
+    padding: 10px;
+    cursor: pointer;
+    display: inline-block;
+    border-radius: 5px;
+  }
+
+  .d_experiment{
+    margin-top: 5px;
+  }
+
+  .eButton{
+    left: 0px;
+    width: 50px;
+    position: fixed;
+    height: 100%;
+    background-color: antiquewhite;
+    text-align: center;
+    z-index: 999;
+  }
+  .fButton{
+    right: 0px;
+    width: 50px;
+    position: fixed;
+    height: 100%;
+    background-color: antiquewhite;
+    text-align: center;
+    z-index: 999;
+  }
+  .eButton:active{
+    background-color: rgb(249, 213, 165);
+  }
+  .fButton:active{
+    background-color: rgb(249, 213, 165);
+  }
+  .eButton strong{
+    display: block;
+    margin-top: 200px;
+  }
+  .fButton strong{
+    display: block;
+    margin-top: 200px;
+  }
+
+</style>
+<body>
+  <div id="container" class="container" ng-controller="doExperiment">
+
+    <login index="0"></login>
+
+    <text-welcome index="1"></text-welcome>
+
+    <text-experiment index="2" stage="2" type="1" uploadresult="true"></text-experiment>
+
+    <end index="3"></end>
+
+  </div>
+</body>
+</html>

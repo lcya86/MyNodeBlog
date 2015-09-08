@@ -49,41 +49,47 @@ exports.doControlExperiment = function(req,res){
   res.render('project/Psychological/v2/ControlExperiment');
 }
 
-exports.doTextPractice = function(req, res) {
-  model.MaterialText.find({stage:1}).sort({
-    'sequence': +1
-  }).exec(function(err, data) {
-    return res.render('project/Psychological/v2/TextExperiment', {
-      texts: data,
-      stage:1,
-      stage_text:'练习'
-    });
-  });
+
+exports.doTextTest1 = function(req,res){
+  res.render('project/Psychological/v2/TextTest1');
 }
 
-exports.doTextTest = function(req,res){
-  model.MaterialText.find({stage:2}).sort({
-    'sequence': +1
-  }).exec(function(err, data) {
-    return res.render('project/Psychological/v2/TextExperiment', {
-      texts: data,
-      stage:2,
-      stage_text:'测试'
-    });
-  });
+exports.doTextTest2 = function(req,res){
+  res.render('project/Psychological/v2/TextTest2');
 }
 
 exports.doTextTrain = function(req,res){
-  model.MaterialText.find({stage:3}).sort({
-    'sequence': +1
-  }).exec(function(err, data) {
-    return res.render('project/Psychological/v2/TextExperiment', {
-      texts: data,
-      stage:3,
-      stage_text:'训练'
-    });
-  });
+  res.render('project/Psychological/v2/TextTrain');
 }
+
+exports.doImageTest1 = function(req,res){
+  res.render('project/Psychological/v2/ImageTest1');
+}
+
+exports.doImageTest2 = function(req,res){
+  res.render('project/Psychological/v2/ImageTest2');
+}
+
+exports.doImageTrain = function(req,res){
+  res.render('project/Psychological/v2/ImageTrain');
+}
+
+exports.doAIM1 = function(req,res){
+  res.render('project/Psychological/v2/AIM1');
+}
+
+exports.doAIM2 = function(req,res){
+  res.render('project/Psychological/v2/AIM2');
+}
+
+exports.doRCC1 = function(req,res){
+  res.render('project/Psychological/v2/RCC1');
+}
+
+exports.doRCC2 = function(req,res){
+  res.render('project/Psychological/v2/RCC2');
+}
+
 
 exports.addSubject = function(req, res) {
   var name = req.body.name;
