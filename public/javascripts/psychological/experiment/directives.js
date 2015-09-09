@@ -121,6 +121,8 @@ angular.module('experiment.directives',['angular-gestures'])
       scope.step.pbstyle = {
         "width":scope.step.progress+"%"
       };
+
+      console.log(typeof scope.step.stage);
       
       scope.step.isCurrent = function(){
         return scope.$parent.state.current == scope.step.index;
@@ -146,7 +148,15 @@ angular.module('experiment.directives',['angular-gestures'])
         scope.step.miss = false;
         scope.step.results[scope.step.currentSentence].isMiss = false;
         scope.step.results[scope.step.currentSentence].sequence = sentence.sequence;
-        if((button===1 && scope.step.showPword)||(button===3 && !scope.step.showPword)){
+        if(scope.step.type == 0){
+          if(Math.random() > .5){
+            scope.step.results[scope.step.currentSentence].isCorrect = true;
+            scope.step.feedback = "你是正确的！";
+          }else{
+            scope.step.results[scope.step.currentSentence].isCorrect = false;
+            scope.step.feedback = "你是错误的！";
+          }
+        }else if((button===1 && scope.step.showPword)||(button===3 && !scope.step.showPword)){
           scope.step.results[scope.step.currentSentence].isCorrect = true;
           scope.step.feedback = "你是正确的！";
         }else{
@@ -225,8 +235,6 @@ angular.module('experiment.directives',['angular-gestures'])
       scope.step.repeat = function(){
         scope.step.currentSentence = -1;
         scope.step.progress = 0;
-        scope.step.stage = 2;
-        scope.step.type = 1;
         scope.step.subStage = 1;
         scope.step.results = [];
         scope.step.startTime = 0;
@@ -424,8 +432,6 @@ angular.module('experiment.directives',['angular-gestures'])
       scope.step.repeat = function(){
         scope.step.currentPair = -1;
         scope.step.progress = 0;
-        scope.step.stage = 2;
-        scope.step.type = 1;
         scope.step.subStage = 1;
         scope.step.results = [];
         scope.step.startTime = 0;
