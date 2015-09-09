@@ -103,12 +103,12 @@ angular.module('experiment.directives',['angular-gestures'])
     replace:true,
     link:function(scope,element,attr){
       scope.step = {};
-      scope.step.index = scope.index;
+      scope.step.index = parseInt(scope.index);
       scope.step.sentences = [];
       scope.step.currentSentence = -1;
       scope.step.progress = 0;
-      scope.step.stage = scope.stage;
-      scope.step.type = scope.type;
+      scope.step.stage = parseInt(scope.stage);
+      scope.step.type = parseInt(scope.type);
       scope.step.subStage = 1;
       scope.step.results = [];
       scope.step.startTime = 0;
@@ -123,6 +123,8 @@ angular.module('experiment.directives',['angular-gestures'])
       };
 
       console.log(typeof scope.step.stage);
+      console.log(typeof scope.hasfeedback);
+      console.log(scope.halflist);
       
       scope.step.isCurrent = function(){
         return scope.$parent.state.current == scope.step.index;
