@@ -50,9 +50,9 @@ angular.module('psychological.directives',[])
           upImg: scope.upImg,
           downImg: scope.downImg,
           letter: scope.$$childTail.letter,
-          type: scope.type,
+          type: parseInt(scope.type),
           positivePosition: scope.$$childTail.position,
-          stage: scope.stage,
+          stage: parseInt(scope.stage),
           sequence: scope.array.length+1
         }).success(function(data){
           if(data.success){
@@ -130,9 +130,9 @@ angular.module('psychological.directives',[])
           sentence: scope.sentence,
           nword: scope.nword,
           pword: scope.pword,
-          stage: scope.stage,
+          stage: parseInt(scope.stage),
           sequence: scope.materials.length+1,
-          type: scope.type
+          type: parseInt(scope.type)
         }).success(function(data){
           if(data.success){
             scope.is_creating = false;
@@ -173,7 +173,7 @@ angular.module('psychological.directives',[])
       scope.getSubjects();
 
       scope.addSubject = function(){
-        $http.post('/project/psychological/console/addsubject',{type:scope.type,name:scope.name}).success(function(data){
+        $http.post('/project/psychological/console/addsubject',{type:parseInt(scope.type),name:scope.name}).success(function(data){
           if(data.success){
             scope.isAdding = false;
             scope.getSubjects();

@@ -10,10 +10,10 @@ angular.module('experiment.directives',['angular-gestures'])
     replace:true,
     link:function(scope,element,attr){
       scope.step = {};
-      scope.step.index = 0;
+      scope.step.index = parseInt(scope.index);
 
       scope.step.isCurrent = function(){
-        return scope.$parent.state.current == scope.step.index;
+        return scope.$parent.state.current === scope.step.index;
       };
 
       scope.step.login = function(){
@@ -42,9 +42,9 @@ angular.module('experiment.directives',['angular-gestures'])
     transclude:true,
     link:function(scope,element,attr){
       scope.step = {};
-      scope.step.index = scope.index;
+      scope.step.index = parseInt(scope.index);
       scope.step.isCurrent = function(){
-        return scope.$parent.state.current == scope.step.index;
+        return scope.$parent.state.current === scope.step.index;
       };
     }
   }
@@ -60,9 +60,9 @@ angular.module('experiment.directives',['angular-gestures'])
     replace:true,
     link:function(scope,element,attr){
       scope.step = {};
-      scope.step.index = scope.index;
+      scope.step.index = parseInt(scope.index);
       scope.step.isCurrent = function(){
-        return scope.$parent.state.current == scope.step.index;
+        return scope.$parent.state.current === scope.step.index;
       };
     }
   }
@@ -81,7 +81,7 @@ angular.module('experiment.directives',['angular-gestures'])
       scope.step = {};
       scope.step.index = scope.index;
       scope.step.isCurrent = function(){
-        return scope.$parent.state.current == scope.step.index;
+        return scope.$parent.state.current === scope.step.index;
       } 
     }
   }
@@ -121,13 +121,9 @@ angular.module('experiment.directives',['angular-gestures'])
       scope.step.pbstyle = {
         "width":scope.step.progress+"%"
       };
-
-      console.log(typeof scope.step.stage);
-      console.log(typeof scope.hasfeedback);
-      console.log(scope.halflist);
       
       scope.step.isCurrent = function(){
-        return scope.$parent.state.current == scope.step.index;
+        return scope.$parent.state.current === scope.step.index;
       }
       scope.step.getSentences = function(){
         $http.get('/project/psychological/v2/console/getSentences?type='+scope.step.type+'&stage='+scope.step.stage)
@@ -150,7 +146,7 @@ angular.module('experiment.directives',['angular-gestures'])
         scope.step.miss = false;
         scope.step.results[scope.step.currentSentence].isMiss = false;
         scope.step.results[scope.step.currentSentence].sequence = sentence.sequence;
-        if(scope.step.type == 0){
+        if(scope.step.type === 0){
           if(Math.random() > .5){
             scope.step.results[scope.step.currentSentence].isCorrect = true;
             scope.step.feedback = "你是正确的！";
@@ -197,7 +193,7 @@ angular.module('experiment.directives',['angular-gestures'])
       };
 
       scope.step.nextSentence = function(){
-        if(scope.step.currentSentence == scope.step.sentences.length-1){
+        if(scope.step.currentSentence === scope.step.sentences.length-1){
           var cr = scope.step.correctRate();
 
           if(scope.upLoadResult){
@@ -266,7 +262,7 @@ angular.module('experiment.directives',['angular-gestures'])
       };
 
       scope.$watch('$parent.state.current',function(nv,ov){
-        if(nv==scope.step.index){
+        if(nv===scope.step.index){
           scope.step.nextSentence();
         }
       });
@@ -289,12 +285,12 @@ angular.module('experiment.directives',['angular-gestures'])
     replace:true,
     link:function(scope,element,attr){
       scope.step = {};
-      scope.step.index = scope.index;
+      scope.step.index = parseInt(scope.index);
       scope.step.pairs = [];
       scope.step.currentPair = -1;
       scope.step.progress = 0;
-      scope.step.stage = scope.stage;
-      scope.step.type = scope.type;
+      scope.step.stage = parseInt(scope.stage);
+      scope.step.type = parseInt(scope.type);
       scope.step.subStage = 1;
       scope.step.results = [];
       scope.step.startTime = 0;
@@ -308,7 +304,7 @@ angular.module('experiment.directives',['angular-gestures'])
       };
       
       scope.step.isCurrent = function(){
-        return scope.$parent.state.current == scope.step.index;
+        return scope.$parent.state.current === scope.step.index;
       }
       scope.step.getPairs = function(){
         $http.get('/project/psychological/v2/getpairs?type='+scope.step.type+'&stage='+scope.step.stage)
@@ -353,7 +349,7 @@ angular.module('experiment.directives',['angular-gestures'])
         scope.step.miss = false;
         scope.step.results[scope.step.currentPair].isMiss = false;
         scope.step.results[scope.step.currentPair].sequence = pair.sequence;
-        if(button==pair.letter){
+        if(button===pair.letter){
           scope.step.results[scope.step.currentPair].isCorrect = true;
         }else{
           scope.step.results[scope.step.currentPair].isCorrect = false;
@@ -366,7 +362,7 @@ angular.module('experiment.directives',['angular-gestures'])
       };
 
       scope.step.isShowUp = function(pair){
-        if(scope.stage==1||scope.stage==2||scope.stage==4){
+        if(scope.step.stage===1||scope.step.stage===2||scope.step.stage===4){
           return (Math.random().toFixed(2) < pair.positivePosition.toFixed(2));
         }else{
           return (Math.random().toFixed(2) < pair.positivePosition.toFixed(2))&&(/.*(-03).*/.test(scope.step.pairs[scope.step.currentPair].upImg));
@@ -374,7 +370,7 @@ angular.module('experiment.directives',['angular-gestures'])
       };
 
       scope.step.nextPair = function(){
-        if(scope.step.currentPair == scope.step.pairs.length-1){
+        if(scope.step.currentPair === scope.step.pairs.length-1){
           var cr = scope.step.correctRate();
           if(scope.upLoadResult){
             return scope.step.sendResult((cr*100)+'%');
@@ -463,7 +459,7 @@ angular.module('experiment.directives',['angular-gestures'])
       };
 
       scope.$watch('$parent.state.current',function(nv,ov){
-        if(nv==scope.step.index){
+        if(nv===scope.step.index){
           scope.step.nextPair();
         }
       });
