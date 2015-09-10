@@ -330,7 +330,7 @@ angular.module('experiment.directives',['angular-gestures'])
                 range.push(i+1);
               }
               scope.step.pairs = data.pairs.filter(function(item,index,array){
-                return item.sequence in range;
+                return range.indexOf(item.sequence) > -1;
               }).sort(function(){
                 return Math.random() > .5 ? -1 : 1;
               });
