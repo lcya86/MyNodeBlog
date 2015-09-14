@@ -129,9 +129,9 @@ angular.module('experiment.directives',['angular-gestures'])
         $http.get('/project/psychological/v2/console/getSentences?type='+scope.step.type+'&stage='+scope.step.stage)
           .success(function(data){
             if(scope.halflist){
-              scope.step.sentences = data.sentences.sort(function(){
+              scope.step.sentences = data.sentences.splice(0,80).sort(function(){
                 return Math.random() > .5 ? -1 : 1;
-              }).splice(0,80);
+              });
             }else{
               scope.step.sentences = data.sentences.sort(function(){
                 return Math.random() > .5 ? -1 : 1;
