@@ -79,7 +79,7 @@ angular.module('experiment.directives',['angular-gestures'])
     replace:true,
     link:function(scope,element,attr){
       scope.step = {};
-      scope.step.index = scope.index;
+      scope.step.index = parseInt(scope.index);
       scope.step.isCurrent = function(){
         return scope.$parent.state.current === scope.step.index;
       } 
