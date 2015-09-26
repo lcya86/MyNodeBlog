@@ -25,8 +25,8 @@ exports.checkSignature = function(signature,timestamp,nonce){
 };
 
 exports.login = function(fn){
-  var wx_user = 'lcya86@gmail.com';
-  var wx_pwd = '1225liu';
+  var wx_user = '***';
+  var wx_pwd = '***';
   var shasum = crypto.createHash('md5');
   shasum.update(wx_pwd);
   var wx_pwd_md5 = shasum.digest('hex');
