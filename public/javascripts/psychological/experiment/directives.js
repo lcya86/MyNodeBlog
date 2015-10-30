@@ -254,6 +254,10 @@ angular.module('experiment.directives', ['angular-gestures'])
           scope.step.readTime = new Date().getTime();
           $timeout.cancel(t2);
         }, 1000);
+        var t3 = $timeout(function() {
+          scope.step.clickButton();
+          $timeout.cancel(t3);
+        }, 5000);
       };
 
       scope.step.correctRate = function() {
