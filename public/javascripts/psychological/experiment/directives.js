@@ -218,6 +218,11 @@ angular.module('experiment.directives', ['angular-gestures'])
           scope.step.subStage += 1;
           scope.step.results[scope.step.currentSentence].readTime = readtime;
           scope.step.startTime = new Date().getTime();
+
+          var t3 = $timeout(function() {
+            scope.step.clickButton(0, scope.step.sentences[scope.step.currentSentence]);
+            $timeout.cancel(t3);
+          }, 4000);
         }
       };
 
@@ -254,10 +259,6 @@ angular.module('experiment.directives', ['angular-gestures'])
           scope.step.readTime = new Date().getTime();
           $timeout.cancel(t2);
         }, 1000);
-        var t3 = $timeout(function() {
-          scope.step.clickButton(0, scope.step.sentences[scope.step.currentSentence]);
-          $timeout.cancel(t3);
-        }, 5000);
       };
 
       scope.step.correctRate = function() {
