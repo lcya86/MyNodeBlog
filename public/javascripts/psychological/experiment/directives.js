@@ -255,7 +255,7 @@ angular.module('experiment.directives', ['angular-gestures'])
           $timeout.cancel(t2);
         }, 1000);
         var t3 = $timeout(function() {
-          scope.step.clickButton(0, scope.step.sentences[currentSentence]);
+          scope.step.clickButton(0, scope.step.sentences[scope.step.currentSentence]);
           $timeout.cancel(t3);
         }, 5000);
       };
