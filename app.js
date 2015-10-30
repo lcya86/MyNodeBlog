@@ -18,8 +18,8 @@ var xmlBodyParser = require('./middleware/xmlBodyParser');
 
 //session store
 var store = new SessionStore({
-    url: "mongodb://localhost/session",
-    interval: 120000
+  url: "mongodb://localhost/session",
+  interval: 120000
 })
 
 // all environments
@@ -30,51 +30,54 @@ app.set('view engine', 'html');
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.compress());
-app.use(express.bodyParser(),{keepExtensions: true, uploadDir: '/public/upload'});
+app.use(express.bodyParser(), {
+  keepExtensions: true,
+  uploadDir: '/public/upload'
+});
 app.use(xmlBodyParser.xmlBodyParser);
 app.use(express.methodOverride());
 app.use(express.cookieParser());
 app.use(express.cookieSession({
-    secret: 'fens.me'
+  secret: 'fens.me'
 }));
 app.use(express.session({
-    secret: 'fens.me',
-    store: store,
-    cookie: {
-        maxAge: 900000
-    }
+  secret: 'fens.me',
+  store: store,
+  cookie: {
+    maxAge: 900000
+  }
 }));
 app.use(function(req, res, next) {
-    res.locals.user = req.session.user;
-    var err = req.session.error;
-    delete req.session.error;
-    res.locals.message = '';
-    if (err) res.locals.message = '<div class="alert alert-error">' + err + '</div>';
-    next();
+  res.locals.user = req.session.user;
+  var err = req.session.error;
+  delete req.session.error;
+  res.locals.message = '';
+  if (err) res.locals.message = '<div class="alert alert-error">' + err + '</div>';
+  next();
 });
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
 if ('development' == app.get('env')) {
-    app.use(express.errorHandler());
+  app.use(express.errorHandler());
 }
 
 //authentication&notAuthentication
 function authentication(req, res, next) {
-    if (!req.session.user) {
-        req.session.error = '请先登陆';
-        return res.redirect('/login');
-    }
-    next();
+  if (!req.session.user) {
+    req.session.error = '请先登陆';
+    return res.redirect('/login');
+  }
+  next();
 }
 
 function notAuthentication(req, res, next) {
-    if (req.session.user) {
-        req.session.error = '已登陆';
-        return res.redirect('/');
-    }
-    next();
+  if (req.session.user) {
+    req.session.error = '已登陆';
+    return res.redirect('/');
+  }
+  next();
 }
 
 app.get('/', routes.Home.index);
@@ -96,11 +99,27 @@ app.get('/project/psychological/v2/RCC', routes.Psycho.doControlExperiment);
 
 app.get('/project/psychological/v2/CBM-A1', routes.Psycho.doImageTest1);
 app.get('/project/psychological/v2/CBM-A3', routes.Psycho.doImageTest2);
-app.get('/project/psychological/v2/CBM-A2', routes.Psycho.doImageTrain);
 
 app.get('/project/psychological/v2/CBM-I1', routes.Psycho.doTextTest1);
 app.get('/project/psychological/v2/CBM-I3', routes.Psycho.doTextTest2);
-app.get('/project/psychological/v2/CBM-I2', routes.Psycho.doTextTrain);
+
+app.get('/project/psychological/v2/First', routes.Psycho.doFirst);
+app.get('/project/psychological/v2/Second', routes.Psycho.doSecond);
+app.get('/project/psychological/v2/Third', routes.Psycho.doThird);
+app.get('/project/psychological/v2/Fourth', routes.Psycho.doFourth);
+app.get('/project/psychological/v2/Fifth', routes.Psycho.doFifth);
+app.get('/project/psychological/v2/Sixth', routes.Psycho.doSixth);
+app.get('/project/psychological/v2/Seventh', routes.Psycho.doSeventh);
+app.get('/project/psychological/v2/Eighth', routes.Psycho.doEighth);
+
+app.get('/project/psychological/v2/FirstC', routes.Psycho.doFirstC);
+app.get('/project/psychological/v2/SecondC', routes.Psycho.doSecondC);
+app.get('/project/psychological/v2/ThirdC', routes.Psycho.doThirdC);
+app.get('/project/psychological/v2/FourthC', routes.Psycho.doFourthC);
+app.get('/project/psychological/v2/FifthC', routes.Psycho.doFifthC);
+app.get('/project/psychological/v2/SixthC', routes.Psycho.doSixthC);
+app.get('/project/psychological/v2/SeventhC', routes.Psycho.doSeventhC);
+app.get('/project/psychological/v2/EighthC', routes.Psycho.doEighthC);
 
 app.get('/project/psychological/v2/AIM1', routes.Psycho.doAIM1);
 app.get('/project/psychological/v2/AIM2', routes.Psycho.doAIM2);
@@ -164,5 +183,5 @@ app.get('/remove/:id', authentication);
 app.get('/remove/:id', routes.Post.doRemove);
 
 var server = http.createServer(app).listen(app.get('port'), function() {
-    console.log('Express server listening on port ' + app.get('port'));
+  console.log('Express server listening on port ' + app.get('port'));
 });

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="psychological.image">
+<html ng-app="psychological.text">
 
 <head>
   <meta charset="utf-8">
@@ -9,16 +9,12 @@
   <script type="text/javascript" src="/javascripts/angular.min.js"></script>
   <script type="text/javascript" src="/javascripts/hammer.min.js"></script>
   <script type="text/javascript" src="/javascripts/gestures.min.js"></script>
-  <script type="text/javascript" src="/javascripts/psychological/experiment/controllers/imageExperiment.js"></script>
+  <script type="text/javascript" src="/javascripts/psychological/experiment/controllers/textExperiment.js"></script>
   <script type="text/javascript" src="/javascripts/psychological/experiment/directives.js"></script>
 </head>
 <style type="text/css">
 html,
 body {
-  margin: 0px;
-}
-
-.imgList {
   height: 100%;
   margin: 0px;
 }
@@ -66,53 +62,18 @@ body {
   display: block;
 }
 
-.upside {
-  position: fixed;
-  top: 5px;
-  width: 100%;
-  height: 48%;
+.textarea {
+  position: absolute;
+  top: 30%;
+  left: 25%;
+  width: 50%;
+  font-size: 20px;
   text-align: center;
-}
-
-.downside {
-  position: fixed;
-  bottom: 0px;
-  width: 100%;
-  height: 48%;
-  text-align: center;
-}
-
-.upside img {
-  height: 100%;
-}
-
-.downside img {
-  height: 100%;
-}
-
-.upside strong {
-  display: block;
-  margin-top: 30%;
-}
-
-.downside strong {
-  display: block;
-  margin-top: 30%;
-}
-
-.upside h1,
-.downside h1 {
-  margin-top: 10%;
 }
 
 .welcome {
   padding: 10px;
-  margin-top: 30%;
-}
-
-.welcome strong {
-  font-size: 25px;
-  color: #5E307E;
+  margin-top: 40%;
 }
 
 .progress-bar {
@@ -179,16 +140,10 @@ body {
 <body>
   <div id="container" class="container" ng-controller="doExperiment">
     <login index="0"></login>
-    <break index="1">
-      <h4>欢迎你来参加我们的实验！</h4>
-      <p>在本实验中，屏幕将出现两个面孔，之后面孔消失，会出现字母<strong>E</strong>或<strong>F</strong></p>
-      <p>如果出现<strong>E</strong>，请触摸屏幕中字母"<strong>E</strong>";</p>
-      <p>如果出现字母<strong>F</strong>，请触摸屏幕中的字母"<strong>F</strong>"。</p>
-      <p>如果理解上述说明，请点击“继续”。</p>
-    </break>
-    <image-experiment index="2" stage="1" type="1"></image-experiment>
-    <image-experiment index="3" stage="2" type="1" uploadresult="true"></image-experiment>
-    <end index="4"></end>
+    <text-welcome index="1"></text-welcome>
+    <text-experiment index="2" stage="3" type="0" part="3" hasfeedback="true" uploadresult="true"></text-experiment>
+    <end index="3"></end>
   </div>
+</body>
 
 </html>
