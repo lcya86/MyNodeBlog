@@ -101,68 +101,68 @@ exports.doRCC2 = function(req, res) {
 
 
 exports.doFirst = function(req, res) {
-  res.render('project/Psychological/v2/doFirst');
+  res.render('project/Psychological/v2/First');
 }
 
 exports.doSecond = function(req, res) {
-  res.render('project/Psychological/v2/doSecond');
+  res.render('project/Psychological/v2/Second');
 }
 
 exports.doThird = function(req, res) {
-  res.render('project/Psychological/v2/doThird');
+  res.render('project/Psychological/v2/Third');
 }
 
 exports.doFourth = function(req, res) {
-  res.render('project/Psychological/v2/doFourth');
+  res.render('project/Psychological/v2/Fourth');
 }
 
 exports.doFifth = function(req, res) {
-  res.render('project/Psychological/v2/doFifth');
+  res.render('project/Psychological/v2/Fifth');
 }
 
 exports.doSixth = function(req, res) {
-  res.render('project/Psychological/v2/doSixth');
+  res.render('project/Psychological/v2/Sixth');
 }
 
 exports.doSeventh = function(req, res) {
-  res.render('project/Psychological/v2/doSeventh');
+  res.render('project/Psychological/v2/Seventh');
 }
 
 exports.doEighth = function(req, res) {
-  res.render('project/Psychological/v2/doEighth');
+  res.render('project/Psychological/v2/Eighth');
 }
 
 
 exports.doFirstC = function(req, res) {
-  res.render('project/Psychological/v2/doFirstC');
+  res.render('project/Psychological/v2/FirstC');
 }
 
 exports.doSecondC = function(req, res) {
-  res.render('project/Psychological/v2/doSecondC');
+  res.render('project/Psychological/v2/SecondC');
 }
 
 exports.doThirdC = function(req, res) {
-  res.render('project/Psychological/v2/doThirdC');
+  res.render('project/Psychological/v2/ThirdC');
 }
 
 exports.doFourthC = function(req, res) {
-  res.render('project/Psychological/v2/doFourthC');
+  res.render('project/Psychological/v2/FourthC');
 }
 
 exports.doFifthC = function(req, res) {
-  res.render('project/Psychological/v2/doFifthC');
+  res.render('project/Psychological/v2/FifthC');
 }
 
 exports.doSixthC = function(req, res) {
-  res.render('project/Psychological/v2/doSixthC');
+  res.render('project/Psychological/v2/SixthC');
 }
 
 exports.doSeventhC = function(req, res) {
-  res.render('project/Psychological/v2/doSeventhC');
+  res.render('project/Psychological/v2/SeventhC');
 }
 
 exports.doEighthC = function(req, res) {
-  res.render('project/Psychological/v2/doEighthC');
+  res.render('project/Psychological/v2/EighthC');
 }
 
 
