@@ -175,35 +175,52 @@ angular.module('experiment.directives', ['angular-gestures'])
       scope.step.getSentences();
 
       scope.step.clickButton = function(button, sentence) {
-        $timeout.cancel(scope.step.t3);
-        scope.step.results[scope.step.currentSentence].reactTime = (new Date().getTime()) - scope.step.startTime;
-        scope.step.miss = false;
-        scope.step.results[scope.step.currentSentence].isMiss = false;
-        scope.step.results[scope.step.currentSentence].sequence = sentence.sequence;
-        if (scope.step.type === 0) {
-          if (Math.random() > .5) {
+        if ($timeout.cancel(scope.step.t3)) {
+          scope.step.results[scope.step.currentSentence].reactTime = (new Date().getTime()) - scope.step.startTime;
+          scope.step.miss = false;
+          scope.step.results[scope.step.currentSentence].isMiss = false;
+          scope.step.results[scope.step.currentSentence].sequence = sentence.sequence;
+          if (scope.step.type === 0) {
+            if (Math.random() > .5) {
+              scope.step.results[scope.step.currentSentence].isCorrect = true;
+              scope.step.feedback = "你是正确的！";
+            } else {
+              scope.step.results[scope.step.currentSentence].isCorrect = false;
+              scope.step.feedback = "你是错误的！";
+            }
+          } else if ((button === 1 && scope.step.showPword) || (button === 3 && !scope.step.showPword)) {
             scope.step.results[scope.step.currentSentence].isCorrect = true;
             scope.step.feedback = "你是正确的！";
           } else {
             scope.step.results[scope.step.currentSentence].isCorrect = false;
             scope.step.feedback = "你是错误的！";
           }
-        } else if ((button === 1 && scope.step.showPword) || (button === 3 && !scope.step.showPword)) {
-          scope.step.results[scope.step.currentSentence].isCorrect = true;
-          scope.step.feedback = "你是正确的！";
-        } else {
-          scope.step.results[scope.step.currentSentence].isCorrect = false;
-          scope.step.feedback = "你是错误的！";
-        }
-        if (scope.hasFeedBack) {
-          scope.step.nextSubStage();
-          var t1 = $timeout(function() {
-            $timeout.cancel(t1);
+          if (scope.hasFeedBack) {
+            scope.step.nextSubStage();
+            var t1 = $timeout(function() {
+              $timeout.cancel(t1);
+              scope.step.nextSentence();
+            }, 500);
+          } else {
             scope.step.nextSentence();
-          }, 500);
+          }
         } else {
-          scope.step.nextSentence();
+          scope.step.results[scope.step.currentSentence].reactTime = 9999;
+          scope.step.results[scope.step.currentSentence].isMiss = true;
+          scope.step.results[scope.step.currentSentence].sequence = sentence.sequence;
+          scope.step.results[scope.step.currentSentence].isCorrect = false;
+          scope.step.feedback = "反应超时";
+          if (scope.hasFeedBack) {
+            scope.step.nextSubStage();
+            var t1 = $timeout(function() {
+              $timeout.cancel(t1);
+              scope.step.nextSentence();
+            }, 500);
+          } else {
+            scope.step.nextSentence();
+          }
         }
+
       };
 
       scope.step.nextSubStage = function() {
@@ -222,7 +239,6 @@ angular.module('experiment.directives', ['angular-gestures'])
 
           scope.step.t3 = $timeout(function() {
             scope.step.clickButton(0, scope.step.sentences[scope.step.currentSentence]);
-            $timeout.cancel(scope.step.t3);
           }, 4000);
         }
       };
