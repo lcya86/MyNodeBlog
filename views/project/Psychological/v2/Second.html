@@ -140,7 +140,11 @@ body {
 <body>
   <div id="container" class="container" ng-controller="doExperiment">
     <login index="0"></login>
-    <text-welcome index="1"></text-welcome>
+    <break index="1">
+      <h4>欢迎你来参加我们的实验！</h4>
+      <p>首先进行一个训练，首先会呈现一个词，之后会呈现一个句子，当你阅读完句子后请按“继续”，你需要判断这个句子和单词之间是否有关系？有关请按<strong>1</strong>键，无关请按<strong>3</strong>键。</p>
+      <p>这部分训练将持续8分钟左右，如果理解上述说明，请点击“继续”。</p>
+    </break>
     <text-experiment index="2" stage="3" type="1" part="2" hasfeedback="true" uploadresult="true"></text-experiment>
     <end index="3"></end>
   </div>
