@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>zhong's massage</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <link rel="stylesheet" href="semantic/dist/semantic.min.css">
+  <script src="js/jquery.min.js" charset="utf-8"></script>
+  <style>
+    #header{
+      padding-top: 100px;
+      padding-bottom: 20px;
+      background-color: #a73920;
+      margin-bottom:0;
+    }
+
+    #footer{
+      background-color: #a73920;
+    }
+
+    #sidebar{
+      background-color: #a73920;
+    }
+
+    #brand{
+      position: absolute;
+      z-index: 2;
+      top: 0px;
+      width:200px;
+      height:200px;
+      border-radius: 0 0 10px 10px;
+    }
+
+    .secondary.pointing.menu .toc.item {
+      display: none;
+    }
+
+    .slider{
+      overflow: hidden;
+    }
+
+    .slide{
+      position: absolute;
+    }
+
+    .slide .content{
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.3);
+      z-index: 1;
+      color: white;
+      width: 100%;
+      height: 100%;
+      padding: 50px 0;
+    }
+
+
+    .ui.dimmer{
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .comments .ui.avatar.image{
+      width: 65px;
+      height: 65px;
+      border-radius: 0;
+      float: left;
+    }
+
+    .ui.list.comments .item{
+      padding-bottom: 10px;
+    }
+    .ui.list.comments .item::after{
+      clear:both;
+      content:' ';
+    }
+
+    .ui.list.comments .item .image+.content{
+      display: table-cell;
+    }
+
+    @media only screen and (max-width: 650px) {
+      .secondary.pointing.menu .item{
+        display: none;
+      }
+      .secondary.pointing.menu .toc.item {
+        display: block;
+      }
+      #brand{
+        height: 40px;
+        width: 40px;
+        margin-left: 14px;
+        position: static;
+        top: none;
+        border-radius: 10px;
+        display: block;
+      }
+      #brand-text{
+        display: inline-block;
+      }
+      #header{
+        padding-top: 5px;
+        padding-bottom: 5px;
+      }
+
+    }
+  </style>
+  <script>
+  $(document)
+    .ready(function() {
+
+      // create sidebar and attach to menu open
+      $('.ui.sidebar')
+        .sidebar('attach events', '.toc.item')
+      ;
+
+
+      var sliderQ = $('.slider .slide');
+
+      $('.slider').height(sliderQ.eq(0).height());
+
+      var currentSlider = 0;
+      $(sliderQ[currentSlider%sliderQ.length]).fadeIn(800).siblings().fadeOut(800);
+      //$(sliderQ[currentSlider++%sliderQ.length]).dimmer('show').siblings().dimmer('hide');
+      $(sliderQ[currentSlider++%sliderQ.length]).find('.content').hide().delay(800).fadeIn();
+      setInterval(function(){
+        $(sliderQ[currentSlider%sliderQ.length]).fadeIn(800).siblings().fadeOut(800);
+        $(sliderQ[currentSlider++%sliderQ.length]).find('.content').hide().delay(800).fadeIn();
+      },5000);
+    });
+
+  $(window).resize(function(){
+    var sliderQ = $('.slider .slide');
+    $('.slider').height(sliderQ.eq(0).height());
+  });
+  </script>
+</head>
+<body class="pushable">
+  <!-- Sidebar Menu -->
+  <div id="sidebar" class="ui vertical inverted sidebar menu left">
+    <a class="active item" href="">HOME</a>
+    <a class="item" href="">ABOUT US</a>
+    <a class="item" href="">SERVICES</a>
+    <a class="item" href="">CONTACTS</a>
+  </div>
+  <div class="pusher">
+    <div id="header" class="ui inverted secondary pointing menu" style="">
+      <div class="ui container">
+        <img id="brand" style="" class="ui image" src="img/zhongs-massage.jpg" alt="">
+        <div id="brand-text" class="item text">Zhong's massage</div>
+        <div class="right menu">
+          <a class="toc item">
+            <i class="sidebar icon"></i>
+          </a>
+          <a class="active item" href="">HOME</a>
+          <a class="item" href="">ABOUT US</a>
+          <a class="item" href="">SERVICES</a>
+          <a class="item" href="">CONTACTS</a>
+        </div>
+      </div>
+    </div>
+    <div class="slider">
+      <div class="slide">
+        <img src="img/massage1.jpg" alt="" class="ui image">
+        <div class="content">
+          <div class="ui container">
+            <h1 class="ui inverted">
+              Acupressure Massage
+            </h1>
+            <p></p>
+          </div>
+        </div>
+      </div>
+      <div class="slide hidden">
+        <img src="img/massage2.jpg" alt="" class="ui image">
+        <div class="content">
+          <h1 class="ui inverted container">
+            Reflexology Foot Massage
+          </h1>
+        </div>
+      </div>
+      <div class="slide hidden">
+        <img src="img/massage3.jpg" alt="" class="ui image">
+        <div class="content">
+          <h1 class="ui inverted container">
+            Deep Tissue Oil Massage
+          </h1>
+        </div>
+      </div>
+    </div>
+    <div class="ui container vertical stripe segment">
+      <div class="ui three column stackable grid text">
+        <div class="column">
+          <h2 class="ui header brown">WELCOME</h2>
+          <p>Zhong's massage has been developed as an effective treatment for public health. The therapy encourages healing by promoting the flow of blood and lynph, relieving tension, stimulating nerves, stretching and loosening muscles and connective tissue to keep them elastic.</p>
+          <p>It has successfully treated chronic pain caused by injuries, poor posture, and symptoms of anxiety, tension, depression, insomnia, and stress.It is highly recommended for the treatment of minor sports injuries and repetitive stress injuries.</p>
+          <p>This therapy can provide great benefits to general health.More and more people of Melbourne are considering it as a better healing and relaxing path to their well-being.</p>
+        </div>
+        <div class="column">
+          <h2 class="ui header brown">COMMENTS</h2>
+          <p>Mes cuml dia sed in lacus ut eniascet ingerto aliiqt es site amet eismod ictor ut ligulate ameti dapibus ticdu nt mtsen lusto dolor ltissim com. Mes cuml dia sed inertio.</p>
+          <p>Nemo enim ipsam voluptatem voluptas sit. Aspernatur aut odit aut fugit sed quia consequuntur magni dolores eose qui rationevoluptatem nesciunt lacusueni.</p>
+        </div>
+        <div class="column">
+          <h2 class="ui header brown">COMMENTS</h2>
+          <div class="ui list comments">
+            <div class="item">
+              <img class="ui avatar image" src="img/Sadhana Temkar.jpg">
+              <div class="content">
+                <a class="header">Sadhana Temkar</a>
+                <div class="description">Very very refreshing n recharging... Enjoyed every bit of it....</div>
+              </div>
+            </div>
+            <div class="item">
+              <img class="ui avatar image" src="img/Matt Riseley.jpg">
+              <div class="content">
+                <a class="header">Matt Riseley</a>
+                <div class="description">Deep tissue was great! Managed to find and fix every sore and tight spot in my legs!</div>
+              </div>
+            </div>
+            <div class="item">
+              <img class="ui avatar image" src="img/Nesrin Gocmen.jpg">
+              <div class="content">
+                <a class="header">Nesrin Gocmen</a>
+                <div class="description">Deep tissue with hot stones has to be best massage here. In saying that reflexology is also a must.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ui container vertical stripe segment">
+      <h2 class="ui header brown">SHOPS</h2>
+      <div class="ui three column stackable grid text">
+          <div class="column">
+            <div class="ui list">
+            <div class="item">
+              <i class="marker icon"></i>
+              <div class="content">
+                <div class="header">Bayside Shopping Centre</div>
+                <div class="description">Shop 182, Level 2, (close to Kmart)</div>
+                <div class="description">Tel:9781 3658</div>
+              </div>
+            </div>
+            <div class="item">
+              <i class="marker icon"></i>
+              <div class="content">
+                <div class="header">Bayside Shopping Centre</div>
+                <div class="description">Shop F014Q, (beside Westco opp. to OPSM)</div>
+                <div class="description">Tel:9783 5948</div>
+              </div>
+            </div>
+            <div class="item">
+              <i class="marker icon"></i>
+              <div class="content">
+                <div class="header">Brimbank Shopping Centre</div>
+                <div class="description">Shop T45A, (close to Kmart and Target)</div>
+                <div class="description">Tel:9360 5605</div>
+              </div>
+            </div>
+            <div class="item">
+              <i class="marker icon"></i>
+              <div class="content">
+                <div class="header">Broadmeadows Shopping Centre</div>
+                <div class="description">Shop G139, (between Coles and Hoyts Cinema)</div>
+                <div class="description">Tel:9309 5077</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui list">
+            <div class="item">
+              <i class="marker icon"></i>
+              <div class="content">
+                <div class="header">Greensborough Plaza</div>
+                <div class="description">Shop 251, Level 2, (next to The Reject Shop)</div>
+                <div class="description">Tel:9435 1778</div>
+              </div>
+            </div>
+            <div class="item">
+              <i class="marker icon"></i>
+              <div class="content">
+                <div class="header">Highpoint Shopping Centre</div>
+                <div class="description">Shop 3002, Level 3, (close to Target)</div>
+                <div class="description">Tel:9317 7116</div>
+              </div>
+            </div>
+            <div class="item">
+              <i class="marker icon"></i>
+              <div class="content">
+                <div class="header">The Glen Shopping Centre</div>
+                <div class="description">Shop 143/SP141, Lower Level, (close to Coles)</div>
+                <div class="description">Tel:9886 7119</div>
+              </div>
+            </div>
+            <div class="item">
+              <i class="marker icon"></i>
+              <div class="content">
+                <div class="header">Westfield Southland Shopping Centre</div>
+                <div class="description">Shop 1040, Level 1, (near Kmart)</div>
+                <div class="description">Tel:9585 2168</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui list">
+            <div class="item">
+              <i class="marker icon"></i>
+              <div class="content">
+                <div class="header">Westfield Doncaster Shopping Centre</div>
+                <div class="description">Shop 1098, Upper Level, (at BIG W entrance)</div>
+                <div class="description">Tel:9855 8818</div>
+              </div>
+            </div>
+            <div class="item">
+              <i class="marker icon"></i>
+              <div class="content">
+                <div class="header">Westfield Airport West Shopping Centre</div>
+                <div class="description">Shop 115, (between Bi-Lo and Coles)</div>
+                <div class="description">Tel:9335 5008</div>
+              </div>
+            </div>
+            <div class="item">
+              <i class="marker icon"></i>
+              <div class="content">
+                <div class="header">Westfield Fountain Gate Shopping Centre</div>
+                <div class="description">Shop 2135, Upper Level, (close to Myer)</div>
+                <div class="description">Tel:9704 5328</div>
+              </div>
+            </div>
+            <div class="item">
+              <i class="marker icon"></i>
+              <div class="content">
+                <div class="header">Eastland Shopping Centre</div>
+                <div class="description">Shop 1128</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="footer" class="ui inverted vertical footer segment">
+      <div class="ui container">
+        <div class="ui stackable three column grid text">
+          <div class="column">
+            <h4 class="ui inverted header">About</h4>
+            <div class="ui inverted link list">
+              <a href="#" class="item">Sitemap</a>
+              <a href="#" class="item">Contact Us</a>
+              <a href="#" class="item">Religious Ceremonies</a>
+              <a href="#" class="item">Gazebo Plans</a>
+            </div>
+          </div>
+          <div class="column">
+            <h4 class="ui inverted header">Services</h4>
+            <div class="ui inverted link list">
+              <a href="#" class="item">Banana Pre-Order</a>
+              <a href="#" class="item">DNA FAQ</a>
+              <a href="#" class="item">How To Access</a>
+              <a href="#" class="item">Favorite X-Men</a>
+            </div>
+          </div>
+          <div class="column">
+            <h4 class="ui inverted header">Footer Header</h4>
+            <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="semantic/dist/semantic.min.js"></script>
+</body>
+</html>

@@ -59,7 +59,7 @@ exports.saveImage = function(req,res){
       });
     }else{
       res.send({
-        success: true 
+        success: true
       });
     }
   });
@@ -420,12 +420,12 @@ exports.sendResult = function(req,res){
   var stage = req.body.stage;
   model.Results.create({name:name,results:result,stage:stage},function(err){
     if(err){
-      console.error(err); 
+      console.error(err);
       return res.send({success:false});
     }
     model.Subject.update({name:name},{complete:{$push:true}},function(err){
       if(err){
-        console.error(err); 
+        console.error(err);
         return res.send({success:false});
       }
       return res.send({success:true});
@@ -439,12 +439,12 @@ exports.sendTextResult = function(req,res){
   var stage = req.body.stage;
   model.TextResults.create({name:name,results:result,stage:stage},function(err){
     if(err){
-      console.error(err); 
+      console.error(err);
       return res.send({success:false});
     }
     model.Subject.update({name:name},{complete:{$push:true}},function(err){
       if(err){
-        console.error(err); 
+        console.error(err);
         return res.send({success:false});
       }
       return res.send({success:true});
@@ -561,4 +561,8 @@ exports.stock = function(req, res) {
       data: data
     });
   });
+}
+
+exports.massage = function(req, res){
+  return res.send()
 }
