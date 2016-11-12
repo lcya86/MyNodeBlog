@@ -7,9 +7,12 @@
   <link rel="stylesheet" href="semantic/dist/semantic.min.css">
   <script src="js/jquery.min.js" charset="utf-8"></script>
   <style>
+    body.pushable>.pusher {
+      background-color: #edece9;
+    }
     #header{
-      padding-top: 100px;
-      padding-bottom: 20px;
+      padding-top: 33px;
+      padding-bottom: 33px;
       background-color: #a73920;
       margin-bottom:0;
     }
@@ -31,6 +34,16 @@
       border-radius: 0 0 10px 10px;
     }
 
+    .slider-wrapper{
+      position: relative;
+    }
+
+    img.home-curve {
+      position: absolute;
+      width: 100%;
+      bottom: 0px;
+    }
+
     .secondary.pointing.menu .toc.item {
       display: none;
     }
@@ -41,6 +54,7 @@
 
     .slide{
       position: absolute;
+      overflow: hidden;
     }
 
     .slide .content{
@@ -79,7 +93,21 @@
       display: table-cell;
     }
 
+    .slider .slide img{
+      -webkit-transition: -webkit-transform 10s linear .1s;
+      -o-transition: -o-transform 10s linear .1s;
+      transition: transform 10s linear .1s;
+      z-index: -1;
+    }
+
+    .slider .slide img.bigger{
+      transform: scale(1.3,1.3);
+    }
+
     @media only screen and (max-width: 650px) {
+      .home-curve{
+        display: none;
+      }
       .secondary.pointing.menu .item{
         display: none;
       }
@@ -108,7 +136,9 @@
   <script>
   $(document)
     .ready(function() {
-
+      $('.fluid.card .image').dimmer({
+        on: 'hover'
+      });
       // create sidebar and attach to menu open
       $('.ui.sidebar')
         .sidebar('attach events', '.toc.item')
@@ -121,11 +151,13 @@
 
       var currentSlider = 0;
       $(sliderQ[currentSlider%sliderQ.length]).fadeIn(800).siblings().fadeOut(800);
-      //$(sliderQ[currentSlider++%sliderQ.length]).dimmer('show').siblings().dimmer('hide');
-      $(sliderQ[currentSlider++%sliderQ.length]).find('.content').hide().delay(800).fadeIn();
+      $(sliderQ[currentSlider%sliderQ.length]).find('img').addClass('bigger');
+      $(sliderQ[currentSlider%sliderQ.length]).find('.content').hide();//.delay(800).fadeIn();
       setInterval(function(){
+        $(sliderQ[currentSlider++%sliderQ.length]).find('img').removeClass('bigger');
         $(sliderQ[currentSlider%sliderQ.length]).fadeIn(800).siblings().fadeOut(800);
-        $(sliderQ[currentSlider++%sliderQ.length]).find('.content').hide().delay(800).fadeIn();
+        $(sliderQ[currentSlider%sliderQ.length]).find('img').addClass('bigger');
+        $(sliderQ[currentSlider%sliderQ.length]).find('.content').hide();//.delay(800).fadeIn();
       },5000);
     });
 
@@ -159,36 +191,105 @@
         </div>
       </div>
     </div>
-    <div class="slider">
-      <div class="slide">
-        <img src="img/massage1.jpg" alt="" class="ui image">
-        <div class="content">
-          <div class="ui container">
-            <h1 class="ui inverted">
-              Acupressure Massage
+    <div class="slider-wrapper">
+      <div class="slider">
+        <div class="slide">
+          <img src="img/massage1.jpg" alt="" class="ui image">
+          <div class="content">
+            <div class="ui container">
+              <h1 class="ui inverted">
+                Acupressure Massage
+              </h1>
+              <p></p>
+            </div>
+          </div>
+        </div>
+        <div class="slide hidden">
+          <img src="img/massage2.jpg" alt="" class="ui image">
+          <div class="content">
+            <h1 class="ui inverted container">
+              Reflexology Foot Massage
             </h1>
-            <p></p>
+          </div>
+        </div>
+        <div class="slide hidden">
+          <img src="img/massage3.jpg" alt="" class="ui image">
+          <div class="content">
+            <h1 class="ui inverted container">
+              Deep Tissue Oil Massage
+            </h1>
           </div>
         </div>
       </div>
-      <div class="slide hidden">
-        <img src="img/massage2.jpg" alt="" class="ui image">
-        <div class="content">
-          <h1 class="ui inverted container">
-            Reflexology Foot Massage
-          </h1>
-        </div>
-      </div>
-      <div class="slide hidden">
-        <img src="img/massage3.jpg" alt="" class="ui image">
-        <div class="content">
-          <h1 class="ui inverted container">
-            Deep Tissue Oil Massage
-          </h1>
-        </div>
-      </div>
+      <img src="img/home-section-curve.svg" class="home-curve" alt="">
     </div>
+
     <div class="ui container vertical stripe segment">
+      <h1 class="ui horizontal divider brown header">WELCOME</h1>
+      <div class="ui two column stackable grid text">
+        <div class="column ten wide">
+          <p>Zhong's massage has been developed as an effective treatment for public health. The therapy encourages healing by promoting the flow of blood and lynph, relieving tension, stimulating nerves, stretching and loosening muscles and connective tissue to keep them elastic.</p>
+          <p>It has successfully treated chronic pain caused by injuries, poor posture, and symptoms of anxiety, tension, depression, insomnia, and stress.It is highly recommended for the treatment of minor sports injuries and repetitive stress injuries.</p>
+          <p>This therapy can provide great benefits to general health.More and more people of Melbourne are considering it as a better healing and relaxing path to their well-being.</p>
+        </div>
+      </div>
+      <h2 class="ui horizontal divider brown header">OUR SERVICES</h2>
+      <div class="ui three column stackable grid text">
+        <div class="column">
+          <div class="ui fluid card">
+            <div class="blurring dimmable image">
+              <div class="ui dimmer">
+                <div class="content">
+                  <div class="center">
+                    <div class="ui inverted button">Read More</div>
+                  </div>
+                </div>
+              </div>
+              <img src="img/massage1.jpg">
+            </div>
+            <div class="content">
+              <p class="header">Reflexology Foot Massage</p>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui fluid card">
+            <div class="blurring dimmable image">
+              <div class="ui dimmer">
+                <div class="content">
+                  <div class="center">
+                    <div class="ui inverted button">Read More</div>
+                  </div>
+                </div>
+              </div>
+              <img src="img/massage2.jpg">
+            </div>
+            <div class="content">
+              <p class="header">Deep Tissue Oil Massage</p>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui fluid card">
+            <div class="blurring dimmable image">
+              <div class="ui dimmer">
+                <div class="content">
+                  <div class="center">
+                    <div class="ui inverted button">Read More</div>
+                  </div>
+                </div>
+              </div>
+              <img src="img/massage3.jpg">
+            </div>
+            <div class="content">
+              <p class="header">Acupressure Massage</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
       <div class="ui three column stackable grid text">
         <div class="column">
           <h2 class="ui header brown">WELCOME</h2>
