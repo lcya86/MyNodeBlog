@@ -147,9 +147,7 @@
 
       var sliderQ = $('.slider .slide');
 
-      $('.slider img').ready(function(){
-        $('.slider').height(sliderQ.eq(0).height());
-      });
+      $('.slider').height($(window).innerWidth()*320/842);
 
       var currentSlider = 0;
       $(sliderQ[currentSlider%sliderQ.length]).fadeIn(800).siblings().fadeOut(800);
