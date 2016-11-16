@@ -5,24 +5,34 @@
   <title>zhong's massage</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <link rel="stylesheet" href="semantic/dist/semantic.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Quattrocento+Sans" rel="stylesheet">
   <script src="js/jquery.min.js" charset="utf-8"></script>
   <style>
     body.pushable>.pusher {
       background-color: #edece9;
+      color: #2b2b2b;
+      font-family: 'Quattrocento Sans', sans-serif;
     }
     #header{
       padding-top: 33px;
       padding-bottom: 33px;
       background-color: #a73920;
       margin-bottom:0;
+      border: none;
+      box-shadow: inset 0 -10px 9px 0px rgba(0,0,0,.1);
     }
 
     #footer{
       background-color: #a73920;
+      box-shadow: inset 0 10px 9px 0px rgba(0,0,0,.1);
     }
 
     #sidebar{
       background-color: #a73920;
+    }
+
+    #sidebar .item{
+      text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     }
 
     #brand{
@@ -32,6 +42,12 @@
       width:200px;
       height:200px;
       border-radius: 0 0 10px 10px;
+      box-shadow: 0 10px 9px 0px rgba(0,0,0,.1);
+    }
+
+    .ui.card{
+      -webkit-box-shadow: none;
+      box-shadow: none;
     }
 
     .slider-wrapper{
@@ -40,7 +56,7 @@
 
     img.home-curve {
       position: absolute;
-      width: 100%;
+      width: 101%;
       bottom: 0px;
     }
 
@@ -104,15 +120,52 @@
       transform: scale(1.3,1.3);
     }
 
+    section{
+      background: white;
+      box-shadow: 0 0px 18px 0px rgba(0,0,0,.1);
+    }
+
+    .subtitle{
+      color:#fbb608;
+      border-top:solid 1px #fbb608;
+      border-bottom:solid 1px #fbb608;
+      padding:10px;
+      text-align: center;
+      width: 40%;
+      margin-left: auto;
+      margin-right: auto;
+      font-family: cursive;
+      margin-bottom: 3rem;
+      margin-top: 10px;
+    }
+
+    .ui.header{
+      font-family: serif;
+    }
+
+    #header .menu .item{
+      text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    #first-section{
+      margin-top: -3rem;
+    }
+
     @media only screen and (max-width: 650px) {
-      .home-curve{
+      .secondary.pointing.menu .item{
         display: none;
       }
-      .secondary.pointing.menu .item{
+      .home-curve{
         display: none;
       }
       .secondary.pointing.menu .toc.item {
         display: block;
+      }
+      #first-section{
+        margin-top: 0;
+      }
+      #first-section>h4{
+        width: 100%;
       }
       #brand{
         height: 40px;
@@ -146,7 +199,6 @@
 
 
       var sliderQ = $('.slider .slide');
-
       $('.slider').height($(window).innerWidth()*320/842);
 
       var currentSlider = 0;
@@ -170,10 +222,10 @@
 <body class="pushable">
   <!-- Sidebar Menu -->
   <div id="sidebar" class="ui vertical inverted sidebar menu left">
-    <a class="active item" href="">HOME</a>
-    <a class="item" href="">ABOUT US</a>
-    <a class="item" href="">SERVICES</a>
-    <a class="item" href="">CONTACTS</a>
+    <a class="active item" href="">Home</a>
+    <a class="item" href="">About Us</a>
+    <a class="item" href="">Services</a>
+    <a class="item" href="">Contacts</a>
   </div>
   <div class="pusher">
     <div id="header" class="ui inverted secondary pointing menu" style="">
@@ -184,17 +236,17 @@
           <a class="toc item">
             <i class="sidebar icon"></i>
           </a>
-          <a class="active item" href="">HOME</a>
-          <a class="item" href="">ABOUT US</a>
-          <a class="item" href="">SERVICES</a>
-          <a class="item" href="">CONTACTS</a>
+          <a class="active item" href="">Home</a>
+          <a class="item" href="">About Us</a>
+          <a class="item" href="">Services</a>
+          <a class="item" href="">Contacts</a>
         </div>
       </div>
     </div>
     <div class="slider-wrapper">
       <div class="slider">
         <div class="slide">
-          <img src="img/massage1.jpg" alt="" class="ui image">
+          <img src="img/shop1.jpg" alt="" class="ui image">
           <div class="content">
             <div class="ui container">
               <h1 class="ui inverted">
@@ -205,7 +257,7 @@
           </div>
         </div>
         <div class="slide hidden">
-          <img src="img/massage2.jpg" alt="" class="ui image">
+          <img src="img/shop2.jpg" alt="" class="ui image">
           <div class="content">
             <h1 class="ui inverted container">
               Reflexology Foot Massage
@@ -213,7 +265,7 @@
           </div>
         </div>
         <div class="slide hidden">
-          <img src="img/massage3.jpg" alt="" class="ui image">
+          <img src="img/shop3.jpg" alt="" class="ui image">
           <div class="content">
             <h1 class="ui inverted container">
               Deep Tissue Oil Massage
@@ -224,16 +276,17 @@
       <img src="img/home-section-curve.svg" class="home-curve" alt="">
     </div>
 
-    <div class="ui container vertical stripe segment">
-      <h1 class="ui horizontal divider brown header">WELCOME</h1>
+    <div id="first-section" class="ui container vertical stripe segment" style="padding-bottom: 50px;border-bottom:none;">
+      <h1 class="ui center aligned brown header">Zhong's Massage</h1>
+      <h4 class="subtitle" style="">Comfort Your Body And Mind Like A Holiday!</h4>
       <div class="ui two column stackable grid text">
-        <div class="column ten wide">
+        <div class="column eleven wide">
           <p>Zhong's massage has been developed as an effective treatment for public health. The therapy encourages healing by promoting the flow of blood and lynph, relieving tension, stimulating nerves, stretching and loosening muscles and connective tissue to keep them elastic.</p>
           <p>It has successfully treated chronic pain caused by injuries, poor posture, and symptoms of anxiety, tension, depression, insomnia, and stress.It is highly recommended for the treatment of minor sports injuries and repetitive stress injuries.</p>
           <p>This therapy can provide great benefits to general health.More and more people of Melbourne are considering it as a better healing and relaxing path to their well-being.</p>
         </div>
       </div>
-      <h2 class="ui horizontal divider brown header">OUR SERVICES</h2>
+      <h2 class="ui center aligned brown header">Our Services</h2>
       <div class="ui three column stackable grid text">
         <div class="column">
           <div class="ui fluid card">
@@ -248,7 +301,7 @@
               <img src="img/massage1.jpg">
             </div>
             <div class="content">
-              <p class="header">Reflexology Foot Massage</p>
+              <p class="description">Reflexology Foot Massage</p>
             </div>
           </div>
         </div>
@@ -265,7 +318,7 @@
               <img src="img/massage2.jpg">
             </div>
             <div class="content">
-              <p class="header">Deep Tissue Oil Massage</p>
+              <p class="description">Deep Tissue Oil Massage</p>
             </div>
           </div>
         </div>
@@ -282,7 +335,7 @@
               <img src="img/massage3.jpg">
             </div>
             <div class="content">
-              <p class="header">Acupressure Massage</p>
+              <p class="description">Acupressure Massage</p>
             </div>
           </div>
         </div>
@@ -290,48 +343,52 @@
       </div>
 
 
-      <div class="ui three column stackable grid text">
-        <div class="column">
-          <h2 class="ui header brown">WELCOME</h2>
-          <p>Zhong's massage has been developed as an effective treatment for public health. The therapy encourages healing by promoting the flow of blood and lynph, relieving tension, stimulating nerves, stretching and loosening muscles and connective tissue to keep them elastic.</p>
-          <p>It has successfully treated chronic pain caused by injuries, poor posture, and symptoms of anxiety, tension, depression, insomnia, and stress.It is highly recommended for the treatment of minor sports injuries and repetitive stress injuries.</p>
-          <p>This therapy can provide great benefits to general health.More and more people of Melbourne are considering it as a better healing and relaxing path to their well-being.</p>
-        </div>
-        <div class="column">
-          <h2 class="ui header brown">COMMENTS</h2>
-          <p>Mes cuml dia sed in lacus ut eniascet ingerto aliiqt es site amet eismod ictor ut ligulate ameti dapibus ticdu nt mtsen lusto dolor ltissim com. Mes cuml dia sed inertio.</p>
-          <p>Nemo enim ipsam voluptatem voluptas sit. Aspernatur aut odit aut fugit sed quia consequuntur magni dolores eose qui rationevoluptatem nesciunt lacusueni.</p>
-        </div>
-        <div class="column">
-          <h2 class="ui header brown">COMMENTS</h2>
-          <div class="ui list comments">
-            <div class="item">
-              <img class="ui avatar image" src="img/Sadhana Temkar.jpg">
-              <div class="content">
-                <a class="header">Sadhana Temkar</a>
-                <div class="description">Very very refreshing n recharging... Enjoyed every bit of it....</div>
-              </div>
-            </div>
-            <div class="item">
-              <img class="ui avatar image" src="img/Matt Riseley.jpg">
-              <div class="content">
-                <a class="header">Matt Riseley</a>
-                <div class="description">Deep tissue was great! Managed to find and fix every sore and tight spot in my legs!</div>
-              </div>
-            </div>
-            <div class="item">
-              <img class="ui avatar image" src="img/Nesrin Gocmen.jpg">
-              <div class="content">
-                <a class="header">Nesrin Gocmen</a>
-                <div class="description">Deep tissue with hot stones has to be best massage here. In saying that reflexology is also a must.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
+    <section>
+      <div class="ui container vertical stripe segment">
+        <div class="ui three column stackable grid text">
+          <div class="column">
+            <h2 class="ui header brown">Welcome</h2>
+            <p>Zhong's massage has been developed as an effective treatment for public health. The therapy encourages healing by promoting the flow of blood and lynph, relieving tension, stimulating nerves, stretching and loosening muscles and connective tissue to keep them elastic.</p>
+            <p>It has successfully treated chronic pain caused by injuries, poor posture, and symptoms of anxiety, tension, depression, insomnia, and stress.It is highly recommended for the treatment of minor sports injuries and repetitive stress injuries.</p>
+            <p>This therapy can provide great benefits to general health.More and more people of Melbourne are considering it as a better healing and relaxing path to their well-being.</p>
+          </div>
+          <div class="column">
+            <h2 class="ui header brown">Comments</h2>
+            <p>Mes cuml dia sed in lacus ut eniascet ingerto aliiqt es site amet eismod ictor ut ligulate ameti dapibus ticdu nt mtsen lusto dolor ltissim com. Mes cuml dia sed inertio.</p>
+            <p>Nemo enim ipsam voluptatem voluptas sit. Aspernatur aut odit aut fugit sed quia consequuntur magni dolores eose qui rationevoluptatem nesciunt lacusueni.</p>
+          </div>
+          <div class="column">
+            <h2 class="ui header brown">Comments</h2>
+            <div class="ui list comments">
+              <div class="item">
+                <img class="ui avatar image" src="img/Sadhana Temkar.jpg">
+                <div class="content">
+                  <a class="header">Sadhana Temkar</a>
+                  <div class="description">Very very refreshing n recharging... Enjoyed every bit of it....</div>
+                </div>
+              </div>
+              <div class="item">
+                <img class="ui avatar image" src="img/Matt Riseley.jpg">
+                <div class="content">
+                  <a class="header">Matt Riseley</a>
+                  <div class="description">Deep tissue was great! Managed to find and fix every sore and tight spot in my legs!</div>
+                </div>
+              </div>
+              <div class="item">
+                <img class="ui avatar image" src="img/Nesrin Gocmen.jpg">
+                <div class="content">
+                  <a class="header">Nesrin Gocmen</a>
+                  <div class="description">Deep tissue with hot stones has to be best massage here. In saying that reflexology is also a must.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     <div class="ui container vertical stripe segment">
-      <h2 class="ui header brown">SHOPS</h2>
+      <h2 class="ui header brown">Shops</h2>
       <div class="ui three column stackable grid text">
           <div class="column">
             <div class="ui list">
