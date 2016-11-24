@@ -92,7 +92,25 @@ semantic.home.ready = function() {
   }
   initialize();
 
+  function getElementTop(element){
+    var actualTop = element.offsetTop;
+    var current = element.offsetParent;
+    while (current !== null){
+      actualTop += current.offsetTop;
+      current = current.offsetParent;
+    }
+    return actualTop;
+  }
 
+  function scroll(id){
+    var top = getElementTop(document.getElementById(id));
+    $("html").animate({scrollTop:top},120);
+    $("body").animate({scrollTop:top},120);
+  }
+
+  $('a.booking.button').click(function(){
+    scroll('shops');
+  });
 
 
   var
