@@ -1,0 +1,7 @@
+/*******************************
+     User Global Variables
+*******************************/
+/* Header Spacing */
+@headerTopMargin    : ~"calc(2rem - "@headerLineHeightOffset~")";
+@headerBottomMargin : 2rem;
+@headerMargin       : @headerTopMargin 0em @headerBottomMargin;
