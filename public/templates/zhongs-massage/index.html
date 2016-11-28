@@ -159,11 +159,13 @@
     .thrid-block>.border{
       position: absolute;
       border-radius: 50%;
-      border:0.5rem solid #dedede;
       box-shadow: inset 0 0 27px -5px rgba(0, 0, 0, .75);
       height: calc(100% - 2rem);
       width: calc(100% - 2rem);
       z-index: 99;
+      background: url(img/qinghuaci.png);
+      background-position: center;
+      background-size: contain;
     }
 
     .thrid-block>img{
@@ -174,12 +176,13 @@
 
     .thrid-block>span{
       position: absolute;
+      height: 45%;
       background: rgba(255, 255, 255, .7);
       -webkit-backdrop-filter: blur(5px);
       backdrop-filter: blur(5px);
       padding: 1rem;
       left: 0;
-      bottom: 4rem;
+      bottom: 0;
       z-index: 9;
       width: 100%;
       text-align: center;
@@ -198,6 +201,7 @@
       position: relative;
       text-align: center;
       line-height: 0;
+      overflow: hidden;
     }
 
     .ui.shops .header{
@@ -242,8 +246,9 @@
       box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.25);
     }
 
-    .yellow {
+    a.ui.yellow-button {
       background: #7ecd56;
+      color:white;
       background: -moz-linear-gradient(top, rgb(251, 182, 8) 0, rgb(165, 103, 63) 100%);
       background: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgb(251, 182, 8)), color-stop(100%, rgb(165, 103, 63)));
       background: -webkit-linear-gradient(top, rgb(251, 182, 8) 0, rgb(165, 103, 63) 100%);
@@ -252,7 +257,7 @@
       background: linear-gradient(to bottom, rgb(251, 182, 8) 0, rgb(165, 103, 63) 100%);
     }
 
-    .yellow:hover{
+    a.ui.yellow-button:hover{
       background: #7ecd56;
       background: -moz-linear-gradient(top, rgb(228, 163, 0) 0, rgb(165, 103, 63) 100%);
       background: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgb(228, 163, 0)), color-stop(100%, rgb(165, 103, 63)));
@@ -490,7 +495,7 @@
         $("body").animate({scrollTop:top},120);
       }
 
-      $('a.intro-button').click(function(){
+      $('a.ui.yellow-button').click(function(){
         scroll('shops');
       });
 
@@ -570,9 +575,9 @@
         </div>
         <div class="column five wide computer tablet only">
           <div id="intro-wrapper">
-            <a href="#shops" class="intro-button cta-big-book cta-book-contact yellow">
+            <a href="#shops" class="ui intro-button cta-big-book cta-book-contact yellow-button">
               <small>Need an Appointment?</small>
-              <span>Book Online Today</span>
+              <span>Book On Call Today</span>
             </a>
 
             <div class="intro-call">
