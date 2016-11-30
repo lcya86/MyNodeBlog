@@ -498,6 +498,16 @@
       $('a.ui.yellow-button').click(function(){
         scroll('shops');
       });
+      $('a.about-us').click(function(){
+        scroll('first-section');
+      });
+      $('a.services').click(function(){
+        scroll('services');
+      });
+      $('a.contacts').click(function(){
+        scroll('shops');
+      });
+
 
     });
 
@@ -511,9 +521,9 @@
   <!-- Sidebar Menu -->
   <div id="sidebar" class="ui vertical inverted sidebar menu left">
     <a class="active item" href="">Home</a>
-    <a class="item" href="">About Us</a>
-    <a class="item" href="">Services</a>
-    <a class="item" href="">Contacts</a>
+    <a class="item about-us" href="javascript:;">About Us</a>
+    <a class="item services" href="javascript:;">Services</a>
+    <a class="item contacts" href="javascript:;">Contacts</a>
   </div>
   <div class="pusher">
     <div id="header" class="ui inverted secondary pointing menu" style="">
@@ -525,9 +535,9 @@
             <i class="sidebar icon"></i>
           </a>
           <a class="active item" href="">Home</a>
-          <a class="item" href="">About Us</a>
-          <a class="item" href="">Services</a>
-          <a class="item" href="">Contacts</a>
+          <a class="item about-us" href="javascript:;">About Us</a>
+          <a class="item services" href="javascript:;">Services</a>
+          <a class="item contacts" href="javascript:;">Contacts</a>
         </div>
       </div>
     </div>
@@ -607,68 +617,68 @@
       </div>
     </div>
     <section>
-      <div class="ui container vertical stripe segment" style="padding-bottom:50px;padding-top:50px;">
+      <div id="services" class="ui container vertical stripe segment" style="padding-bottom:50px;padding-top:50px;">
         <h2 class="ui center aligned brown header">Our Services</h2>
         <h5 class="ui center aligned brown header horizontal divider">A Comprehensive Range of Treatments...</h5>
         <div class="ui doubling six column grid" style="margin-top:20px;">
-          <a class="column thrid-block" href="head-massage.html" title="">
+          <a class="column thrid-block" href="javascript:;" title="">
             <div class="border"></div>
             <img alt="Head Massage" src="img/head-massage.jpg">
             <span>Head Massage</span>
           </a>
-          <a class="column thrid-block" href="torticollis.html" title="">
+          <a class="column thrid-block" href="javascript:;" title="">
             <div class="border"></div>
             <img alt="Torticollis" src="img/neck-pain.jpg">
             <span>Torticollis</span>
           </a>
-          <a class="column thrid-block" href="reflexology.html" title="">
+          <a class="column thrid-block" href="javascript:;" title="">
             <div class="border"></div>
             <img alt="Reflexology" src="img/foot.jpg">
             <span>Reflexology</span>
           </a>
-          <a class="column thrid-block" href="back-pain.html" title="">
+          <a class="column thrid-block" href="javascript:;" title="">
             <div class="border"></div>
             <img alt="Back Pain" src="img/back-pain.jpg">
             <span>Back Pain</span>
           </a>
-          <a class="column thrid-block" href="pregnancy-care.html" title="">
+          <a class="column thrid-block" href="javascript:;" title="">
             <div class="border"></div>
             <img alt="Pregnancy Care" src="img/preg.jpg">
             <span>Pregnancy Care</span>
           </a>
-          <a class="column thrid-block" href="sports-injury.html" title="">
+          <a class="column thrid-block" href="javascript:;" title="">
             <div class="border"></div>
             <img alt="Sports Injury" src="img/sports.jpg">
             <span>Sports Injury</span>
           </a>
         </div>
         <div class="ui doubling six column grid">
-          <a class="column thrid-block" href="cupping.html" title="">
+          <a class="column thrid-block" href="javascript:;" title="">
             <div class="border"></div>
             <img alt="Cupping" src="img/cupping.jpg">
             <span>Cupping</span>
           </a>
-          <a class="column thrid-block" href="foot-spa.html" title="">
+          <a class="column thrid-block" href="javascript:;" title="">
             <div class="border"></div>
             <img alt="Foot Spa" src="img/foot-spa.jpg">
             <span>Foot Spa</span>
           </a>
-          <a class="column thrid-block" href="hot-stone.html" title="">
+          <a class="column thrid-block" href="javascript:;" title="">
             <div class="border"></div>
             <img alt="Hot Stone" src="img/hot-stone.jpg">
             <span>Hot Stone</span>
           </a>
-          <a class="column thrid-block" href="frozen-shoulder.html" title="">
+          <a class="column thrid-block" href="javascript:;" title="">
             <div class="border"></div>
             <img alt="Frozen Shoulders" src="img/frozen-shoulder.jpg">
             <span>Frozen Shoulders</span>
           </a>
-          <a class="column thrid-block" href="tennis-elbow.html" title="">
+          <a class="column thrid-block" href="javascript:;" title="">
             <div class="border"></div>
             <img alt="Tennis Elbow" src="img/tennis-elbow.jpg">
             <span>Tennis Elbow</span>
           </a>
-          <a class="column thrid-block" href="child-massage.html" title="">
+          <a class="column thrid-block" href="javascript:;" title="">
             <div class="border"></div>
             <img alt="Child Massage" src="img/child-massage.jpg">
             <span>Child Massage</span>
@@ -909,8 +919,10 @@
               </div>
             </div>
             <div class="column">
-              <h4 class="ui inverted header">Footer Header</h4>
-              <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
+              <h4 class="ui inverted header">Staff Center</h4>
+              <div class="ui inverted link list">
+                <a href="staff-center.html" class="item">Login</a>
+              </div>
             </div>
           </div>
         </div>
