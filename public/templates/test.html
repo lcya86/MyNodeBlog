@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body>
+  <script>
+  window.onload = function(){
+    $.ajax({
+      type:'POST',
+      url:'http://lcy-blog.com/login',
+      // headers:{
+      //   'Origin':'lcy-blog.com'
+      // },
+      data:{
+        username:'admin',
+        password:'admin'
+      },
+      success:function(){
+        
+      }
+
+    })
+
+
+  }
+  </script>
+</body>
+</html>
