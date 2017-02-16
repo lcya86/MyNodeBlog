@@ -13,6 +13,7 @@ exports.doLogin = function(req, res) {
 	}
   res.set('Access-Control-Allow-Origin','*');
 	if (req.body.username === user.username && req.body.password === user.password) {
+    console.log(req.session);
 		req.session.user = user;
 		return res.redirect('/home');
 	} else {
