@@ -15,6 +15,7 @@ exports.doLogin = function(req, res) {
 	if (req.body.username === user.username && req.body.password === user.password) {
 		req.session.user = user;
     console.log('登录成功')
+    console.log(req.cookies);
 		return res.redirect('/home');
 	} else {
 		req.session.error = '用户名或密码不正确';

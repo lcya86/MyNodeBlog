@@ -65,6 +65,7 @@ if ('development' == app.get('env')) {
 
 //authentication&notAuthentication
 function authentication(req, res, next) {
+  console.log(req.cookies)
   if (!req.session.user) {
     req.session.error = '请先登陆';
     console.log('请先登陆');
