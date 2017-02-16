@@ -11,9 +11,8 @@ exports.doLogin = function(req, res) {
 		username: 'admin',
 		password: 'admin'
 	}
-  res.set('Access-Control-Allow-Origin','null');
+  res.set('Access-Control-Allow-Origin','*');
 	if (req.body.username === user.username && req.body.password === user.password) {
-
 		req.session.user = user;
     console.log('登录成功')
 		return res.redirect('/home');
