@@ -13,8 +13,9 @@ exports.doLogin = function(req, res) {
 	}
   res.set('Access-Control-Allow-Origin','*');
 	if (req.body.username === user.username && req.body.password === user.password) {
-    console.log(req.body);
+
 		req.session.user = user;
+    console.log('登录成功')
 		return res.redirect('/home');
 	} else {
 		req.session.error = '用户名或密码不正确';

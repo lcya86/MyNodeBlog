@@ -67,6 +67,7 @@ if ('development' == app.get('env')) {
 function authentication(req, res, next) {
   if (!req.session.user) {
     req.session.error = '请先登陆';
+    console.log('请先登陆');
     return res.redirect('/login');
   }
   next();
