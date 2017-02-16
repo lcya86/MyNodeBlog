@@ -16,6 +16,7 @@ exports.doLogin = function(req, res) {
 		req.session.user = user;
     console.log('登录成功')
     console.log(req.cookies);
+    res.cookie('name', 'tobi', { domain: '.example.com', path: '/admin', secure: true });
 		return res.redirect('/home');
 	} else {
 		req.session.error = '用户名或密码不正确';
