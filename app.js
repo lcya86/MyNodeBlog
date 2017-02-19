@@ -163,8 +163,6 @@ app.get('/project/psychological/console/getresult', routes.Project.getResult);
 app.get('/project/psychological/console/gettextresult', routes.Project.getTextResult);
 app.get('/project/psychological/experiment/login', routes.Project.subjectLogin);
 
-app.get('/test', routes.Doing.getResponse);
-
 app.get('/project/stock', routes.Project.stock);
 app.get('/getpost/:id', routes.Post.getPost);
 app.get('/like/:id', routes.Post.doLike);
