@@ -21286,6 +21286,73 @@ sub {
   -webkit-backdrop-filter: blur(20px);
 }
 
+page-agent h1, page-agent h2, page-agent h3, page-agent h4, page-agent h5, page-agent h6 {
+  color: #323232;
+  margin: 24px;
+}
+
+page-agent .item-name, page-agent .item-price {
+  text-align: left;
+  font-size: 14px;
+}
+
+page-agent .item-price {
+  font-weight: bold;
+}
+
+page-agent section {
+  margin-bottom: 48px;
+}
+
+page-agent ion-slides {
+  height: auto;
+}
+
+page-agent ion-slides .swiper-slide {
+  width: 60%;
+}
+
+page-agent ion-slides .swiper-container {
+  height: auto;
+}
+
+page-agent .card-background-page ion-card {
+  position: relative;
+  text-align: center;
+}
+
+page-agent .card-background-page .card-title {
+  position: absolute;
+  top: 36%;
+  font-size: 2.0em;
+  width: 100%;
+  font-weight: bold;
+  color: #fff;
+}
+
+page-agent .card-background-page .card-subtitle {
+  font-size: 1.0em;
+  position: absolute;
+  top: 52%;
+  width: 100%;
+  color: #fff;
+}
+
+page-collection h1, page-collection h2, page-collection h3, page-collection h4, page-collection h5, page-collection h6 {
+  color: #323232;
+  margin: 24px;
+}
+
+page-collection .item-name, page-collection .item-price {
+  text-align: left;
+  font-size: 14px;
+}
+
+page-collection .item-price {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
 page-home h1, page-home h2, page-home h3, page-home h4, page-home h5, page-home h6 {
   color: #323232;
   margin: 24px;
@@ -21397,4 +21464,20 @@ page-item ion-footer .toolbar-content {
 
 pic-detail {
   background-color: #404040;
+}
+
+page-user ion-content.content {
+  background-color: #f3f3f3;
+}
+
+page-information ion-content.content {
+  background-color: #f3f3f3;
+}
+
+page-input ion-content.content {
+  background-color: #f3f3f3;
+}
+
+page-setting ion-content.content {
+  background-color: #f3f3f3;
 }
