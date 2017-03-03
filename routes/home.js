@@ -1,7 +1,6 @@
 var model = require('../models');
 var weixin = require('../tools/weixin');
 exports.index = function(req, res) {
-  res.set('Access-Control-Allow-Origin','*');
 	if(req.query.signature){
 		if(weixin.checkSignature(req.query.signature,req.query.timestamp,req.query.nonce)){
 			return res.send(req.query.echostr);
@@ -58,7 +57,6 @@ exports.index = function(req, res) {
 };
 
 exports.home = function(req, res) {
-  res.set('Access-Control-Allow-Origin','*');
 	var user = {
 		username: 'admin',
 		password: 'admin'
