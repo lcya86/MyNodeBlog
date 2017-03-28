@@ -1,0 +1,81 @@
+{
+  "OutputData": {
+    "biddingData": [{
+      "nickname": "辽河教育",
+      "biddingPrice": "1600.00 元",
+      "biddingTime": "2015-06-18 16:11:36",
+      "biddingId": "4012012"
+    }, {
+      "nickname": "jtwen",
+      "biddingPrice": "1500.00 元 <font color=red>(代理)<\/font>",
+      "biddingTime": "2015-06-18 15:22:04",
+      "biddingId": "4011753"
+    }, {
+      "nickname": "pingan88",
+      "biddingPrice": "1400.00 元 <font color=red>(代理)<\/font>",
+      "biddingTime": "2015-06-18 15:22:04",
+      "biddingId": "4011752"
+    }, {
+      "nickname": "pingan88",
+      "biddingPrice": "1200.00 元 <font color=red>(代理)<\/font>",
+      "biddingTime": "2015-06-18 15:22:04",
+      "biddingId": "4011751"
+    }, {
+      "nickname": "jtwen",
+      "biddingPrice": "1100.00 元 <font color=red>(代理)<\/font>",
+      "biddingTime": "2015-06-18 15:13:54",
+      "biddingId": "4011702"
+    }, {
+      "nickname": "pingan88",
+      "biddingPrice": "1000.00 元",
+      "biddingTime": "2015-06-18 11:42:09",
+      "biddingId": "4010945"
+    }, {
+      "nickname": "看茶听香",
+      "biddingPrice": "600.00 元",
+      "biddingTime": "2015-06-18 08:04:01",
+      "biddingId": "4010639"
+    }, {
+      "nickname": "suibian614",
+      "biddingPrice": "500.00 元",
+      "biddingTime": "2015-06-17 15:38:45",
+      "biddingId": "4009381"
+    }, {
+      "nickname": "xin斋",
+      "biddingPrice": "400.00 元",
+      "biddingTime": "2015-06-14 23:29:55",
+      "biddingId": "4005868"
+    }, {
+      "nickname": "spcwup",
+      "biddingPrice": "100.00 元",
+      "biddingTime": "2015-06-14 20:32:46",
+      "biddingId": "4005583"
+    }, {
+      "nickname": "yexingge",
+      "biddingPrice": "1.00 元",
+      "biddingTime": "2015-06-14 17:55:43",
+      "biddingId": "4005423"
+    }],
+    "status": "0",
+    "bidTimes": "11",
+    "Success": "true",
+    "reservePrice": "1.00",
+    "curBid": "1600.00",
+    "incrementPrice": "100.00",
+    "ErrorInfo": "",
+    "picPath": "http://image.artrade.com/gallery/2015/06/11/732790/v_a10347820.jpg",
+    "sysTime": "2017-03-26 07:35:52",
+    "sPicPath": "http://image.artrade.com/gallery/2015/06/11/732790/a10347820.jpg,http://image.artrade.com/gallery/2015/06/11/732790/a10347820_1.jpg,http://image.artrade.com/gallery/2015/06/11/732790/a10347820_2.jpg",
+    "title": "a10347820  唐醉石    与山闲止明月",
+    "isDelay": "N",
+    "aType": "E",
+    "timeStart": "2015-06-14 11:00:00",
+    "timeEnd": "2015-06-18 16:30:00",
+    "APIName": "showitem",
+    "description": "长: 6.5cm 宽: 3.0cm 高: 12.5cm  材质：寿山石<br><br>完残状况：有绺，有裂<br><font color=red>※ 本公司欢迎您亲临查看拍品。<\/font><br>唐醉石，曾任北洋政府印铸局技正科长、所长，故宫博物院顾问，国民政府印铸局技师。湖北省文史研究馆副馆长。中国美术家协会会员。长于书 ",
+    "letime": "-55868752615",
+    "minimumPrice": "1.00",
+    "isCared": "N",
+    "carePers": "203"
+  }
+}
