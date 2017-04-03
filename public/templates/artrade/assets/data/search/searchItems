@@ -1,0 +1,118 @@
+{
+  "OutputData": {
+    "ErrorInfo": "",
+    "Data": [{
+      "sysTime": "2017-03-26 07:26:12",
+      "picPath": "http://image.artrade.com/gallery/2017/02/09/732788/a10508926_s.jpg",
+      "title": "朱国平（半农） 香雪图",
+      "timeStart": "2017-03-23 11:00:00",
+      "timeEnd": "2017-03-26 14:00:00",
+      "currentBid": "1000.00",
+      "itemnum": "400962758",
+      "bstatus": "np",
+      "minimumBid": "1000.00",
+      "carePers": "43"
+    }, {
+      "sysTime": "2017-03-26 07:26:12",
+      "picPath": "http://image.artrade.com/gallery/2017/02/09/732788/a10508927_s.jpg",
+      "title": "朱国平（半农） 迎春图",
+      "timeStart": "2017-03-23 11:00:00",
+      "timeEnd": "2017-03-26 14:00:00",
+      "currentBid": "1000.00",
+      "itemnum": "400962759",
+      "bstatus": "np",
+      "minimumBid": "1000.00",
+      "carePers": "50"
+    }, {
+      "sysTime": "2017-03-26 07:26:12",
+      "picPath": "http://image.artrade.com/gallery/2017/02/09/732788/a10508928_s.jpg",
+      "title": "徐培晨 南国情",
+      "timeStart": "2017-03-23 11:00:00",
+      "timeEnd": "2017-03-26 14:00:00",
+      "currentBid": "3000.00",
+      "itemnum": "400962760",
+      "bstatus": "np",
+      "minimumBid": "3000.00",
+      "carePers": "72"
+    }, {
+      "sysTime": "2017-03-26 07:26:12",
+      "picPath": "http://image.artrade.com/gallery/2017/02/09/732788/a10508929_s.jpg",
+      "title": "苏适 行书",
+      "timeStart": "2017-03-23 11:00:00",
+      "timeEnd": "2017-03-26 14:00:00",
+      "currentBid": "4500.00",
+      "itemnum": "400962761",
+      "bstatus": "np",
+      "minimumBid": "4500.00",
+      "carePers": "73"
+    }, {
+      "sysTime": "2017-03-26 07:26:12",
+      "picPath": "http://image.artrade.com/gallery/2017/02/09/732788/a10508930_s.jpg",
+      "title": "苏适 行书",
+      "timeStart": "2017-03-23 11:00:00",
+      "timeEnd": "2017-03-26 14:00:00",
+      "currentBid": "2000.00",
+      "itemnum": "400962762",
+      "bstatus": "np",
+      "minimumBid": "2000.00",
+      "carePers": "83"
+    }, {
+      "sysTime": "2017-03-26 07:26:12",
+      "picPath": "http://image.artrade.com/gallery/2017/02/09/732788/a10508931_s.jpg",
+      "title": "富察静云 牡丹图",
+      "timeStart": "2017-03-23 11:00:00",
+      "timeEnd": "2017-03-26 14:05:00",
+      "currentBid": "1000.00",
+      "itemnum": "400962763",
+      "bstatus": "np",
+      "minimumBid": "1000.00",
+      "carePers": "39"
+    }, {
+      "sysTime": "2017-03-26 07:26:12",
+      "picPath": "http://image.artrade.com/gallery/2017/02/09/732788/a10508932_s.jpg",
+      "title": "爱新觉罗·毓歌 行书（两幅）",
+      "timeStart": "2017-03-23 11:00:00",
+      "timeEnd": "2017-03-26 14:05:00",
+      "currentBid": "1000.00",
+      "itemnum": "400962764",
+      "bstatus": "np",
+      "minimumBid": "1000.00",
+      "carePers": "52"
+    }, {
+      "sysTime": "2017-03-26 07:26:12",
+      "picPath": "http://image.artrade.com/gallery/2017/02/09/732788/a10508933_s.jpg",
+      "title": "徐庆山 行书（三幅）",
+      "timeStart": "2017-03-23 11:00:00",
+      "timeEnd": "2017-03-26 14:05:00",
+      "currentBid": "1000.00",
+      "itemnum": "400962765",
+      "bstatus": "np",
+      "minimumBid": "1000.00",
+      "carePers": "39"
+    }, {
+      "sysTime": "2017-03-26 07:26:12",
+      "picPath": "http://image.artrade.com/gallery/2017/02/09/732788/a10508934_s.jpg",
+      "title": "郭立成 水乡（三幅）",
+      "timeStart": "2017-03-23 11:00:00",
+      "timeEnd": "2017-03-26 14:05:00",
+      "currentBid": "1000.00",
+      "itemnum": "400962766",
+      "bstatus": "ab",
+      "minimumBid": "1000.00",
+      "carePers": "91"
+    }, {
+      "sysTime": "2017-03-26 07:26:12",
+      "picPath": "http://image.artrade.com/gallery/2017/02/09/732788/a10508935_s.jpg",
+      "title": "郭海旺 行书（两幅)",
+      "timeStart": "2017-03-23 11:00:00",
+      "timeEnd": "2017-03-26 14:05:00",
+      "currentBid": "1000.00",
+      "itemnum": "400962767",
+      "bstatus": "np",
+      "minimumBid": "1000.00",
+      "carePers": "32"
+    }],
+    "APIName": "endOfDaylist",
+    "Success": "true"
+  }
+}

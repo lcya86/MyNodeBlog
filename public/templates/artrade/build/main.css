@@ -24664,21 +24664,18 @@ pick-artist {
   background-position: center;
 }
 
-pick-artist ion-header {
-  border-bottom: 1px solid #718a94;
-}
-
 pick-artist ion-content {
   background: rgba(255, 255, 255, 0) !important;
 }
 
-pick-artist ion-header .toolbar-background {
-  background: rgba(255, 255, 255, 0) !important;
-}
-
-pick-artist ion-header ion-item {
+pick-artist ion-item {
   background: rgba(255, 255, 255, 0) !important;
   border: none !important;
+  color: white !important;
+}
+
+pick-artist ion-header .toolbar-background {
+  background: rgba(255, 255, 255, 0) !important;
 }
 
 pick-artist ion-header ion-input {
@@ -24695,14 +24692,15 @@ pick-date ion-content {
   background: rgba(255, 255, 255, 0) !important;
 }
 
+pick-date ion-item {
+  background: rgba(255, 255, 255, 0) !important;
+  border: none !important;
+  color: white !important;
+}
+
 pick-date ion-header .toolbar-background {
   background: rgba(255, 255, 255, 0) !important;
   border-bottom: none !important;
-}
-
-pick-date ion-header ion-item {
-  background: rgba(255, 255, 255, 0) !important;
-  border: none !important;
 }
 
 pick-date ion-header ion-input {
