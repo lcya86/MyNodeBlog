@@ -4,17 +4,6 @@
     "ErrorInfo": "",
     "Data": [{
       "sysTime": "2017-02-15 13:05:03",
-      "picPath": "http://image.artrade.com/gallery/2017/01/18/732769/a10480360_s.jpg",
-      "title": "朱法鹏    行书",
-      "timeStart": "2017-02-16 16:00:00",
-      "timeEnd": "2017-02-16 16:10:00",
-      "currentBid": "1.00",
-      "itemnum": "400957195",
-      "bstatus": "np",
-      "minimumBid": "1.00",
-      "carePers": "6"
-    }, {
-      "sysTime": "2017-02-15 13:05:03",
       "picPath": "http://image.artrade.com/gallery/2016/08/15/732769/a10500442_s.jpg",
       "title": "郭海旺    行书",
       "timeStart": "2017-02-16 16:08:00",
@@ -68,50 +57,6 @@
       "bstatus": "np",
       "minimumBid": "1.00",
       "carePers": "52"
-    }, {
-      "sysTime": "2017-02-15 13:05:03",
-      "picPath": "http://image.artrade.com/gallery/2017/02/10/732778/a10509952_s.jpg",
-      "title": "清光绪  粉彩多子多福纹碗",
-      "timeStart": "2017-02-16 16:48:00",
-      "timeEnd": "2017-02-16 16:58:00",
-      "currentBid": "1.00",
-      "itemnum": "400958761",
-      "bstatus": "np",
-      "minimumBid": "1.00",
-      "carePers": "49"
-    }, {
-      "sysTime": "2017-02-15 13:05:03",
-      "picPath": "http://image.artrade.com/gallery/2017/01/10/732778/a10505410_s.jpg",
-      "title": "建国初  老红木卷几",
-      "timeStart": "2017-02-16 16:56:00",
-      "timeEnd": "2017-02-16 17:06:00",
-      "currentBid": "1.00",
-      "itemnum": "400957903",
-      "bstatus": "np",
-      "minimumBid": "1.00",
-      "carePers": "49"
-    }, {
-      "sysTime": "2017-02-15 13:05:03",
-      "picPath": "http://image.artrade.com/gallery/2017/02/09/732769/a10513175_s.jpg",
-      "title": "建国初  天然水晶雕莲花式供盒",
-      "timeStart": "2017-02-16 17:04:00",
-      "timeEnd": "2017-02-16 17:14:00",
-      "currentBid": "1.00",
-      "itemnum": "400957509",
-      "bstatus": "np",
-      "minimumBid": "1.00",
-      "carePers": "50"
-    }, {
-      "sysTime": "2017-02-15 13:05:03",
-      "picPath": "http://image.artrade.com/gallery/2017/02/10/732778/a10513553_s.jpg",
-      "title": "建国初  原矿绿松石圆珠手串",
-      "timeStart": "2017-02-16 17:12:00",
-      "timeEnd": "2017-02-16 17:22:00",
-      "currentBid": "1.00",
-      "itemnum": "400958660",
-      "bstatus": "np",
-      "minimumBid": "1.00",
-      "carePers": "49"
     }],
     "APIName": "blist",
     "Success": "true",

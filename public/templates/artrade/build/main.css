@@ -24775,6 +24775,18 @@ pic-detail {
   background-color: #404040;
 }
 
+pic-detail .header-ios ion-navbar.toolbar-ios:last-child .toolbar-background {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2), transparent);
+}
+
+pic-detail .header-md ion-navbar.toolbar-md:last-child .toolbar-background {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2), transparent);
+}
+
+pic-detail .header-md:after {
+  background: none;
+}
+
 page-setting ion-content.content {
   background-color: #f3f3f3;
 }
